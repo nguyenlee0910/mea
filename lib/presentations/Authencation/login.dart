@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mea/presentations/Authencation/forgot_password.dart';
 
 // import 'models/post.dart';
 // import 'services/dummy_service.dart';
@@ -23,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     runZoned(
       () async {
         lockIc = Image.asset('assets/icon/ic_lock.png');
@@ -38,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
         width: double.infinity,
@@ -51,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               style: GoogleFonts.knewave(
                 fontSize: 45,
                 fontWeight: FontWeight.w400,
-                color: Color.fromRGBO(252, 252, 252, 1),
+                color: const Color.fromRGBO(252, 252, 252, 1),
               ),
               textAlign: TextAlign.center,
             ),
@@ -100,7 +102,8 @@ class _LoginPageState extends State<LoginPage> {
                         border: InputBorder.none,
                         icon: lockIc,
                         suffixIcon: IconButton(
-                          icon: visibleIc,
+                          icon: const Icon(Icons.remove_red_eye),
+                          color: Colors.white,
                           onPressed: () {
                             setState(() {
                               _hidePassword = !_hidePassword;
@@ -110,24 +113,30 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 200),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(29, 254, 255, 254),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: SizedBox(
+                      width: size.width * 0.4,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(29, 254, 255, 254),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
                         ),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Forgot Password?',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w900,
-                          height: 0,
+                        onPressed: () {
+                          return context.go('/${ForgotPassword.routeName}');
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                          ),
                         ),
                       ),
                     ),
