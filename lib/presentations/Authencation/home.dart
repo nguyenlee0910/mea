@@ -122,44 +122,49 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildCell({required IconData icon, required String text}) {
     return Center(
-      child: Container(
-        // width: double.infinity,
-        width: 352,
-        height: 52,
-        decoration: const ShapeDecoration(
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(42.5)),
+      child: GestureDetector(
+        child: Container(
+          // width: double.infinity,
+          width: 352,
+          height: 52,
+          decoration: const ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(42.5)),
+            ),
           ),
-        ),
-        child: Center(
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24),
-                child: Icon(
-                  icon,
-                  size: 30,
-                  color: Color(0xFF6CD7CB),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Text(
-                  text,
-                  style: const TextStyle(
+          child: Center(
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 24, right: 24),
+                  child: Icon(
+                    icon,
+                    size: 30,
                     color: Color(0xFF6CD7CB),
-                    fontSize: 14,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w900,
-                    height: 0,
                   ),
-                  overflow: TextOverflow.clip,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Text(
+                    text,
+                    style: const TextStyle(
+                      color: Color(0xFF6CD7CB),
+                      fontSize: 14,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w900,
+                      height: 0,
+                    ),
+                    overflow: TextOverflow.clip,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
+        onTap: () {
+          print('hehe');
+        },
       ),
     );
   }
