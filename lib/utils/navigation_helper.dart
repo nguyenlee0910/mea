@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mea/presentations/Authencation/login.dart';
 
 class CustomNavigationHelper {
   static final GlobalKey<NavigatorState> parentNavigatorKey =
@@ -16,6 +18,23 @@ class CustomNavigationHelper {
   }
 
   CustomNavigationHelper._internal() {
-    // Router initialization happens here.
+    final routes = [
+      StatefulShellBranch(navigatorKey: homeTabNavigatorKey, routes: [
+        GoRoute(
+            path: '/',
+            pageBuilder: (context, GoRouterState state) {
+              return getPage(child: LoginPage(), state: state);
+            }),
+      ])
+    ];
+  }
+  static Page getPage({
+    required Widget child,
+    required GoRouterState state,
+  }) {
+    return MaterialPage(
+      key: state.pageKey,
+      child: child,
+    );
   }
 }
