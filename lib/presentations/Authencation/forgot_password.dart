@@ -46,7 +46,7 @@ class ForgotPassword extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(42.5),
-                              bottomRight: Radius.circular(42.5)),
+                              bottomRight: Radius.circular(42.5),),
                         ),
                       ),
                       child: const Center(
@@ -63,7 +63,7 @@ class ForgotPassword extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 120),
+                  const SizedBox(width: 120),
                 ],
               ),
 
@@ -173,13 +173,13 @@ class ForgotPassword extends StatelessWidget {
               //   ),
             ],
           ),
-        ));
+        ),);
   }
 
   Widget backBtn(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.go("\\");
+        context.go(r'\');
       },
       child: Container(
         width: 36,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
 
 class CreateNewPassword extends StatefulWidget {
@@ -61,7 +61,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(42.5),
-                            bottomRight: Radius.circular(42.5)),
+                            bottomRight: Radius.circular(42.5),),
                       ),
                     ),
                     child: const Center(

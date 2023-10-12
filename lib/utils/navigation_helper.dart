@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomNavigationHelper {
+  factory CustomNavigationHelper() {
+    return _instance;
+  }
+
+  CustomNavigationHelper._internal() {
+    // Router initialization happens here.
+  }
   static final GlobalKey<NavigatorState> parentNavigatorKey =
       GlobalKey<NavigatorState>();
 
@@ -11,11 +18,4 @@ class CustomNavigationHelper {
       CustomNavigationHelper._internal();
 
   static CustomNavigationHelper get instance => _instance;
-  factory CustomNavigationHelper() {
-    return _instance;
-  }
-
-  CustomNavigationHelper._internal() {
-    // Router initialization happens here.
-  }
 }

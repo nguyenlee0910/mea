@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mea/presentations/Authencation/home.dart';
+import 'package:mea/presentations/UserManagement/user_management.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
-  static final routeName = 'navigation_page';
+  static const routeName = 'navigation_page';
 
   @override
   State<Navigation> createState() => _NavigationState();
@@ -11,16 +12,15 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     Container(),
     Container(),
-    Container(),
+    UserManagementPage(),
   ];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -38,7 +38,9 @@ class _NavigationState extends State<Navigation> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.heart_broken), label: 'Track'),
+              icon: Icon(Icons.heart_broken),
+              label: 'Track',
+            ),
             BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ],

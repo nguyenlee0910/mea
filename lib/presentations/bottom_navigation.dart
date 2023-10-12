@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ScaffoldWithNavBar extends StatefulWidget {
+  ScaffoldWithNavBar({required this.child, required this.location, super.key});
   String location;
-  ScaffoldWithNavBar({super.key, required this.child, required this.location});
 
   final Widget child;
 
@@ -71,8 +71,8 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
 
   void _goOtherTab(BuildContext context, int index) {
     if (index == _currentIndex) return;
-    GoRouter router = GoRouter.of(context);
-    String location = tabs[index].initialLocation;
+    final router = GoRouter.of(context);
+    final location = tabs[index].initialLocation;
 
     setState(() {
       _currentIndex = index;
@@ -86,12 +86,12 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
 }
 
 class MyCustomBottomNavBarItem extends BottomNavigationBarItem {
-  final String initialLocation;
 
   const MyCustomBottomNavBarItem(
       {required this.initialLocation,
-      required Widget icon,
-      String? label,
-      Widget? activeIcon})
-      : super(icon: icon, label: label, activeIcon: activeIcon ?? icon);
+      required super.icon,
+      super.label,
+      Widget? activeIcon,})
+      : super(activeIcon: activeIcon ?? icon);
+  final String initialLocation;
 }

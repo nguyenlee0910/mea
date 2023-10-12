@@ -10,20 +10,16 @@ class ErrorInterceptor extends Interceptor {
     switch (err.type) {
       case DioExceptionType.cancel:
         dioError = err.copyWith(error: 'Request to API server was cancelled');
-        break;
       case DioExceptionType.connectionTimeout:
         dioError = err.copyWith(error: 'Connection to API server timed out');
-        break;
       case DioExceptionType.receiveTimeout:
         dioError = err.copyWith(
           error: 'Receive timeout in connection with API server',
         );
-        break;
       case DioExceptionType.sendTimeout:
         dioError = err.copyWith(
           error: 'Send timeout in connection with API server',
         );
-        break;
       case DioExceptionType.badResponse:
         if (err.response!.data != null) {
           if (err.response!.data is String) {
@@ -48,15 +44,12 @@ class ErrorInterceptor extends Interceptor {
             error: 'Received invalid status code: ${err.response!.statusCode}',
           );
         }
-        break;
       case DioExceptionType.badCertificate:
         dioError = err.copyWith(error: 'Certificate validation failed');
-        break;
       case DioExceptionType.connectionError:
         dioError = err.copyWith(
           error: 'Connection to API server failed due to internet connection',
         );
-        break;
       case DioExceptionType.unknown:
         dioError = err.copyWith(
           error: 'Connection to API server failed due to unknown error',

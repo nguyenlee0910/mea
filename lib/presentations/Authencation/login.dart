@@ -1,12 +1,12 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
-import 'package:mea/presentations/Authencation/home.dart';
 
 // import 'models/post.dart';
 // import 'services/dummy_service.dart';
@@ -27,11 +27,12 @@ class _LoginPageState extends State<LoginPage> {
   late bool _hidePassword;
   final dio = Dio();
 
-  String userName = "";
-  String password = "";
+  String userName = '';
+  String password = '';
 
   @override
   void initState() {
+    super.initState();
     runZoned(
       () async {
         lockIc = Image.asset('assets/icon/ic_lock.png');
@@ -41,15 +42,16 @@ class _LoginPageState extends State<LoginPage> {
     );
     _hidePassword = true;
 
-    userName = "";
-    password = "";
+    userName = '';
+    password = '';
   }
 
-  void login(
-      {required String userName,
-      required String password,
-      required VoidCallback callback}) async {
-    final body = {"password": password, "username": userName};
+  Future<void> login({
+    required String userName,
+    required String password,
+    required VoidCallback callback,
+  }) async {
+    final body = {'password': password, 'username': userName};
     final response = await dio.post(
       'https://mea.monoinfinity.net/api/v1/auth/login',
       data: body,
@@ -199,12 +201,14 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         onPressed: () {
-                          login(
-                              userName: userName,
-                              password: password,
-                              callback: () {
-                                context.go('/${Navigation.routeName}');
-                              });
+                          context.go('/${Navigation.routeName}');
+                          // login(
+                          //   userName: userName,
+                          //   password: password,
+                          //   callback: () {
+                          //     context.go('/${Navigation.routeName}');
+                          //   },
+                          // );
                           // ;
                         },
                         child: Text(
