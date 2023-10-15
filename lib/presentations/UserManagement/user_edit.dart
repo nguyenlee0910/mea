@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mea/presentations/Authencation/home.dart';
 
 import '../../constants.dart';
 
@@ -31,28 +33,34 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton: backBtn(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
         child: Column(
           children: [
-            Center(
-              child: Container(
-                width: 135.61,
-                height: 135.61,
-                clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(),
-                child: const Icon(
-                  Icons.person_pin,
-                  color: Colors.white,
-                  size: 120,
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 20),
+              child: Center(
+                child: Container(
+                  width: 135.61,
+                  height: 135.61,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(),
+                  child: const Icon(
+                    Icons.person_pin,
+                    color: Colors.white,
+                    size: 120,
+                  ),
                 ),
               ),
             ),
             Center(
               child: Container(
                 width: size.width * 0.9,
-                height: size.height * 0.45,
+                height: size.height * 0.55,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -208,6 +216,28 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget backBtn(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.pop();
+      },
+      child: Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: const Center(
+          child: Icon(
+            Icons.arrow_back,
+            color: Color.fromARGB(168, 0, 187, 165),
+          ),
+        ),
       ),
     );
   }

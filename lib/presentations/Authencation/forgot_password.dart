@@ -12,168 +12,169 @@ class ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        floatingActionButton: backBtn(context),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
-        body: Container(
-          width: double.infinity,
-          decoration:
-              BoxDecoration(gradient: AppColors.instance.backgroundTheme),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(80),
-                child: Center(
-                  child: Text(
-                    'MEA',
-                    style: GoogleFonts.knewave(
-                      fontSize: 45,
-                      fontWeight: FontWeight.w400,
-                      color: const Color.fromRGBO(252, 252, 252, 1),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      // width: double.infinity,
-                      height: 52,
-                      decoration: const ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(42.5),
-                              bottomRight: Radius.circular(42.5),),
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Forgot password',
-                          style: TextStyle(
-                            color: Color(0xFF6CD7CB),
-                            fontSize: 25,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w900,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 120),
-                ],
-              ),
-
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: 20,
-                  left: 32,
-                ),
+      floatingActionButton: backBtn(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(80),
+              child: Center(
                 child: Text(
-                  'Please enter your email code to\nrecover your password',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontFamily: 'Inter',
+                  'MEA',
+                  style: GoogleFonts.knewave(
+                    fontSize: 45,
                     fontWeight: FontWeight.w400,
-                    height: 0,
+                    color: const Color.fromRGBO(252, 252, 252, 1),
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Colors.grey[200]!),
-                    ),
-                  ),
-                  child: const TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Username',
-                      hintStyle: TextStyle(color: Colors.white),
-                      icon: Icon(
-                        Icons.mail,
-                        color: Colors.white,
-                      ),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 100,
-              ),
-              Center(
-                child: SizedBox(
-                  width: size.width * 0.6,
-                  height: 56,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    // width: double.infinity,
+                    height: 52,
+                    decoration: const ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(42.5),
+                          bottomRight: Radius.circular(42.5),
+                        ),
                       ),
                     ),
-                    onPressed: () {},
-                    child: Text(
-                      'Send',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        color: const Color.fromARGB(168, 0, 187, 165),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
+                    child: const Center(
+                      child: Text(
+                        'Forgot password',
+                        style: TextStyle(
+                          color: Color(0xFF6CD7CB),
+                          fontSize: 25,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w900,
+                          height: 0,
+                        ),
                       ),
                     ),
                   ),
                 ),
+                const SizedBox(width: 120),
+              ],
+            ),
+
+            const Padding(
+              padding: EdgeInsets.only(
+                top: 20,
+                left: 32,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: SizedBox(
-                  width: size.width * 0.4,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(29, 254, 255, 254),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
+              child: Text(
+                'Please enter your email code to\nrecover your password',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey[200]!),
+                  ),
+                ),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Username',
+                    hintStyle: TextStyle(color: Colors.white),
+                    icon: Icon(
+                      Icons.mail,
+                      color: Colors.white,
                     ),
-                    onPressed: () {
-                      return context.go('/${CreateNewPassword.routeName}');
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                      ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            Center(
+              child: SizedBox(
+                width: size.width * 0.6,
+                height: 56,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Send',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.inter(
+                      color: const Color.fromARGB(168, 0, 187, 165),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
               ),
-              //  Padding(
-              //     padding: const EdgeInsets.only(top: 80),
-              //     child: Text(
-              //       'Forgot Password',
-              //       style: GoogleFonts.inter(
-              //         color: Colors.white,
-              //         fontSize: 25,
-              //         fontWeight: FontWeight.w900,
-              //         height: 0,
-              //       ),
-              //     ),
-              //   ),
-            ],
-          ),
-        ),);
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: SizedBox(
+                width: size.width * 0.4,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(29, 254, 255, 254),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
+                  onPressed: () {
+                    return context.go('/${CreateNewPassword.routeName}');
+                  },
+                  child: Text(
+                    'Forgot Password?',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.inter(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //  Padding(
+            //     padding: const EdgeInsets.only(top: 80),
+            //     child: Text(
+            //       'Forgot Password',
+            //       style: GoogleFonts.inter(
+            //         color: Colors.white,
+            //         fontSize: 25,
+            //         fontWeight: FontWeight.w900,
+            //         height: 0,
+            //       ),
+            //     ),
+            //   ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget backBtn(BuildContext context) {

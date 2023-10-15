@@ -60,8 +60,9 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(42.5),
-                            bottomRight: Radius.circular(42.5),),
+                          topRight: Radius.circular(42.5),
+                          bottomRight: Radius.circular(42.5),
+                        ),
                       ),
                     ),
                     child: const Center(

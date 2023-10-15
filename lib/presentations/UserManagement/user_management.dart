@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mea/presentations/Authencation/create_new_password.dart';
+import 'package:mea/presentations/Authencation/login.dart';
 
 import '../../constants.dart';
 import '../../models/cell_data.dart';
@@ -19,6 +22,7 @@ class UserManagementPage extends StatefulWidget {
     CellData(
       iconData: Icons.lock,
       textTitle: 'Đổi mật khẩu',
+      route: '/${CreateNewPassword.routeName}',
     ),
   ];
 
@@ -68,6 +72,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                     ),
                     onPressed: () {
                       // ;
+                      context.go('//');
                     },
                     child: Text(
                       'Đăng xuất',

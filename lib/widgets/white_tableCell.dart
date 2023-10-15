@@ -58,7 +58,7 @@ class WhiteTableCell extends StatelessWidget {
         ),
         onTap: () {
           if ('' != route) {
-            context.pushReplacement(route!);
+            context.push(route!);
           }
         },
       ),
