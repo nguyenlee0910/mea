@@ -7,6 +7,7 @@ import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
 import 'package:mea/presentations/Authencation/home.dart';
 import 'package:mea/presentations/Authencation/login.dart';
+import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/UserManagement/user_edit.dart';
 
 GoRouter appRouter() => GoRouter(
@@ -42,13 +43,18 @@ GoRouter appRouter() => GoRouter(
           name: HomePage.routeName,
           builder: (BuildContext context, GoRouterState state) => HomePage(),
         ),
-
         GoRoute(
           path: '/edit_profile',
           name: UserEditProfilePage.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               UserEditProfilePage(),
-        )
+        ),
+        GoRoute(
+          path: '/equipment_all',
+          name: EquipmentPage.routeName,
+          builder: (BuildContext context, GoRouterState state) =>
+              EquipmentPage(),
+        ),
       ],
       observers: [
         FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),

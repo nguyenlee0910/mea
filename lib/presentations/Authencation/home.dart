@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/models/cell_data.dart';
+import 'package:mea/presentations/Equipment/equipment.dart';
 
 import '../../widgets/circle_avatar.dart';
 import '../../widgets/white_tableCell.dart';
@@ -14,15 +15,16 @@ class HomePage extends StatefulWidget {
     CellData(
       iconData: Icons.calendar_month,
       textTitle: 'Danh sách thiết bị trong phòng ban',
+      route: '/${EquipmentPage.routeName}',
     ),
-    CellData(
-      iconData: Icons.notifications,
-      textTitle: 'Thông báo',
-    ),
-    CellData(
-      iconData: Icons.group,
-      textTitle: 'Tin nhắn',
-    ),
+    // CellData(
+    //   iconData: Icons.notifications,
+    //   textTitle: 'Thông báo',
+    // ),
+    // CellData(
+    //   iconData: Icons.group,
+    //   textTitle: 'Tin nhắn',
+    // ),
     CellData(
       iconData: Icons.note_add,
       textTitle: 'Lập đơn',
@@ -57,6 +59,7 @@ class _HomePageState extends State<HomePage> {
                   child: WhiteTableCell(
                     icon: widget.cellData[index].iconData!,
                     text: widget.cellData[index].textTitle!,
+                    route: widget.cellData[index].route ?? '',
                   ),
                 );
               },

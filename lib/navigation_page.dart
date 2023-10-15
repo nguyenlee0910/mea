@@ -38,8 +38,8 @@ class _NavigationState extends State<Navigation> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.heart_broken),
-              label: 'Track',
+              icon: Icon(Icons.notifications),
+              label: 'Notification',
             ),
             BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),

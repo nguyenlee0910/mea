@@ -201,14 +201,14 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         onPressed: () {
-                          // context.go('/${Navigation.routeName}');
-                          login(
-                            userName: userName,
-                            password: password,
-                            callback: () {
-                              context.go('/${Navigation.routeName}');
-                            },
-                          );
+                          context.go('/${Navigation.routeName}');
+                          // login(
+                          //   userName: userName,
+                          //   password: password,
+                          //   callback: () {
+                          //     context.go('/${Navigation.routeName}');
+                          //   },
+                          // );
                           ;
                         },
                         child: Text(

@@ -196,7 +196,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
   Widget backBtn(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.go('/${ForgotPassword.routeName}');
+        context.pop();
       },
       child: Container(
         width: 36,
