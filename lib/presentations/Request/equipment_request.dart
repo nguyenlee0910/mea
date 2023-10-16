@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/widgets/custom_equipment_cell.dart';
 import 'package:mea/widgets/equipment_cell.dart';
@@ -9,14 +10,6 @@ class EquipmentRequestPage extends StatefulWidget {
   EquipmentRequestPage({super.key});
   static const routeName = 'equipment_request';
 
-  List<CustomEquipmentCell> equipmentCellData = [
-    CustomEquipmentCell(name: 'Găng tay'),
-    CustomEquipmentCell(name: 'Găng tay2'),
-    CustomEquipmentCell(name: 'Găng tay3'),
-    CustomEquipmentCell(name: 'Găng tay4'),
-    CustomEquipmentCell(name: 'Găng tay5'),
-  ];
-
   @override
   State<EquipmentRequestPage> createState() => _EquipmentRequestPageState();
 }
@@ -25,77 +18,86 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
   late List<CustomEquipmentCell> filterCellData;
 
   @override
-  void initState() {
-    super.initState();
-    filterCellData = widget.equipmentCellData;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       floatingActionButton: backBtn(context),
+      resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 80),
-              child: WhiteTableCell(
-                icon: Icons.edit_calendar,
-                text: 'Đơn yêu cầu thiết bị',
-                isCenter: true,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: SearchBar(
-                hintText: 'Tìm kiếm',
-                leading: const Icon(Icons.search),
-                backgroundColor: MaterialStateProperty.all(
-                  Colors.white.withOpacity(0.5),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          width: double.infinity,
+          decoration:
+              BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 80),
+                child: WhiteTableCell(
+                  icon: Icons.edit_calendar,
+                  text: 'Đơn yêu cầu thiết bị',
+                  isCenter: true,
+                  route: '',
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    if (value.isEmpty) {
-                      filterCellData = widget.equipmentCellData;
-                      return;
-                    }
-                    filterCellData = widget.equipmentCellData.where((element) {
-                      return element.name.contains(value);
-                    }).toList();
-                  });
-                },
               ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
+              SizedBox(
+                height: 40,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    color: Color(0xFF7CE6AD),
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: TextField(
+                        maxLines: 8, //or null
+                        decoration: InputDecoration.collapsed(
+                          hintText: "Nhập tên thiết bị bạn cần !!!",
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return CustomEquipmentCell(
-                      name: filterCellData[index].name,
-                    );
-                  },
-                  itemCount: filterCellData.length,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 50),
+                child: Center(
+                  child: SizedBox(
+                    width: size.width * 0.6,
+                    height: 56,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 255, 255),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Gửi',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.inter(
+                          color: const Color.fromARGB(168, 0, 187, 165),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -29,8 +29,12 @@ class HomePage extends StatefulWidget {
     // ),
     CellData(
       iconData: Icons.note_add,
-      textTitle: 'Lập đơn',
+      textTitle: 'Lập đơn yêu cầu thiết bị',
       route: '/${EquipmentRequestPage.routeName}',
+    ),
+    CellData(
+      iconData: Icons.note_add_outlined,
+      textTitle: 'Lập đơn sửa chữa thiết bị',
     ),
     CellData(
       iconData: Icons.art_track,
