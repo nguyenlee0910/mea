@@ -1,16 +1,20 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
+import 'package:mea/models/cell_data.dart';
+import 'package:mea/widgets/custom_textfield.dart';
+import 'package:mea/widgets/equipment_cell.dart';
 import 'package:mea/widgets/white_tableCell.dart';
 
-import '../../widgets/equipment_cell.dart';
+class CreateRequest extends StatefulWidget {
+  CreateRequest({super.key});
+  static const routeName = 'create_request';
 
-class EquipmentPage extends StatefulWidget {
-  EquipmentPage({super.key});
-  static const routeName = 'equipment_all';
-
+  final requestType = [
+    'Loại đơn',
+    'Đơn yêu cầu thiết bị',
+    'Đơn yêu cầu sửa chữa',
+  ];
   List<EquipmentCellData> equipmentCellData = [
     EquipmentCellData(name: 'Máy x quang', code: 'ABC'),
     EquipmentCellData(name: 'Máy đo huyết áp', code: 'AAA'),
@@ -21,22 +25,21 @@ class EquipmentPage extends StatefulWidget {
   ];
 
   @override
-  State<EquipmentPage> createState() => _EquipmentPageState();
+  State<CreateRequest> createState() => _CreateRequestState();
 }
 
-class _EquipmentPageState extends State<EquipmentPage> {
+class _CreateRequestState extends State<CreateRequest> {
   late List<EquipmentCellData> filterCellData;
-
+  late String choosenRequestType;
   @override
   void initState() {
     super.initState();
+    choosenRequestType = widget.requestType.first;
     filterCellData = widget.equipmentCellData;
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       floatingActionButton: backBtn(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
@@ -45,38 +48,34 @@ class _EquipmentPageState extends State<EquipmentPage> {
         decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(top: 80),
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 80),
               child: WhiteTableCell(
-                icon: Icons.devices,
-                text: 'Danh sách thiết bị trong phòng ban',
+                icon: Icons.edit_calendar,
+                text: 'Lập đơn yêu cầu',
                 isCenter: true,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(12),
-              child: SearchBar(
-                hintText: 'Tìm kiếm',
-                leading: const Icon(Icons.search),
-                backgroundColor: MaterialStateProperty.all(
-                  Colors.white.withOpacity(0.5),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    if (value.isEmpty) {
-                      filterCellData = widget.equipmentCellData;
-                      return;
-                    }
-                    filterCellData = widget.equipmentCellData.where((element) {
-                      return element.name.contains(value);
-                    }).toList();
-                  });
-                },
+              padding: const EdgeInsets.only(top: 20),
+              child: SizedBox(
+                child: buildEditable(
+                    size: Size(352, 36),
+                    backgroundColor: const Color.fromARGB(182, 255, 255, 255),
+                    borderRadiusRatio: 50,
+                    initiaValue: choosenRequestType,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    onChange: (value) {
+                      setState(() {
+                        choosenRequestType = value;
+                      });
+                    },
+                    dropDownItems: widget.requestType),
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 32,
             ),
             Expanded(
               child: Container(
@@ -90,14 +89,27 @@ class _EquipmentPageState extends State<EquipmentPage> {
                     ),
                   ),
                 ),
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return EquipmentCell(
-                      name: filterCellData[index].name,
-                      code: filterCellData[index].code,
-                    );
-                  },
-                  itemCount: filterCellData.length,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: SearchBar(
+                    hintText: 'Tìm kiếm',
+                    leading: const Icon(Icons.search),
+                    backgroundColor: MaterialStateProperty.all(
+                      Colors.white.withOpacity(0.5),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        if (value.isEmpty) {
+                          filterCellData = widget.equipmentCellData;
+                          return;
+                        }
+                        filterCellData =
+                            widget.equipmentCellData.where((element) {
+                          return element.name.contains(value);
+                        }).toList();
+                      });
+                    },
+                  ),
                 ),
               ),
             ),

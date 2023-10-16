@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   late Widget mailIc;
   late Widget visibleIc;
   late bool _hidePassword;
+  late bool checkBoxValue;
   final dio = Dio();
 
   String userName = '';
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
     _hidePassword = true;
-
+    checkBoxValue = true;
     userName = '';
     password = '';
   }
@@ -155,6 +156,25 @@ class _LoginPageState extends State<LoginPage> {
                             password = value;
                           });
                         },
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: Row(
+                        children: <Widget>[
+                          Checkbox(
+                              value: checkBoxValue,
+                              activeColor: Colors.green,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  checkBoxValue = newValue!;
+                                });
+                              }),
+                          Text(
+                            'Remember me',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
                       ),
                     ),
                     Align(

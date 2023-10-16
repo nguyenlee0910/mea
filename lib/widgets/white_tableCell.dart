@@ -6,15 +6,29 @@ class WhiteTableCell extends StatelessWidget {
     required this.icon,
     required this.text,
     this.route,
+    this.isCenter = false,
     super.key,
   });
 
   final IconData icon;
   final String text;
   final String? route;
+  final bool isCenter;
 
   @override
   Widget build(BuildContext context) {
+    final texToShow = Text(
+      text,
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        color: Color(0xFF6CD7CB),
+        fontSize: 14,
+        fontFamily: 'Inter',
+        fontWeight: FontWeight.w900,
+        height: 0,
+      ),
+      overflow: TextOverflow.clip,
+    );
     return Center(
       child: GestureDetector(
         child: Container(
@@ -31,26 +45,21 @@ class WhiteTableCell extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24),
+                  padding: EdgeInsets.only(left: 24, right: isCenter ? 0 : 24),
                   child: Icon(
                     icon,
                     size: 30,
                     color: const Color(0xFF6CD7CB),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Text(
-                    text,
-                    style: const TextStyle(
-                      color: Color(0xFF6CD7CB),
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w900,
-                      height: 0,
-                    ),
-                    overflow: TextOverflow.clip,
-                  ),
+                isCenter
+                    ? Expanded(child: texToShow)
+                    : Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: texToShow,
+                      ),
+                SizedBox(
+                  width: isCenter ? 36 : 0,
                 ),
               ],
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/presentations/Authencation/home.dart';
+import 'package:mea/widgets/custom_textfield.dart';
 
 import '../../constants.dart';
 
@@ -70,7 +71,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(children: [
-                    _buildEditable(
+                    buildEditable(
                       titleText: 'Tên:',
                       initiaValue: 'Hoang Thanh Thao',
                       onChange: (value) {},
@@ -78,7 +79,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                     SizedBox(
                       height: 12,
                     ),
-                    _buildEditable(
+                    buildEditable(
                       titleText: 'Email:',
                       initiaValue: 'nguyenle@gmail.com',
                       onChange: (value) {},
@@ -86,7 +87,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                     SizedBox(
                       height: 12,
                     ),
-                    _buildEditable(
+                    buildEditable(
                       titleText: 'SDT:',
                       initiaValue: '012345678',
                       onChange: (value) {},
@@ -94,7 +95,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                     SizedBox(
                       height: 12,
                     ),
-                    _buildEditable(
+                    buildEditable(
                       titleText: 'CCCD:',
                       initiaValue: '1712200117270',
                       onChange: (value) {},
@@ -102,7 +103,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                     SizedBox(
                       height: 12,
                     ),
-                    _buildEditable(
+                    buildEditable(
                       titleText: 'Giới tính:',
                       initiaValue: _gender,
                       dropDownItems: genderList,
@@ -115,7 +116,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                     SizedBox(
                       height: 12,
                     ),
-                    _buildEditable(
+                    buildEditable(
                       titleText: 'Chức vụ:',
                       initiaValue: _role,
                       dropDownItems: roleList,
@@ -128,7 +129,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                     SizedBox(
                       height: 12,
                     ),
-                    _buildEditable(
+                    buildEditable(
                       titleText: 'Phòng ban:',
                       initiaValue: _department,
                       dropDownItems: departmentList,
@@ -147,75 +148,6 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildEditable({
-    required String titleText,
-    required String initiaValue,
-    required void Function(String) onChange,
-    List<String> dropDownItems = const [],
-  }) {
-    return SizedBox(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(
-            titleText,
-            style: const TextStyle(
-              color: Colors.green,
-              fontSize: 16,
-            ),
-          ),
-          Expanded(
-            child: Container(),
-          ),
-          SizedBox(
-            width: 240,
-            child: Container(
-              width: double.infinity,
-              height: 36,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                color: Color(0xffd9d9d9),
-              ),
-              child: dropDownItems.isNotEmpty
-                  ? Center(
-                      child: DropdownButton<String>(
-                        value: initiaValue,
-                        onChanged: (String? value) {
-                          onChange(value!);
-                        },
-                        icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
-                        isExpanded: true,
-                        items: dropDownItems
-                            .map<DropdownMenuItem<String>>((value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            alignment: Alignment.center,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
-                      child: Center(
-                        child: TextFormField(
-                          initialValue: initiaValue,
-                          decoration:
-                              const InputDecoration(border: InputBorder.none),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-            ),
-          )
-        ],
       ),
     );
   }

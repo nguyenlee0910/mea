@@ -1,31 +1,28 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
+import 'package:mea/widgets/custom_equipment_cell.dart';
+import 'package:mea/widgets/equipment_cell.dart';
 import 'package:mea/widgets/white_tableCell.dart';
 
-import '../../widgets/equipment_cell.dart';
+class EquipmentRequestPage extends StatefulWidget {
+  EquipmentRequestPage({super.key});
+  static const routeName = 'equipment_request';
 
-class EquipmentPage extends StatefulWidget {
-  EquipmentPage({super.key});
-  static const routeName = 'equipment_all';
-
-  List<EquipmentCellData> equipmentCellData = [
-    EquipmentCellData(name: 'Máy x quang', code: 'ABC'),
-    EquipmentCellData(name: 'Máy đo huyết áp', code: 'AAA'),
-    EquipmentCellData(name: 'name', code: 'code'),
-    EquipmentCellData(name: 'name1', code: 'code1'),
-    EquipmentCellData(name: 'name2', code: 'code2'),
-    EquipmentCellData(name: 'abc', code: 'ASDAS'),
+  List<CustomEquipmentCell> equipmentCellData = [
+    CustomEquipmentCell(name: 'Găng tay'),
+    CustomEquipmentCell(name: 'Găng tay2'),
+    CustomEquipmentCell(name: 'Găng tay3'),
+    CustomEquipmentCell(name: 'Găng tay4'),
+    CustomEquipmentCell(name: 'Găng tay5'),
   ];
 
   @override
-  State<EquipmentPage> createState() => _EquipmentPageState();
+  State<EquipmentRequestPage> createState() => _EquipmentRequestPageState();
 }
 
-class _EquipmentPageState extends State<EquipmentPage> {
-  late List<EquipmentCellData> filterCellData;
+class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
+  late List<CustomEquipmentCell> filterCellData;
 
   @override
   void initState() {
@@ -35,8 +32,6 @@ class _EquipmentPageState extends State<EquipmentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       floatingActionButton: backBtn(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
@@ -45,12 +40,12 @@ class _EquipmentPageState extends State<EquipmentPage> {
         decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
+          children: [
             const Padding(
               padding: EdgeInsets.only(top: 80),
               child: WhiteTableCell(
-                icon: Icons.devices,
-                text: 'Danh sách thiết bị trong phòng ban',
+                icon: Icons.edit_calendar,
+                text: 'Đơn yêu cầu thiết bị',
                 isCenter: true,
               ),
             ),
@@ -92,9 +87,8 @@ class _EquipmentPageState extends State<EquipmentPage> {
                 ),
                 child: ListView.builder(
                   itemBuilder: (context, index) {
-                    return EquipmentCell(
+                    return CustomEquipmentCell(
                       name: filterCellData[index].name,
-                      code: filterCellData[index].code,
                     );
                   },
                   itemCount: filterCellData.length,
