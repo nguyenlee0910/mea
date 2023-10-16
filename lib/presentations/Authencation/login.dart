@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'models/post.dart';
 // import 'services/dummy_service.dart';
@@ -26,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   late Widget visibleIc;
   late bool _hidePassword;
   late bool checkBoxValue;
+  late SharedPreferences prefs;
   final dio = Dio();
 
   String userName = '';
@@ -39,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
         lockIc = Image.asset('assets/icon/ic_lock.png');
         mailIc = Image.asset('assets/icon/ic_mail.png');
         visibleIc = Image.asset('assets/icon/ic_visible.png');
+        prefs = await SharedPreferences.getInstance();
       },
     );
     _hidePassword = true;
@@ -53,14 +57,27 @@ class _LoginPageState extends State<LoginPage> {
     required VoidCallback callback,
   }) async {
     final body = {'password': password, 'username': userName};
-    final response = await dio.post(
+    await dio
+        .post(
       'https://mea.monoinfinity.net/api/v1/auth/login',
       data: body,
-    );
-    debugPrint(response.toString());
-    if (response.statusCode == 201) {
-      callback();
-    }
+    )
+        .then((response) {
+      debugPrint(jsonDecode(response.toString()).toString());
+      if (response.statusCode == 201) {
+        prefs.setString(
+          'departmentId',
+          response.data['user']['department']['id'].toString(),
+        );
+
+        prefs.setString(
+          'auth',
+          response.data['token'].toString(),
+        );
+
+        callback();
+      }
+    });
   }
 
   @override
@@ -221,15 +238,18 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         onPressed: () {
-                          context.go('/${Navigation.routeName}');
-                          // login(
-                          //   userName: userName,
-                          //   password: password,
-                          //   callback: () {
-                          //     context.go('/${Navigation.routeName}');
-                          //   },
-                          // );
-                          ;
+                          //context.go('/${Navigation.routeName}');
+                          login(
+                            userName: userName,
+                            password: password,
+                            callback: () {
+                              debugPrint(
+                                  ' AUTH KEY: ${prefs.getString('auth')}');
+                              debugPrint(
+                                  ' AUTH KEY 2: ${prefs.getString('departmentId')}');
+                              context.go('/${Navigation.routeName}');
+                            },
+                          );
                         },
                         child: Text(
                           'Login',

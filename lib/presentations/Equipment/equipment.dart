@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
+import 'package:mea/models/equipment_model.dart';
+import 'package:mea/services/department_api.dart';
 import 'package:mea/widgets/white_tableCell.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/equipment_cell.dart';
 
@@ -11,26 +16,62 @@ class EquipmentPage extends StatefulWidget {
   EquipmentPage({super.key});
   static const routeName = 'equipment_all';
 
-  List<EquipmentCellData> equipmentCellData = [
-    EquipmentCellData(name: 'Máy x quang', code: 'ABC'),
-    EquipmentCellData(name: 'Máy đo huyết áp', code: 'AAA'),
-    EquipmentCellData(name: 'name', code: 'code'),
-    EquipmentCellData(name: 'name1', code: 'code1'),
-    EquipmentCellData(name: 'name2', code: 'code2'),
-    EquipmentCellData(name: 'abc', code: 'ASDAS'),
-  ];
-
   @override
   State<EquipmentPage> createState() => _EquipmentPageState();
 }
 
 class _EquipmentPageState extends State<EquipmentPage> {
-  late List<EquipmentCellData> filterCellData;
+  List<EquipmentCellData> filterCellData = [];
+  List<EquipmentModel> equipmentList = [];
+  List<EquipmentCellData> equipmentCellData = [];
 
   @override
   void initState() {
     super.initState();
-    filterCellData = widget.equipmentCellData;
+    final service = DepartmentServices();
+    runZoned(() async {
+      await SharedPreferences.getInstance().then(
+        (value) async {
+          final id = value.getString('departmentId');
+          final auth = value.getString('auth');
+          final resultArary = await Future.wait(
+            [
+              service.getEquipment(
+                page: 0,
+                departmentId: id!,
+                auth: auth,
+              ),
+              service.getEquipment(
+                page: 1,
+                departmentId: id!,
+                auth: auth,
+              ),
+            ],
+          );
+          List<EquipmentModel> newList = new List.from(resultArary[0])
+            ..addAll(resultArary[1])
+            ..sort(
+              (a, b) {
+                final aStr = a.code.replaceAll(RegExp(r'[^0-9]'), '');
+                final bStr = b.code.replaceAll(RegExp(r'[^0-9]'), '');
+                return int.parse(aStr).compareTo(int.parse(bStr));
+              },
+            );
+          // equipmentList = result;
+          setState(() {
+            if (newList.isNotEmpty) {
+              List<EquipmentCellData> temp = [];
+              for (var i in newList) {
+                temp.add(EquipmentCellData(name: i.name, code: i.code));
+              }
+              equipmentCellData = temp;
+              filterCellData = equipmentCellData;
+              print(filterCellData.length);
+            }
+          });
+        },
+      );
+    });
   }
 
   @override
@@ -65,10 +106,10 @@ class _EquipmentPageState extends State<EquipmentPage> {
                 onChanged: (value) {
                   setState(() {
                     if (value.isEmpty) {
-                      filterCellData = widget.equipmentCellData;
+                      filterCellData = equipmentCellData;
                       return;
                     }
-                    filterCellData = widget.equipmentCellData.where((element) {
+                    filterCellData = equipmentCellData.where((element) {
                       return element.name.contains(value);
                     }).toList();
                   });
