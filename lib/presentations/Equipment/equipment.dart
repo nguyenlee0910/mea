@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/models/equipment_model.dart';
@@ -13,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/equipment_cell.dart';
 
 class EquipmentPage extends StatefulWidget {
-  EquipmentPage({super.key});
+  const EquipmentPage({super.key});
   static const routeName = 'equipment_all';
 
   @override
@@ -43,25 +41,25 @@ class _EquipmentPageState extends State<EquipmentPage> {
               ),
               service.getEquipment(
                 page: 1,
-                departmentId: id!,
+                departmentId: id,
                 auth: auth,
               ),
             ],
           );
-          List<EquipmentModel> newList = new List.from(resultArary[0])
+          final newList = List<EquipmentModel>.from(resultArary[0])
             ..addAll(resultArary[1])
             ..sort(
               (a, b) {
-                final aStr = a.code.replaceAll(RegExp(r'[^0-9]'), '');
-                final bStr = b.code.replaceAll(RegExp(r'[^0-9]'), '');
+                final aStr = a.code.replaceAll(RegExp('[^0-9]'), '');
+                final bStr = b.code.replaceAll(RegExp('[^0-9]'), '');
                 return int.parse(aStr).compareTo(int.parse(bStr));
               },
             );
           // equipmentList = result;
           setState(() {
             if (newList.isNotEmpty) {
-              List<EquipmentCellData> temp = [];
-              for (var i in newList) {
+              final temp = <EquipmentCellData>[];
+              for (final i in newList) {
                 temp.add(EquipmentCellData(name: i.name, code: i.code));
               }
               equipmentCellData = temp;
@@ -85,7 +83,6 @@ class _EquipmentPageState extends State<EquipmentPage> {
         width: double.infinity,
         decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const Padding(
               padding: EdgeInsets.only(top: 80),
@@ -116,13 +113,13 @@ class _EquipmentPageState extends State<EquipmentPage> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: ShapeDecoration(
+                decoration: const ShapeDecoration(
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(

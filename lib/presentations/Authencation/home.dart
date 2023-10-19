@@ -3,7 +3,6 @@ import 'package:mea/constants.dart';
 import 'package:mea/models/cell_data.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
-import 'package:mea/presentations/Request/create_request.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 
 import '../../widgets/circle_avatar.dart';

@@ -50,13 +50,13 @@ GoRouter appRouter() => GoRouter(
           path: '/edit_profile',
           name: UserEditProfilePage.routeName,
           builder: (BuildContext context, GoRouterState state) =>
-              UserEditProfilePage(),
+              const UserEditProfilePage(),
         ),
         GoRoute(
           path: '/equipment_all',
           name: EquipmentPage.routeName,
           builder: (BuildContext context, GoRouterState state) =>
-              EquipmentPage(),
+              const EquipmentPage(),
         ),
         GoRoute(
           path: '/create_request',
@@ -68,13 +68,13 @@ GoRouter appRouter() => GoRouter(
           path: '/equipment_request',
           name: EquipmentRequestPage.routeName,
           builder: (BuildContext context, GoRouterState state) =>
-              EquipmentRequestPage(),
+              const EquipmentRequestPage(),
         ),
         GoRoute(
           path: '/equipment_detail',
           name: EquipmentDetail.routeName,
           builder: (BuildContext context, GoRouterState state) =>
-              EquipmentDetail(),
+              const EquipmentDetail(),
         ),
       ],
       observers: [

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomEquipmentCell extends StatelessWidget {
-  const CustomEquipmentCell({super.key, required this.name});
+  const CustomEquipmentCell({required this.name, super.key});
 
   final String name;
   @override
@@ -20,13 +20,13 @@ class CustomEquipmentCell extends StatelessWidget {
     );
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12),
         child: Container(
           width: 352,
           height: 52,
           decoration: const ShapeDecoration(
             gradient: LinearGradient(
-              begin: Alignment(0.00, -1.00),
+              begin: Alignment(0, -1),
               end: Alignment(0, 1),
               colors: [Color(0xFF7CE6AD), Color(0xFF7CE6D3)],
             ),
@@ -46,7 +46,7 @@ class CustomEquipmentCell extends StatelessWidget {
                   onPressed: () {
                     print('object');
                   },
-                  icon: Icon(Icons.accessible_forward_sharp),
+                  icon: const Icon(Icons.accessible_forward_sharp),
                   color: Colors.white,
                 ),
               ],

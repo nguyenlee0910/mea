@@ -27,17 +27,17 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
               width: size.width,
               height: size.height * 0.3,
               child: const DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.red),
+                decoration: BoxDecoration(color: Colors.red),
                 child: Image(
                   image: NetworkImage(
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',),
                 ),
               ),
             ),
             const Padding(
-              padding: const EdgeInsets.only(top: 8, left: 12, bottom: 8),
+              padding: EdgeInsets.only(top: 8, left: 12, bottom: 8),
               child: Text(
-                "Chi tiết",
+                'Chi tiết',
                 style: TextStyle(
                   fontSize: 27,
                   fontWeight: FontWeight.w600,
@@ -50,17 +50,12 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 height: size.height * 0.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Color(0x6683edac),
+                  color: const Color(0x6683edac),
                 ),
                 child: const Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(12),
                   child: Text(
-                    'Ten thiet bi: ' +
-                        'May tinh 01\n' +
-                        'Ma thiet bi: ' +
-                        'MM01\n' +
-                        'Mo ta: ' +
-                        'May tinh sieu nang ... ... ...',
+                    'Ten thiet bi: May tinh 01\nMa thiet bi: MM01\nMo ta: May tinh sieu nang ... ... ...',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w300,

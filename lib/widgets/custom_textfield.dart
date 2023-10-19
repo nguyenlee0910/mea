@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 Widget buildEditable({
-  String? titleText,
-  required String initiaValue,
-  required void Function(String) onChange,
+  required String initiaValue, required void Function(String) onChange, String? titleText,
   List<String> dropDownItems = const [],
   MainAxisAlignment mainAxisAlignment = MainAxisAlignment.end,
   Size size = const Size(240, 36),
@@ -58,7 +56,7 @@ Widget buildEditable({
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
+                    padding: const EdgeInsets.only(bottom: 4),
                     child: Center(
                       child: TextFormField(
                         initialValue: initiaValue,

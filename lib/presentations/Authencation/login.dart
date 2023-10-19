@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: Row(
                         children: <Widget>[
@@ -186,8 +186,8 @@ class _LoginPageState extends State<LoginPage> {
                                 setState(() {
                                   checkBoxValue = newValue!;
                                 });
-                              }),
-                          Text(
+                              },),
+                          const Text(
                             'Remember me',
                             style: TextStyle(color: Colors.white),
                           ),
@@ -245,9 +245,9 @@ class _LoginPageState extends State<LoginPage> {
                             password: password,
                             callback: () {
                               debugPrint(
-                                  ' AUTH KEY: ${prefs.getString('auth')}');
+                                  ' AUTH KEY: ${prefs.getString('auth')}',);
                               debugPrint(
-                                  ' AUTH KEY 2: ${prefs.getString('departmentId')}');
+                                  ' AUTH KEY 2: ${prefs.getString('departmentId')}',);
                               context.go('/${Navigation.routeName}');
                             },
                           );

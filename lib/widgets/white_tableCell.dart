@@ -52,9 +52,7 @@ class WhiteTableCell extends StatelessWidget {
                     color: const Color(0xFF6CD7CB),
                   ),
                 ),
-                isCenter
-                    ? Expanded(child: texToShow)
-                    : Padding(
+                if (isCenter) Expanded(child: texToShow) else Padding(
                         padding: const EdgeInsets.only(right: 8),
                         child: texToShow,
                       ),

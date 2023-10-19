@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mea/presentations/Authencation/home.dart';
 import 'package:mea/widgets/custom_textfield.dart';
 
 import '../../constants.dart';
 
 class UserEditProfilePage extends StatefulWidget {
-  UserEditProfilePage({super.key});
+  const UserEditProfilePage({super.key});
   static const routeName = 'edit_profile';
 
   @override
@@ -18,9 +17,9 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
   final roleList = ['Nhân viên', 'Giám đốc'];
   final departmentList = ['Tim mạch', 'Sản phụ khoa'];
 
-  String _gender = "";
-  String _role = "";
-  String _department = "";
+  String _gender = '';
+  String _role = '';
+  String _department = '';
 
   @override
   void initState() {
@@ -62,21 +61,21 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
               child: Container(
                 width: size.width * 0.9,
                 height: size.height * 0.55,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12),
                   child: Column(children: [
                     buildEditable(
                       titleText: 'Tên:',
                       initiaValue: 'Hoang Thanh Thao',
                       onChange: (value) {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     buildEditable(
@@ -84,7 +83,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                       initiaValue: 'nguyenle@gmail.com',
                       onChange: (value) {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     buildEditable(
@@ -92,7 +91,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                       initiaValue: '012345678',
                       onChange: (value) {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     buildEditable(
@@ -100,7 +99,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                       initiaValue: '1712200117270',
                       onChange: (value) {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     buildEditable(
@@ -113,7 +112,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                         });
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     buildEditable(
@@ -126,7 +125,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                         });
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     buildEditable(
@@ -139,10 +138,10 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                         });
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
-                  ]),
+                  ],),
                 ),
               ),
             )

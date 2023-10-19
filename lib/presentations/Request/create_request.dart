@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
-import 'package:mea/models/cell_data.dart';
 import 'package:mea/widgets/custom_textfield.dart';
 import 'package:mea/widgets/equipment_cell.dart';
 import 'package:mea/widgets/white_tableCell.dart';
@@ -47,10 +46,9 @@ class _CreateRequestState extends State<CreateRequest> {
         width: double.infinity,
         decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 80),
+            const Padding(
+              padding: EdgeInsets.only(top: 80),
               child: WhiteTableCell(
                 icon: Icons.edit_calendar,
                 text: 'Lập đơn yêu cầu',
@@ -61,7 +59,7 @@ class _CreateRequestState extends State<CreateRequest> {
               padding: const EdgeInsets.only(top: 20),
               child: SizedBox(
                 child: buildEditable(
-                    size: Size(352, 36),
+                    size: const Size(352, 36),
                     backgroundColor: const Color.fromARGB(182, 255, 255, 255),
                     borderRadiusRatio: 50,
                     initiaValue: choosenRequestType,
@@ -71,16 +69,16 @@ class _CreateRequestState extends State<CreateRequest> {
                         choosenRequestType = value;
                       });
                     },
-                    dropDownItems: widget.requestType),
+                    dropDownItems: widget.requestType,),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: ShapeDecoration(
+                decoration: const ShapeDecoration(
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
