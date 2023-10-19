@@ -29,8 +29,10 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
               child: const DecoratedBox(
                 decoration: BoxDecoration(color: Colors.red),
                 child: Image(
+                  fit: BoxFit.fill,
                   image: NetworkImage(
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',),
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                  ),
                 ),
               ),
             ),
@@ -55,7 +57,12 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 child: const Padding(
                   padding: EdgeInsets.all(12),
                   child: Text(
-                    'Ten thiet bi: May tinh 01\nMa thiet bi: MM01\nMo ta: May tinh sieu nang ... ... ...',
+                    'Ten thiet bi: ' +
+                        'May tinh 01\n' +
+                        'Ma thiet bi: ' +
+                        'MM01\n' +
+                        'Chi tiet: ' +
+                        'May tinh sieu nang ... ... ...',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w300,

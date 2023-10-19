@@ -11,6 +11,8 @@ import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/create_request.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
+import 'package:mea/presentations/Request/repair_request.dart';
+import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/presentations/UserManagement/user_edit.dart';
 
 GoRouter appRouter() => GoRouter(
@@ -75,6 +77,18 @@ GoRouter appRouter() => GoRouter(
           name: EquipmentDetail.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               const EquipmentDetail(),
+        ),
+        GoRoute(
+          path: '/repair_request',
+          name: RepairRequest.routeName,
+          builder: (BuildContext context, GoRouterState state) =>
+              const RepairRequest(),
+        ),
+        GoRoute(
+          path: '/repair_request_detail',
+          name: RepairRequestDetail.routeName,
+          builder: (BuildContext context, GoRouterState state) =>
+              const RepairRequestDetail(),
         ),
       ],
       observers: [

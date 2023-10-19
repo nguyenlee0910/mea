@@ -8,6 +8,7 @@ import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mea/presentations/Request/repair_request.dart';
 
 import '../../models/user_model.dart';
 import '../../widgets/circle_avatar.dart';
@@ -40,7 +41,7 @@ class HomePage extends StatefulWidget {
     CellData(
       iconData: Icons.note_add_outlined,
       textTitle: 'Lập đơn sửa chữa thiết bị',
-      route: '/${EquipmentDetail.routeName}',
+      route: '/${RepairRequest.routeName}',
     ),
     CellData(
       iconData: Icons.art_track,

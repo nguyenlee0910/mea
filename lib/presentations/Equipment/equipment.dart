@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/models/equipment_model.dart';
+import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/services/department_api.dart';
 import 'package:mea/widgets/white_tableCell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -133,6 +134,10 @@ class _EquipmentPageState extends State<EquipmentPage> {
                     return EquipmentCell(
                       name: filterCellData[index].name,
                       code: filterCellData[index].code,
+                      buttonName: 'Chi tiết',
+                      onPress: () {
+                        context.push('/${EquipmentDetail.routeName}');
+                      },
                     );
                   },
                   itemCount: filterCellData.length,

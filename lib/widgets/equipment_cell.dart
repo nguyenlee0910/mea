@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EquipmentCellData {
   EquipmentCellData({
@@ -13,11 +13,16 @@ class EquipmentCellData {
 class EquipmentCell extends StatelessWidget {
   const EquipmentCell({
     required this.name,
-    required this.code, super.key,
+    required this.code,
+    required this.buttonName,
+    this.onPress,
+    super.key,
   });
 
   final String name;
   final String code;
+  final String buttonName;
+  final VoidCallback? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +65,36 @@ class EquipmentCell extends StatelessWidget {
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
                     height: 0,
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: SizedBox(
+                      width: 200,
+                      height: 20,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
+                        ),
+                        onPressed: () {
+                          onPress!();
+                        },
+                        child: Text(
+                          buttonName,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            color: const Color.fromARGB(168, 0, 187, 165),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
