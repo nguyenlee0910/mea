@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CircleAvatarWithName extends StatelessWidget {
-  const CircleAvatarWithName({
+  CircleAvatarWithName({
+    required this.name,
+    this.deparmentName,
+    this.email,
     super.key,
   });
+  final String name;
+  String? deparmentName;
+  String? email;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +29,14 @@ class CircleAvatarWithName extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(top: 80, right: 60),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hoang Nha Thy',
-                style: TextStyle(
+                name,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontFamily: 'Inter',
@@ -39,7 +45,7 @@ class CircleAvatarWithName extends StatelessWidget {
                 ),
               ),
               Text(
-                'Bộ phận: Tim mạch',
+                deparmentName ?? "NULL",
                 style: TextStyle(
                   color: Color(0xFF074E23),
                   fontSize: 12,
@@ -49,7 +55,7 @@ class CircleAvatarWithName extends StatelessWidget {
                 ),
               ),
               Text(
-                'nhathyxxxxxx@gmail.com',
+                email ?? "NULL",
                 style: TextStyle(
                   color: Color(0xFF074E23),
                   fontSize: 12,

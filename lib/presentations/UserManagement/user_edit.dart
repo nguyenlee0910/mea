@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/widgets/custom_textfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
+import '../../models/user_model.dart';
 
 class UserEditProfilePage extends StatefulWidget {
   const UserEditProfilePage({super.key});
@@ -15,18 +19,35 @@ class UserEditProfilePage extends StatefulWidget {
 class _UserEditProfilePageState extends State<UserEditProfilePage> {
   final genderList = ['Nam', 'Nữ'];
   final roleList = ['Nhân viên', 'Giám đốc'];
-  final departmentList = ['Tim mạch', 'Sản phụ khoa'];
+  List<String> departmentList = ['Tim mạch', 'Sản phụ khoa'];
 
   String _gender = '';
   String _role = '';
   String _department = '';
+  String _name = '';
+
+  UserModel userModel = UserModel();
+  String departmentName = '';
+
+  Future<void> getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> data =
+        jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
+    setState(() {
+      userModel = UserModel.fromJson(data);
+      departmentName = prefs.getString('departmentName') ?? "NULL";
+      departmentList.insert(0, departmentName);
+      _gender = userModel.gender == "MALE" ? genderList.first : genderList.last;
+      _role = roleList.first;
+      _department = departmentList.first;
+      _name = userModel.name ?? 'NULL';
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    _gender = genderList.first;
-    _role = roleList.first;
-    _department = departmentList.first;
+    getData();
   }
 
   @override
@@ -69,79 +90,81 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(12),
-                  child: Column(children: [
-                    buildEditable(
-                      titleText: 'Tên:',
-                      initiaValue: 'Hoang Thanh Thao',
-                      onChange: (value) {},
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    buildEditable(
-                      titleText: 'Email:',
-                      initiaValue: 'nguyenle@gmail.com',
-                      onChange: (value) {},
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    buildEditable(
-                      titleText: 'SDT:',
-                      initiaValue: '012345678',
-                      onChange: (value) {},
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    buildEditable(
-                      titleText: 'CCCD:',
-                      initiaValue: '1712200117270',
-                      onChange: (value) {},
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    buildEditable(
-                      titleText: 'Giới tính:',
-                      initiaValue: _gender,
-                      dropDownItems: genderList,
-                      onChange: (value) {
-                        setState(() {
-                          _gender = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    buildEditable(
-                      titleText: 'Chức vụ:',
-                      initiaValue: _role,
-                      dropDownItems: roleList,
-                      onChange: (value) {
-                        setState(() {
-                          _role = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    buildEditable(
-                      titleText: 'Phòng ban:',
-                      initiaValue: _department,
-                      dropDownItems: departmentList,
-                      onChange: (value) {
-                        setState(() {
-                          _department = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                  ],),
+                  child: Column(
+                    children: [
+                      buildEditable(
+                        titleText: 'Tên:',
+                        initiaValue: _name,
+                        onChange: (value) {},
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      buildEditable(
+                        titleText: 'Email:',
+                        initiaValue: userModel.email ?? 'NULL',
+                        onChange: (value) {},
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      buildEditable(
+                        titleText: 'SDT:',
+                        initiaValue: userModel.phone ?? 'NULL',
+                        onChange: (value) {},
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      buildEditable(
+                        titleText: 'CCCD:',
+                        initiaValue: userModel.citizenId ?? 'NULL',
+                        onChange: (value) {},
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      buildEditable(
+                        titleText: 'Giới tính:',
+                        initiaValue: _gender,
+                        dropDownItems: genderList,
+                        onChange: (value) {
+                          setState(() {
+                            _gender = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      buildEditable(
+                        titleText: 'Chức vụ:',
+                        initiaValue: _role,
+                        dropDownItems: roleList,
+                        onChange: (value) {
+                          setState(() {
+                            _role = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      buildEditable(
+                        titleText: 'Phòng ban:',
+                        initiaValue: _department,
+                        dropDownItems: departmentList,
+                        onChange: (value) {
+                          setState(() {
+                            _department = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )

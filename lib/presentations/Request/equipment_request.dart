@@ -157,14 +157,14 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
 
 void _showSucess(BuildContext context, VoidCallback? callback) {
   final alert = AlertDialog(
-    title: Text("Success"),
-    content: Text("Request Sucess !"),
+    title: const Text('Success'),
+    content: const Text('Request Sucess !'),
     actions: [
       ElevatedButton(
-          child: Text("OK"),
+          child: const Text('OK'),
           onPressed: () {
             callback!();
-          })
+          },)
     ],
   );
 

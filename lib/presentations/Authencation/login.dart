@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
+import 'package:mea/models/user_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,20 +62,33 @@ class _LoginPageState extends State<LoginPage> {
         .post(
       'https://mea.monoinfinity.net/api/v1/auth/login',
       data: body,
+      options: Options(responseType: ResponseType.plain),
     )
         .then((response) {
       debugPrint(jsonDecode(response.toString()).toString());
       if (response.statusCode == 201) {
+        final Map<String, dynamic> responseJson =
+            jsonDecode(response.data as String) as Map<String, dynamic>;
         prefs.setString(
           'departmentId',
-          response.data['user']['department']['id'].toString(),
+          responseJson['user']['department']['id'].toString(),
         );
+
+        final userData =
+            UserModel.fromJson(responseJson['user'] as Map<String, dynamic>);
+
+        debugPrint('===> USER DATA: ${userData.toString()}');
 
         prefs.setString(
           'auth',
-          response.data['token'].toString(),
+          responseJson['token'].toString(),
         );
 
+        prefs.setString('userData', jsonEncode(userData.toJson()));
+        prefs.setString(
+          'departmentName',
+          responseJson['user']['department']['name'].toString(),
+        );
         callback();
       }
     });
@@ -180,13 +194,14 @@ class _LoginPageState extends State<LoginPage> {
                       child: Row(
                         children: <Widget>[
                           Checkbox(
-                              value: checkBoxValue,
-                              activeColor: Colors.green,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  checkBoxValue = newValue!;
-                                });
-                              },),
+                            value: checkBoxValue,
+                            activeColor: Colors.green,
+                            onChanged: (newValue) {
+                              setState(() {
+                                checkBoxValue = newValue!;
+                              });
+                            },
+                          ),
                           const Text(
                             'Remember me',
                             style: TextStyle(color: Colors.white),
@@ -245,9 +260,11 @@ class _LoginPageState extends State<LoginPage> {
                             password: password,
                             callback: () {
                               debugPrint(
-                                  ' AUTH KEY: ${prefs.getString('auth')}',);
+                                ' AUTH KEY: ${prefs.getString('auth')}',
+                              );
                               debugPrint(
-                                  ' AUTH KEY 2: ${prefs.getString('departmentId')}',);
+                                ' AUTH KEY 2: ${prefs.getString('departmentId')}',
+                              );
                               context.go('/${Navigation.routeName}');
                             },
                           );

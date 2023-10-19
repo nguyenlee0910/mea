@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
 import '../../models/cell_data.dart';
+import '../../models/user_model.dart';
 import '../../widgets/circle_avatar.dart';
 import '../../widgets/white_tableCell.dart';
 import 'user_edit.dart';
@@ -30,6 +34,25 @@ class UserManagementPage extends StatefulWidget {
 }
 
 class _UserManagementPageState extends State<UserManagementPage> {
+  UserModel userModel = UserModel();
+  String departmentName = '';
+
+  Future<void> getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> data =
+        jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
+    setState(() {
+      userModel = UserModel.fromJson(data);
+      departmentName = prefs.getString('departmentName') ?? "NULL";
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -40,7 +63,11 @@ class _UserManagementPageState extends State<UserManagementPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const CircleAvatarWithName(),
+            CircleAvatarWithName(
+              name: userModel.name ?? "No Name",
+              email: userModel.email,
+              deparmentName: departmentName,
+            ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
