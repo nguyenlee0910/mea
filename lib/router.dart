@@ -7,6 +7,7 @@ import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
 import 'package:mea/presentations/Authencation/home.dart';
 import 'package:mea/presentations/Authencation/login.dart';
+import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/create_request.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
@@ -68,6 +69,12 @@ GoRouter appRouter() => GoRouter(
           name: EquipmentRequestPage.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               EquipmentRequestPage(),
+        ),
+        GoRoute(
+          path: '/equipment_detail',
+          name: EquipmentDetail.routeName,
+          builder: (BuildContext context, GoRouterState state) =>
+              EquipmentDetail(),
         ),
       ],
       observers: [
