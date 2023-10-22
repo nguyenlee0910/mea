@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mea/constants.dart';
+import 'package:mea/models/notification_model.dart';
+import 'package:mea/services/notification_api.dart';
 import 'package:mea/widgets/notification_cell.dart';
 import 'package:mea/widgets/white_tableCell.dart';
 
@@ -12,6 +14,37 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationCellData> filterCellData = [];
+  List<NotificationModel> data = [];
+
+  void fetchData() async {
+    await NotificationService.getNotification().then((value) {
+      data = value;
+      if (mounted || filterCellData.isEmpty) {
+        setState(() {
+          final temp = <NotificationCellData>[];
+          for (final i in data) {
+            temp.add(NotificationCellData(
+                sender: i.sender?.name ?? "NULL",
+                content: i.content ?? 'NULL',
+                iso8601Date: i.createdAt ?? 'NULL',
+                title: i.title!));
+          }
+          filterCellData = temp;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +64,21 @@ class _NotificationPageState extends State<NotificationPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(12),
-              child: SearchBar(
-                hintText: 'Tìm kiếm',
-                leading: const Icon(Icons.search),
-                backgroundColor: MaterialStateProperty.all(
-                  Colors.white.withOpacity(0.5),
+              child: Container(
+                width: 352,
+                height: 52,
+                child: SearchBar(
+                  hintText: 'Tìm kiếm',
+                  leading: const Icon(Icons.search),
+                  backgroundColor: MaterialStateProperty.all(
+                    Colors.white.withOpacity(0.5),
+                  ),
+                  onChanged: (value) {},
                 ),
-                onChanged: (value) {},
               ),
             ),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
             Expanded(
               child: Container(
@@ -55,17 +92,21 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ),
                 ),
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return NotificationCell(
-                      content: filterCellData[index].content,
-                      sender: filterCellData[index].sender,
-                      iso8601Date: filterCellData[index].iso8601Date,
-                      title: filterCellData[index].title,
-                    );
-                  },
-                  itemCount: filterCellData.length,
-                ),
+                child: filterCellData.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) {
+                          return NotificationCell(
+                            content: filterCellData[index].content,
+                            sender: filterCellData[index].sender,
+                            iso8601Date: filterCellData[index].iso8601Date,
+                            title: filterCellData[index].title,
+                          );
+                        },
+                        itemCount: filterCellData.length,
+                      ),
               ),
             ),
           ],

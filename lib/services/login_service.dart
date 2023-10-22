@@ -5,7 +5,7 @@ import 'package:mea/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginService {
+class AuthService {
   static Future<void> login({
     required String userName,
     required String password,
@@ -52,5 +52,27 @@ class LoginService {
       // ignore: avoid_dynamic_calls
       callBack();
     }
+  }
+
+  static Future<void> logout({required Function callBack}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final auth = prefs.getString('auth');
+    final uri = Uri(
+        scheme: 'https', host: Env.serverUrl, path: 'api/v1/user-me/logout');
+    unawaited(http.post(
+      uri,
+      body: jsonEncode({}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    ));
+
+    prefs.clear().then((value) {
+      if (value == true) {
+        callBack();
+      }
+    });
   }
 }

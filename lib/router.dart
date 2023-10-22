@@ -14,6 +14,7 @@ import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/presentations/UserManagement/user_edit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 GoRouter appRouter() => GoRouter(
       debugLogDiagnostics: kDebugMode,
@@ -30,6 +31,15 @@ GoRouter appRouter() => GoRouter(
           name: LoginPage.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               const LoginPage(),
+          redirect: (context, state) async {
+            final prefs = await SharedPreferences.getInstance();
+            final rememberMe = prefs.getBool('rememberMe') ?? false;
+            final auth = prefs.getString('auth') ?? '';
+
+            if (auth.isNotEmpty && rememberMe) {
+              return '/navigation_page';
+            }
+          },
         ),
         GoRoute(
           path: '/forgot_password',

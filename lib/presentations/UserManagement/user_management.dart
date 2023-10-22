@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
+import 'package:mea/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
@@ -97,8 +98,9 @@ class _UserManagementPageState extends State<UserManagementPage> {
                       ),
                     ),
                     onPressed: () {
-                      // ;
-                      context.go('//');
+                      AuthService.logout(callBack: () {
+                        context.go('//');
+                      });
                     },
                     child: Text(
                       'Đăng xuất',

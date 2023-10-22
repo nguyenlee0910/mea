@@ -53,6 +53,10 @@ class _LoginPageState extends State<LoginPage> {
     password = '';
   }
 
+  void saveRemember(bool value) {
+    unawaited(prefs.setBool('rememberMe', value));
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -212,10 +216,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         onPressed: () {
-                          LoginService.login(
+                          AuthService.login(
                             userName: userName,
                             password: password,
                             callBack: () {
+                              saveRemember(checkBoxValue);
                               context.go('/${Navigation.routeName}');
                             },
                           );

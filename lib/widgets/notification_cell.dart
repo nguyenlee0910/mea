@@ -14,12 +14,13 @@ class NotificationCellData {
 }
 
 class NotificationCell extends StatelessWidget {
-  const NotificationCell(
-      {super.key,
-      required this.sender,
-      required this.content,
-      required this.iso8601Date,
-      required this.title});
+  const NotificationCell({
+    required this.sender,
+    required this.content,
+    required this.iso8601Date,
+    required this.title,
+    super.key,
+  });
 
   final String sender;
   final String title;
@@ -29,7 +30,7 @@ class NotificationCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.parse(iso8601Date);
-    DateFormat dateFormat = DateFormat('MM/dd/yyyy');
+    DateFormat dateFormat = DateFormat('dd/MM/yyyy');
     String formattedDate = dateFormat.format(dateTime);
 
     return Center(
