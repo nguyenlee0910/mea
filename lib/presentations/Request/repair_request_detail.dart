@@ -143,8 +143,10 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                       onPressed: () async {
                         debugPrint(description);
                         await DepartmentServices.requestRepairEquipment(
-                                id: widget.id, description: description)
-                            .then((value) {
+                          id: widget.id,
+                          description: description,
+                        ).then((value) {
+                          print(value);
                           if (value == true) {
                             _showSucess(context, () {
                               fieldText.clear();
@@ -185,6 +187,13 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
           },
         )
       ],
+    );
+    // ignore: inference_failure_on_function_invocation
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 
