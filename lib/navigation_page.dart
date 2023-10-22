@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mea/presentations/Authencation/home.dart';
+import 'package:mea/presentations/Notification/list_notification.dart';
 import 'package:mea/presentations/UserManagement/user_management.dart';
 
 class Navigation extends StatefulWidget {
@@ -14,7 +15,7 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Container(),
+    NotificationPage(),
     Container(),
     UserManagementPage(),
   ];
