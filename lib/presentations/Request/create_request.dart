@@ -44,7 +44,7 @@ class _CreateRequestState extends State<CreateRequest> {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
         child: Column(
           children: [
             const Padding(
@@ -59,17 +59,18 @@ class _CreateRequestState extends State<CreateRequest> {
               padding: const EdgeInsets.only(top: 20),
               child: SizedBox(
                 child: buildEditable(
-                    size: const Size(352, 36),
-                    backgroundColor: const Color.fromARGB(182, 255, 255, 255),
-                    borderRadiusRatio: 50,
-                    initiaValue: choosenRequestType,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    onChange: (value) {
-                      setState(() {
-                        choosenRequestType = value;
-                      });
-                    },
-                    dropDownItems: widget.requestType,),
+                  size: const Size(352, 36),
+                  backgroundColor: const Color.fromARGB(182, 255, 255, 255),
+                  borderRadiusRatio: 50,
+                  initiaValue: choosenRequestType,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  onChange: (value) {
+                    setState(() {
+                      choosenRequestType = value;
+                    });
+                  },
+                  dropDownItems: widget.requestType,
+                ),
               ),
             ),
             const SizedBox(

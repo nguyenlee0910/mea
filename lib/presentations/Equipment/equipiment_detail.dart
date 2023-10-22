@@ -19,7 +19,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

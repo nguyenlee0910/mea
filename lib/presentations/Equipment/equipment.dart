@@ -27,23 +27,18 @@ class _EquipmentPageState extends State<EquipmentPage> {
   @override
   void initState() {
     super.initState();
-    final service = DepartmentServices();
     runZoned(() async {
       await SharedPreferences.getInstance().then(
         (value) async {
           final id = value.getString('departmentId');
-          final auth = value.getString('auth');
           final resultArary = await Future.wait(
             [
-              service.getEquipment(
-                page: 0,
+              DepartmentServices.getEquipment(
                 departmentId: id!,
-                auth: auth,
               ),
-              service.getEquipment(
+              DepartmentServices.getEquipment(
                 page: 1,
                 departmentId: id,
-                auth: auth,
               ),
             ],
           );
@@ -82,7 +77,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
         child: Column(
           children: <Widget>[
             const Padding(

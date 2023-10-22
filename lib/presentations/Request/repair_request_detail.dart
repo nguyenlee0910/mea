@@ -30,8 +30,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
         },
         child: Container(
           width: double.infinity,
-          decoration:
-              BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+          decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
           child: Column(
             children: [
               const Padding(

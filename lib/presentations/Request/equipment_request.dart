@@ -18,7 +18,6 @@ class EquipmentRequestPage extends StatefulWidget {
 class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
   late List<CustomEquipmentCell> filterCellData;
   String description = '';
-  DepartmentServices departmentServices = DepartmentServices();
   final fieldText = TextEditingController();
 
   @override
@@ -40,8 +39,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
         },
         child: Container(
           width: double.infinity,
-          decoration:
-              BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+          decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
           child: Column(
             children: [
               const Padding(
@@ -98,8 +96,8 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                       ),
                       onPressed: () async {
                         if (description.isNotEmpty) {
-                          await departmentServices
-                              .requestEquipment(description: description)
+                          await DepartmentServices.requestEquipment(
+                                  description: description)
                               .then(
                             (value) {
                               if (value == true) {
@@ -161,10 +159,11 @@ void _showSucess(BuildContext context, VoidCallback? callback) {
     content: const Text('Request Sucess !'),
     actions: [
       ElevatedButton(
-          child: const Text('OK'),
-          onPressed: () {
-            callback!();
-          },)
+        child: const Text('OK'),
+        onPressed: () {
+          callback!();
+        },
+      )
     ],
   );
 

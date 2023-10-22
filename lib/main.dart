@@ -1,18 +1,14 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get_it/get_it.dart';
 
 import 'app.dart';
-import 'env.dart';
 import 'firebase_options.dart';
-import 'utils/http_client.dart';
 
 void main() async {
   await runZonedGuarded(
@@ -23,10 +19,6 @@ void main() async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      GetIt.instance.registerLazySingleton(() {
-        debugPrint('[SERVER:] ${Env.serverUrl}');
-        return HttpClient(baseOptions: BaseOptions(baseUrl: Env.serverUrl));
-      });
       if (!kIsWeb) {
         if (kDebugMode) {
           await FirebaseCrashlytics.instance

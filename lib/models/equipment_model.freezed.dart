@@ -74,22 +74,22 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
 }
 
 /// @nodoc
-abstract class _$$_EquipmentModelCopyWith<$Res>
+abstract class _$$EquipmentModelImplCopyWith<$Res>
     implements $EquipmentModelCopyWith<$Res> {
-  factory _$$_EquipmentModelCopyWith(
-          _$_EquipmentModel value, $Res Function(_$_EquipmentModel) then) =
-      __$$_EquipmentModelCopyWithImpl<$Res>;
+  factory _$$EquipmentModelImplCopyWith(_$EquipmentModelImpl value,
+          $Res Function(_$EquipmentModelImpl) then) =
+      __$$EquipmentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String code});
 }
 
 /// @nodoc
-class __$$_EquipmentModelCopyWithImpl<$Res>
-    extends _$EquipmentModelCopyWithImpl<$Res, _$_EquipmentModel>
-    implements _$$_EquipmentModelCopyWith<$Res> {
-  __$$_EquipmentModelCopyWithImpl(
-      _$_EquipmentModel _value, $Res Function(_$_EquipmentModel) _then)
+class __$$EquipmentModelImplCopyWithImpl<$Res>
+    extends _$EquipmentModelCopyWithImpl<$Res, _$EquipmentModelImpl>
+    implements _$$EquipmentModelImplCopyWith<$Res> {
+  __$$EquipmentModelImplCopyWithImpl(
+      _$EquipmentModelImpl _value, $Res Function(_$EquipmentModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_EquipmentModelCopyWithImpl<$Res>
     Object? name = null,
     Object? code = null,
   }) {
-    return _then(_$_EquipmentModel(
+    return _then(_$EquipmentModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -118,11 +118,12 @@ class __$$_EquipmentModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_EquipmentModel implements _EquipmentModel {
-  _$_EquipmentModel({required this.id, required this.name, required this.code});
+class _$EquipmentModelImpl implements _EquipmentModel {
+  _$EquipmentModelImpl(
+      {required this.id, required this.name, required this.code});
 
-  factory _$_EquipmentModel.fromJson(Map<String, dynamic> json) =>
-      _$$_EquipmentModelFromJson(json);
+  factory _$EquipmentModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EquipmentModelImplFromJson(json);
 
   @override
   final String id;
@@ -140,7 +141,7 @@ class _$_EquipmentModel implements _EquipmentModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EquipmentModel &&
+            other is _$EquipmentModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.code, code) || other.code == code));
@@ -153,12 +154,13 @@ class _$_EquipmentModel implements _EquipmentModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EquipmentModelCopyWith<_$_EquipmentModel> get copyWith =>
-      __$$_EquipmentModelCopyWithImpl<_$_EquipmentModel>(this, _$identity);
+  _$$EquipmentModelImplCopyWith<_$EquipmentModelImpl> get copyWith =>
+      __$$EquipmentModelImplCopyWithImpl<_$EquipmentModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EquipmentModelToJson(
+    return _$$EquipmentModelImplToJson(
       this,
     );
   }
@@ -168,10 +170,10 @@ abstract class _EquipmentModel implements EquipmentModel {
   factory _EquipmentModel(
       {required final String id,
       required final String name,
-      required final String code}) = _$_EquipmentModel;
+      required final String code}) = _$EquipmentModelImpl;
 
   factory _EquipmentModel.fromJson(Map<String, dynamic> json) =
-      _$_EquipmentModel.fromJson;
+      _$EquipmentModelImpl.fromJson;
 
   @override
   String get id;
@@ -181,6 +183,6 @@ abstract class _EquipmentModel implements EquipmentModel {
   String get code;
   @override
   @JsonKey(ignore: true)
-  _$$_EquipmentModelCopyWith<_$_EquipmentModel> get copyWith =>
+  _$$EquipmentModelImplCopyWith<_$EquipmentModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

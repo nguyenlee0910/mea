@@ -59,7 +59,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
       resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
         child: Column(
           children: [
             Padding(

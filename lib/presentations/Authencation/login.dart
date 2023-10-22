@@ -9,6 +9,7 @@ import 'package:mea/constants.dart';
 import 'package:mea/models/user_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
+import 'package:mea/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'models/post.dart';
@@ -52,55 +53,13 @@ class _LoginPageState extends State<LoginPage> {
     password = '';
   }
 
-  Future<void> login({
-    required String userName,
-    required String password,
-    required VoidCallback callback,
-  }) async {
-    final body = {'password': password, 'username': userName};
-    await dio
-        .post(
-      'https://mea.monoinfinity.net/api/v1/auth/login',
-      data: body,
-      options: Options(responseType: ResponseType.plain),
-    )
-        .then((response) {
-      debugPrint(jsonDecode(response.toString()).toString());
-      if (response.statusCode == 201) {
-        final Map<String, dynamic> responseJson =
-            jsonDecode(response.data as String) as Map<String, dynamic>;
-        prefs.setString(
-          'departmentId',
-          responseJson['user']['department']['id'].toString(),
-        );
-
-        final userData =
-            UserModel.fromJson(responseJson['user'] as Map<String, dynamic>);
-
-        debugPrint('===> USER DATA: ${userData.toString()}');
-
-        prefs.setString(
-          'auth',
-          responseJson['token'].toString(),
-        );
-
-        prefs.setString('userData', jsonEncode(userData.toJson()));
-        prefs.setString(
-          'departmentName',
-          responseJson['user']['department']['name'].toString(),
-        );
-        callback();
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: BoxDecoration(gradient: AppColors.instance.backgroundTheme),
+        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,18 +212,10 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         onPressed: () {
-                          print('hello');
-                          //context.go('/${Navigation.routeName}');
-                          login(
+                          LoginService.login(
                             userName: userName,
                             password: password,
-                            callback: () {
-                              debugPrint(
-                                ' AUTH KEY: ${prefs.getString('auth')}',
-                              );
-                              debugPrint(
-                                ' AUTH KEY 2: ${prefs.getString('departmentId')}',
-                              );
+                            callBack: () {
                               context.go('/${Navigation.routeName}');
                             },
                           );

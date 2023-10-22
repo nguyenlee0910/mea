@@ -1,27 +1,38 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:mea/constants.dart';
 import 'package:mea/env.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/equipment_model.dart';
 
 class DepartmentServices {
-  //get
-  Future<List<EquipmentModel>> getEquipment({
-    required page,
+  static Future<List<EquipmentModel>> getEquipment({
     required String departmentId,
-    required auth,
     int pageSize = 12,
+    int page = 0,
   }) async {
-    final url =
-        '${Env.serverUrl}/api/v1/equipment/department/$departmentId?page=$page&pageSize=$pageSize';
+    final prefs = await SharedPreferences.getInstance();
 
-    debugPrint(url);
+    final departmentId = prefs.getString('departmentId');
+    final auth = prefs.getString('auth');
+
+    final uri = Uri(
+      scheme: 'https',
+      host: Env.serverUrl,
+      path: 'api/v1/equipment/department/$departmentId',
+      queryParameters: {
+        'page': page.toString(),
+        'pageSize': pageSize.toString(),
+      },
+    );
+
     final response = await http.get(
-      Uri.parse(url),
+      uri,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -41,24 +52,28 @@ class DepartmentServices {
     return listResult;
   }
 
-  Future<bool> requestEquipment({required String description}) async {
+  static Future<bool> requestEquipment({required String description}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final auth = prefs.getString('auth');
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final auth = prefs.getString('auth');
-      final url = '${Env.serverUrl}/api/v1/import-request';
-      final params = jsonEncode(
-        {'name': 'Đơn yêu cầu thiết bị y tế', 'description': description},
-      );
-      final response = await http.post(
-        Uri.parse(url),
-        body: params,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $auth',
-        },
-      );
-      if (response.statusCode == 201) {
+      final getId = await _sendRequest(description: description);
+      if (getId != kErrorString) {
+        final id = getId;
+        final uri = Uri(
+          scheme: 'https',
+          host: Env.serverUrl,
+          path: 'api/v1/import-request/$id/submit',
+        );
+        unawaited(
+          http.put(
+            uri,
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer $auth',
+            },
+          ),
+        );
         return true;
       }
       return false;
@@ -68,6 +83,46 @@ class DepartmentServices {
     } on Exception {
       debugPrint('=== ERROR READING SHARE PREFS ===');
       return false;
+    }
+  }
+
+  static Future<String> _sendRequest({required String description}) async {
+    try {
+      final uri = Uri(
+        scheme: 'https',
+        host: Env.serverUrl,
+        path: 'api/v1/import-request',
+      );
+      final prefs = await SharedPreferences.getInstance();
+      final auth = prefs.getString('auth');
+      final params = jsonEncode(
+        {
+          'name': 'Đơn yêu cầu thiết bị y tế',
+          'description': description,
+        },
+      );
+      final response = await http.post(
+        uri,
+        body: params,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
+      if (response.statusCode == 201) {
+        final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+        return responseJson['id'] as String;
+      } else {
+        return kErrorString;
+      }
+    } on HttpException {
+      debugPrint('=== ERROR ===');
+      return kErrorString;
+    } on Exception {
+      debugPrint('=== ERROR READING SHARE PREFS ===');
+      return kErrorString;
     }
   }
 }
