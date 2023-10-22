@@ -133,7 +133,7 @@ class _RepairRequestState extends State<RepairRequest> {
                       buttonName: 'Yêu cầu sửa chữa thiết bị',
                       onPress: () {
                         context.push(
-                            '/${RepairRequestDetail.routeName}/:${filterCellData[index].id}');
+                            '/${RepairRequestDetail.routeName}/:${filterCellData[index].id}/:${filterCellData[index].name}/:${filterCellData[index].code}');
                       },
                     );
                   },

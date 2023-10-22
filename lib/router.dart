@@ -85,11 +85,13 @@ GoRouter appRouter() => GoRouter(
               const RepairRequest(),
         ),
         GoRoute(
-          path: '/repair_request_detail/:id',
+          path: '/repair_request_detail/:id/:nameEquipment/:codeEquipment',
           name: RepairRequestDetail.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               RepairRequestDetail(
             id: state.pathParameters['id']!,
+            nameEquipment: state.pathParameters['nameEquipment']!,
+            codeEquipment: state.pathParameters['codeEquipment']!,
           ),
         ),
       ],

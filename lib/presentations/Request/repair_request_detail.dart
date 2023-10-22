@@ -9,9 +9,13 @@ class RepairRequestDetail extends StatefulWidget {
   const RepairRequestDetail({
     super.key,
     required this.id,
+    required this.codeEquipment,
+    required this.nameEquipment,
   });
   static const routeName = 'repair_request_detail';
   final String id;
+  final String nameEquipment;
+  final String codeEquipment;
 
   @override
   State<RepairRequestDetail> createState() => _RepairRequestDetailState();
@@ -73,7 +77,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                             Padding(
                               padding: EdgeInsets.only(top: 8),
                               child: Text(
-                                'Tên thiết bị: Máy tính 1',
+                                'Tên thiết bị: ${widget.nameEquipment}',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
@@ -85,7 +89,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                             Padding(
                               padding: EdgeInsets.only(top: 8),
                               child: Text(
-                                'Mã thiết bị: MM01',
+                                'Mã thiết bị: ${widget.codeEquipment}',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
