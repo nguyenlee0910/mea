@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
+import 'package:mea/services/department_api.dart';
 import 'package:mea/widgets/white_tableCell.dart';
 
 class RepairRequestDetail extends StatefulWidget {
-  const RepairRequestDetail({super.key});
+  const RepairRequestDetail({
+    super.key,
+    required this.id,
+  });
   static const routeName = 'repair_request_detail';
+  final String id;
 
   @override
   State<RepairRequestDetail> createState() => _RepairRequestDetailState();
@@ -15,6 +20,12 @@ class RepairRequestDetail extends StatefulWidget {
 class _RepairRequestDetailState extends State<RepairRequestDetail> {
   String description = '';
   final fieldText = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    print(widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +140,19 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                           borderRadius: BorderRadius.all(Radius.circular(40)),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        debugPrint(description);
+                        await DepartmentServices.requestRepairEquipment(
+                                id: widget.id, description: description)
+                            .then((value) {
+                          if (value == true) {
+                            _showSucess(context, () {
+                              fieldText.clear();
+                              context.pop();
+                            });
+                          }
+                        });
+                      },
                       child: Text(
                         'Gửi',
                         textAlign: TextAlign.center,
@@ -147,6 +170,21 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showSucess(BuildContext context, VoidCallback? callback) {
+    final alert = AlertDialog(
+      title: const Text('Success'),
+      content: const Text('Request Sucess !'),
+      actions: [
+        ElevatedButton(
+          child: const Text('OK'),
+          onPressed: () {
+            callback!();
+          },
+        )
+      ],
     );
   }
 

@@ -52,10 +52,13 @@ class WhiteTableCell extends StatelessWidget {
                     color: const Color(0xFF6CD7CB),
                   ),
                 ),
-                if (isCenter) Expanded(child: texToShow) else Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: texToShow,
-                      ),
+                if (isCenter)
+                  Expanded(child: texToShow)
+                else
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: texToShow,
+                  ),
                 SizedBox(
                   width: isCenter ? 36 : 0,
                 ),

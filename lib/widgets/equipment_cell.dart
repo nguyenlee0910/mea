@@ -3,9 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EquipmentCellData {
   EquipmentCellData({
+    this.id,
     required this.name,
     required this.code,
   });
+  String? id;
   String name;
   String code;
 }

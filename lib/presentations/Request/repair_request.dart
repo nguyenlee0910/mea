@@ -56,7 +56,8 @@ class _RepairRequestState extends State<RepairRequest> {
             if (newList.isNotEmpty) {
               final temp = <EquipmentCellData>[];
               for (final i in newList) {
-                temp.add(EquipmentCellData(name: i.name, code: i.code));
+                temp.add(
+                    EquipmentCellData(name: i.name, code: i.code, id: i.id));
               }
               equipmentCellData = temp;
               filterCellData = equipmentCellData;
@@ -131,7 +132,8 @@ class _RepairRequestState extends State<RepairRequest> {
                       code: filterCellData[index].code,
                       buttonName: 'Yêu cầu sửa chữa thiết bị',
                       onPress: () {
-                        context.push('/${RepairRequestDetail.routeName}');
+                        context.push(
+                            '/${RepairRequestDetail.routeName}/:${filterCellData[index].id}');
                       },
                     );
                   },

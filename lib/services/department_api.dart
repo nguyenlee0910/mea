@@ -125,4 +125,43 @@ class DepartmentServices {
       return kErrorString;
     }
   }
+
+  static Future<bool> requestRepairEquipment({
+    required String id,
+    required String description,
+    List<String>? urlImage,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    final auth = prefs.getString('auth');
+    try {
+      final header = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $auth',
+      };
+      final uri = Uri(
+        scheme: 'https',
+        host: Env.serverUrl,
+        path: 'api/v1/repair-request',
+      );
+      final body = {
+        "description": description,
+        "imageUrls": urlImage ?? [],
+        "equipmentId": '08de2642-c733-41aa-b524-451d00305b52',
+      };
+      final response = await http.post(
+        uri,
+        headers: header,
+        body: jsonEncode(body),
+      );
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
+    } on HttpException {
+      debugPrint('==ERROR==');
+      return false;
+    }
+  }
 }
