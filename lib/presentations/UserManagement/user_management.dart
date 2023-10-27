@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
@@ -60,7 +61,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+        decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -84,37 +85,90 @@ class _UserManagementPageState extends State<UserManagementPage> {
               },
               itemCount: widget.cellData.length,
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 64),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 64),
+            //   child: Center(
+            //     child: SizedBox(
+            //       width: size.width * 0.6,
+            //       height: 56,
+            //       child: ElevatedButton(
+            //         style: ElevatedButton.styleFrom(
+            //           shape: RoundedRectangleBorder(
+            //             side: BorderSide(
+            //               width: 1,
+            //               color: Color.fromARGB(255, 255, 87, 78),
+            //             ),
+            //             borderRadius: BorderRadius.all(Radius.circular(24)),
+            //           ),
+            //         ),
+            //         onPressed: () {
+            //           AuthService.logout(callBack: () {
+            //             context.go('//');
+            //           });
+            //         },
+            //         child: Text(
+            //           'Đăng xuất',
+            //           textAlign: TextAlign.center,
+            //           style: GoogleFonts.inter(
+            //             color: Color.fromARGB(255, 255, 87, 78),
+            //             fontSize: 20,
+            //             fontWeight: FontWeight.w800,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            GestureDetector(
+              onTap: () {
+                AuthService.logout(callBack: () {
+                  context.go('//');
+                });
+              },
               child: Center(
-                child: SizedBox(
-                  width: size.width * 0.6,
-                  height: 56,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(182, 255, 255, 255),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                child: Neumorphic(
+                  style: NeumorphicStyle(
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(24)),
+                      depth: 7,
+                      color: Colors.transparent,
+                      intensity: 1),
+                  child: Container(
+                    width: 312,
+                    height: 60,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 12),
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 255, 87, 78),
+                        ),
+                        borderRadius: BorderRadius.circular(24),
                       ),
                     ),
-                    onPressed: () {
-                      AuthService.logout(callBack: () {
-                        context.go('//');
-                      });
-                    },
-                    child: Text(
-                      'Đăng xuất',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Đăng Xuất',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 87, 78),
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w800,
+                            height: 0,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

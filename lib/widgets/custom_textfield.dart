@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 Widget buildEditable({
-  required String initiaValue, required void Function(String) onChange, String? titleText,
+  required String initiaValue,
+  required void Function(String) onChange,
+  String? titleText,
   List<String> dropDownItems = const [],
   MainAxisAlignment mainAxisAlignment = MainAxisAlignment.end,
   Size size = const Size(240, 36),
@@ -16,8 +18,9 @@ Widget buildEditable({
           Text(
             titleText,
             style: const TextStyle(
-              color: Colors.green,
-              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
             ),
           ),
           Expanded(
@@ -49,8 +52,11 @@ Widget buildEditable({
                           dropDownItems.map<DropdownMenuItem<String>>((value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          alignment: Alignment.center,
-                          child: Text(value),
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12),
+                            child: Text(value),
+                          ),
                         );
                       }).toList(),
                     ),
@@ -58,11 +64,14 @@ Widget buildEditable({
                 : Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Center(
-                      child: TextFormField(
-                        initialValue: initiaValue,
-                        decoration:
-                            const InputDecoration(border: InputBorder.none),
-                        textAlign: TextAlign.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: TextFormField(
+                          initialValue: initiaValue,
+                          decoration:
+                              const InputDecoration(border: InputBorder.none),
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                     ),
                   ),

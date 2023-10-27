@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
@@ -45,7 +46,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
         },
         child: Container(
           width: double.infinity,
-          decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+          decoration: BoxDecoration(color: Colors.grey[100]),
           child: Column(
             children: [
               const Padding(
@@ -63,69 +64,79 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    color: const Color(0xFF7CE6AD),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Text(
-                                'Tên thiết bị: ${widget.nameEquipment}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w900,
+                  child: Neumorphic(
+                    style: NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(20)),
+                        depth: 6,
+                        color: Colors.grey,
+                        lightSource: LightSource.top,
+                        intensity: 1),
+                    child: Card(
+                      margin: EdgeInsets.all(0.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Text(
+                                  'Tên thiết bị: ${widget.nameEquipment}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Text(
-                                'Mã thiết bị: ${widget.codeEquipment}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w900,
+                              Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Text(
+                                  'Mã thiết bị: ${widget.codeEquipment}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Divider(
-                          color: Colors.white,
-                          thickness: 2,
-                          indent: 8,
-                          endIndent: 8,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, left: 20, right: 20, bottom: 20),
-                          child: TextField(
-                            controller: fieldText,
-                            maxLines: 8, //or null
-                            decoration: const InputDecoration.collapsed(
-                              hintText: 'Lí do bảo trì',
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                description = value;
-                              });
-                            },
+                            ],
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Divider(
+                            color: Colors.grey,
+                            thickness: 2,
+                            indent: 20,
+                            endIndent: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 8, left: 20, right: 20, bottom: 20),
+                            child: TextField(
+                              controller: fieldText,
+                              maxLines: 8, //or null
+                              decoration: const InputDecoration.collapsed(
+                                hintText: 'Lí do bảo trì',
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  description = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -136,36 +147,44 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                   child: SizedBox(
                     width: size.width * 0.6,
                     height: 56,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 255, 255, 255),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                    child: Neumorphic(
+                      style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                              BorderRadius.circular(42)),
+                          depth: 5,
+                          color: Colors.transparent,
+                          intensity: 1),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 70, 133, 246),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
                         ),
-                      ),
-                      onPressed: () async {
-                        debugPrint(description);
-                        await DepartmentServices.requestRepairEquipment(
-                          id: widget.id,
-                          description: description,
-                        ).then((value) {
-                          print(value);
-                          if (value == true) {
-                            _showSucess(context, () {
-                              fieldText.clear();
-                              context.pop();
-                            });
-                          }
-                        });
-                      },
-                      child: Text(
-                        'Gửi',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
-                          color: const Color.fromARGB(168, 0, 187, 165),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
+                        onPressed: () async {
+                          debugPrint(description);
+                          await DepartmentServices.requestRepairEquipment(
+                            id: widget.id,
+                            description: description,
+                          ).then((value) {
+                            print(value);
+                            if (value == true) {
+                              _showSucess(context, () {
+                                fieldText.clear();
+                                context.pop();
+                              });
+                            }
+                          });
+                        },
+                        child: Text(
+                          'Gửi',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                       ),
                     ),
@@ -206,17 +225,27 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
       onTap: () {
         context.pop();
       },
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: const Center(
-          child: Icon(
-            Icons.arrow_back,
-            color: Color.fromARGB(168, 0, 187, 165),
+      child: Neumorphic(
+        style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+            depth: 5,
+            color: Colors.grey,
+            intensity: 1),
+        child: Container(
+          width: 36,
+          height: 36,
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.arrow_back,
+              color: Color(0xFFE5E5E5),
+            ),
           ),
         ),
       ),

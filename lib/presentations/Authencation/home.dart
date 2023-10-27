@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+        decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

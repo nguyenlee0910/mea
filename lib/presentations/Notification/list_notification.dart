@@ -15,6 +15,7 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationCellData> filterCellData = [];
   List<NotificationModel> data = [];
+  List<NotificationCellData> notificationCellData = [];
 
   void fetchData() async {
     await NotificationService.getNotification().then((value) {
@@ -51,7 +52,7 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+        decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           children: <Widget>[
             const Padding(
@@ -73,7 +74,17 @@ class _NotificationPageState extends State<NotificationPage> {
                   backgroundColor: MaterialStateProperty.all(
                     Colors.white.withOpacity(0.5),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    setState(() {
+                      if (value.isEmpty) {
+                        filterCellData = notificationCellData;
+                        return;
+                      }
+                      filterCellData = notificationCellData.where((element) {
+                        return element.title.toLowerCase().contains(value);
+                      }).toList();
+                    });
+                  },
                 ),
               ),
             ),

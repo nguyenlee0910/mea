@@ -25,6 +25,8 @@ mixin _$UserModel {
   String? get phone => throw _privateConstructorUsedError;
   String? get citizenId => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
+  String? get birthday => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +44,9 @@ abstract class $UserModelCopyWith<$Res> {
       String? email,
       String? phone,
       String? citizenId,
-      String? gender});
+      String? gender,
+      String? birthday,
+      String? address});
 }
 
 /// @nodoc
@@ -63,6 +67,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? phone = freezed,
     Object? citizenId = freezed,
     Object? gender = freezed,
+    Object? birthday = freezed,
+    Object? address = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -85,6 +91,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -102,7 +116,9 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? email,
       String? phone,
       String? citizenId,
-      String? gender});
+      String? gender,
+      String? birthday,
+      String? address});
 }
 
 /// @nodoc
@@ -121,6 +137,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? phone = freezed,
     Object? citizenId = freezed,
     Object? gender = freezed,
+    Object? birthday = freezed,
+    Object? address = freezed,
   }) {
     return _then(_$UserModelImpl(
       name: freezed == name
@@ -143,6 +161,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -151,7 +177,13 @@ class __$$UserModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserModelImpl implements _UserModel {
   _$UserModelImpl(
-      {this.name, this.email, this.phone, this.citizenId, this.gender});
+      {this.name,
+      this.email,
+      this.phone,
+      this.citizenId,
+      this.gender,
+      this.birthday,
+      this.address});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -166,10 +198,14 @@ class _$UserModelImpl implements _UserModel {
   final String? citizenId;
   @override
   final String? gender;
+  @override
+  final String? birthday;
+  @override
+  final String? address;
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, citizenId: $citizenId, gender: $gender)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, citizenId: $citizenId, gender: $gender, birthday: $birthday, address: $address)';
   }
 
   @override
@@ -182,13 +218,16 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.citizenId, citizenId) ||
                 other.citizenId == citizenId) &&
-            (identical(other.gender, gender) || other.gender == gender));
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
+            (identical(other.address, address) || other.address == address));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, email, phone, citizenId, gender);
+  int get hashCode => Object.hash(
+      runtimeType, name, email, phone, citizenId, gender, birthday, address);
 
   @JsonKey(ignore: true)
   @override
@@ -210,7 +249,9 @@ abstract class _UserModel implements UserModel {
       final String? email,
       final String? phone,
       final String? citizenId,
-      final String? gender}) = _$UserModelImpl;
+      final String? gender,
+      final String? birthday,
+      final String? address}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -225,6 +266,10 @@ abstract class _UserModel implements UserModel {
   String? get citizenId;
   @override
   String? get gender;
+  @override
+  String? get birthday;
+  @override
+  String? get address;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

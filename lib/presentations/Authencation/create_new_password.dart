@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/constants.dart';
@@ -27,23 +28,30 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: backBtn(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Đổi mật khẩu'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 110, 194, 247),
+          ),
+        ),
+      ),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+        decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(80),
+              padding: const EdgeInsets.only(top: 20, bottom: 80),
               child: Center(
                 child: Text(
                   'MEA',
                   style: GoogleFonts.knewave(
                     fontSize: 45,
                     fontWeight: FontWeight.w400,
-                    color: const Color.fromRGBO(252, 252, 252, 1),
+                    color: Color.fromARGB(255, 70, 113, 246),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -52,27 +60,38 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    // width: double.infinity,
-                    height: 52,
-                    decoration: const ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(42.5),
-                          bottomRight: Radius.circular(42.5),
+                  child: Neumorphic(
+                    style: NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.only(
+                                topRight: Radius.circular(42.5),
+                                bottomRight: Radius.circular(42.5))),
+                        depth: 5,
+                        color: Colors.grey,
+                        intensity: 1),
+                    child: Container(
+                      // width: double.infinity,
+                      height: 52,
+                      decoration: const ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(42.5),
+                            bottomRight: Radius.circular(42.5),
+                          ),
                         ),
                       ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Create new password',
-                        style: TextStyle(
-                          color: Color(0xFF6CD7CB),
-                          fontSize: 25,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w900,
-                          height: 0,
+                      child: const Center(
+                        child: Text(
+                          'Tạo mật khẩu mới',
+                          style: TextStyle(
+                            color: Color(0xFF1A1A1A),
+                            fontSize: 25,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w900,
+                            height: 0,
+                          ),
                         ),
                       ),
                     ),
@@ -87,9 +106,9 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 left: 32,
               ),
               child: Text(
-                'Your new password must be different from\npreviously used password',
+                'Mật khẩu mới của bạn phải khác\nmật khẩu gần nhất đã sử dụng',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF999999),
                   fontSize: 14,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
@@ -111,16 +130,18 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     child: TextField(
                       obscureText: _hidePassword,
                       decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: const TextStyle(color: Colors.white),
+                        hintText: 'Mật khẩu',
+                        hintStyle: const TextStyle(
+                          color: Color(0xFF999999),
+                        ),
                         border: InputBorder.none,
                         icon: const Icon(
                           Icons.lock,
-                          color: Colors.white,
+                          color: Color(0xFF999999),
                         ),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.remove_red_eye),
-                          color: Colors.white,
+                          color: Color(0xFF999999),
                           onPressed: () {
                             setState(() {
                               _hidePassword = !_hidePassword;
@@ -140,16 +161,18 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     child: TextField(
                       obscureText: _hideConfirmPassword,
                       decoration: InputDecoration(
-                        hintText: 'Confirm Password',
-                        hintStyle: const TextStyle(color: Colors.white),
+                        hintText: 'Xác nhận mật khẩu',
+                        hintStyle: const TextStyle(
+                          color: Color(0xFF999999),
+                        ),
                         border: InputBorder.none,
                         icon: const Icon(
                           Icons.lock,
-                          color: Colors.white,
+                          color: Color(0xFF999999),
                         ),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.remove_red_eye),
-                          color: Colors.white,
+                          color: Color(0xFF999999),
                           onPressed: () {
                             setState(() {
                               _hideConfirmPassword = !_hideConfirmPassword;
@@ -163,24 +186,32 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
               ),
             ),
             Center(
-              child: SizedBox(
-                width: size.width * 0.6,
-                height: 56,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(40)),
+              child: Neumorphic(
+                style: NeumorphicStyle(
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(BorderRadius.circular(40)),
+                    depth: 5,
+                    color: Colors.grey,
+                    intensity: 1),
+                child: SizedBox(
+                  width: size.width * 0.6,
+                  height: 56,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 70, 113, 246),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                      ),
                     ),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    'Save',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                      color: const Color.fromARGB(168, 0, 187, 165),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
+                    onPressed: () {},
+                    child: Text(
+                      'Lưu',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.inter(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ),
@@ -197,17 +228,27 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
       onTap: () {
         context.pop();
       },
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: const Center(
-          child: Icon(
-            Icons.arrow_back,
-            color: Color.fromARGB(168, 0, 187, 165),
+      child: Neumorphic(
+        style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+            depth: 5,
+            color: Colors.grey,
+            intensity: 1),
+        child: Container(
+          width: 36,
+          height: 36,
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.arrow_back,
+              color: Color(0xFFE5E5E5),
+            ),
           ),
         ),
       ),

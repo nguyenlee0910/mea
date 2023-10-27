@@ -27,26 +27,62 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> appBarName = [
+      'Trang chủ',
+      'Thông báo',
+      'Tin nhắn',
+      'Thông tin cá nhân',
+    ];
     return Scaffold(
+      appBar: _selectedIndex == 4
+          ? null
+          : AppBar(
+              centerTitle: true,
+              title: Text(appBarName[_selectedIndex]),
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 110, 194, 247),
+                ),
+              ),
+            ),
       body: _widgetOptions.elementAt(_selectedIndex),
       extendBody: true,
       bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(20),
-          topLeft: Radius.circular(20),
-        ),
+        // borderRadius: const BorderRadius.only(
+        //   topRight: Radius.circular(20),
+        //   topLeft: Radius.circular(20),
+        // ),
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                ),
+                label: 'Home'),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.white,
+              ),
               label: 'Notification',
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.chat,
+                color: Colors.white,
+              ),
+              label: 'Chat',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                label: 'Profile'),
           ],
           currentIndex: _selectedIndex,
-          backgroundColor: const Color(0xFF7CF2AC),
+          backgroundColor: Color.fromARGB(255, 110, 194, 247),
           type: BottomNavigationBarType.fixed,
           onTap: (value) {
             setState(() {

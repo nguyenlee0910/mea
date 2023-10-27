@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class WhiteTableCell extends StatelessWidget {
   const WhiteTableCell({
@@ -21,56 +22,64 @@ class WhiteTableCell extends StatelessWidget {
       text,
       textAlign: TextAlign.center,
       style: const TextStyle(
-        color: Color(0xFF6CD7CB),
+        color: Color(0xFF1A1A1A),
         fontSize: 14,
         fontFamily: 'Inter',
-        fontWeight: FontWeight.w900,
+        fontWeight: FontWeight.w800,
         height: 0,
       ),
       overflow: TextOverflow.clip,
     );
     return Center(
-      child: GestureDetector(
-        child: Container(
-          // width: double.infinity,
-          width: 352,
-          height: 52,
-          decoration: const ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(42.5)),
+      child: Neumorphic(
+        style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(42)),
+            depth: 5,
+            color: Colors.grey,
+            intensity: 1),
+        child: GestureDetector(
+          child: Container(
+            // width: double.infinity,
+            width: 352,
+            height: 52,
+            decoration: const ShapeDecoration(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(42)),
+              ),
             ),
-          ),
-          child: Center(
-            child: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 24, right: isCenter ? 0 : 24),
-                  child: Icon(
-                    icon,
-                    size: 30,
-                    color: const Color(0xFF6CD7CB),
-                  ),
-                ),
-                if (isCenter)
-                  Expanded(child: texToShow)
-                else
+            child: Center(
+              child: Row(
+                children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: texToShow,
+                    padding:
+                        EdgeInsets.only(left: 24, right: isCenter ? 0 : 24),
+                    child: Icon(
+                      icon,
+                      size: 30,
+                      color: Color(0xFF1A1A1A),
+                    ),
                   ),
-                SizedBox(
-                  width: isCenter ? 36 : 0,
-                ),
-              ],
+                  if (isCenter)
+                    Expanded(child: texToShow)
+                  else
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: texToShow,
+                    ),
+                  SizedBox(
+                    width: isCenter ? 36 : 0,
+                  ),
+                ],
+              ),
             ),
           ),
+          onTap: () {
+            if ('' != route) {
+              context.push(route!);
+            }
+          },
         ),
-        onTap: () {
-          if ('' != route) {
-            context.push(route!);
-          }
-        },
       ),
     );
   }

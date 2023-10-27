@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:mea/env.dart';
 import 'package:mea/models/user_model.dart';
 import 'package:http/http.dart' as http;
@@ -28,6 +29,7 @@ class AuthService {
       final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
       final userData =
           UserModel.fromJson(responseJson['user'] as Map<String, dynamic>);
+      debugPrint("[DEBUG]: ${userData}");
       final prefs = await SharedPreferences.getInstance();
       unawaited(
         prefs.setString('auth', responseJson['token'].toString()),

@@ -16,7 +16,18 @@ class ForgotPassword extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+        // decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+        decoration: BoxDecoration(
+          color: Color(0xFFF9FAFB),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x3F000000),
+              blurRadius: 4,
+              offset: Offset(0, 4),
+              spreadRadius: 0,
+            )
+          ],
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -28,7 +39,7 @@ class ForgotPassword extends StatelessWidget {
                   style: GoogleFonts.knewave(
                     fontSize: 45,
                     fontWeight: FontWeight.w400,
-                    color: const Color.fromRGBO(252, 252, 252, 1),
+                    color: Color(0xFF4671F6),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -41,7 +52,7 @@ class ForgotPassword extends StatelessWidget {
                     // width: double.infinity,
                     height: 52,
                     decoration: const ShapeDecoration(
-                      color: Colors.white,
+                      color: Color(0xFFF2F2F2),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(42.5),
@@ -53,7 +64,7 @@ class ForgotPassword extends StatelessWidget {
                       child: Text(
                         'Forgot password',
                         style: TextStyle(
-                          color: Color(0xFF6CD7CB),
+                          color: Color(0xFF1A1A1A),
                           fontSize: 25,
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.w900,
@@ -75,7 +86,7 @@ class ForgotPassword extends StatelessWidget {
               child: Text(
                 'Please enter your email code to\nrecover your password',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF999999),
                   fontSize: 14,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
@@ -95,10 +106,12 @@ class ForgotPassword extends StatelessWidget {
                 child: const TextField(
                   decoration: InputDecoration(
                     hintText: 'Username',
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(
+                      color: Color(0xFF999999),
+                    ),
                     icon: Icon(
                       Icons.mail,
-                      color: Colors.white,
+                      color: Color(0xFF999999),
                     ),
                     border: InputBorder.none,
                   ),
@@ -114,7 +127,7 @@ class ForgotPassword extends StatelessWidget {
                 height: 56,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    backgroundColor: Color(0xFF4671F6),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(40)),
                     ),
@@ -124,7 +137,7 @@ class ForgotPassword extends StatelessWidget {
                     'Send',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
-                      color: const Color.fromARGB(168, 0, 187, 165),
+                      color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
                     ),
@@ -150,7 +163,7 @@ class ForgotPassword extends StatelessWidget {
                     'Forgot Password?',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
-                      color: Colors.white,
+                      color: Color(0xFF1A1A1A),
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       height: 0,
@@ -177,6 +190,27 @@ class ForgotPassword extends StatelessWidget {
     );
   }
 
+  // Widget backBtn(BuildContext context) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       context.go(r'\');
+  //     },
+  //     child: Container(
+  //       width: 36,
+  //       height: 36,
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         borderRadius: BorderRadius.circular(15),
+  //       ),
+  //       child: const Center(
+  //         child: Icon(
+  //           Icons.arrow_back,
+  //           color: Color(0xFF1A1A1A),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
   Widget backBtn(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -185,14 +219,17 @@ class ForgotPassword extends StatelessWidget {
       child: Container(
         width: 36,
         height: 36,
-        decoration: BoxDecoration(
+        decoration: ShapeDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
         ),
         child: const Center(
           child: Icon(
             Icons.arrow_back,
-            color: Color.fromARGB(168, 0, 187, 165),
+            color: Color(0xFFE5E5E5),
           ),
         ),
       ),

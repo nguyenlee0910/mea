@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/widgets/custom_textfield.dart';
@@ -123,17 +124,27 @@ class _CreateRequestState extends State<CreateRequest> {
       onTap: () {
         context.pop();
       },
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: const Center(
-          child: Icon(
-            Icons.arrow_back,
-            color: Color.fromARGB(168, 0, 187, 165),
+      child: Neumorphic(
+        style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+            depth: 5,
+            color: Colors.grey,
+            intensity: 1),
+        child: Container(
+          width: 36,
+          height: 36,
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.arrow_back,
+              color: Color(0xFFE5E5E5),
+            ),
           ),
         ),
       ),

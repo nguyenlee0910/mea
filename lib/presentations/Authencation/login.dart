@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
+        decoration: BoxDecoration(color: Colors.grey[100]),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: GoogleFonts.knewave(
                   fontSize: 45,
                   fontWeight: FontWeight.w400,
-                  color: const Color.fromRGBO(252, 252, 252, 1),
+                  color: Color.fromARGB(255, 70, 113, 246),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Log In',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 70, 113, 246),
                   fontSize: 45,
                   fontWeight: FontWeight.w900,
                   height: 0,
@@ -110,8 +110,17 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Username',
-                          hintStyle: const TextStyle(color: Colors.white),
-                          icon: mailIc,
+                          hintStyle: const TextStyle(
+                            color: Color(0xFF999999),
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                            height: 0,
+                          ),
+                          icon: Icon(
+                            Icons.mail_outline,
+                            color: Color(0xFF999999),
+                          ),
                           border: InputBorder.none,
                         ),
                         onChanged: (value) {
@@ -132,11 +141,23 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: _hidePassword,
                         decoration: InputDecoration(
                           hintText: 'Password',
-                          hintStyle: const TextStyle(color: Colors.white),
+                          hintStyle: const TextStyle(
+                            color: Color(0xFF999999),
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                            height: 0,
+                          ),
                           border: InputBorder.none,
-                          icon: lockIc,
+                          icon: Icon(
+                            Icons.lock,
+                            color: Color(0xFF999999),
+                          ),
                           suffixIcon: IconButton(
-                            icon: const Icon(Icons.remove_red_eye),
+                            icon: const Icon(
+                              Icons.remove_red_eye,
+                              color: Color(0xFF999999),
+                            ),
                             color: Colors.white,
                             onPressed: () {
                               setState(() {
@@ -158,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Checkbox(
                             value: checkBoxValue,
-                            activeColor: Colors.green,
+                            activeColor: Colors.blue,
                             onChanged: (newValue) {
                               setState(() {
                                 checkBoxValue = newValue!;
@@ -167,7 +188,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const Text(
                             'Remember me',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Color(0xFF999999),
+                              fontSize: 14,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
                           ),
                         ],
                       ),
@@ -209,8 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 56,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 255, 255, 255),
+                          backgroundColor: Color.fromARGB(255, 70, 113, 246),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
@@ -229,7 +255,7 @@ class _LoginPageState extends State<LoginPage> {
                           'Login',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
-                            color: const Color.fromARGB(168, 0, 187, 165),
+                            color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w800,
                           ),

@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-class CircleAvatarWithName extends StatelessWidget {
+class CircleAvatarWithName extends StatefulWidget {
   CircleAvatarWithName({
     required this.name,
     this.deparmentName,
@@ -12,20 +14,35 @@ class CircleAvatarWithName extends StatelessWidget {
   String? email;
 
   @override
+  State<CircleAvatarWithName> createState() => _CircleAvatarWithNameState();
+}
+
+class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    runZoned(() async {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 80, left: 44),
+          padding:
+              const EdgeInsets.only(top: 40, left: 44, right: 20, bottom: 20),
           child: Container(
-            width: 135.61,
-            height: 135.61,
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(),
-            child: const Icon(
-              Icons.person_pin,
-              color: Colors.white,
-              size: 120,
+            width: 140,
+            height: 140,
+            decoration: ShapeDecoration(
+              image: const DecorationImage(
+                image: NetworkImage("https://via.placeholder.com/140x140"),
+                fit: BoxFit.cover,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(74.87),
+              ),
             ),
           ),
         ),
@@ -35,9 +52,9 @@ class CircleAvatarWithName extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                widget.name,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF1A1A1A),
                   fontSize: 20,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w800,
@@ -45,9 +62,9 @@ class CircleAvatarWithName extends StatelessWidget {
                 ),
               ),
               Text(
-                deparmentName ?? "NULL",
+                widget.deparmentName ?? "NULL",
                 style: TextStyle(
-                  color: Color(0xFF074E23),
+                  color: Color(0xFF999999),
                   fontSize: 12,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
@@ -55,9 +72,9 @@ class CircleAvatarWithName extends StatelessWidget {
                 ),
               ),
               Text(
-                email ?? "NULL",
+                widget.email ?? "NULL",
                 style: TextStyle(
-                  color: Color(0xFF074E23),
+                  color: Color(0xFF999999),
                   fontSize: 12,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
