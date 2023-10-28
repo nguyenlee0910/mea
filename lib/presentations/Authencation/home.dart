@@ -7,6 +7,7 @@ import 'package:mea/models/cell_data.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
+import 'package:mea/presentations/Request/view_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 
@@ -44,9 +45,9 @@ class HomePage extends StatefulWidget {
       route: '/${RepairRequest.routeName}',
     ),
     CellData(
-      iconData: Icons.art_track,
-      textTitle: 'Theo dõi đơn',
-    ),
+        iconData: Icons.art_track,
+        textTitle: 'Theo dõi đơn',
+        route: '/${ViewRequest.routeName}'),
   ];
 
   @override

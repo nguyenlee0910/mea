@@ -9,10 +9,10 @@ import 'package:mea/presentations/Authencation/home.dart';
 import 'package:mea/presentations/Authencation/login.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
-import 'package:mea/presentations/Request/create_request.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
+import 'package:mea/presentations/Request/view_request.dart';
 import 'package:mea/presentations/UserManagement/user_edit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,10 +71,9 @@ GoRouter appRouter() => GoRouter(
               const EquipmentPage(),
         ),
         GoRoute(
-          path: '/create_request',
-          name: CreateRequest.routeName,
-          builder: (BuildContext context, GoRouterState state) =>
-              CreateRequest(),
+          path: '/view_request',
+          name: ViewRequest.routeName,
+          builder: (BuildContext context, GoRouterState state) => ViewRequest(),
         ),
         GoRoute(
           path: '/equipment_request',

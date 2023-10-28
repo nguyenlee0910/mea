@@ -49,15 +49,6 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
           decoration: BoxDecoration(color: Colors.grey[100]),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 80),
-                child: WhiteTableCell(
-                  icon: Icons.edit_calendar,
-                  text: 'Đơn yêu cầu thiết bị',
-                  isCenter: true,
-                  route: '',
-                ),
-              ),
               const SizedBox(
                 height: 40,
               ),
