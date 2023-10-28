@@ -37,9 +37,16 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      floatingActionButton: backBtn(context),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Yêu cầu sửa chữa thiết bị'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 110, 194, 247),
+          ),
+        ),
+      ),
       resizeToAvoidBottomInset: false,
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
@@ -49,15 +56,6 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
           decoration: BoxDecoration(color: Colors.grey[100]),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 80),
-                child: WhiteTableCell(
-                  icon: Icons.edit_calendar,
-                  text: 'Đơn yêu cầu sửa chữa thiết bị',
-                  isCenter: true,
-                  route: '',
-                ),
-              ),
               SizedBox(
                 height: 50,
               ),
