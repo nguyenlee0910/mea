@@ -99,6 +99,7 @@ class DepartmentServices {
         {
           'name': 'Đơn yêu cầu thiết bị y tế',
           'description': description,
+          "importRequestItems": <String>[],
         },
       );
       final response = await http.post(
