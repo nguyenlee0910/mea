@@ -12,7 +12,6 @@ import '../models/equipment_model.dart';
 
 class DepartmentServices {
   static Future<List<EquipmentModel>> getEquipment({
-    required String departmentId,
     int pageSize = 12,
     int page = 0,
   }) async {

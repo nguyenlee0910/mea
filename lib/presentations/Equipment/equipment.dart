@@ -31,38 +31,27 @@ class _EquipmentPageState extends State<EquipmentPage> {
     super.initState();
 
     runZoned(() async {
-      await SharedPreferences.getInstance().then(
-        (value) async {
-          final id = value.getString('departmentId');
-          final resultArary = await Future.wait(
-            [
-              DepartmentServices.getEquipment(
-                departmentId: id!,
-              ),
-              DepartmentServices.getEquipment(
-                page: 1,
-                departmentId: id,
-              ),
-            ],
-          );
-          final newList = List<EquipmentModel>.from(resultArary[0])
-            ..addAll(resultArary[1]);
-          equipmentList = newList;
-          setState(() {
-            if (newList.isNotEmpty) {
-              final temp = <EquipmentCellData>[];
-              for (final i in newList) {
-                temp.add(EquipmentCellData(name: i.name, code: i.code));
-              }
-              equipmentCellData = temp;
-              filterCellData = equipmentCellData;
-            }
-          });
-          filterCellData.forEach((element) {
-            print(element.name);
-          });
-        },
+      final resultArary = await Future.wait(
+        [
+          DepartmentServices.getEquipment(),
+          DepartmentServices.getEquipment(
+            page: 1,
+          ),
+        ],
       );
+      final newList = List<EquipmentModel>.from(resultArary[0])
+        ..addAll(resultArary[1]);
+      equipmentList = newList;
+      setState(() {
+        if (newList.isNotEmpty) {
+          final temp = <EquipmentCellData>[];
+          for (final i in newList) {
+            temp.add(EquipmentCellData(name: i.name, code: i.code));
+          }
+          equipmentCellData = temp;
+          filterCellData = equipmentCellData;
+        }
+      });
     });
     _searchController.addListener(() {
       setState(() {

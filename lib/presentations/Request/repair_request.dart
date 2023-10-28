@@ -32,15 +32,11 @@ class _RepairRequestState extends State<RepairRequest> {
     runZoned(() async {
       await SharedPreferences.getInstance().then(
         (value) async {
-          final id = value.getString('departmentId');
           final resultArary = await Future.wait(
             [
-              DepartmentServices.getEquipment(
-                departmentId: id!,
-              ),
+              DepartmentServices.getEquipment(),
               DepartmentServices.getEquipment(
                 page: 1,
-                departmentId: id,
               ),
             ],
           );

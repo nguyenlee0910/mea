@@ -1,5 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:mea/models/import_request_model.dart';
+import 'package:mea/models/repair_request_model.dart';
+import 'package:mea/presentations/Request/repair_request.dart';
+import 'package:mea/services/device_request_api.dart';
 
 class ViewRequest extends StatefulWidget {
   const ViewRequest({super.key});
@@ -9,10 +15,30 @@ class ViewRequest extends StatefulWidget {
 }
 
 class _ViewRequestState extends State<ViewRequest> {
+  List<RepairRequestModel> repairRequest = [];
+  List<ImportRequestModel> importRequest = [];
+
+  Future<void> getAllRequest() async {
+    await Future.wait(
+      [
+        DeviceRequestService.getImportRequests(),
+        DeviceRequestService.getRepairRequests()
+      ],
+    ).then((resultArary) {
+      setState(() {
+        if (resultArary.isNotEmpty) {
+          importRequest = resultArary[0] as List<ImportRequestModel>;
+          repairRequest = resultArary[1] as List<RepairRequestModel>;
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+
+    getAllRequest();
   }
 
   @override
@@ -31,88 +57,47 @@ class _ViewRequestState extends State<ViewRequest> {
         width: double.infinity,
         decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
-          children: [
-            Neumorphic(
-              style: NeumorphicStyle(
-                  boxShape:
-                      NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-                  depth: 5,
-                  color: Colors.grey,
-                  intensity: 1),
+          children: <Widget>[
+            const SizedBox(
+              height: 40,
+            ),
+            Expanded(
               child: Container(
-                width: 400,
-                height: 120,
-                child: Column(
-                  children: [
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text("Đơn bảo trì 0001",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                ))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text("Mã máy: 002",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    )),
-                                Text("Status: Approved",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    ))
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text("Tên máy: Đây là một tên máy rất dài ",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                        ))
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Thời gian tạo: 11.02.2023",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                        ))
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+                width: double.infinity,
+                decoration: const ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
-                    Row(
-                      children: [
-                        Text("Xem chi tiết",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ))
-                      ],
-                    )
-                  ],
+                  ),
+                ),
+                child: ListView.builder(
+                  itemBuilder: (context, index) =>
+                      _buildImportRequestCell(importRequest[index]),
+                  itemCount: importRequest.length,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildImportRequestCell(ImportRequestModel importRequestModel) {
+  return Container(
+      width: 200,
+      height: 80,
+      child: Column(
+        children: [
+          Text(importRequestModel.name),
+          ElevatedButton(
+            child: Text('Test'),
+            onPressed: () {},
+          )
+        ],
+      ));
 }
