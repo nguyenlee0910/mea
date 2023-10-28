@@ -53,31 +53,31 @@ class _NavigationState extends State<Navigation> {
         //   topLeft: Radius.circular(20),
         // ),
         child: BottomNavigationBar(
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.orange[900],
+          selectedIconTheme: IconThemeData(color: Colors.orange[900]),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: Colors.white,
+                  //  color: Colors.white,
                 ),
                 label: 'Home'),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.notifications,
-                color: Colors.white,
               ),
               label: 'Notification',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.chat,
-                color: Colors.white,
               ),
               label: 'Chat',
             ),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
-                  color: Colors.white,
                 ),
                 label: 'Profile'),
           ],

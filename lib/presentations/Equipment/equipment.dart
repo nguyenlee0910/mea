@@ -47,6 +47,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
           );
           final newList = List<EquipmentModel>.from(resultArary[0])
             ..addAll(resultArary[1]);
+          equipmentList = newList;
           setState(() {
             if (newList.isNotEmpty) {
               final temp = <EquipmentCellData>[];
@@ -55,8 +56,10 @@ class _EquipmentPageState extends State<EquipmentPage> {
               }
               equipmentCellData = temp;
               filterCellData = equipmentCellData;
-              print(filterCellData.length);
             }
+          });
+          filterCellData.forEach((element) {
+            print(element.name);
           });
         },
       );
@@ -140,13 +143,15 @@ class _EquipmentPageState extends State<EquipmentPage> {
                 ),
                 child: ListView.builder(
                   itemBuilder: (context, index) {
+                    print(filterCellData[index].name);
                     return EquipmentCell(
                       name: filterCellData[index].name,
                       code: filterCellData[index].code,
                       colorButtonName: Color.fromARGB(255, 70, 133, 246),
                       buttonName: 'Xem Chi tiết',
                       onPress: () {
-                        context.push('/${EquipmentDetail.routeName}');
+                        context.push('/${EquipmentDetail.routeName}',
+                            extra: equipmentList[index]);
                       },
                     );
                   },

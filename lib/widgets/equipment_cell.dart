@@ -134,8 +134,8 @@ class EquipmentCell extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 150,
-                        height: 19,
+                        width: 300,
+                        height: 20,
                         child: Text.rich(
                           TextSpan(
                             children: [
@@ -150,7 +150,7 @@ class EquipmentCell extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: '$name\n',
+                                text: name,
                                 style: TextStyle(
                                   color: Color(0xFF1A1A1A),
                                   fontSize: 14,
@@ -165,8 +165,8 @@ class EquipmentCell extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       SizedBox(
-                        width: 147,
-                        height: 19,
+                        width: 300,
+                        height: 20,
                         child: Text.rich(
                           TextSpan(
                             children: [

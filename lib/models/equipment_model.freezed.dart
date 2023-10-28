@@ -23,6 +23,10 @@ mixin _$EquipmentModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  List<String> get imageUrls => throw _privateConstructorUsedError;
+  EquipmentMaintainScheduleModel? get equipmentMaintainSchedule =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +40,15 @@ abstract class $EquipmentModelCopyWith<$Res> {
           EquipmentModel value, $Res Function(EquipmentModel) then) =
       _$EquipmentModelCopyWithImpl<$Res, EquipmentModel>;
   @useResult
-  $Res call({String id, String name, String code});
+  $Res call(
+      {String id,
+      String name,
+      String code,
+      String description,
+      List<String> imageUrls,
+      EquipmentMaintainScheduleModel? equipmentMaintainSchedule});
+
+  $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
 }
 
 /// @nodoc
@@ -55,6 +67,9 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
     Object? id = null,
     Object? name = null,
     Object? code = null,
+    Object? description = null,
+    Object? imageUrls = null,
+    Object? equipmentMaintainSchedule = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -69,7 +84,32 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageUrls: null == imageUrls
+          ? _value.imageUrls
+          : imageUrls // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      equipmentMaintainSchedule: freezed == equipmentMaintainSchedule
+          ? _value.equipmentMaintainSchedule
+          : equipmentMaintainSchedule // ignore: cast_nullable_to_non_nullable
+              as EquipmentMaintainScheduleModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule {
+    if (_value.equipmentMaintainSchedule == null) {
+      return null;
+    }
+
+    return $EquipmentMaintainScheduleModelCopyWith<$Res>(
+        _value.equipmentMaintainSchedule!, (value) {
+      return _then(_value.copyWith(equipmentMaintainSchedule: value) as $Val);
+    });
   }
 }
 
@@ -81,7 +121,16 @@ abstract class _$$EquipmentModelImplCopyWith<$Res>
       __$$EquipmentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String code});
+  $Res call(
+      {String id,
+      String name,
+      String code,
+      String description,
+      List<String> imageUrls,
+      EquipmentMaintainScheduleModel? equipmentMaintainSchedule});
+
+  @override
+  $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
 }
 
 /// @nodoc
@@ -98,6 +147,9 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? code = null,
+    Object? description = null,
+    Object? imageUrls = null,
+    Object? equipmentMaintainSchedule = freezed,
   }) {
     return _then(_$EquipmentModelImpl(
       id: null == id
@@ -112,6 +164,18 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageUrls: null == imageUrls
+          ? _value._imageUrls
+          : imageUrls // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      equipmentMaintainSchedule: freezed == equipmentMaintainSchedule
+          ? _value.equipmentMaintainSchedule
+          : equipmentMaintainSchedule // ignore: cast_nullable_to_non_nullable
+              as EquipmentMaintainScheduleModel?,
     ));
   }
 }
@@ -120,7 +184,13 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$EquipmentModelImpl implements _EquipmentModel {
   _$EquipmentModelImpl(
-      {required this.id, required this.name, required this.code});
+      {required this.id,
+      required this.name,
+      required this.code,
+      required this.description,
+      required final List<String> imageUrls,
+      this.equipmentMaintainSchedule})
+      : _imageUrls = imageUrls;
 
   factory _$EquipmentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$EquipmentModelImplFromJson(json);
@@ -131,10 +201,22 @@ class _$EquipmentModelImpl implements _EquipmentModel {
   final String name;
   @override
   final String code;
+  @override
+  final String description;
+  final List<String> _imageUrls;
+  @override
+  List<String> get imageUrls {
+    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageUrls);
+  }
+
+  @override
+  final EquipmentMaintainScheduleModel? equipmentMaintainSchedule;
 
   @override
   String toString() {
-    return 'EquipmentModel(id: $id, name: $name, code: $code)';
+    return 'EquipmentModel(id: $id, name: $name, code: $code, description: $description, imageUrls: $imageUrls, equipmentMaintainSchedule: $equipmentMaintainSchedule)';
   }
 
   @override
@@ -144,12 +226,26 @@ class _$EquipmentModelImpl implements _EquipmentModel {
             other is _$EquipmentModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.code, code) || other.code == code));
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other._imageUrls, _imageUrls) &&
+            (identical(other.equipmentMaintainSchedule,
+                    equipmentMaintainSchedule) ||
+                other.equipmentMaintainSchedule == equipmentMaintainSchedule));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, code);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      code,
+      description,
+      const DeepCollectionEquality().hash(_imageUrls),
+      equipmentMaintainSchedule);
 
   @JsonKey(ignore: true)
   @override
@@ -168,9 +264,13 @@ class _$EquipmentModelImpl implements _EquipmentModel {
 
 abstract class _EquipmentModel implements EquipmentModel {
   factory _EquipmentModel(
-      {required final String id,
-      required final String name,
-      required final String code}) = _$EquipmentModelImpl;
+          {required final String id,
+          required final String name,
+          required final String code,
+          required final String description,
+          required final List<String> imageUrls,
+          final EquipmentMaintainScheduleModel? equipmentMaintainSchedule}) =
+      _$EquipmentModelImpl;
 
   factory _EquipmentModel.fromJson(Map<String, dynamic> json) =
       _$EquipmentModelImpl.fromJson;
@@ -181,6 +281,12 @@ abstract class _EquipmentModel implements EquipmentModel {
   String get name;
   @override
   String get code;
+  @override
+  String get description;
+  @override
+  List<String> get imageUrls;
+  @override
+  EquipmentMaintainScheduleModel? get equipmentMaintainSchedule;
   @override
   @JsonKey(ignore: true)
   _$$EquipmentModelImplCopyWith<_$EquipmentModelImpl> get copyWith =>

@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mea/models/equipment_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
@@ -82,11 +83,14 @@ GoRouter appRouter() => GoRouter(
               const EquipmentRequestPage(),
         ),
         GoRoute(
-          path: '/equipment_detail',
-          name: EquipmentDetail.routeName,
-          builder: (BuildContext context, GoRouterState state) =>
-              const EquipmentDetail(),
-        ),
+            path: '/equipment_detail',
+            name: EquipmentDetail.routeName,
+            builder: (BuildContext context, GoRouterState state) {
+              EquipmentModel equipmentModel = state.extra as EquipmentModel;
+              return EquipmentDetail(
+                equipmentModel: equipmentModel,
+              );
+            }),
         GoRoute(
           path: '/repair_request',
           name: RepairRequest.routeName,

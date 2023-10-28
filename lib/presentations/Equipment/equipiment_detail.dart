@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:mea/constants.dart';
+import 'package:mea/models/equipment_model.dart';
 
 class EquipmentDetail extends StatefulWidget {
-  const EquipmentDetail({super.key});
+  const EquipmentDetail({super.key, required this.equipmentModel});
   static const routeName = 'equipment_detail';
+  final EquipmentModel equipmentModel;
 
   @override
   State<EquipmentDetail> createState() => _EquipmentDetailState();
@@ -13,8 +18,27 @@ class EquipmentDetail extends StatefulWidget {
 
 class _EquipmentDetailState extends State<EquipmentDetail> {
   @override
+  void initState() {
+    super.initState();
+    runZoned(() async {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final checkImage =
+        Uri.tryParse(widget.equipmentModel.imageUrls.first)?.hasAbsolutePath ??
+            false;
+    DateTime dateTime = DateTime.now();
+    try {
+      dateTime = DateTime.parse(
+          widget.equipmentModel.equipmentMaintainSchedule!.lastMaintainDate);
+    } on Exception {
+      print('ERROR');
+      dateTime = DateTime.now();
+    }
+    DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+    String formattedDate = dateFormat.format(dateTime);
     return Scaffold(
       floatingActionButton: backBtn(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
@@ -31,9 +55,10 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 decoration: BoxDecoration(color: Colors.grey[100]),
                 child: Image(
                   fit: BoxFit.fill,
-                  image: NetworkImage(
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                  ),
+                  image: checkImage
+                      ? NetworkImage(widget.equipmentModel.imageUrls[0])
+                      : NetworkImage(
+                          'https://monkeymedia.vcdn.com.vn/upload/web/img/tieng-viet-lop-4-cau-hoi-va-dau-cham-hoi-01a.png'),
                 ),
               ),
             ),
@@ -67,13 +92,11 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
@@ -86,7 +109,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               height: 0,
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 48),
                           Container(
                             height: 30,
                             padding: const EdgeInsets.symmetric(
@@ -95,22 +118,15 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'STELLA',
-                                  style: TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 18,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
-                                ),
-                              ],
+                            child: Text(
+                              widget.equipmentModel.name,
+                              style: TextStyle(
+                                color: Color(0xFF1A1A1A),
+                                fontSize: 18,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
                             ),
                           ),
                         ],
@@ -120,25 +136,18 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                     Container(
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Ngày bảo trì gần nhất',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            'Ngày bảo trì\ngần nhất',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                            ),
                           ),
                           const SizedBox(width: 20),
                           Container(
@@ -149,25 +158,18 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 186,
-                                  child: Text(
-                                    'Ibuprofen 200mg, Paracetamol 325mg',
-                                    style: TextStyle(
-                                      color: Color(0xFF1A1A1A),
-                                      fontSize: 15,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
+                            child: SizedBox(
+                              width: 186,
+                              child: Text(
+                                formattedDate,
+                                style: TextStyle(
+                                  color: Color(0xFF1A1A1A),
+                                  fontSize: 15,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ],
@@ -194,7 +196,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 16),
                           Container(
                             height: 224,
                             padding: const EdgeInsets.symmetric(
@@ -203,25 +205,18 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 186,
-                                  child: Text(
-                                    'Thuốc Partamol Extra giảm các cơn đau cơ xương nhẹ đến trung bình như đau cổ, đau vai, đau lưng, căng cơ bắp tay hoặc bắp chân, cứng cơ cổ, viêm khớp, thấp khớp, viêm bao hoạt dịch, bong gân, viêm gân. Giảm nhức đầu vì căng thẳng tinh thần, đau bụng kinh, nhức răng, đau sau nhổ...',
-                                    style: TextStyle(
-                                      color: Color(0xFF1A1A1A),
-                                      fontSize: 15,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
+                            child: SizedBox(
+                              width: 186,
+                              child: Text(
+                                widget.equipmentModel.description,
+                                style: TextStyle(
+                                  color: Color(0xFF1A1A1A),
+                                  fontSize: 15,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ],

@@ -55,14 +55,6 @@ class _NotificationPageState extends State<NotificationPage> {
         decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(top: 80),
-              child: WhiteTableCell(
-                icon: Icons.notifications,
-                text: 'Danh sách thông báo',
-                isCenter: true,
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(12),
               child: Container(

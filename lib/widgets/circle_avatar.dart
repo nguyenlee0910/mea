@@ -37,7 +37,8 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
             height: 140,
             decoration: ShapeDecoration(
               image: const DecorationImage(
-                image: NetworkImage("https://via.placeholder.com/140x140"),
+                image: NetworkImage(
+                    "https://boxgaixinh.net/wp-content/uploads/2023/02/avatar-shin-cute-8.1.jpg"),
                 fit: BoxFit.cover,
               ),
               shape: RoundedRectangleBorder(

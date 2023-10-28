@@ -96,7 +96,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                       decoration: ShapeDecoration(
                         image: DecorationImage(
                           image: NetworkImage(
-                              "https://via.placeholder.com/140x140"),
+                              "https://boxgaixinh.net/wp-content/uploads/2023/02/avatar-shin-cute-8.1.jpg"),
                           fit: BoxFit.cover,
                         ),
                         shape: RoundedRectangleBorder(
