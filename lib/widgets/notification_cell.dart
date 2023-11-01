@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:intl/intl.dart';
+import 'package:mea/utils/utils.dart';
 
 class NotificationCellData {
   NotificationCellData(
       {required this.sender,
       required this.content,
       required this.iso8601Date,
-      required this.title});
+      required this.title,
+      required this.status});
   String sender;
   String title;
   String content;
   String iso8601Date;
+  String status;
 }
 
 class NotificationCell extends StatelessWidget {
@@ -20,6 +23,7 @@ class NotificationCell extends StatelessWidget {
     required this.content,
     required this.iso8601Date,
     required this.title,
+    required this.status,
     super.key,
   });
 
@@ -27,12 +31,14 @@ class NotificationCell extends StatelessWidget {
   final String title;
   final String content;
   final String iso8601Date;
+  final String status;
 
   @override
   Widget build(BuildContext context) {
-    DateTime dateTime = DateTime.parse(iso8601Date);
-    DateFormat dateFormat = DateFormat('dd/MM/yyyy');
-    String formattedDate = dateFormat.format(dateTime);
+    // DateTime dateTime = DateTime.parse(iso8601Date);
+    // DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+    // String formattedDate = dateFormat.format(dateTime);
+    final (dateNoti, type) = Utils.findDistance(iso8601Date);
 
     return Center(
       child: Padding(
@@ -110,7 +116,7 @@ class NotificationCell extends StatelessWidget {
             height: 160,
             padding: const EdgeInsets.all(16),
             decoration: ShapeDecoration(
-              color: Colors.white,
+              color: status == "READ_DETAIL" ? Colors.white : Colors.grey,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -187,7 +193,9 @@ class NotificationCell extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: '$formattedDate\n',
+                                text: type == 'hours'
+                                    ? dateNoti.toString() + ' giờ trước\n'
+                                    : dateNoti.toString() + ' ngày trước\n',
                                 style: TextStyle(
                                   color: Color(0xFF1A1A1A),
                                   fontSize: 16,

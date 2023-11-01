@@ -25,6 +25,7 @@ class _NotificationPageState extends State<NotificationPage> {
           final temp = <NotificationCellData>[];
           for (final i in data) {
             temp.add(NotificationCellData(
+                status: i.status ?? "READ",
                 sender: i.sender?.name ?? "NULL",
                 content: i.content ?? 'NULL',
                 iso8601Date: i.createdAt ?? 'NULL',
@@ -102,6 +103,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     : ListView.builder(
                         itemBuilder: (context, index) {
                           return NotificationCell(
+                            status: filterCellData[index].status,
                             content: filterCellData[index].content,
                             sender: filterCellData[index].sender,
                             iso8601Date: filterCellData[index].iso8601Date,

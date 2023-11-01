@@ -130,22 +130,26 @@ class _EquipmentPageState extends State<EquipmentPage> {
                     ),
                   ),
                 ),
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    print(filterCellData[index].name);
-                    return EquipmentCell(
-                      name: filterCellData[index].name,
-                      code: filterCellData[index].code,
-                      colorButtonName: Color.fromARGB(255, 70, 133, 246),
-                      buttonName: 'Xem Chi tiết',
-                      onPress: () {
-                        context.push('/${EquipmentDetail.routeName}',
-                            extra: equipmentList[index]);
-                      },
-                    );
-                  },
-                  itemCount: filterCellData.length,
-                ),
+                child: filterCellData.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) {
+                          // print(filterCellData[index].name);
+                          return EquipmentCell(
+                            name: filterCellData[index].name,
+                            code: filterCellData[index].code,
+                            colorButtonName: Color.fromARGB(255, 70, 133, 246),
+                            buttonName: 'Xem Chi tiết',
+                            onPress: () {
+                              context.push('/${EquipmentDetail.routeName}',
+                                  extra: equipmentList[index]);
+                            },
+                          );
+                        },
+                        itemCount: filterCellData.length,
+                      ),
               ),
             ),
           ],

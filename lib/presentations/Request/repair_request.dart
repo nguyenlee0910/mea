@@ -176,21 +176,26 @@ class _RepairRequestState extends State<RepairRequest> {
                     ),
                   ),
                 ),
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return EquipmentCell(
-                      name: filterCellData[index].name,
-                      code: filterCellData[index].code,
-                      colorButtonName: Color.fromARGB(255, 255, 87, 78),
-                      buttonName: 'Yêu cầu sửa chữa thiết bị',
-                      onPress: () {
-                        context.push(
-                            '/${RepairRequestDetail.routeName}/:${filterCellData[index].id}/:${filterCellData[index].name}/:${filterCellData[index].code}');
-                      },
-                    );
-                  },
-                  itemCount: filterCellData.length,
-                ),
+                child: filterCellData.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) {
+                          return EquipmentCell(
+                            name: filterCellData[index].name,
+                            code: filterCellData[index].code,
+                            colorButtonName:
+                                const Color.fromARGB(255, 70, 133, 246),
+                            buttonName: 'Yêu cầu sửa chữa thiết bị',
+                            onPress: () {
+                              context.push(
+                                  '/${RepairRequestDetail.routeName}/:${filterCellData[index].id}/:${filterCellData[index].name}/:${filterCellData[index].code}');
+                            },
+                          );
+                        },
+                        itemCount: filterCellData.length,
+                      ),
               ),
             ),
           ],

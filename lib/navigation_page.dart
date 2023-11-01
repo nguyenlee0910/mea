@@ -54,8 +54,8 @@ class _NavigationState extends State<Navigation> {
         // ),
         child: BottomNavigationBar(
           unselectedItemColor: Colors.white,
-          selectedItemColor: Colors.orange[900],
-          selectedIconTheme: IconThemeData(color: Colors.orange[900]),
+          selectedItemColor: Colors.blue[900],
+          selectedIconTheme: IconThemeData(color: Colors.blue[900]),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(
