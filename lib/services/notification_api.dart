@@ -13,6 +13,8 @@ class NotificationService {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
 
+    await NotificationService.makeAsReadAll();
+
     final uri = Uri(
       scheme: 'https',
       host: Env.serverUrl,
@@ -44,5 +46,49 @@ class NotificationService {
       listResult.add(NotificationModel.fromJson(i));
     }
     return listResult;
+  }
+
+  static Future<void> makeAsReadDetail(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final auth = prefs.getString('auth');
+
+    final uri = Uri(
+      scheme: 'https',
+      host: Env.serverUrl,
+      path: 'api/v1/user-me-notification/mark-as-read-detail/$id',
+    );
+
+    final header = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $auth',
+    };
+
+    final response = await http.put(
+      uri,
+      headers: header,
+    );
+  }
+
+  static Future<void> makeAsReadAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    final auth = prefs.getString('auth');
+
+    final uri = Uri(
+      scheme: 'https',
+      host: Env.serverUrl,
+      path: 'api/v1/user-me-notification/mark-as-read',
+    );
+
+    final header = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $auth',
+    };
+
+    final response = await http.put(
+      uri,
+      headers: header,
+    );
   }
 }

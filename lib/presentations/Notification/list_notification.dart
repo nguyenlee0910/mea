@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
@@ -113,6 +115,14 @@ class _NotificationPageState extends State<NotificationPage> {
                             iso8601Date: filterCellData[index].iso8601Date,
                             title: filterCellData[index].title,
                             onPress: () {
+                              if (filterCellData[index].status == 'READ') {
+                                unawaited(NotificationService.makeAsReadDetail(
+                                    data[index].id!));
+                                setState(() {
+                                  filterCellData[index].status = 'READ_DETAIL';
+                                });
+                              }
+
                               context.push('/${NotificationDetail.routeName}',
                                   extra: notificationList[index]);
                             },
