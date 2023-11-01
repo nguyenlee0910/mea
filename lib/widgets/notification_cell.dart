@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:mea/presentations/Notification/notification_detail.dart';
 import 'package:mea/utils/utils.dart';
 
 class NotificationCellData {
@@ -24,6 +26,7 @@ class NotificationCell extends StatelessWidget {
     required this.iso8601Date,
     required this.title,
     required this.status,
+    this.onPress,
     super.key,
   });
 
@@ -32,6 +35,7 @@ class NotificationCell extends StatelessWidget {
   final String content;
   final String iso8601Date;
   final String status;
+  final VoidCallback? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class NotificationCell extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(0),
         // child: Container(
         //   width: 358,
         //   height: 100,
@@ -105,144 +109,152 @@ class NotificationCell extends StatelessWidget {
         //     ),
         //   ),
         // ),
-        child: Neumorphic(
-          style: NeumorphicStyle(
-              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-              depth: 6,
-              color: Colors.grey,
-              intensity: 1),
-          child: Container(
-            width: 352,
-            height: 160,
-            padding: const EdgeInsets.all(16),
-            decoration: ShapeDecoration(
-              color: status == "READ_DETAIL" ? Colors.white : Colors.grey,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+        child: GestureDetector(
+          onTap: () {
+            onPress!();
+          },
+          child: Neumorphic(
+            style: NeumorphicStyle(
+                boxShape:
+                    NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+                depth: 6,
+                color: Colors.grey,
+                intensity: 1),
+            child: Container(
+              // width: 352,
+              height: 120,
+              padding: const EdgeInsets.all(16),
+              decoration: ShapeDecoration(
+                color: status == "READ_DETAIL"
+                    ? Colors.white
+                    : Color.fromARGB(255, 234, 242, 255),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Người thông báo: $sender',
-                  style: TextStyle(
-                    color: Color(0xFF1A1A1A),
-                    fontSize: 16,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w800,
-                    height: 0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Người thông báo: $sender',
+                    style: TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 16,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w800,
+                      height: 0,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  width: double.infinity,
-                  height: 73,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 193,
-                        height: 19,
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Tiêu đề: ',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
+                  const SizedBox(height: 8),
+                  Container(
+                    width: double.infinity,
+                    height: 60,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 300,
+                          height: 20,
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Tiêu đề: ',
+                                  style: TextStyle(
+                                    color: Color(0xFF999999),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
+                                    height: 0,
+                                  ),
                                 ),
-                              ),
-                              TextSpan(
-                                text: '$title\n',
-                                style: TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
+                                TextSpan(
+                                  text: '$title\n',
+                                  style: TextStyle(
+                                    color: Color(0xFF1A1A1A),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      SizedBox(
-                        width: 193,
-                        height: 19,
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Thời gian: ',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          width: 300,
+                          height: 20,
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Thời gian: ',
+                                  style: TextStyle(
+                                    color: Color(0xFF999999),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
+                                    height: 0,
+                                  ),
                                 ),
-                              ),
-                              TextSpan(
-                                text: type == 'hours'
-                                    ? dateNoti.toString() + ' giờ trước\n'
-                                    : dateNoti.toString() + ' ngày trước\n',
-                                style: TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
+                                TextSpan(
+                                  text: type == 'hours'
+                                      ? dateNoti.toString() + ' giờ trước\n'
+                                      : dateNoti.toString() + ' ngày trước\n',
+                                  style: TextStyle(
+                                    color: Color(0xFF1A1A1A),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 19,
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Nội dung: ',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
-                              ),
-                              TextSpan(
-                                text: '$content\n',
-                                style: TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                        // const SizedBox(height: 8),
+                        // SizedBox(
+                        //   width: double.infinity,
+                        //   height: 20,
+                        //   child: Text.rich(
+                        //     TextSpan(
+                        //       children: [
+                        //         TextSpan(
+                        //           text: 'Nội dung: ',
+                        //           style: TextStyle(
+                        //             color: Color(0xFF999999),
+                        //             fontSize: 16,
+                        //             fontFamily: 'Inter',
+                        //             fontWeight: FontWeight.w400,
+                        //             height: 0,
+                        //           ),
+                        //         ),
+                        //         TextSpan(
+                        //           text: '$content\n',
+                        //           style: TextStyle(
+                        //             color: Color(0xFF1A1A1A),
+                        //             fontSize: 16,
+                        //             fontFamily: 'Inter',
+                        //             fontWeight: FontWeight.w600,
+                        //             height: 0,
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

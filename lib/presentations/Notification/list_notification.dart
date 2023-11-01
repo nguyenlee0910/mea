@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/models/notification_model.dart';
+import 'package:mea/presentations/Notification/notification_detail.dart';
 import 'package:mea/services/notification_api.dart';
 import 'package:mea/widgets/notification_cell.dart';
 import 'package:mea/widgets/white_tableCell.dart';
@@ -15,6 +17,7 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationCellData> filterCellData = [];
   List<NotificationModel> data = [];
+  List<NotificationModel> notificationList = [];
   List<NotificationCellData> notificationCellData = [];
 
   void fetchData() async {
@@ -23,6 +26,7 @@ class _NotificationPageState extends State<NotificationPage> {
       if (mounted || filterCellData.isEmpty) {
         setState(() {
           final temp = <NotificationCellData>[];
+          notificationList = data;
           for (final i in data) {
             temp.add(NotificationCellData(
                 status: i.status ?? "READ",
@@ -108,6 +112,10 @@ class _NotificationPageState extends State<NotificationPage> {
                             sender: filterCellData[index].sender,
                             iso8601Date: filterCellData[index].iso8601Date,
                             title: filterCellData[index].title,
+                            onPress: () {
+                              context.push('/${NotificationDetail.routeName}',
+                                  extra: notificationList[index]);
+                            },
                           );
                         },
                         itemCount: filterCellData.length,

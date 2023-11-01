@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/models/equipment_model.dart';
+import 'package:mea/models/notification_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
@@ -10,6 +11,7 @@ import 'package:mea/presentations/Authencation/home.dart';
 import 'package:mea/presentations/Authencation/login.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
+import 'package:mea/presentations/Notification/notification_detail.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
@@ -89,6 +91,16 @@ GoRouter appRouter() => GoRouter(
               EquipmentModel equipmentModel = state.extra as EquipmentModel;
               return EquipmentDetail(
                 equipmentModel: equipmentModel,
+              );
+            }),
+        GoRoute(
+            path: '/notification_detail',
+            name: NotificationDetail.routeName,
+            builder: (BuildContext context, GoRouterState state) {
+              NotificationModel notificationModel =
+                  state.extra as NotificationModel;
+              return NotificationDetail(
+                notificationModel: notificationModel,
               );
             }),
         GoRoute(
