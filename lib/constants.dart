@@ -20,3 +20,6 @@ class AppColors {
 }
 
 const String kErrorString = 'NULL-RESPONSE';
+GlobalKey<ScaffoldState> repairRequestKey =
+    GlobalKey(); //so we can call snackbar from anywhere
+

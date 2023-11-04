@@ -1,6 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mea/constants.dart';
 import 'package:mea/services/department_api.dart';
 
 class RepairRequestDetail extends StatefulWidget {
@@ -175,6 +176,8 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                               _showSucess(context, () {
                                 fieldText.clear();
                                 context.pop();
+                                context.pop();
+                                repairRequestKey.currentState!.context.pop();
                               });
                             }
                           });
@@ -202,11 +205,11 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
 
   void _showSucess(BuildContext context, VoidCallback? callback) {
     final alert = AlertDialog(
-      title: const Text('Success'),
-      content: const Text('Request Sucess !'),
+      title: const Text('Thành công'),
+      content: const Text('Gửi yêu cầu thành công!'),
       actions: [
         ElevatedButton(
-          child: const Text('OK'),
+          child: const Text('Xác nhận'),
           onPressed: () {
             callback!();
           },

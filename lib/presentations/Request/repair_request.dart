@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mea/constants.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/services/department_api.dart';
@@ -81,6 +82,7 @@ class _RepairRequestState extends State<RepairRequest> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      key: repairRequestKey,
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Yêu cầu sửa chữa'),
