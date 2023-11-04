@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/models/notification_model.dart';
+import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
@@ -42,6 +43,7 @@ GoRouter appRouter() => GoRouter(
             if (auth.isNotEmpty && rememberMe) {
               return '/navigation_page';
             }
+            return null;
           },
         ),
         GoRoute(
@@ -76,7 +78,8 @@ GoRouter appRouter() => GoRouter(
         GoRoute(
           path: '/view_request',
           name: ViewRequest.routeName,
-          builder: (BuildContext context, GoRouterState state) => ViewRequest(),
+          builder: (BuildContext context, GoRouterState state) =>
+              const ViewRequest(),
         ),
         GoRoute(
           path: '/equipment_request',
@@ -85,24 +88,36 @@ GoRouter appRouter() => GoRouter(
               const EquipmentRequestPage(),
         ),
         GoRoute(
-            path: '/equipment_detail',
-            name: EquipmentDetail.routeName,
-            builder: (BuildContext context, GoRouterState state) {
-              EquipmentModel equipmentModel = state.extra as EquipmentModel;
-              return EquipmentDetail(
-                equipmentModel: equipmentModel,
-              );
-            }),
+          path: '/equipment_detail',
+          name: EquipmentDetail.routeName,
+          builder: (BuildContext context, GoRouterState state) {
+            final equipmentModel = state.extra! as EquipmentModel;
+            return EquipmentDetail(
+              equipmentModel: equipmentModel,
+            );
+          },
+        ),
         GoRoute(
-            path: '/notification_detail',
-            name: NotificationDetail.routeName,
-            builder: (BuildContext context, GoRouterState state) {
-              NotificationModel notificationModel =
-                  state.extra as NotificationModel;
-              return NotificationDetail(
-                notificationModel: notificationModel,
-              );
-            }),
+          path: '/notification_detail',
+          name: NotificationDetail.routeName,
+          builder: (BuildContext context, GoRouterState state) {
+            final notificationModel = state.extra! as NotificationModel;
+            return NotificationDetail(
+              notificationModel: notificationModel,
+            );
+          },
+        ),
+        // GoRoute(
+        //   path: '/repair_request_detail',
+        //   name: RepairRequestDetail.routeName,
+        //   builder: (BuildContext context, GoRouterState state) {
+        //     final equipmentModel = state.extra! as EquipmentModel;
+        //     return RepairRequestDetail(
+        //       equipmentModel: equipmentModel,
+        //     );
+        //   },
+        // ),
+
         GoRoute(
           path: '/repair_request',
           name: RepairRequest.routeName,

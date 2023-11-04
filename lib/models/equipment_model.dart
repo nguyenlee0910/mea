@@ -12,7 +12,7 @@ class EquipmentModel with _$EquipmentModel {
     required String code,
     required String description,
     required List<String> imageUrls,
-    EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
+    required String endOfWarrantyDate, EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
   }) = _EquipmentModel;
 
   factory EquipmentModel.fromJson(Map<String, dynamic> json) =>

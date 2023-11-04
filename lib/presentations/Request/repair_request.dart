@@ -1,13 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mea/constants.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/services/department_api.dart';
-import 'package:mea/widgets/white_tableCell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/equipment_cell.dart';
@@ -55,7 +52,8 @@ class _RepairRequestState extends State<RepairRequest> {
               final temp = <EquipmentCellData>[];
               for (final i in newList) {
                 temp.add(
-                    EquipmentCellData(name: i.name, code: i.code, id: i.id));
+                  EquipmentCellData(name: i.name, code: i.code, id: i.id),
+                );
               }
               equipmentCellData = temp;
               filterCellData = equipmentCellData;
@@ -85,40 +83,42 @@ class _RepairRequestState extends State<RepairRequest> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Yêu cầu sửa chữa'),
+        title: const Text('Yêu cầu sửa chữa'),
         bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 12),
-              child: Container(
-                height: 50,
-                child: TextField(
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(color: Colors.black),
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Tìm kiếm',
-                    fillColor: Colors.white,
-                    filled: true,
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () => _searchController.clear(),
-                    ),
-                    prefixIcon: IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () {},
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(width: 0.0)),
+          preferredSize: const Size.fromHeight(50),
+          child: Padding(
+            padding:
+                const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 12),
+            child: SizedBox(
+              height: 50,
+              child: TextField(
+                textAlign: TextAlign.justify,
+                style: const TextStyle(color: Colors.black),
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Tìm kiếm',
+                  fillColor: Colors.white,
+                  filled: true,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: _searchController.clear,
                   ),
-                  onChanged: (value) {},
+                  prefixIcon: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(width: 0),
+                  ),
                 ),
+                onChanged: (value) {},
               ),
-            )),
+            ),
+          ),
+        ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
           ),
         ),
@@ -190,7 +190,8 @@ class _RepairRequestState extends State<RepairRequest> {
                             buttonName: 'Yêu cầu sửa chữa thiết bị',
                             onPress: () {
                               context.push(
-                                  '/${RepairRequestDetail.routeName}/:${filterCellData[index].id}/:${filterCellData[index].name}/:${filterCellData[index].code}');
+                                '/${RepairRequestDetail.routeName}/${filterCellData[index].id}/${filterCellData[index].name}/${filterCellData[index].code}',
+                              );
                             },
                           );
                         },
@@ -211,14 +212,15 @@ class _RepairRequestState extends State<RepairRequest> {
       },
       child: Neumorphic(
         style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            depth: 5,
-            color: Colors.grey,
-            intensity: 1),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+          depth: 5,
+          color: Colors.grey,
+          intensity: 1,
+        ),
         child: Container(
           width: 36,
           height: 36,
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),

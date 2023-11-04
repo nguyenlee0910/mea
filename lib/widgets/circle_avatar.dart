@@ -38,7 +38,7 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
             decoration: ShapeDecoration(
               image: const DecorationImage(
                 image: NetworkImage(
-                    "https://boxgaixinh.net/wp-content/uploads/2023/02/avatar-shin-cute-8.1.jpg"),
+                    'https://boxgaixinh.net/wp-content/uploads/2023/02/avatar-shin-cute-8.1.jpg',),
                 fit: BoxFit.cover,
               ),
               shape: RoundedRectangleBorder(
@@ -48,7 +48,7 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 80, right: 60),
+          padding: const EdgeInsets.only(top: 80, right: 60),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -63,8 +63,8 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
                 ),
               ),
               Text(
-                widget.deparmentName ?? "NULL",
-                style: TextStyle(
+                widget.deparmentName ?? 'NULL',
+                style: const TextStyle(
                   color: Color(0xFF999999),
                   fontSize: 12,
                   fontFamily: 'Inter',
@@ -73,15 +73,15 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
                 ),
               ),
               Text(
-                widget.email ?? "NULL",
-                style: TextStyle(
+                widget.email ?? 'NULL',
+                style: const TextStyle(
                   color: Color(0xFF999999),
                   fontSize: 12,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
                   height: 0,
                 ),
-              )
+              ),
             ],
           ),
         ),

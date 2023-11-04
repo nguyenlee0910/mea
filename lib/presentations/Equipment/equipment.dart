@@ -1,14 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mea/constants.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/services/department_api.dart';
-import 'package:mea/widgets/white_tableCell.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/equipment_cell.dart';
 
@@ -72,40 +68,40 @@ class _EquipmentPageState extends State<EquipmentPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Danh sách thiết bị'),
+        title: const Text('Danh sách thiết bị'),
         bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
+            preferredSize: const Size.fromHeight(50),
             child: Padding(
               padding:
                   const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 12),
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 child: TextField(
                   textAlign: TextAlign.justify,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   controller: _searchController,
                   decoration: InputDecoration(
                     hintText: 'Tìm kiếm',
                     fillColor: Colors.white,
                     filled: true,
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () => _searchController.clear(),
+                      icon: const Icon(Icons.clear),
+                      onPressed: _searchController.clear,
                     ),
                     prefixIcon: IconButton(
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                       onPressed: () {},
                     ),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(width: 0.0)),
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(width: 0),),
                   ),
                   onChanged: (value) {},
                 ),
               ),
-            )),
+            ),),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
           ),
         ),
@@ -140,11 +136,11 @@ class _EquipmentPageState extends State<EquipmentPage> {
                           return EquipmentCell(
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
-                            colorButtonName: Color.fromARGB(255, 70, 133, 246),
+                            colorButtonName: const Color.fromARGB(255, 70, 133, 246),
                             buttonName: 'Xem Chi tiết',
                             onPress: () {
                               context.push('/${EquipmentDetail.routeName}',
-                                  extra: equipmentList[index]);
+                                  extra: equipmentList[index],);
                             },
                           );
                         },
@@ -168,11 +164,11 @@ class _EquipmentPageState extends State<EquipmentPage> {
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
             depth: 5,
             color: Colors.grey,
-            intensity: 1),
+            intensity: 1,),
         child: Container(
           width: 36,
           height: 36,
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),

@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:mea/constants.dart';
 import 'package:mea/models/equipment_model.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class EquipmentDetail extends StatefulWidget {
-  const EquipmentDetail({super.key, required this.equipmentModel});
+  const EquipmentDetail({required this.equipmentModel, super.key});
   static const routeName = 'equipment_detail';
   final EquipmentModel equipmentModel;
 
@@ -29,16 +28,22 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
     final checkImage =
         Uri.tryParse(widget.equipmentModel.imageUrls.first)?.hasAbsolutePath ??
             false;
-    DateTime dateTime = DateTime.now();
+    var dateTime = DateTime.now();
+    var dateTime2 = DateTime.now();
     try {
       dateTime = DateTime.parse(
-          widget.equipmentModel.equipmentMaintainSchedule!.lastMaintainDate);
+        widget.equipmentModel.equipmentMaintainSchedule!.lastMaintainDate,
+      );
+      dateTime2 = DateTime.parse(
+        widget.equipmentModel.endOfWarrantyDate,
+      );
     } on Exception {
       print('ERROR');
       dateTime = DateTime.now();
     }
-    DateFormat dateFormat = DateFormat('dd/MM/yyyy');
-    String formattedDate = dateFormat.format(dateTime);
+    final dateFormat = DateFormat('dd/MM/yyyy');
+    final formattedDate = dateFormat.format(dateTime);
+    final formattedDate2 = dateFormat.format(dateTime2);
     return Scaffold(
       floatingActionButton: backBtn(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
@@ -48,20 +53,40 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              width: size.width,
-              height: size.height * 0.3,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.grey[100]),
-                child: Image(
-                  fit: BoxFit.fill,
-                  image: checkImage
-                      ? NetworkImage(widget.equipmentModel.imageUrls[0])
-                      : NetworkImage(
-                          'https://monkeymedia.vcdn.com.vn/upload/web/img/tieng-viet-lop-4-cau-hoi-va-dau-cham-hoi-01a.png'),
-                ),
+            CarouselSlider(
+              options: CarouselOptions(
+                //aspectRatio: 16 / 9, // Adjust the aspect ratio as needed
+                enlargeCenterPage: true,
+                enableInfiniteScroll:
+                    true, // Set this to true if you want infinite scrolling
               ),
+              items: widget.equipmentModel.imageUrls.map((imageURL) {
+                return SizedBox(
+                  width: size.width,
+                  height: size.height * 0.3,
+                  child: Image.network(
+                    imageURL,
+                    fit: BoxFit.fill,
+                  ),
+                );
+              }).toList(),
             ),
+
+            // SizedBox(
+            //   width: size.width,
+            //   height: size.height * 0.3,
+            //   child: DecoratedBox(
+            //     decoration: BoxDecoration(color: Colors.grey[100]),
+            //     child: Image(
+            //       fit: BoxFit.fill,
+            //       image: checkImage
+            //           ? NetworkImage(widget.equipmentModel.imageUrls[0])
+            //           : const NetworkImage(
+            //               'https://monkeymedia.vcdn.com.vn/upload/web/img/tieng-viet-lop-4-cau-hoi-va-dau-cham-hoi-01a.png',
+            //             ),
+            //     ),
+            //   ),
+            // ),
             const Padding(
               padding: EdgeInsets.only(top: 8, left: 12, bottom: 8),
               child: Text(
@@ -73,56 +98,52 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
               ),
             ),
             Center(
-                child: Neumorphic(
-              style: NeumorphicStyle(
+              child: Neumorphic(
+                style: NeumorphicStyle(
                   boxShape:
                       NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
                   depth: 5,
                   color: Colors.grey,
-                  intensity: 1),
-              child: Container(
-                width: 380,
-                height: 400,
-                padding: const EdgeInsets.all(20),
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                  intensity: 1,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child: Row(
+                child: Container(
+                  width: 380,
+                  height: 380,
+                  padding: const EdgeInsets.all(20),
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            'Tên máy',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              height: 0,
+                          SizedBox(
+                            width: 120,
+                            child: const Text(
+                              'Tên máy',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 48),
-                          Container(
-                            height: 30,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
-                            ),
+                          const SizedBox(width: 20),
+                          Expanded(
                             child: Text(
                               widget.equipmentModel.name,
-                              style: TextStyle(
+                              softWrap: true,
+                              style: const TextStyle(
                                 color: Color(0xFF1A1A1A),
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.w500,
                                 height: 0,
@@ -131,60 +152,116 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Container(
-                      child: Row(
+                      const SizedBox(height: 16),
+                      Row(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Ngày bảo trì\ngần nhất',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              height: 0,
+                          SizedBox(
+                            width: 120,
+                            child: const Text(
+                              'Mã máy',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
                             ),
                           ),
                           const SizedBox(width: 20),
-                          Container(
-                            height: 44,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
-                            ),
-                            child: SizedBox(
-                              width: 186,
-                              child: Text(
-                                formattedDate,
-                                style: TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 15,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
+                          Expanded(
+                            child: Text(
+                              widget.equipmentModel.code,
+                              softWrap: true,
+                              style: const TextStyle(
+                                color: Color(0xFF1A1A1A),
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Container(
-                      child: Row(
+                      const SizedBox(height: 16),
+                      Row(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 104,
-                            height: 22,
+                            width: 120,
+                            child: const Text(
+                              'Ngày bảo trì\ngần nhất',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: Text(
+                              formattedDate,
+                              softWrap: true,
+                              style: const TextStyle(
+                                color: Color(0xFF1A1A1A),
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 120,
+                            child: const Text(
+                              'Ngày hết hạn\nbảo trì',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: Text(
+                              formattedDate2,
+                              softWrap: true,
+                              style: const TextStyle(
+                                color: Color(0xFF1A1A1A),
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            width: 120,
                             child: Text(
                               'Mô tả',
                               style: TextStyle(
@@ -196,36 +273,29 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 16),
-                          Container(
-                            height: 224,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
-                            ),
-                            child: SizedBox(
-                              width: 186,
-                              child: Text(
-                                widget.equipmentModel.description,
-                                style: TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 15,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: Text(
+                              widget.equipmentModel.description,
+                              //softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 7,
+                              style: const TextStyle(
+                                color: Color(0xFF1A1A1A),
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            )),
+            ),
           ],
         ),
       ),
@@ -239,14 +309,15 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
       },
       child: Neumorphic(
         style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            depth: 5,
-            color: Colors.grey,
-            intensity: 1),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+          depth: 5,
+          color: Colors.grey,
+          intensity: 1,
+        ),
         child: Container(
           width: 36,
           height: 36,
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),

@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mea/constants.dart';
 import 'package:mea/models/notification_model.dart';
 import 'package:mea/presentations/Notification/notification_detail.dart';
 import 'package:mea/services/notification_api.dart';
 import 'package:mea/widgets/notification_cell.dart';
-import 'package:mea/widgets/white_tableCell.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -22,7 +20,16 @@ class _NotificationPageState extends State<NotificationPage> {
   List<NotificationModel> notificationList = [];
   List<NotificationCellData> notificationCellData = [];
 
-  void fetchData() async {
+  void sortFilterCellDataByDate() {
+    filterCellData.sort((a, b) {
+      final DateTime dateA = DateTime.tryParse(a.iso8601Date) ?? DateTime(1970);
+      final DateTime dateB = DateTime.tryParse(b.iso8601Date) ?? DateTime(1970);
+      return dateB
+          .compareTo(dateA); // Sorting in descending order (most recent first)
+    });
+  }
+
+  Future<void> fetchData() async {
     await NotificationService.getNotification().then((value) {
       data = value;
       if (mounted || filterCellData.isEmpty) {
@@ -30,14 +37,18 @@ class _NotificationPageState extends State<NotificationPage> {
           final temp = <NotificationCellData>[];
           notificationList = data;
           for (final i in data) {
-            temp.add(NotificationCellData(
-                status: i.status ?? "READ",
-                sender: i.sender?.name ?? "NULL",
+            temp.add(
+              NotificationCellData(
+                status: i.status ?? 'READ',
+                sender: i.sender?.name ?? 'NULL',
                 content: i.content ?? 'NULL',
                 iso8601Date: i.createdAt ?? 'NULL',
-                title: i.title!));
+                title: i.title!,
+              ),
+            );
           }
           filterCellData = temp;
+          sortFilterCellDataByDate(); // Sort the data by date
         });
       }
     });
@@ -62,31 +73,28 @@ class _NotificationPageState extends State<NotificationPage> {
         decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Container(
-                width: 352,
-                height: 52,
-                child: SearchBar(
-                  hintText: 'Tìm kiếm',
-                  leading: const Icon(Icons.search),
-                  backgroundColor: MaterialStateProperty.all(
-                    Colors.white.withOpacity(0.5),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      if (value.isEmpty) {
-                        filterCellData = notificationCellData;
-                        return;
-                      }
-                      filterCellData = notificationCellData.where((element) {
-                        return element.title.toLowerCase().contains(value);
-                      }).toList();
-                    });
-                  },
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   width: 352,
+            //   height: 52,
+            //   child: SearchBar(
+            //     hintText: 'Tìm kiếm',
+            //     leading: const Icon(Icons.search),
+            //     backgroundColor: MaterialStateProperty.all(
+            //       Colors.white.withOpacity(0.5),
+            //     ),
+            //     onChanged: (value) {
+            //       setState(() {
+            //         if (value.isEmpty) {
+            //           filterCellData = notificationCellData;
+            //           return;
+            //         }
+            //         filterCellData = notificationCellData.where((element) {
+            //           return element.title.toLowerCase().contains(value);
+            //         }).toList();
+            //       });
+            //     },
+            //   ),
+            // ),
             const SizedBox(
               height: 20,
             ),
@@ -116,15 +124,20 @@ class _NotificationPageState extends State<NotificationPage> {
                             title: filterCellData[index].title,
                             onPress: () {
                               if (filterCellData[index].status == 'READ') {
-                                unawaited(NotificationService.makeAsReadDetail(
-                                    data[index].id!));
+                                unawaited(
+                                  NotificationService.makeAsReadDetail(
+                                    data[index].id!,
+                                  ),
+                                );
                                 setState(() {
                                   filterCellData[index].status = 'READ_DETAIL';
                                 });
                               }
 
-                              context.push('/${NotificationDetail.routeName}',
-                                  extra: notificationList[index]);
+                              context.push(
+                                '/${NotificationDetail.routeName}',
+                                extra: notificationList[index],
+                              );
                             },
                           );
                         },

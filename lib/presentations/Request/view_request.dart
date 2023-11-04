@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
-import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/services/device_request_api.dart';
 
 class ViewRequest extends StatefulWidget {
@@ -22,7 +21,7 @@ class _ViewRequestState extends State<ViewRequest> {
     await Future.wait(
       [
         DeviceRequestService.getImportRequests(),
-        DeviceRequestService.getRepairRequests()
+        DeviceRequestService.getRepairRequests(),
       ],
     ).then((resultArary) {
       setState(() {
@@ -46,9 +45,9 @@ class _ViewRequestState extends State<ViewRequest> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Theo dõi đơn yêu cầu'),
+        title: const Text('Theo dõi đơn yêu cầu'),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
           ),
         ),
@@ -88,16 +87,16 @@ class _ViewRequestState extends State<ViewRequest> {
 }
 
 Widget _buildImportRequestCell(ImportRequestModel importRequestModel) {
-  return Container(
+  return SizedBox(
       width: 200,
       height: 80,
       child: Column(
         children: [
           Text(importRequestModel.name),
           ElevatedButton(
-            child: Text('Test'),
+            child: const Text('Test'),
             onPressed: () {},
-          )
+          ),
         ],
-      ));
+      ),);
 }

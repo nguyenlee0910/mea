@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mea/constants.dart';
 
 class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});
@@ -30,9 +28,9 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Đổi mật khẩu'),
+        title: const Text('Đổi mật khẩu'),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
           ),
         ),
@@ -51,7 +49,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                   style: GoogleFonts.knewave(
                     fontSize: 45,
                     fontWeight: FontWeight.w400,
-                    color: Color.fromARGB(255, 70, 113, 246),
+                    color: const Color.fromARGB(255, 70, 113, 246),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -63,12 +61,12 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                   child: Neumorphic(
                     style: NeumorphicStyle(
                         boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.only(
+                            const BorderRadius.only(
                                 topRight: Radius.circular(42.5),
-                                bottomRight: Radius.circular(42.5))),
+                                bottomRight: Radius.circular(42.5),),),
                         depth: 5,
                         color: Colors.grey,
-                        intensity: 1),
+                        intensity: 1,),
                     child: Container(
                       // width: double.infinity,
                       height: 52,
@@ -141,7 +139,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                         ),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.remove_red_eye),
-                          color: Color(0xFF999999),
+                          color: const Color(0xFF999999),
                           onPressed: () {
                             setState(() {
                               _hidePassword = !_hidePassword;
@@ -172,7 +170,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                         ),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.remove_red_eye),
-                          color: Color(0xFF999999),
+                          color: const Color(0xFF999999),
                           onPressed: () {
                             setState(() {
                               _hideConfirmPassword = !_hideConfirmPassword;
@@ -192,13 +190,13 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                         NeumorphicBoxShape.roundRect(BorderRadius.circular(40)),
                     depth: 5,
                     color: Colors.grey,
-                    intensity: 1),
+                    intensity: 1,),
                 child: SizedBox(
                   width: size.width * 0.6,
                   height: 56,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 70, 113, 246),
+                      backgroundColor: const Color.fromARGB(255, 70, 113, 246),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(40)),
                       ),
@@ -233,11 +231,11 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
             depth: 5,
             color: Colors.grey,
-            intensity: 1),
+            intensity: 1,),
         child: Container(
           width: 36,
           height: 36,
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
