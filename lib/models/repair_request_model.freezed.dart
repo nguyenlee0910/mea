@@ -22,11 +22,10 @@ RepairRequestModel _$RepairRequestModelFromJson(Map<String, dynamic> json) {
 mixin _$RepairRequestModel {
   String get id => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
-  EquipmentModel get equipmentModel => throw _privateConstructorUsedError;
+  EquipmentModel get equipment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,13 +42,12 @@ abstract class $RepairRequestModelCopyWith<$Res> {
   $Res call(
       {String id,
       String createdAt,
-      String name,
       String description,
       String status,
       String note,
-      EquipmentModel equipmentModel});
+      EquipmentModel equipment});
 
-  $EquipmentModelCopyWith<$Res> get equipmentModel;
+  $EquipmentModelCopyWith<$Res> get equipment;
 }
 
 /// @nodoc
@@ -67,11 +65,10 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
   $Res call({
     Object? id = null,
     Object? createdAt = null,
-    Object? name = null,
     Object? description = null,
     Object? status = null,
     Object? note = null,
-    Object? equipmentModel = null,
+    Object? equipment = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -81,10 +78,6 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
           ? _value.description
@@ -98,18 +91,18 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
-      equipmentModel: null == equipmentModel
-          ? _value.equipmentModel
-          : equipmentModel // ignore: cast_nullable_to_non_nullable
+      equipment: null == equipment
+          ? _value.equipment
+          : equipment // ignore: cast_nullable_to_non_nullable
               as EquipmentModel,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $EquipmentModelCopyWith<$Res> get equipmentModel {
-    return $EquipmentModelCopyWith<$Res>(_value.equipmentModel, (value) {
-      return _then(_value.copyWith(equipmentModel: value) as $Val);
+  $EquipmentModelCopyWith<$Res> get equipment {
+    return $EquipmentModelCopyWith<$Res>(_value.equipment, (value) {
+      return _then(_value.copyWith(equipment: value) as $Val);
     });
   }
 }
@@ -125,14 +118,13 @@ abstract class _$$RepairRequestModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String createdAt,
-      String name,
       String description,
       String status,
       String note,
-      EquipmentModel equipmentModel});
+      EquipmentModel equipment});
 
   @override
-  $EquipmentModelCopyWith<$Res> get equipmentModel;
+  $EquipmentModelCopyWith<$Res> get equipment;
 }
 
 /// @nodoc
@@ -148,11 +140,10 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? createdAt = null,
-    Object? name = null,
     Object? description = null,
     Object? status = null,
     Object? note = null,
-    Object? equipmentModel = null,
+    Object? equipment = null,
   }) {
     return _then(_$RepairRequestModelImpl(
       id: null == id
@@ -162,10 +153,6 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
           ? _value.description
@@ -179,9 +166,9 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
-      equipmentModel: null == equipmentModel
-          ? _value.equipmentModel
-          : equipmentModel // ignore: cast_nullable_to_non_nullable
+      equipment: null == equipment
+          ? _value.equipment
+          : equipment // ignore: cast_nullable_to_non_nullable
               as EquipmentModel,
     ));
   }
@@ -193,11 +180,10 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
   _$RepairRequestModelImpl(
       {required this.id,
       required this.createdAt,
-      required this.name,
       required this.description,
       required this.status,
       required this.note,
-      required this.equipmentModel});
+      required this.equipment});
 
   factory _$RepairRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RepairRequestModelImplFromJson(json);
@@ -207,19 +193,17 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
   @override
   final String createdAt;
   @override
-  final String name;
-  @override
   final String description;
   @override
   final String status;
   @override
   final String note;
   @override
-  final EquipmentModel equipmentModel;
+  final EquipmentModel equipment;
 
   @override
   String toString() {
-    return 'RepairRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, status: $status, note: $note, equipmentModel: $equipmentModel)';
+    return 'RepairRequestModel(id: $id, createdAt: $createdAt, description: $description, status: $status, note: $note, equipment: $equipment)';
   }
 
   @override
@@ -230,19 +214,18 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.note, note) || other.note == note) &&
-            (identical(other.equipmentModel, equipmentModel) ||
-                other.equipmentModel == equipmentModel));
+            (identical(other.equipment, equipment) ||
+                other.equipment == equipment));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdAt, name, description,
-      status, note, equipmentModel);
+  int get hashCode => Object.hash(
+      runtimeType, id, createdAt, description, status, note, equipment);
 
   @JsonKey(ignore: true)
   @override
@@ -263,11 +246,10 @@ abstract class _RepairRequestModel implements RepairRequestModel {
   factory _RepairRequestModel(
       {required final String id,
       required final String createdAt,
-      required final String name,
       required final String description,
       required final String status,
       required final String note,
-      required final EquipmentModel equipmentModel}) = _$RepairRequestModelImpl;
+      required final EquipmentModel equipment}) = _$RepairRequestModelImpl;
 
   factory _RepairRequestModel.fromJson(Map<String, dynamic> json) =
       _$RepairRequestModelImpl.fromJson;
@@ -277,15 +259,13 @@ abstract class _RepairRequestModel implements RepairRequestModel {
   @override
   String get createdAt;
   @override
-  String get name;
-  @override
   String get description;
   @override
   String get status;
   @override
   String get note;
   @override
-  EquipmentModel get equipmentModel;
+  EquipmentModel get equipment;
   @override
   @JsonKey(ignore: true)
   _$$RepairRequestModelImplCopyWith<_$RepairRequestModelImpl> get copyWith =>

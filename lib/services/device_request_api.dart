@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:mea/env.dart';
+import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,7 +44,6 @@ class DeviceRequestService {
         )
         .map((e) => e as Map<String, dynamic>)
         .toList();
-    print(filterRequestJson);
 
     for (final i in filterRequestJson) {
       listResult.add(ImportRequestModel.fromJson(i));
@@ -60,7 +61,7 @@ class DeviceRequestService {
     final uri = Uri(
       scheme: 'https',
       host: Env.serverUrl,
-      path: 'api/v1/repair-report/all',
+      path: 'api/v1/repair-request/all',
     );
 
     final response = await http.get(
@@ -80,9 +81,10 @@ class DeviceRequestService {
 
     final filterRequestJson = requestJson.where(
       (element) {
-        return element['createdBy']['id'] == userId;
+        return (element['createdBy']['id'] as String).contains(userId!);
       },
     );
+    debugPrint(filterRequestJson.toString());
 
     for (final i in filterRequestJson) {
       listResult.add(RepairRequestModel.fromJson(i));

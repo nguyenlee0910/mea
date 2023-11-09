@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:gap/gap.dart';
+import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
-import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/services/device_request_api.dart';
 
 class ViewRequest extends StatefulWidget {
@@ -15,8 +16,7 @@ class ViewRequest extends StatefulWidget {
 }
 
 class _ViewRequestState extends State<ViewRequest> {
-  List<RepairRequestModel> repairRequest = [];
-  List<ImportRequestModel> importRequest = [];
+  List<BaseRequestModel> requestData = [];
 
   Future<void> getAllRequest() async {
     await Future.wait(
@@ -25,12 +25,15 @@ class _ViewRequestState extends State<ViewRequest> {
         DeviceRequestService.getRepairRequests()
       ],
     ).then((resultArary) {
+      debugPrint(resultArary.toString());
       setState(() {
         if (resultArary.isNotEmpty) {
-          importRequest = resultArary[0] as List<ImportRequestModel>;
-          repairRequest = resultArary[1] as List<RepairRequestModel>;
+          requestData
+            ..addAll(resultArary[0])
+            ..addAll(resultArary[1]);
         }
       });
+      debugPrint(requestData.toString());
     });
   }
 
@@ -74,9 +77,10 @@ class _ViewRequestState extends State<ViewRequest> {
                   ),
                 ),
                 child: ListView.builder(
-                  itemBuilder: (context, index) =>
-                      _buildImportRequestCell(importRequest[index]),
-                  itemCount: importRequest.length,
+                  itemBuilder: (context, index) => _buildImportRequestCell(
+                    requestModel: requestData[index],
+                  ),
+                  itemCount: requestData.length,
                 ),
               ),
             ),
@@ -87,17 +91,51 @@ class _ViewRequestState extends State<ViewRequest> {
   }
 }
 
-Widget _buildImportRequestCell(ImportRequestModel importRequestModel) {
-  return Container(
-      width: 200,
-      height: 80,
-      child: Column(
-        children: [
-          Text(importRequestModel.name),
-          ElevatedButton(
-            child: Text('Test'),
-            onPressed: () {},
-          )
-        ],
-      ));
+Widget _buildImportRequestCell({
+  required BaseRequestModel requestModel,
+}) {
+  return Neumorphic(
+    style: NeumorphicStyle(
+      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+      depth: 6,
+      color: Colors.grey,
+      intensity: 1,
+    ),
+    child: Container(
+        width: 396,
+        height: 172,
+        decoration: const BoxDecoration(color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                requestModel is ImportRequestModel
+                    ? (requestModel as ImportRequestModel).name
+                    : "Đơn yêu cầu sửa chữa thiết bị",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const Gap(12),
+              if (requestModel is RepairRequestModel) ...[
+                Text(
+                  "Mã máy: ${(requestModel as RepairRequestModel).equipment.code}",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+                ),
+                const Gap(12),
+                Text(
+                  "Tên máy: ${(requestModel as RepairRequestModel).equipment.name}",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+                ),
+              ],
+              ElevatedButton(
+                child: Text('Xem chi tiết'),
+                onPressed: () {},
+              )
+            ],
+          ),
+        )),
+  );
 }
+
+mixin _$RepairRequestModelImpl {}

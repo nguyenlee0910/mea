@@ -1,10 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mea/models/base_request_model.dart';
 
 part 'import_request_model.freezed.dart';
 part 'import_request_model.g.dart';
 
 @freezed
-class ImportRequestModel with _$ImportRequestModel {
+class ImportRequestModel extends BaseRequestModel with _$ImportRequestModel {
   factory ImportRequestModel({
     required String id,
     required String createdAt,
