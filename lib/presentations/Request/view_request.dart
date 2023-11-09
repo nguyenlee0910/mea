@@ -56,8 +56,8 @@ class _ViewRequestState extends State<ViewRequest> {
   Widget build(BuildContext context) {
     Map<int, Widget> _children = {
       0: Text('Tất cả'),
-      1: Text('Đơn sửa chữa'),
-      2: Text('Đơn yêu cầu'),
+      1: Text('Đơn sửa chữa thiết bị'),
+      2: Text('Đơn yêu cầu thiết bị'),
     };
     return Scaffold(
       appBar: AppBar(
@@ -125,7 +125,7 @@ class _ViewRequestState extends State<ViewRequest> {
                   color: Colors.white,
                 ),
                 child: ListView.builder(
-                  itemBuilder: (context, index) => _buildImportRequestCell(
+                  itemBuilder: (context, index) => buildImportRequestCell(
                     context: context,
                     requestModel: filterList[index],
                   ),
@@ -140,9 +140,10 @@ class _ViewRequestState extends State<ViewRequest> {
   }
 }
 
-Widget _buildImportRequestCell({
+Widget buildImportRequestCell({
   required BuildContext context,
   required BaseRequestModel requestModel,
+  bool isDetail = false,
 }) {
   DateTime createDate = DateTime.parse(requestModel.createdAt);
   var formatter = DateFormat('dd.MM.yyyy');
@@ -171,7 +172,7 @@ Widget _buildImportRequestCell({
       ),
       child: Container(
           width: 396,
-          height: 172,
+          height: 140,
           decoration: const BoxDecoration(color: Colors.white),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -224,15 +225,17 @@ Widget _buildImportRequestCell({
                     ),
                   ],
                 ),
-                ElevatedButton(
-                  child: Text('Xem chi tiết'),
-                  onPressed: () {
-                    context.push(
-                      '/${ViewRequestDetail.routeName}',
-                      extra: requestModel,
-                    );
-                  },
-                )
+                if (isDetail == false) ...[
+                  ElevatedButton(
+                    child: Text('Xem chi tiết'),
+                    onPressed: () {
+                      context.push(
+                        '/${ViewRequestDetail.routeName}',
+                        extra: requestModel,
+                      );
+                    },
+                  ),
+                ],
               ],
             ),
           )),
