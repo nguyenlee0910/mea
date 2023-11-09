@@ -6,10 +6,12 @@ abstract class BaseRequestModel {
     this.createdAt,
     this.description,
     this.status,
+    this.note,
   );
 
   final String id;
   final String createdAt;
   final String description;
   final String status;
+  final String note;
 }
