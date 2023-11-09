@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
+import 'package:mea/presentations/Request/view_request_detail.dart';
 import 'package:mea/services/device_request_api.dart';
 
 class ViewRequest extends StatefulWidget {
@@ -78,6 +80,7 @@ class _ViewRequestState extends State<ViewRequest> {
                 ),
                 child: ListView.builder(
                   itemBuilder: (context, index) => _buildImportRequestCell(
+                    context: context,
                     requestModel: requestData[index],
                   ),
                   itemCount: requestData.length,
@@ -92,6 +95,7 @@ class _ViewRequestState extends State<ViewRequest> {
 }
 
 Widget _buildImportRequestCell({
+  required BuildContext context,
   required BaseRequestModel requestModel,
 }) {
   return Neumorphic(
@@ -130,7 +134,12 @@ Widget _buildImportRequestCell({
               ],
               ElevatedButton(
                 child: Text('Xem chi tiết'),
-                onPressed: () {},
+                onPressed: () {
+                  context.push(
+                    '/${ViewRequestDetail.routeName}',
+                    extra: requestModel,
+                  );
+                },
               )
             ],
           ),

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/models/notification_model.dart';
 import 'package:mea/models/repair_request_model.dart';
@@ -17,6 +20,7 @@ import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/presentations/Request/view_request.dart';
+import 'package:mea/presentations/Request/view_request_detail.dart';
 import 'package:mea/presentations/UserManagement/user_edit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -123,6 +127,16 @@ GoRouter appRouter() => GoRouter(
           name: RepairRequest.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               const RepairRequest(),
+        ),
+        GoRoute(
+          path: '/view_request_detail',
+          name: ViewRequestDetail.routeName,
+          builder: (BuildContext context, GoRouterState state) {
+            final baseRequestModel = state.extra! as BaseRequestModel;
+            return ViewRequestDetail(
+              baseRequestModel: baseRequestModel,
+            );
+          },
         ),
         GoRoute(
           path: '/repair_request_detail/:id/:nameEquipment/:codeEquipment',
