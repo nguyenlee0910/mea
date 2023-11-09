@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mea/constants.dart';
 import 'package:mea/models/cell_data.dart';
-import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
+import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mea/presentations/Request/repair_request.dart';
 
 import '../../models/user_model.dart';
 import '../../widgets/circle_avatar.dart';
@@ -47,7 +45,7 @@ class HomePage extends StatefulWidget {
     CellData(
         iconData: Icons.art_track,
         textTitle: 'Theo dõi đơn',
-        route: '/${ViewRequest.routeName}'),
+        route: '/${ViewRequest.routeName}',),
   ];
 
   @override
@@ -59,12 +57,12 @@ class _HomePageState extends State<HomePage> {
   String departmentName = '';
 
   Future<void> getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Map<String, dynamic> data =
+    final prefs = await SharedPreferences.getInstance();
+    final data =
         jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
     setState(() {
       userModel = UserModel.fromJson(data);
-      departmentName = prefs.getString('departmentName') ?? "NULL";
+      departmentName = prefs.getString('departmentName') ?? 'NULL';
     });
   }
 

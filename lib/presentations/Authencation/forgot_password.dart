@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mea/constants.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
 
 class ForgotPassword extends StatelessWidget {
@@ -17,15 +16,14 @@ class ForgotPassword extends StatelessWidget {
       body: Container(
         width: double.infinity,
         // decoration: BoxDecoration(gradient: AppColors.backgroundTheme),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFFF9FAFB),
           boxShadow: [
             BoxShadow(
               color: Color(0x3F000000),
               blurRadius: 4,
               offset: Offset(0, 4),
-              spreadRadius: 0,
-            )
+            ),
           ],
         ),
         child: Column(
@@ -39,7 +37,7 @@ class ForgotPassword extends StatelessWidget {
                   style: GoogleFonts.knewave(
                     fontSize: 45,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF4671F6),
+                    color: const Color(0xFF4671F6),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -127,7 +125,7 @@ class ForgotPassword extends StatelessWidget {
                 height: 56,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF4671F6),
+                    backgroundColor: const Color(0xFF4671F6),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(40)),
                     ),
@@ -163,7 +161,7 @@ class ForgotPassword extends StatelessWidget {
                     'Forgot Password?',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
-                      color: Color(0xFF1A1A1A),
+                      color: const Color(0xFF1A1A1A),
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       height: 0,
@@ -219,7 +217,7 @@ class ForgotPassword extends StatelessWidget {
       child: Container(
         width: 36,
         height: 36,
-        decoration: ShapeDecoration(
+        decoration: const ShapeDecoration(
           color: Colors.white,
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),

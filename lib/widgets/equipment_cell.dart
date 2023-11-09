@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EquipmentCellData {
   EquipmentCellData({
-    this.id,
-    required this.name,
-    required this.code,
+    required this.name, required this.code, this.id,
   });
   String? id;
   String name;
@@ -18,8 +14,7 @@ class EquipmentCell extends StatelessWidget {
     required this.name,
     required this.code,
     required this.buttonName,
-    this.onPress,
-    required this.colorButtonName,
+    required this.colorButtonName, this.onPress,
     super.key,
   });
 
@@ -111,7 +106,7 @@ class EquipmentCell extends StatelessWidget {
               boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
               depth: 3,
               color: Colors.grey,
-              intensity: 1),
+              intensity: 1,),
           child: Container(
             width: 372,
             height: 128,
@@ -124,13 +119,11 @@ class EquipmentCell extends StatelessWidget {
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
@@ -139,7 +132,7 @@ class EquipmentCell extends StatelessWidget {
                         child: Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Tên thiết bị: ',
                                 style: TextStyle(
                                   color: Color(0xFF999999),
@@ -151,7 +144,7 @@ class EquipmentCell extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color(0xFF1A1A1A),
                                   fontSize: 14,
                                   fontFamily: 'Inter',
@@ -170,7 +163,7 @@ class EquipmentCell extends StatelessWidget {
                         child: Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Mã thiết bị: ',
                                 style: TextStyle(
                                   color: Color(0xFF999999),
@@ -182,7 +175,7 @@ class EquipmentCell extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: '$code\n',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color(0xFF1A1A1A),
                                   fontSize: 14,
                                   fontFamily: 'Inter',
@@ -205,28 +198,27 @@ class EquipmentCell extends StatelessWidget {
                   child: Neumorphic(
                     style: NeumorphicStyle(
                         boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(12)),
+                            BorderRadius.circular(12),),
                         depth: 5,
                         color: Colors.grey,
-                        intensity: 1),
+                        intensity: 1,),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 12),
+                          horizontal: 40, vertical: 12,),
                       decoration: ShapeDecoration(
                         // color: Color.fromARGB(255, 70, 133, 246),
                         color: colorButtonName,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
+                            borderRadius: BorderRadius.circular(8),),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             buttonName,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontFamily: 'Inter',

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mea/models/notification_model.dart';
 
 class NotificationDetail extends StatelessWidget {
-  const NotificationDetail({super.key, required this.notificationModel});
+  const NotificationDetail({required this.notificationModel, super.key});
   static const routeName = 'notification_detail';
   final NotificationModel notificationModel;
 
@@ -12,28 +12,28 @@ class NotificationDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Chi tiết thông báo'),
+        title: const Text('Chi tiết thông báo'),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
           ),
         ),
       ),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: Colors.transparent),
+        decoration: const BoxDecoration(color: Colors.transparent),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12),
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 100,
                       child: Text(
                         'Người gửi',
@@ -48,8 +48,8 @@ class NotificationDetail extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        notificationModel.sender?.name ?? "NULL",
-                        style: TextStyle(
+                        notificationModel.sender?.name ?? 'NULL',
+                        style: const TextStyle(
                           color: Color(0xFF1A1A1A),
                           fontSize: 18,
                           fontFamily: 'Inter',
@@ -62,17 +62,17 @@ class NotificationDetail extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12),
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 100,
                       child: Text(
                         'Tiêu đề',
@@ -88,7 +88,7 @@ class NotificationDetail extends StatelessWidget {
                     Expanded(
                       child: Text(
                         notificationModel.content ?? 'NULL',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF1A1A1A),
                           fontSize: 18,
                           fontFamily: 'Inter',
@@ -101,17 +101,17 @@ class NotificationDetail extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12),
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 100,
                       child: Text(
                         'Nội dung',
@@ -126,9 +126,9 @@ class NotificationDetail extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        notificationModel.title ?? "NULL",
+                        notificationModel.title ?? 'NULL',
                         softWrap: true,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF1A1A1A),
                           fontSize: 18,
                           fontFamily: 'Inter',

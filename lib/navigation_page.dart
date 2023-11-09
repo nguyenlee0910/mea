@@ -15,7 +15,7 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    NotificationPage(),
+    const NotificationPage(),
     Container(),
     UserManagementPage(),
   ];
@@ -27,7 +27,7 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> appBarName = [
+    final appBarName = <String>[
       'Trang chủ',
       'Thông báo',
       'Tin nhắn',
@@ -40,7 +40,7 @@ class _NavigationState extends State<Navigation> {
               centerTitle: true,
               title: Text(appBarName[_selectedIndex]),
               flexibleSpace: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 110, 194, 247),
                 ),
               ),
@@ -62,7 +62,7 @@ class _NavigationState extends State<Navigation> {
                   Icons.home,
                   //  color: Colors.white,
                 ),
-                label: 'Home'),
+                label: 'Home',),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.notifications,
@@ -79,10 +79,10 @@ class _NavigationState extends State<Navigation> {
                 icon: Icon(
                   Icons.person,
                 ),
-                label: 'Profile'),
+                label: 'Profile',),
           ],
           currentIndex: _selectedIndex,
-          backgroundColor: Color.fromARGB(255, 110, 194, 247),
+          backgroundColor: const Color.fromARGB(255, 110, 194, 247),
           type: BottomNavigationBarType.fixed,
           onTap: (value) {
             setState(() {

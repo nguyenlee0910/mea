@@ -18,6 +18,7 @@ _$EquipmentModelImpl _$$EquipmentModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : EquipmentMaintainScheduleModel.fromJson(
               json['equipmentMaintainSchedule'] as Map<String, dynamic>),
+      endOfWarrantyDate: json['endOfWarrantyDate'] as String,
     );
 
 Map<String, dynamic> _$$EquipmentModelImplToJson(
@@ -29,4 +30,5 @@ Map<String, dynamic> _$$EquipmentModelImplToJson(
       'description': instance.description,
       'imageUrls': instance.imageUrls,
       'equipmentMaintainSchedule': instance.equipmentMaintainSchedule,
+      'endOfWarrantyDate': instance.endOfWarrantyDate,
     };

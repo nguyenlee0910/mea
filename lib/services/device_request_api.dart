@@ -42,13 +42,13 @@ class DeviceRequestService {
             return element['createdBy']['id'] as String == userId;
           },
         )
-        .map((e) => e as Map<String, dynamic>)
+        .map((e) => e)
         .toList();
 
     for (final i in filterRequestJson) {
       listResult.add(ImportRequestModel.fromJson(i));
     }
-    print(listResult.toString());
+    print(listResult);
     return listResult;
   }
 

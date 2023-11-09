@@ -98,7 +98,7 @@ class DepartmentServices {
         {
           'name': 'Đơn yêu cầu thiết bị y tế',
           'description': description,
-          "importRequestItems": <String>[],
+          'importRequestItems': <String>[],
         },
       );
       final response = await http.post(
@@ -145,9 +145,9 @@ class DepartmentServices {
         path: 'api/v1/repair-request',
       );
       final body = {
-        "description": description,
-        "imageUrls": urlImage ?? [],
-        "equipmentId": '08de2642-c733-41aa-b524-451d00305b52',
+        'description': description,
+        'imageUrls': urlImage ?? [],
+        'equipmentId': id,
       };
       final response = await http.post(
         uri,

@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mea/constants.dart';
 import 'package:mea/widgets/custom_equipment_cell.dart';
-import 'package:mea/widgets/white_tableCell.dart';
 
 import '../../services/department_api.dart';
 
@@ -33,9 +30,9 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Yêu cầu thiết bị'),
+        title: const Text('Yêu cầu thiết bị'),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
           ),
         ),
@@ -57,14 +54,16 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Neumorphic(
                     style: NeumorphicStyle(
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(20)),
-                        depth: 6,
-                        color: Colors.grey,
-                        lightSource: LightSource.top,
-                        intensity: 1),
+                      boxShape: NeumorphicBoxShape.roundRect(
+                        BorderRadius.circular(20),
+                      ),
+                      depth: 6,
+                      color: Colors.grey,
+                      lightSource: LightSource.top,
+                      intensity: 1,
+                    ),
                     child: Card(
-                      margin: EdgeInsets.all(0),
+                      margin: const EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -96,11 +95,13 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                     height: 56,
                     child: Neumorphic(
                       style: NeumorphicStyle(
-                          boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.circular(40)),
-                          depth: 6,
-                          color: Colors.grey,
-                          intensity: 1),
+                        boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(40),
+                        ),
+                        depth: 6,
+                        color: Colors.grey,
+                        intensity: 1,
+                      ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
@@ -112,13 +113,14 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                         onPressed: () async {
                           if (description.isNotEmpty) {
                             await DepartmentServices.requestEquipment(
-                                    description: description)
-                                .then(
+                              description: description,
+                            ).then(
                               (value) {
                                 if (value == true) {
                                   _showSucess(context, () {
                                     context.pop();
                                     fieldText.clear();
+                                    context.pop();
                                   });
                                 }
                               },
@@ -153,14 +155,15 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
       },
       child: Neumorphic(
         style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            depth: 5,
-            color: Colors.grey,
-            intensity: 1),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+          depth: 5,
+          color: Colors.grey,
+          intensity: 1,
+        ),
         child: Container(
           width: 36,
           height: 36,
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -180,15 +183,15 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
 
 void _showSucess(BuildContext context, VoidCallback? callback) {
   final alert = AlertDialog(
-    title: const Text('Success'),
-    content: const Text('Request Sucess !'),
+    title: const Text('Thành công'),
+    content: const Text('Gửi yêu cầu thành công !'),
     actions: [
       ElevatedButton(
-        child: const Text('OK'),
+        child: const Text('Xác nhận'),
         onPressed: () {
           callback!();
         },
-      )
+      ),
     ],
   );
 

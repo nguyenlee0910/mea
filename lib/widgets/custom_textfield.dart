@@ -70,7 +70,6 @@ Widget buildEditable({
                           initialValue: initiaValue,
                           decoration:
                               const InputDecoration(border: InputBorder.none),
-                          textAlign: TextAlign.start,
                         ),
                       ),
                     ),

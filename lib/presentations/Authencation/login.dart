@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mea/constants.dart';
-import 'package:mea/models/user_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
 import 'package:mea/services/login_service.dart';
@@ -77,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: GoogleFonts.knewave(
                   fontSize: 45,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 70, 113, 246),
+                  color: const Color.fromARGB(255, 70, 113, 246),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -88,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Log In',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                  color: Color.fromARGB(255, 70, 113, 246),
+                  color: const Color.fromARGB(255, 70, 113, 246),
                   fontSize: 45,
                   fontWeight: FontWeight.w900,
                   height: 0,
@@ -108,9 +105,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       child: TextField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Username',
-                          hintStyle: const TextStyle(
+                          hintStyle: TextStyle(
                             color: Color(0xFF999999),
                             fontSize: 20,
                             fontFamily: 'Inter',
@@ -149,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                             height: 0,
                           ),
                           border: InputBorder.none,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.lock,
                             color: Color(0xFF999999),
                           ),
@@ -236,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 56,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 70, 113, 246),
+                          backgroundColor: const Color.fromARGB(255, 70, 113, 246),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),

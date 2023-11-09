@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
-import 'package:mea/presentations/Notification/notification_detail.dart';
 import 'package:mea/utils/utils.dart';
 
 class NotificationCellData {
@@ -11,7 +7,7 @@ class NotificationCellData {
       required this.content,
       required this.iso8601Date,
       required this.title,
-      required this.status});
+      required this.status,});
   String sender;
   String title;
   String content;
@@ -119,27 +115,26 @@ class NotificationCell extends StatelessWidget {
                     NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
                 depth: 6,
                 color: Colors.grey,
-                intensity: 1),
+                intensity: 1,),
             child: Container(
               // width: 352,
               height: 120,
               padding: const EdgeInsets.all(16),
               decoration: ShapeDecoration(
-                color: status == "READ_DETAIL"
+                color: status == 'READ_DETAIL'
                     ? Colors.white
-                    : Color.fromARGB(255, 234, 242, 255),
+                    : const Color.fromARGB(255, 234, 242, 255),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Người thông báo: $sender',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF1A1A1A),
                       fontSize: 16,
                       fontFamily: 'Inter',
@@ -148,7 +143,7 @@ class NotificationCell extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 60,
                     child: Column(
@@ -162,7 +157,7 @@ class NotificationCell extends StatelessWidget {
                           child: Text.rich(
                             TextSpan(
                               children: [
-                                TextSpan(
+                                const TextSpan(
                                   text: 'Tiêu đề: ',
                                   style: TextStyle(
                                     color: Color(0xFF999999),
@@ -174,7 +169,7 @@ class NotificationCell extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   text: '$title\n',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF1A1A1A),
                                     fontSize: 16,
                                     fontFamily: 'Inter',
@@ -193,7 +188,7 @@ class NotificationCell extends StatelessWidget {
                           child: Text.rich(
                             TextSpan(
                               children: [
-                                TextSpan(
+                                const TextSpan(
                                   text: 'Thời gian: ',
                                   style: TextStyle(
                                     color: Color(0xFF999999),
@@ -205,9 +200,9 @@ class NotificationCell extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   text: type == 'hours'
-                                      ? dateNoti.toString() + ' giờ trước\n'
-                                      : dateNoti.toString() + ' ngày trước\n',
-                                  style: TextStyle(
+                                      ? '$dateNoti giờ trước\n'
+                                      : '$dateNoti ngày trước\n',
+                                  style: const TextStyle(
                                     color: Color(0xFF1A1A1A),
                                     fontSize: 16,
                                     fontFamily: 'Inter',

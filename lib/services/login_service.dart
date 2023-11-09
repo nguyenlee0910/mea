@@ -65,7 +65,7 @@ class AuthService {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
     final uri = Uri(
-        scheme: 'https', host: Env.serverUrl, path: 'api/v1/user-me/logout');
+        scheme: 'https', host: Env.serverUrl, path: 'api/v1/user-me/logout',);
     unawaited(http.post(
       uri,
       body: jsonEncode({}),
@@ -74,9 +74,9 @@ class AuthService {
         'Accept': 'application/json',
         'Authorization': 'Bearer $auth',
       },
-    ));
+    ),);
 
-    prefs.clear().then((value) {
+    await prefs.clear().then((value) {
       if (value == true) {
         callBack();
       }

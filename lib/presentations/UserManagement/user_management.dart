@@ -1,14 +1,11 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../constants.dart';
 import '../../models/cell_data.dart';
 import '../../models/user_model.dart';
 import '../../widgets/circle_avatar.dart';
@@ -40,12 +37,12 @@ class _UserManagementPageState extends State<UserManagementPage> {
   String departmentName = '';
 
   Future<void> getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Map<String, dynamic> data =
+    final prefs = await SharedPreferences.getInstance();
+    final data =
         jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
     setState(() {
       userModel = UserModel.fromJson(data);
-      departmentName = prefs.getString('departmentName') ?? "NULL";
+      departmentName = prefs.getString('departmentName') ?? 'NULL';
     });
   }
 
@@ -66,7 +63,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CircleAvatarWithName(
-              name: userModel.name ?? "No Name",
+              name: userModel.name ?? 'No Name',
               email: userModel.email,
               deparmentName: departmentName,
             ),
@@ -123,34 +120,33 @@ class _UserManagementPageState extends State<UserManagementPage> {
               onTap: () {
                 AuthService.logout(callBack: () {
                   context.go('//');
-                });
+                },);
               },
               child: Center(
                 child: Neumorphic(
                   style: NeumorphicStyle(
                       boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(24)),
+                          BorderRadius.circular(24),),
                       depth: 7,
                       color: Colors.transparent,
-                      intensity: 1),
+                      intensity: 1,),
                   child: Container(
                     width: 312,
                     height: 60,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 12),
+                        horizontal: 40, vertical: 12,),
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(
+                        side: const BorderSide(
                           width: 2,
                           color: Color.fromARGB(255, 255, 87, 78),
                         ),
                         borderRadius: BorderRadius.circular(24),
                       ),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           'Đăng Xuất',
@@ -168,7 +164,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

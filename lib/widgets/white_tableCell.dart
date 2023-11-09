@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:go_router/go_router.dart';
 
 class WhiteTableCell extends StatelessWidget {
   const WhiteTableCell({
@@ -36,7 +35,7 @@ class WhiteTableCell extends StatelessWidget {
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(42)),
             depth: 5,
             color: Colors.grey,
-            intensity: 1),
+            intensity: 1,),
         child: GestureDetector(
           child: Container(
             // width: double.infinity,
@@ -57,7 +56,7 @@ class WhiteTableCell extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 30,
-                      color: Color(0xFF1A1A1A),
+                      color: const Color(0xFF1A1A1A),
                     ),
                   ),
                   if (isCenter)

@@ -22,7 +22,7 @@ class _ViewRequestState extends State<ViewRequest> {
     await Future.wait(
       [
         DeviceRequestService.getImportRequests(),
-        DeviceRequestService.getRepairRequests()
+        DeviceRequestService.getRepairRequests(),
       ],
     ).then((resultArary) {
       debugPrint(resultArary.toString());
@@ -49,9 +49,9 @@ class _ViewRequestState extends State<ViewRequest> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Theo dõi đơn yêu cầu'),
+        title: const Text('Theo dõi đơn yêu cầu'),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
           ),
         ),
