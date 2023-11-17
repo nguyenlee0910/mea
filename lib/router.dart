@@ -43,6 +43,7 @@ GoRouter appRouter() => GoRouter(
             final prefs = await SharedPreferences.getInstance();
             final rememberMe = prefs.getBool('rememberMe') ?? false;
             final auth = prefs.getString('auth') ?? '';
+            final roleId = prefs.getString('roleId');
 
             if (auth.isNotEmpty && rememberMe) {
               return '/navigation_page';

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:mea/constants.dart';
 import 'package:mea/env.dart';
 import 'package:mea/models/user_model.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +10,8 @@ class AuthService {
   static Future<void> login({
     required String userName,
     required String password,
-    required Function callBack,
+    required Function onSucess,
+    required Function onFail,
   }) async {
     final uri =
         Uri(scheme: 'https', host: Env.serverUrl, path: 'api/v1/auth/login');
@@ -28,6 +30,13 @@ class AuthService {
       final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
       final userData =
           UserModel.fromJson(responseJson['user'] as Map<String, dynamic>);
+      //authencation: ///
+      String roleId = responseJson['user']['role']['id'] as String;
+      if (roleId != kAuthencatedRoleId) {
+        onFail();
+        return;
+      }
+
       final prefs = await SharedPreferences.getInstance();
       unawaited(
         prefs.setString('auth', responseJson['token'].toString()),
@@ -57,7 +66,7 @@ class AuthService {
         ),
       );
       // ignore: avoid_dynamic_calls
-      callBack();
+      onSucess();
     }
   }
 
@@ -65,16 +74,21 @@ class AuthService {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
     final uri = Uri(
-        scheme: 'https', host: Env.serverUrl, path: 'api/v1/user-me/logout',);
-    unawaited(http.post(
-      uri,
-      body: jsonEncode({}),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    ),);
+      scheme: 'https',
+      host: Env.serverUrl,
+      path: 'api/v1/user-me/logout',
+    );
+    unawaited(
+      http.post(
+        uri,
+        body: jsonEncode({}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      ),
+    );
 
     await prefs.clear().then((value) {
       if (value == true) {

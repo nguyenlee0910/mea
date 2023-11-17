@@ -14,11 +14,11 @@ _$EquipmentModelImpl _$$EquipmentModelImplFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       imageUrls:
           (json['imageUrls'] as List<dynamic>).map((e) => e as String).toList(),
+      endOfWarrantyDate: json['endOfWarrantyDate'] as String,
       equipmentMaintainSchedule: json['equipmentMaintainSchedule'] == null
           ? null
           : EquipmentMaintainScheduleModel.fromJson(
               json['equipmentMaintainSchedule'] as Map<String, dynamic>),
-      endOfWarrantyDate: json['endOfWarrantyDate'] as String,
     );
 
 Map<String, dynamic> _$$EquipmentModelImplToJson(
@@ -29,6 +29,6 @@ Map<String, dynamic> _$$EquipmentModelImplToJson(
       'code': instance.code,
       'description': instance.description,
       'imageUrls': instance.imageUrls,
-      'equipmentMaintainSchedule': instance.equipmentMaintainSchedule,
       'endOfWarrantyDate': instance.endOfWarrantyDate,
+      'equipmentMaintainSchedule': instance.equipmentMaintainSchedule,
     };

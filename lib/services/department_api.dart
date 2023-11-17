@@ -51,11 +51,15 @@ class DepartmentServices {
     return listResult;
   }
 
-  static Future<bool> requestEquipment({required String description}) async {
+  static Future<bool> requestEquipment({
+    required String description,
+  }) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
     try {
-      final getId = await _sendRequest(description: description);
+      final getId = await _sendRequest(
+        description: description,
+      );
       if (getId != kErrorString) {
         final id = getId;
         final uri = Uri(
@@ -85,7 +89,9 @@ class DepartmentServices {
     }
   }
 
-  static Future<String> _sendRequest({required String description}) async {
+  static Future<String> _sendRequest({
+    required String description,
+  }) async {
     try {
       final uri = Uri(
         scheme: 'https',
@@ -94,10 +100,12 @@ class DepartmentServices {
       );
       final prefs = await SharedPreferences.getInstance();
       final auth = prefs.getString('auth');
+      final departmentId = prefs.getString('departmentId');
       final params = jsonEncode(
         {
-          'name': 'Đơn yêu cầu thiết bị y tế',
+          'name': 'Yêu cầu thiết bị',
           'description': description,
+          'departmentId': departmentId,
           'importRequestItems': <String>[],
         },
       );

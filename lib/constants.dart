@@ -20,6 +20,6 @@ class AppColors {
 }
 
 const String kErrorString = 'NULL-RESPONSE';
-GlobalKey<ScaffoldState> repairRequestKey =
-    GlobalKey(); //so we can call snackbar from anywhere
+GlobalKey<ScaffoldState> repairRequestKey = GlobalKey();
 
+const String kAuthencatedRoleId = '2375e466-45d6-f1c2-9170-af1dcc2f5f6c';

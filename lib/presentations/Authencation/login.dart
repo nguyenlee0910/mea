@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String userName = '';
   String password = '';
+  String roleId = '';
 
   @override
   void initState() {
@@ -233,20 +235,50 @@ class _LoginPageState extends State<LoginPage> {
                       height: 56,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 70, 113, 246),
+                          backgroundColor:
+                              const Color.fromARGB(255, 70, 113, 246),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
                         ),
                         onPressed: () {
                           AuthService.login(
-                            userName: userName,
-                            password: password,
-                            callBack: () {
-                              saveRemember(checkBoxValue);
-                              context.go('/${Navigation.routeName}');
-                            },
-                          );
+                              userName: userName,
+                              password: password,
+                              onSucess: () {
+                                saveRemember(checkBoxValue);
+                                context.go('/${Navigation.routeName}');
+                              },
+                              onFail: () {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.error,
+                                  borderSide: const BorderSide(
+                                    color: Colors.green,
+                                    width: 2,
+                                  ),
+                                  width: 280,
+                                  buttonsBorderRadius: const BorderRadius.all(
+                                    Radius.circular(2),
+                                  ),
+                                  dismissOnTouchOutside: true,
+                                  dismissOnBackKeyPress: false,
+                                  onDismissCallback: (type) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Dismissed by $type'),
+                                      ),
+                                    );
+                                  },
+                                  headerAnimationLoop: false,
+                                  animType: AnimType.bottomSlide,
+                                  title: 'ERROR',
+                                  desc: 'Vui lòng kiểm tra tài khoản',
+                                  showCloseIcon: false,
+                                  btnCancelOnPress: () {},
+                                  btnOkOnPress: () {},
+                                ).show();
+                              });
                         },
                         child: Text(
                           'Login',

@@ -20,6 +20,7 @@ dependencies:
   firebase_performance: ^0.9.2+6
   firebase_performance_dio: ^0.5.0
   shared_preferences: ^2.2.2
+  awesome_dialog: ^3.1.0
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.3.1
