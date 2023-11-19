@@ -62,7 +62,7 @@ class _ViewRequestState extends State<ViewRequest> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Theo dõi đơn yêu cầu'),
+        title: const Text('Đơn yêu cầu thiết bị'),
       ),
       body: Container(
         width: double.infinity,

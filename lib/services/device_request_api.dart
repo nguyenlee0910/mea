@@ -7,6 +7,7 @@ import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:core';
 
 class DeviceRequestService {
   static Future<List<ImportRequestModel>> getImportRequests() async {
@@ -48,6 +49,11 @@ class DeviceRequestService {
     for (final i in filterRequestJson) {
       listResult.add(ImportRequestModel.fromJson(i));
     }
+    listResult.sort((a, b) {
+      DateTime dateTimeA = DateTime.parse(a.createdAt);
+      DateTime dateTimeB = DateTime.parse(b.createdAt);
+      return dateTimeB.compareTo(dateTimeA);
+    });
     print(listResult);
     return listResult;
   }

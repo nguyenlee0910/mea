@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mea/models/cell_data.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
+import 'package:mea/presentations/Request/list_equipment_ticket.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatefulWidget {
 
   List<CellData> cellData = [
     CellData(
-      iconData: Icons.calendar_month,
+      iconData: Icons.medical_services_rounded,
       textTitle: 'Danh sách thiết bị trong phòng ban',
       route: '/${EquipmentPage.routeName}',
     ),
@@ -33,19 +34,25 @@ class HomePage extends StatefulWidget {
     //   textTitle: 'Tin nhắn',
     // ),
     CellData(
-      iconData: Icons.note_add,
-      textTitle: 'Lập đơn yêu cầu thiết bị',
+      iconData: Icons.warehouse_rounded,
+      textTitle: 'Tạo đơn yêu cầu thiết bị',
       route: '/${EquipmentRequestPage.routeName}',
     ),
     CellData(
-      iconData: Icons.note_add_outlined,
-      textTitle: 'Lập đơn sửa chữa thiết bị',
+      iconData: Icons.article_rounded,
+      textTitle: 'Tạo đơn sửa chữa thiết bị',
       route: '/${RepairRequest.routeName}',
     ),
     CellData(
-        iconData: Icons.art_track,
-        textTitle: 'Theo dõi đơn',
-        route: '/${ViewRequest.routeName}',),
+      iconData: Icons.list_alt_rounded,
+      textTitle: 'Đơn yêu cầu thiết bị y tế',
+      route: '/${ListEquipmentTicket.routeName}',
+    ),
+    CellData(
+      iconData: Icons.edit_calendar_rounded,
+      textTitle: 'Đơn yêu cầu sửa chữa',
+      route: '/${ViewRequest.routeName}',
+    ),
   ];
 
   @override

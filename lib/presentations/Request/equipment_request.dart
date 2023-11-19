@@ -16,8 +16,11 @@ class EquipmentRequestPage extends StatefulWidget {
 class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
   late List<CustomEquipmentCell> filterCellData;
   String description = '';
-  final fieldText = TextEditingController();
-
+  String name = '';
+  final descriptionController = TextEditingController();
+  final nameController = TextEditingController();
+  bool nameError = false;
+  bool descriptionError = false;
   @override
   void initState() {
     super.initState();
@@ -28,9 +31,10 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Yêu cầu thiết bị'),
+        title: const Text('Đơn yêu cầu thiết bị'),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
@@ -52,38 +56,136 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Neumorphic(
-                    style: NeumorphicStyle(
-                      boxShape: NeumorphicBoxShape.roundRect(
-                        BorderRadius.circular(20),
-                      ),
-                      depth: 6,
-                      color: Colors.grey,
-                      lightSource: LightSource.top,
-                      intensity: 1,
-                    ),
-                    child: Card(
-                      margin: const EdgeInsets.all(0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: TextField(
-                          controller: fieldText,
-                          maxLines: 8, //or null
-                          decoration: const InputDecoration.collapsed(
-                            hintText: 'Nhập tên thiết bị bạn cần !!!',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Tên đơn yêu cầu thiết bị y tế:',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
-                          onChanged: (value) {
-                            setState(() {
-                              description = value;
-                            });
-                          },
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 8),
+                      Neumorphic(
+                        style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(20),
+                          ),
+                          depth: 6,
+                          color: Colors.grey,
+                          lightSource: LightSource.top,
+                          intensity: 1,
+                        ),
+                        child: Card(
+                          margin: const EdgeInsets.all(0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          color: Color.fromARGB(255, 226, 245, 253),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextFormField(
+                                  controller: nameController,
+                                  decoration: const InputDecoration.collapsed(
+                                    hintText: 'Nhập tên đơn yêu cầu thiết bị',
+                                  ),
+                                  onChanged: (valueName) {
+                                    setState(() {
+                                      name = valueName;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 25),
+                      Container(
+                        margin: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Mô tả:',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Neumorphic(
+                        style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(20),
+                          ),
+                          depth: 6,
+                          color: Colors.grey,
+                          lightSource: LightSource.top,
+                          intensity: 1,
+                        ),
+                        child: Card(
+                          margin: const EdgeInsets.all(0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          color: Color.fromARGB(255, 226, 245, 253),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextField(
+                                  controller: descriptionController,
+                                  maxLines: 8,
+                                  decoration: const InputDecoration.collapsed(
+                                    hintText: 'Bông gạc, Bơm tiêm, ...',
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      description = value;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Column(
+                          children: [
+                            if (nameError && descriptionError)
+                              Text(
+                                '*Tên và mô tả không được trống',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              )
+                            else if (descriptionError)
+                              Text(
+                                '*Mô tả không được trống',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              )
+                            else if (nameError)
+                              Text(
+                                '*Tên không được trống',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -92,7 +194,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                 child: Center(
                   child: SizedBox(
                     width: size.width * 0.6,
-                    height: 56,
+                    height: 50,
                     child: Neumorphic(
                       style: NeumorphicStyle(
                         boxShape: NeumorphicBoxShape.roundRect(
@@ -111,15 +213,23 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           ),
                         ),
                         onPressed: () async {
-                          if (description.isNotEmpty) {
+                          setState(() {
+                            nameError = name.isEmpty;
+                            descriptionError = description.isEmpty;
+                          });
+
+                          if (!nameError && !descriptionError) {
+                            // Both name and description are non-empty
                             await DepartmentServices.requestEquipment(
                               description: description,
+                              name: name,
                             ).then(
                               (value) {
                                 if (value == true) {
                                   _showSucess(context, () {
                                     context.pop();
-                                    fieldText.clear();
+                                    descriptionController.clear();
+                                    nameController.clear();
                                     context.pop();
                                   });
                                 }
@@ -184,7 +294,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
 void _showSucess(BuildContext context, VoidCallback? callback) {
   final alert = AlertDialog(
     title: const Text('Thành công'),
-    content: const Text('Gửi yêu cầu thành công !'),
+    content: const Text('Gửi đơn yêu cầu thiết bị y tế thành công!'),
     actions: [
       ElevatedButton(
         child: const Text('Xác nhận'),

@@ -53,12 +53,14 @@ class DepartmentServices {
 
   static Future<bool> requestEquipment({
     required String description,
+    required String name,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
     try {
       final getId = await _sendRequest(
         description: description,
+        name: name,
       );
       if (getId != kErrorString) {
         final id = getId;
@@ -91,6 +93,7 @@ class DepartmentServices {
 
   static Future<String> _sendRequest({
     required String description,
+    required String name,
   }) async {
     try {
       final uri = Uri(
@@ -103,7 +106,7 @@ class DepartmentServices {
       final departmentId = prefs.getString('departmentId');
       final params = jsonEncode(
         {
-          'name': 'Yêu cầu thiết bị',
+          'name': name,
           'description': description,
           'departmentId': departmentId,
           'importRequestItems': <String>[],

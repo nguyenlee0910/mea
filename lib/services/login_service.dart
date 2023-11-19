@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/env.dart';
 import 'package:mea/models/user_model.dart';
@@ -41,6 +42,9 @@ class AuthService {
       unawaited(
         prefs.setString('auth', responseJson['token'].toString()),
       );
+
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+
       unawaited(
         prefs.setString(
           'departmentId',
