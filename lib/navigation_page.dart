@@ -58,28 +58,30 @@ class _NavigationState extends State<Navigation> {
           selectedIconTheme: IconThemeData(color: Colors.blue[900]),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  //  color: Colors.white,
-                ),
-                label: 'Home',),
+              icon: Icon(
+                Icons.home,
+                //  color: Colors.white,
+              ),
+              label: 'Trang chủ',
+            ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.notifications,
               ),
-              label: 'Notification',
+              label: 'Thông báo',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.chat,
               ),
-              label: 'Chat',
+              label: 'Tin nhắn',
             ),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                ),
-                label: 'Profile',),
+              icon: Icon(
+                Icons.person,
+              ),
+              label: 'Hồ sơ',
+            ),
           ],
           currentIndex: _selectedIndex,
           backgroundColor: const Color.fromARGB(255, 110, 194, 247),
