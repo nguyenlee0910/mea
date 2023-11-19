@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: BoxDecoration(color: Colors.grey[100]),
+        decoration: BoxDecoration(color: Color.fromARGB(255, 201, 229, 255)),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,11 +84,11 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 32, top: 40),
               child: Text(
-                'Log In',
+                'Đăng nhập',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                   color: const Color.fromARGB(255, 70, 113, 246),
-                  fontSize: 45,
+                  fontSize: 30,
                   fontWeight: FontWeight.w900,
                   height: 0,
                 ),
@@ -103,22 +103,23 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         border: Border(
-                          bottom: BorderSide(color: Colors.grey[200]!),
+                          bottom: BorderSide(
+                              color: const Color.fromARGB(255, 0, 0, 0)!),
                         ),
                       ),
                       child: TextField(
                         decoration: const InputDecoration(
-                          hintText: 'Username',
+                          hintText: 'Tên đăng nhập',
                           hintStyle: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 20,
+                            color: Color.fromARGB(255, 95, 95, 95),
+                            fontSize: 17,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w400,
                             height: 0,
                           ),
                           icon: Icon(
                             Icons.mail_outline,
-                            color: Color(0xFF999999),
+                            color: Color.fromARGB(255, 95, 95, 95),
                           ),
                           border: InputBorder.none,
                         ),
@@ -133,16 +134,17 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         border: Border(
-                          bottom: BorderSide(color: Colors.grey[200]!),
+                          bottom: BorderSide(
+                              color: const Color.fromARGB(255, 0, 0, 0)!),
                         ),
                       ),
                       child: TextField(
                         obscureText: _hidePassword,
                         decoration: InputDecoration(
-                          hintText: 'Password',
+                          hintText: 'Mật khẩu',
                           hintStyle: const TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 20,
+                            color: Color.fromARGB(255, 95, 95, 95),
+                            fontSize: 17,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w400,
                             height: 0,
@@ -150,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                           border: InputBorder.none,
                           icon: const Icon(
                             Icons.lock,
-                            color: Color(0xFF999999),
+                            color: Color.fromARGB(255, 95, 95, 95),
                           ),
                           suffixIcon: IconButton(
                             icon: const Icon(
@@ -186,13 +188,13 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           const Text(
-                            'Remember me',
+                            'Lưu đăng nhập',
                             style: TextStyle(
-                              color: Color(0xFF999999),
+                              color: Color.fromARGB(255, 95, 95, 95),
                               fontSize: 14,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w400,
-                              height: 0,
+                              height: 5,
                             ),
                           ),
                         ],
@@ -204,8 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: size.width * 0.4,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(29, 254, 255, 254),
+                            backgroundColor: Color.fromARGB(255, 32, 69, 182),
                             shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -215,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                             return context.go('/${ForgotPassword.routeName}');
                           },
                           child: Text(
-                            'Forgot Password?',
+                            'Quên mật khẩu?',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.inter(
                               color: Colors.white,
