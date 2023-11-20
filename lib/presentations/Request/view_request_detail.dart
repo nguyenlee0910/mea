@@ -14,10 +14,12 @@ class ViewRequestDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          baseRequestModel is ImportRequestModel
-              ? 'Đơn yêu cầu thiết bị'
-              : "Đơn yêu cầu sửa chữa thiết bị",
+        title: const Text(
+          'Chi tiết',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -37,48 +39,60 @@ class ViewRequestDetail extends StatelessWidget {
                   isDetail: true,
                   context: context,
                   requestModel: baseRequestModel),
-              Text(
-                'Mô tả',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Text(
+                  'Mô tả đơn yêu cầu',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                baseRequestModel.description,
-                //softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 7,
-                style: const TextStyle(
-                  color: Color(0xFF1A1A1A),
-                  fontSize: 15,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  height: 0,
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Text(
+                  baseRequestModel.description,
+                  //softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 7,
+                  style: const TextStyle(
+                    color: Color(0xFF1A1A1A),
+                    fontSize: 15,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
-              Text(
-                'Chú thích',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Text(
+                  'Ghi chú duyệt đơn',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                baseRequestModel.note,
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Text(
+                  baseRequestModel.note,
 
-                //softWrap: true,
-                // overflow: TextOverflow.ellipsis,
-                maxLines: 100,
-                style: const TextStyle(
-                  color: Color(0xFF1A1A1A),
-                  fontSize: 15,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  height: 0,
+                  //softWrap: true,
+                  // overflow: TextOverflow.ellipsis,
+                  maxLines: 100,
+                  style: const TextStyle(
+                    color: Color(0xFF1A1A1A),
+                    fontSize: 15,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
                 ),
               ),
             ],

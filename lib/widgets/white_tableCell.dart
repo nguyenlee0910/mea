@@ -32,17 +32,18 @@ class WhiteTableCell extends StatelessWidget {
     return Center(
       child: Neumorphic(
         style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(42)),
-            depth: 5,
-            color: Colors.grey,
-            intensity: 1,),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(42)),
+          depth: 5,
+          color: Colors.grey,
+          intensity: 1,
+        ),
         child: GestureDetector(
           child: Container(
             // width: double.infinity,
             width: 352,
             height: 52,
             decoration: const ShapeDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 205, 229, 245),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(42)),
               ),

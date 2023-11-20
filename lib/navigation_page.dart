@@ -38,7 +38,13 @@ class _NavigationState extends State<Navigation> {
           ? null
           : AppBar(
               centerTitle: true,
-              title: Text(appBarName[_selectedIndex]),
+              title: Text(
+                appBarName[_selectedIndex],
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               flexibleSpace: Container(
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 110, 194, 247),

@@ -1,17 +1,13 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/presentations/Request/view_request_detail.dart';
 import 'package:mea/services/device_request_api.dart';
+import 'package:go_router/go_router.dart';
 
 class ListEquipmentTicket extends StatefulWidget {
   const ListEquipmentTicket({Key? key}) : super(key: key);
@@ -51,26 +47,47 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Đơn yêu cầu thiết bị'),
+        title: const Text(
+          'Đơn yêu cầu thiết bị',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 110, 194, 247),
+          ),
+        ),
       ),
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(color: Colors.grey[100]),
+      body: DefaultTabController(
+        length: 4,
         child: Column(
-          children: <Widget>[
+          children: [
+            TabBar(
+              indicatorColor: Colors.blue[900],
+              labelColor: Colors.blue[900],
+              tabs: [
+                Tab(text: 'Tất cả'),
+                Tab(text: 'Đang chờ'),
+                Tab(text: 'Đã duyệt'),
+                Tab(text: 'Đã hủy'),
+              ],
+              onTap: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+            ),
             Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: ListView.builder(
-                  itemBuilder: (context, index) => buildImportRequestCell(
-                    context: context,
-                    requestModel: filterList[index],
-                  ),
-                  itemCount: filterList.length,
-                ),
+              child: TabBarView(
+                children: [
+                  // Replace the content of each TabBarView with the corresponding list.
+                  buildTabContent(status: 'ALL'),
+                  buildTabContent(status: 'REQUESTING'),
+                  buildTabContent(status: 'APPROVED'),
+                  buildTabContent(status: 'CANCELLED'),
+                ],
               ),
             ),
           ],
@@ -78,109 +95,171 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
       ),
     );
   }
-}
 
-Widget buildImportRequestCell({
-  required BuildContext context,
-  required BaseRequestModel requestModel,
-  bool isDetail = false,
-}) {
-  DateTime createDate = DateTime.parse(requestModel.createdAt);
-  var formatter = DateFormat('dd.MM.yyyy');
-  var createDateString = formatter.format(createDate);
-  var color = Colors.black;
-  var createdBy = createDate;
+  Widget buildTabContent({required String status}) {
+    List<BaseRequestModel> tabFilterList = [];
 
-  String statusText = '';
-  switch (requestModel.status) {
-    case 'REQUESTING':
-      color = Colors.yellow.shade800;
-      statusText = 'Chờ xác nhận'; // Gán giá trị 'Chờ xác nhận' cho statusText
-      break;
-    case 'APPROVED':
-      color = Colors.green;
-      statusText = 'Đã duyệt';
-      break;
-    case 'CANCELLED':
-      color = Colors.red;
-      statusText = 'Đã hủy';
-      break;
-    case 'UPDATED':
-      color = Colors.blue;
-      statusText = 'Đã cập nhật';
-      break;
-    case 'DRAFT':
-      color = const Color.fromARGB(255, 51, 51, 51);
-      statusText = 'Nháp';
-      break;
-    default:
-      color = Colors.black;
-      break;
+    if (status == 'ALL') {
+      tabFilterList = requestData;
+    } else if (status == 'REQUESTING') {
+      // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
+      tabFilterList = requestData
+          .where((request) =>
+              request.status == 'REQUESTING' || request.status == 'UPDATED')
+          .toList();
+    } else {
+      // Lọc theo status khác
+      tabFilterList =
+          requestData.where((request) => request.status == status).toList();
+    }
+
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+      ),
+      child: ListView.builder(
+        itemBuilder: (context, index) => buildImportRequestCell(
+          context: context,
+          requestModel: tabFilterList[index],
+        ),
+        itemCount: tabFilterList.length,
+      ),
+    );
   }
 
-  return Padding(
-    padding: const EdgeInsets.all(12),
-    child: Neumorphic(
-      style: NeumorphicStyle(
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-        depth: 6,
-        color: Colors.grey,
-        intensity: 1,
-      ),
-      child: Container(
-        width: 396,
-        height: 151,
-        decoration: const BoxDecoration(color: Colors.white),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                requestModel is ImportRequestModel
-                    ? (requestModel as ImportRequestModel).name
-                    : 'Đơn yêu cầu sửa chữa thiết bị',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const Gap(12),
-              Row(
+  Widget buildImportRequestCell({
+    required BuildContext context,
+    required BaseRequestModel requestModel,
+  }) {
+    DateTime createDate = DateTime.parse(requestModel.createdAt);
+    var formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
+    var createDateString = formatter.format(createDate);
+    var color = Colors.black;
+
+    String statusText = '';
+    switch (requestModel.status) {
+      case 'REQUESTING':
+        color = Color.fromARGB(255, 211, 145, 38);
+        statusText = 'Chờ xác nhận';
+        break;
+      case 'APPROVED':
+        color = const Color.fromARGB(255, 67, 153, 70);
+        statusText = 'Đã duyệt';
+        break;
+      case 'CANCELLED':
+        color = const Color.fromARGB(255, 221, 60, 48);
+        statusText = 'Đã hủy';
+        break;
+      case 'UPDATED':
+        color = Color.fromARGB(255, 30, 89, 216);
+        statusText = 'Đã cập nhật';
+        break;
+      case 'DRAFT':
+        color = const Color.fromARGB(255, 51, 51, 51);
+        statusText = 'Nháp';
+        break;
+      default:
+        color = Colors.black;
+        break;
+    }
+
+    return GestureDetector(
+      onTap: () {
+        // Chuyển hướng đến màn hình chi tiết
+        context.push(
+          '/${ViewRequestDetail.routeName}',
+          extra: requestModel,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Neumorphic(
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+            depth: 6,
+            color: const Color.fromARGB(255, 158, 158, 158),
+            intensity: 1,
+          ),
+          child: Container(
+            width: 396,
+            height: 120,
+            decoration:
+                const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (requestModel is RepairRequestModel) ...[const Gap(24)],
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, top: 5),
+                    child: Text(
+                      requestModel is ImportRequestModel
+                          ? (requestModel as ImportRequestModel).name
+                          : 'Đơn yêu cầu thiết bị y tế',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Gap(12),
+                  Row(
                     children: [
-                      Text.rich(TextSpan(text: "Trạng thái: ", children: [
-                        TextSpan(
-                          text:
-                              statusText, // Sử dụng statusText thay vì requestModel.status
-                          style: TextStyle(fontSize: 14, color: color),
-                        ),
-                      ])),
-                      const Gap(12),
-                      Text(
-                        "Ngày tạo: $createDateString",
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.normal),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Trạng thái: ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  statusText,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: color,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Gap(6),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  "Thời gian tạo: ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                createDateString,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-              if (isDetail == false) ...[
-                ElevatedButton(
-                  child: Text('Xem chi tiết'),
-                  onPressed: () {
-                    context.push(
-                      '/${ViewRequestDetail.routeName}',
-                      extra: requestModel,
-                    );
-                  },
-                ),
-              ],
-            ],
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

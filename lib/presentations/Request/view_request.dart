@@ -146,19 +146,35 @@ Widget buildImportRequestCell({
   bool isDetail = false,
 }) {
   DateTime createDate = DateTime.parse(requestModel.createdAt);
-  var formatter = DateFormat('dd.MM.yyyy');
+  var formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
   var createDateString = formatter.format(createDate);
   var color = Colors.black;
 
+  String statusText = '';
   switch (requestModel.status) {
     case 'REQUESTING':
-      color = Colors.yellow.shade800;
+      color = Color.fromARGB(255, 211, 145, 38);
+      statusText = 'Chờ xác nhận';
+      break;
     case 'APPROVED':
-      color = Colors.green;
+      color = const Color.fromARGB(255, 67, 153, 70);
+      statusText = 'Đã duyệt';
+      break;
     case 'CANCELLED':
-      color = Colors.red;
+      color = const Color.fromARGB(255, 221, 60, 48);
+      statusText = 'Đã hủy';
+      break;
+    case 'UPDATED':
+      color = Color.fromARGB(255, 30, 89, 216);
+      statusText = 'Đã cập nhật';
+      break;
+    case 'DRAFT':
+      color = const Color.fromARGB(255, 51, 51, 51);
+      statusText = 'Nháp';
+      break;
     default:
       color = Colors.black;
+      break;
   }
 
   return Padding(
@@ -172,18 +188,22 @@ Widget buildImportRequestCell({
       ),
       child: Container(
           width: 396,
-          height: 140,
-          decoration: const BoxDecoration(color: Colors.white),
+          height: 120,
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  requestModel is ImportRequestModel
-                      ? (requestModel as ImportRequestModel).name
-                      : 'Đơn yêu cầu sửa chữa thiết bị',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, top: 5),
+                  child: Text(
+                    requestModel is ImportRequestModel
+                        ? (requestModel as ImportRequestModel).name
+                        : 'Đơn yêu cầu thiết bị y tế',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const Gap(12),
                 Row(
@@ -210,16 +230,48 @@ Widget buildImportRequestCell({
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text.rich(TextSpan(text: "Trạng thái: ", children: [
-                          TextSpan(
-                              text: requestModel.status,
-                              style: TextStyle(fontSize: 14, color: color))
-                        ])),
-                        const Gap(12),
-                        Text(
-                          "Ngày tạo: $createDateString",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.normal),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Trạng thái: ",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                statusText,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: color,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Gap(6),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                "Thời gian tạo: ",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              createDateString,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
