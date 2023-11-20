@@ -99,10 +99,12 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: WhiteTableCell(
-                    icon: widget.cellData[index].iconData!,
-                    text: widget.cellData[index].textTitle!,
-                    route: widget.cellData[index].route ?? '',
+                  child: Container(
+                    child: WhiteTableCell(
+                      icon: widget.cellData[index].iconData!,
+                      text: widget.cellData[index].textTitle!,
+                      route: widget.cellData[index].route ?? '',
+                    ),
                   ),
                 );
               },
