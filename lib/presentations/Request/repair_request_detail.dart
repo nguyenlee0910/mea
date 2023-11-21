@@ -37,7 +37,13 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Yêu cầu sửa chữa thiết bị'),
+        title: const Text(
+          'Tạo đơn sửa chữa thiết bị',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),

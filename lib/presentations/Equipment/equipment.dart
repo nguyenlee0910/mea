@@ -68,38 +68,46 @@ class _EquipmentPageState extends State<EquipmentPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Danh sách thiết bị'),
+        title: const Text(
+          'Thiết bị trong phòng ban',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 12),
-              child: SizedBox(
-                height: 50,
-                child: TextField(
-                  textAlign: TextAlign.justify,
-                  style: const TextStyle(color: Colors.black),
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Tìm kiếm',
-                    fillColor: Colors.white,
-                    filled: true,
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: _searchController.clear,
-                    ),
-                    prefixIcon: IconButton(
-                      icon: const Icon(Icons.search),
-                      onPressed: () {},
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(width: 0),),
+          preferredSize: const Size.fromHeight(50),
+          child: Padding(
+            padding:
+                const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 12),
+            child: SizedBox(
+              height: 50,
+              child: TextField(
+                textAlign: TextAlign.justify,
+                style: const TextStyle(color: Colors.black),
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Tìm kiếm',
+                  fillColor: Colors.white,
+                  filled: true,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: _searchController.clear,
                   ),
-                  onChanged: (value) {},
+                  prefixIcon: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(width: 0),
+                  ),
                 ),
+                onChanged: (value) {},
               ),
-            ),),
+            ),
+          ),
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 110, 194, 247),
@@ -136,11 +144,14 @@ class _EquipmentPageState extends State<EquipmentPage> {
                           return EquipmentCell(
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
-                            colorButtonName: const Color.fromARGB(255, 70, 133, 246),
+                            colorButtonName:
+                                const Color.fromARGB(255, 70, 133, 246),
                             buttonName: 'Xem Chi tiết',
                             onPress: () {
-                              context.push('/${EquipmentDetail.routeName}',
-                                  extra: equipmentList[index],);
+                              context.push(
+                                '/${EquipmentDetail.routeName}',
+                                extra: equipmentList[index],
+                              );
                             },
                           );
                         },
@@ -161,10 +172,11 @@ class _EquipmentPageState extends State<EquipmentPage> {
       },
       child: Neumorphic(
         style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            depth: 5,
-            color: Colors.grey,
-            intensity: 1,),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+          depth: 5,
+          color: Colors.grey,
+          intensity: 1,
+        ),
         child: Container(
           width: 36,
           height: 36,

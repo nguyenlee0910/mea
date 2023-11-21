@@ -85,7 +85,13 @@ class _RepairRequestState extends State<RepairRequest> {
       key: repairRequestKey,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Yêu cầu sửa chữa'),
+        title: const Text(
+          'Tạo đơn sửa chữa thiết bị',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Padding(
