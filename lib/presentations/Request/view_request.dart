@@ -176,7 +176,7 @@ Widget buildImportRequestCell({
       color = Colors.black;
       break;
   }
-
+  double containerHeight = (requestModel is RepairRequestModel) ? 180 : 120;
   return Padding(
     padding: const EdgeInsets.all(12),
     child: Neumorphic(
@@ -187,78 +187,38 @@ Widget buildImportRequestCell({
         intensity: 1,
       ),
       child: Container(
-          width: 396,
-          height: 120,
-          decoration:
-              const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 5),
-                  child: Text(
-                    requestModel is ImportRequestModel
-                        ? (requestModel as ImportRequestModel).name
-                        : 'Đơn yêu cầu thiết bị y tế',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+        width: 396,
+        height: containerHeight,
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 219, 236, 248),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 5),
+                child: Text(
+                  requestModel is ImportRequestModel
+                      ? (requestModel as ImportRequestModel).name
+                      : 'Đơn yêu cầu thiết bị y tế',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                const Gap(12),
+              ),
+              const Gap(12),
+              if (requestModel is RepairRequestModel) ...[
                 Row(
                   children: [
-                    if (requestModel is RepairRequestModel) ...[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Mã máy: ${(requestModel as RepairRequestModel).equipment.code}",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.normal),
-                          ),
-                          const Gap(12),
-                          Text(
-                            "Tên máy: ${(requestModel as RepairRequestModel).equipment.name}",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.normal),
-                          ),
-                        ],
-                      ),
-                    ],
-                    if (requestModel is RepairRequestModel) ...[const Gap(24)],
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Trạng thái: ",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                statusText,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: color,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Gap(6),
                         Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: Text(
-                                "Thời gian tạo: ",
+                                "Mã máy: ",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -266,9 +226,36 @@ Widget buildImportRequestCell({
                               ),
                             ),
                             Text(
-                              createDateString,
+                              (requestModel as RepairRequestModel)
+                                  .equipment
+                                  .code,
                               style: TextStyle(
                                 fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Gap(6),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                "Tên máy: ",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              (requestModel as RepairRequestModel)
+                                  .equipment
+                                  .name,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ],
@@ -277,22 +264,66 @@ Widget buildImportRequestCell({
                     ),
                   ],
                 ),
-                if (isDetail == false) ...[
-                  ElevatedButton(
-                    child: Text('Xem chi tiết'),
-                    onPressed: () {
-                      context.push(
-                        '/${ViewRequestDetail.routeName}',
-                        extra: requestModel,
-                      );
-                    },
+              ],
+              const Gap(6),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Trạng thái: ",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    statusText,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
+              ),
+              const Gap(6),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Thời gian tạo: ",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    createDateString,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              if (isDetail == false) ...[
+                ElevatedButton(
+                  child: Text('Xem chi tiết'),
+                  onPressed: () {
+                    context.push(
+                      '/${ViewRequestDetail.routeName}',
+                      extra: requestModel,
+                    );
+                  },
+                ),
               ],
-            ),
-          )),
+            ],
+          ),
+        ),
+      ),
     ),
   );
 }
-
-mixin _$RepairRequestModelImpl {}
