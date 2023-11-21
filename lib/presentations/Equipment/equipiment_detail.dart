@@ -32,7 +32,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
     var dateTime2 = DateTime.now();
     try {
       dateTime = DateTime.parse(
-        widget.equipmentModel.equipmentMaintainSchedule!.lastMaintainDate,
+        widget.equipmentModel.equipmentMaintainSchedule?.lastMaintainDate ??
+            DateTime.now().toIso8601String(),
       );
       dateTime2 = DateTime.parse(
         widget.equipmentModel.endOfWarrantyDate,
