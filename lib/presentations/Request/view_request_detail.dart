@@ -40,7 +40,7 @@ class ViewRequestDetail extends StatelessWidget {
                   context: context,
                   requestModel: baseRequestModel),
               Padding(
-                padding: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.only(left: 15, top: 10),
                 child: Text(
                   'Mô tả đơn yêu cầu',
                   style: TextStyle(
@@ -51,7 +51,7 @@ class ViewRequestDetail extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Padding(
-                padding: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.only(left: 15),
                 child: Text(
                   baseRequestModel.description,
                   //softWrap: true,
@@ -68,7 +68,7 @@ class ViewRequestDetail extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.only(left: 15),
                 child: Text(
                   'Ghi chú duyệt đơn',
                   style: TextStyle(
@@ -79,7 +79,7 @@ class ViewRequestDetail extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Padding(
-                padding: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.only(left: 15),
                 child: Text(
                   baseRequestModel.note,
 

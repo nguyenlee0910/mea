@@ -107,6 +107,12 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
           .where((request) =>
               request.status == 'REQUESTING' || request.status == 'UPDATED')
           .toList();
+    } else if (status == 'CANCELLED') {
+      // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
+      tabFilterList = requestData
+          .where((request) =>
+              request.status == 'CANCELLED' || request.status == 'REJECTED')
+          .toList();
     } else {
       // Lọc theo status khác
       tabFilterList =
@@ -150,6 +156,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã hủy';
+        break;
+      case 'REJECTED':
+        color = const Color.fromARGB(255, 221, 60, 48);
+        statusText = 'Đã từ chối';
         break;
       case 'UPDATED':
         color = Color.fromARGB(255, 30, 89, 216);

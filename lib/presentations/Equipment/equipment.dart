@@ -102,6 +102,8 @@ class _EquipmentPageState extends State<EquipmentPage> {
                     borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(width: 0),
                   ),
+                  contentPadding:
+                      const EdgeInsets.only(top: 20, left: 10, right: 10),
                 ),
                 onChanged: (value) {},
               ),

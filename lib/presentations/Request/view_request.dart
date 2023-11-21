@@ -164,6 +164,10 @@ Widget buildImportRequestCell({
       color = const Color.fromARGB(255, 221, 60, 48);
       statusText = 'Đã hủy';
       break;
+    case 'REJECTED':
+      color = const Color.fromARGB(255, 221, 60, 48);
+      statusText = 'Đã từ chối';
+      break;
     case 'UPDATED':
       color = Color.fromARGB(255, 30, 89, 216);
       statusText = 'Đã cập nhật';
