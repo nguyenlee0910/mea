@@ -6,6 +6,7 @@ import 'package:mea/models/cell_data.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/list_equipment_ticket.dart';
+import 'package:mea/presentations/Request/list_repair_ticket.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +52,7 @@ class HomePage extends StatefulWidget {
     CellData(
       iconData: Icons.edit_calendar_rounded,
       textTitle: 'Đơn yêu cầu sửa chữa',
-      route: '/${ViewRequest.routeName}',
+      route: '/${ListRepairTicket.routeName}',
     ),
   ];
 

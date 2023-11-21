@@ -1,13 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:mea/env.dart';
-import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:core';
 
 class DeviceRequestService {
   static Future<List<ImportRequestModel>> getImportRequests() async {
@@ -49,12 +46,14 @@ class DeviceRequestService {
     for (final i in filterRequestJson) {
       listResult.add(ImportRequestModel.fromJson(i));
     }
+
+    // Sort the list based on the creation date in descending order
     listResult.sort((a, b) {
       DateTime dateTimeA = DateTime.parse(a.createdAt);
       DateTime dateTimeB = DateTime.parse(b.createdAt);
       return dateTimeB.compareTo(dateTimeA);
     });
-    print(listResult);
+
     return listResult;
   }
 
@@ -90,11 +89,18 @@ class DeviceRequestService {
         return (element['createdBy']['id'] as String).contains(userId!);
       },
     );
-    debugPrint(filterRequestJson.toString());
 
     for (final i in filterRequestJson) {
       listResult.add(RepairRequestModel.fromJson(i));
     }
+
+    // Sort the list based on the creation date in descending order
+    listResult.sort((a, b) {
+      DateTime dateTimeA = DateTime.parse(a.createdAt);
+      DateTime dateTimeB = DateTime.parse(b.createdAt);
+      return dateTimeB.compareTo(dateTimeA);
+    });
+
     return listResult;
   }
 }
