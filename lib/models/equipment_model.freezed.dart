@@ -28,6 +28,10 @@ mixin _$EquipmentModel {
   String get endOfWarrantyDate => throw _privateConstructorUsedError;
   EquipmentMaintainScheduleModel? get equipmentMaintainSchedule =>
       throw _privateConstructorUsedError;
+  String get currentStatus => throw _privateConstructorUsedError;
+  EquipmentCategoryModel get equipmentCategory =>
+      throw _privateConstructorUsedError;
+  BrandModel get brand => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,9 +52,14 @@ abstract class $EquipmentModelCopyWith<$Res> {
       String description,
       List<String> imageUrls,
       String endOfWarrantyDate,
-      EquipmentMaintainScheduleModel? equipmentMaintainSchedule});
+      EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
+      String currentStatus,
+      EquipmentCategoryModel equipmentCategory,
+      BrandModel brand});
 
   $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
+  $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory;
+  $BrandModelCopyWith<$Res> get brand;
 }
 
 /// @nodoc
@@ -73,6 +82,9 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
     Object? imageUrls = null,
     Object? endOfWarrantyDate = null,
     Object? equipmentMaintainSchedule = freezed,
+    Object? currentStatus = null,
+    Object? equipmentCategory = null,
+    Object? brand = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -103,6 +115,18 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
           ? _value.equipmentMaintainSchedule
           : equipmentMaintainSchedule // ignore: cast_nullable_to_non_nullable
               as EquipmentMaintainScheduleModel?,
+      currentStatus: null == currentStatus
+          ? _value.currentStatus
+          : currentStatus // ignore: cast_nullable_to_non_nullable
+              as String,
+      equipmentCategory: null == equipmentCategory
+          ? _value.equipmentCategory
+          : equipmentCategory // ignore: cast_nullable_to_non_nullable
+              as EquipmentCategoryModel,
+      brand: null == brand
+          ? _value.brand
+          : brand // ignore: cast_nullable_to_non_nullable
+              as BrandModel,
     ) as $Val);
   }
 
@@ -116,6 +140,23 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
     return $EquipmentMaintainScheduleModelCopyWith<$Res>(
         _value.equipmentMaintainSchedule!, (value) {
       return _then(_value.copyWith(equipmentMaintainSchedule: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory {
+    return $EquipmentCategoryModelCopyWith<$Res>(_value.equipmentCategory,
+        (value) {
+      return _then(_value.copyWith(equipmentCategory: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BrandModelCopyWith<$Res> get brand {
+    return $BrandModelCopyWith<$Res>(_value.brand, (value) {
+      return _then(_value.copyWith(brand: value) as $Val);
     });
   }
 }
@@ -135,10 +176,17 @@ abstract class _$$EquipmentModelImplCopyWith<$Res>
       String description,
       List<String> imageUrls,
       String endOfWarrantyDate,
-      EquipmentMaintainScheduleModel? equipmentMaintainSchedule});
+      EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
+      String currentStatus,
+      EquipmentCategoryModel equipmentCategory,
+      BrandModel brand});
 
   @override
   $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
+  @override
+  $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory;
+  @override
+  $BrandModelCopyWith<$Res> get brand;
 }
 
 /// @nodoc
@@ -159,6 +207,9 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
     Object? imageUrls = null,
     Object? endOfWarrantyDate = null,
     Object? equipmentMaintainSchedule = freezed,
+    Object? currentStatus = null,
+    Object? equipmentCategory = null,
+    Object? brand = null,
   }) {
     return _then(_$EquipmentModelImpl(
       id: null == id
@@ -189,6 +240,18 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
           ? _value.equipmentMaintainSchedule
           : equipmentMaintainSchedule // ignore: cast_nullable_to_non_nullable
               as EquipmentMaintainScheduleModel?,
+      currentStatus: null == currentStatus
+          ? _value.currentStatus
+          : currentStatus // ignore: cast_nullable_to_non_nullable
+              as String,
+      equipmentCategory: null == equipmentCategory
+          ? _value.equipmentCategory
+          : equipmentCategory // ignore: cast_nullable_to_non_nullable
+              as EquipmentCategoryModel,
+      brand: null == brand
+          ? _value.brand
+          : brand // ignore: cast_nullable_to_non_nullable
+              as BrandModel,
     ));
   }
 }
@@ -203,7 +266,10 @@ class _$EquipmentModelImpl implements _EquipmentModel {
       required this.description,
       required final List<String> imageUrls,
       required this.endOfWarrantyDate,
-      this.equipmentMaintainSchedule})
+      this.equipmentMaintainSchedule,
+      required this.currentStatus,
+      required this.equipmentCategory,
+      required this.brand})
       : _imageUrls = imageUrls;
 
   factory _$EquipmentModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -229,10 +295,16 @@ class _$EquipmentModelImpl implements _EquipmentModel {
   final String endOfWarrantyDate;
   @override
   final EquipmentMaintainScheduleModel? equipmentMaintainSchedule;
+  @override
+  final String currentStatus;
+  @override
+  final EquipmentCategoryModel equipmentCategory;
+  @override
+  final BrandModel brand;
 
   @override
   String toString() {
-    return 'EquipmentModel(id: $id, name: $name, code: $code, description: $description, imageUrls: $imageUrls, endOfWarrantyDate: $endOfWarrantyDate, equipmentMaintainSchedule: $equipmentMaintainSchedule)';
+    return 'EquipmentModel(id: $id, name: $name, code: $code, description: $description, imageUrls: $imageUrls, endOfWarrantyDate: $endOfWarrantyDate, equipmentMaintainSchedule: $equipmentMaintainSchedule, currentStatus: $currentStatus, equipmentCategory: $equipmentCategory, brand: $brand)';
   }
 
   @override
@@ -251,7 +323,12 @@ class _$EquipmentModelImpl implements _EquipmentModel {
                 other.endOfWarrantyDate == endOfWarrantyDate) &&
             (identical(other.equipmentMaintainSchedule,
                     equipmentMaintainSchedule) ||
-                other.equipmentMaintainSchedule == equipmentMaintainSchedule));
+                other.equipmentMaintainSchedule == equipmentMaintainSchedule) &&
+            (identical(other.currentStatus, currentStatus) ||
+                other.currentStatus == currentStatus) &&
+            (identical(other.equipmentCategory, equipmentCategory) ||
+                other.equipmentCategory == equipmentCategory) &&
+            (identical(other.brand, brand) || other.brand == brand));
   }
 
   @JsonKey(ignore: true)
@@ -264,7 +341,10 @@ class _$EquipmentModelImpl implements _EquipmentModel {
       description,
       const DeepCollectionEquality().hash(_imageUrls),
       endOfWarrantyDate,
-      equipmentMaintainSchedule);
+      equipmentMaintainSchedule,
+      currentStatus,
+      equipmentCategory,
+      brand);
 
   @JsonKey(ignore: true)
   @override
@@ -283,14 +363,16 @@ class _$EquipmentModelImpl implements _EquipmentModel {
 
 abstract class _EquipmentModel implements EquipmentModel {
   factory _EquipmentModel(
-          {required final String id,
-          required final String name,
-          required final String code,
-          required final String description,
-          required final List<String> imageUrls,
-          required final String endOfWarrantyDate,
-          final EquipmentMaintainScheduleModel? equipmentMaintainSchedule}) =
-      _$EquipmentModelImpl;
+      {required final String id,
+      required final String name,
+      required final String code,
+      required final String description,
+      required final List<String> imageUrls,
+      required final String endOfWarrantyDate,
+      final EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
+      required final String currentStatus,
+      required final EquipmentCategoryModel equipmentCategory,
+      required final BrandModel brand}) = _$EquipmentModelImpl;
 
   factory _EquipmentModel.fromJson(Map<String, dynamic> json) =
       _$EquipmentModelImpl.fromJson;
@@ -309,6 +391,12 @@ abstract class _EquipmentModel implements EquipmentModel {
   String get endOfWarrantyDate;
   @override
   EquipmentMaintainScheduleModel? get equipmentMaintainSchedule;
+  @override
+  String get currentStatus;
+  @override
+  EquipmentCategoryModel get equipmentCategory;
+  @override
+  BrandModel get brand;
   @override
   @JsonKey(ignore: true)
   _$$EquipmentModelImplCopyWith<_$EquipmentModelImpl> get copyWith =>

@@ -26,6 +26,11 @@ mixin _$ImportRequestModel {
   String get description => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
+  String get updatedAt => throw _privateConstructorUsedError;
+  ImportRequestCreatedByModel get createdBy =>
+      throw _privateConstructorUsedError;
+  ImportRequestUpdatedByModel get updatedBy =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +50,13 @@ abstract class $ImportRequestModelCopyWith<$Res> {
       String name,
       String description,
       String status,
-      String note});
+      String note,
+      String updatedAt,
+      ImportRequestCreatedByModel createdBy,
+      ImportRequestUpdatedByModel updatedBy});
+
+  $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
+  $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy;
 }
 
 /// @nodoc
@@ -67,6 +78,9 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
     Object? description = null,
     Object? status = null,
     Object? note = null,
+    Object? updatedAt = null,
+    Object? createdBy = null,
+    Object? updatedBy = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -93,7 +107,37 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: null == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as ImportRequestCreatedByModel,
+      updatedBy: null == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as ImportRequestUpdatedByModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImportRequestCreatedByModelCopyWith<$Res> get createdBy {
+    return $ImportRequestCreatedByModelCopyWith<$Res>(_value.createdBy,
+        (value) {
+      return _then(_value.copyWith(createdBy: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy {
+    return $ImportRequestUpdatedByModelCopyWith<$Res>(_value.updatedBy,
+        (value) {
+      return _then(_value.copyWith(updatedBy: value) as $Val);
+    });
   }
 }
 
@@ -111,7 +155,15 @@ abstract class _$$ImportRequestModelImplCopyWith<$Res>
       String name,
       String description,
       String status,
-      String note});
+      String note,
+      String updatedAt,
+      ImportRequestCreatedByModel createdBy,
+      ImportRequestUpdatedByModel updatedBy});
+
+  @override
+  $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
+  @override
+  $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy;
 }
 
 /// @nodoc
@@ -131,6 +183,9 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
     Object? description = null,
     Object? status = null,
     Object? note = null,
+    Object? updatedAt = null,
+    Object? createdBy = null,
+    Object? updatedBy = null,
   }) {
     return _then(_$ImportRequestModelImpl(
       id: null == id
@@ -157,6 +212,18 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: null == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as ImportRequestCreatedByModel,
+      updatedBy: null == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as ImportRequestUpdatedByModel,
     ));
   }
 }
@@ -170,7 +237,10 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
       required this.name,
       required this.description,
       required this.status,
-      required this.note});
+      required this.note,
+      required this.updatedAt,
+      required this.createdBy,
+      required this.updatedBy});
 
   factory _$ImportRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImportRequestModelImplFromJson(json);
@@ -187,10 +257,16 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
   final String status;
   @override
   final String note;
+  @override
+  final String updatedAt;
+  @override
+  final ImportRequestCreatedByModel createdBy;
+  @override
+  final ImportRequestUpdatedByModel updatedBy;
 
   @override
   String toString() {
-    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, status: $status, note: $note)';
+    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy)';
   }
 
   @override
@@ -205,13 +281,19 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.note, note) || other.note == note));
+            (identical(other.note, note) || other.note == note) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.updatedBy, updatedBy) ||
+                other.updatedBy == updatedBy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, createdAt, name, description, status, note);
+  int get hashCode => Object.hash(runtimeType, id, createdAt, name, description,
+      status, note, updatedAt, createdBy, updatedBy);
 
   @JsonKey(ignore: true)
   @override
@@ -230,12 +312,16 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
 
 abstract class _ImportRequestModel implements ImportRequestModel {
   factory _ImportRequestModel(
-      {required final String id,
-      required final String createdAt,
-      required final String name,
-      required final String description,
-      required final String status,
-      required final String note}) = _$ImportRequestModelImpl;
+          {required final String id,
+          required final String createdAt,
+          required final String name,
+          required final String description,
+          required final String status,
+          required final String note,
+          required final String updatedAt,
+          required final ImportRequestCreatedByModel createdBy,
+          required final ImportRequestUpdatedByModel updatedBy}) =
+      _$ImportRequestModelImpl;
 
   factory _ImportRequestModel.fromJson(Map<String, dynamic> json) =
       _$ImportRequestModelImpl.fromJson;
@@ -252,6 +338,12 @@ abstract class _ImportRequestModel implements ImportRequestModel {
   String get status;
   @override
   String get note;
+  @override
+  String get updatedAt;
+  @override
+  ImportRequestCreatedByModel get createdBy;
+  @override
+  ImportRequestUpdatedByModel get updatedBy;
   @override
   @JsonKey(ignore: true)
   _$$ImportRequestModelImplCopyWith<_$ImportRequestModelImpl> get copyWith =>

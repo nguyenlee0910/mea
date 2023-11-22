@@ -26,6 +26,11 @@ mixin _$RepairRequestModel {
   String get status => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
   EquipmentModel get equipment => throw _privateConstructorUsedError;
+  String get updatedAt => throw _privateConstructorUsedError;
+  RepairRequestCreatedByModel get createdBy =>
+      throw _privateConstructorUsedError;
+  RepairRequestUpdatedByModel get updatedBy =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,9 +50,14 @@ abstract class $RepairRequestModelCopyWith<$Res> {
       String description,
       String status,
       String note,
-      EquipmentModel equipment});
+      EquipmentModel equipment,
+      String updatedAt,
+      RepairRequestCreatedByModel createdBy,
+      RepairRequestUpdatedByModel updatedBy});
 
   $EquipmentModelCopyWith<$Res> get equipment;
+  $RepairRequestCreatedByModelCopyWith<$Res> get createdBy;
+  $RepairRequestUpdatedByModelCopyWith<$Res> get updatedBy;
 }
 
 /// @nodoc
@@ -69,6 +79,9 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
     Object? status = null,
     Object? note = null,
     Object? equipment = null,
+    Object? updatedAt = null,
+    Object? createdBy = null,
+    Object? updatedBy = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -95,6 +108,18 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
           ? _value.equipment
           : equipment // ignore: cast_nullable_to_non_nullable
               as EquipmentModel,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: null == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as RepairRequestCreatedByModel,
+      updatedBy: null == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as RepairRequestUpdatedByModel,
     ) as $Val);
   }
 
@@ -103,6 +128,24 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
   $EquipmentModelCopyWith<$Res> get equipment {
     return $EquipmentModelCopyWith<$Res>(_value.equipment, (value) {
       return _then(_value.copyWith(equipment: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RepairRequestCreatedByModelCopyWith<$Res> get createdBy {
+    return $RepairRequestCreatedByModelCopyWith<$Res>(_value.createdBy,
+        (value) {
+      return _then(_value.copyWith(createdBy: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RepairRequestUpdatedByModelCopyWith<$Res> get updatedBy {
+    return $RepairRequestUpdatedByModelCopyWith<$Res>(_value.updatedBy,
+        (value) {
+      return _then(_value.copyWith(updatedBy: value) as $Val);
     });
   }
 }
@@ -121,10 +164,17 @@ abstract class _$$RepairRequestModelImplCopyWith<$Res>
       String description,
       String status,
       String note,
-      EquipmentModel equipment});
+      EquipmentModel equipment,
+      String updatedAt,
+      RepairRequestCreatedByModel createdBy,
+      RepairRequestUpdatedByModel updatedBy});
 
   @override
   $EquipmentModelCopyWith<$Res> get equipment;
+  @override
+  $RepairRequestCreatedByModelCopyWith<$Res> get createdBy;
+  @override
+  $RepairRequestUpdatedByModelCopyWith<$Res> get updatedBy;
 }
 
 /// @nodoc
@@ -144,6 +194,9 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
     Object? status = null,
     Object? note = null,
     Object? equipment = null,
+    Object? updatedAt = null,
+    Object? createdBy = null,
+    Object? updatedBy = null,
   }) {
     return _then(_$RepairRequestModelImpl(
       id: null == id
@@ -170,6 +223,18 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
           ? _value.equipment
           : equipment // ignore: cast_nullable_to_non_nullable
               as EquipmentModel,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: null == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as RepairRequestCreatedByModel,
+      updatedBy: null == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as RepairRequestUpdatedByModel,
     ));
   }
 }
@@ -183,7 +248,10 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
       required this.description,
       required this.status,
       required this.note,
-      required this.equipment});
+      required this.equipment,
+      required this.updatedAt,
+      required this.createdBy,
+      required this.updatedBy});
 
   factory _$RepairRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RepairRequestModelImplFromJson(json);
@@ -200,10 +268,16 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
   final String note;
   @override
   final EquipmentModel equipment;
+  @override
+  final String updatedAt;
+  @override
+  final RepairRequestCreatedByModel createdBy;
+  @override
+  final RepairRequestUpdatedByModel updatedBy;
 
   @override
   String toString() {
-    return 'RepairRequestModel(id: $id, createdAt: $createdAt, description: $description, status: $status, note: $note, equipment: $equipment)';
+    return 'RepairRequestModel(id: $id, createdAt: $createdAt, description: $description, status: $status, note: $note, equipment: $equipment, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy)';
   }
 
   @override
@@ -219,13 +293,19 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.note, note) || other.note == note) &&
             (identical(other.equipment, equipment) ||
-                other.equipment == equipment));
+                other.equipment == equipment) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.updatedBy, updatedBy) ||
+                other.updatedBy == updatedBy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, createdAt, description, status, note, equipment);
+  int get hashCode => Object.hash(runtimeType, id, createdAt, description,
+      status, note, equipment, updatedAt, createdBy, updatedBy);
 
   @JsonKey(ignore: true)
   @override
@@ -244,12 +324,16 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
 
 abstract class _RepairRequestModel implements RepairRequestModel {
   factory _RepairRequestModel(
-      {required final String id,
-      required final String createdAt,
-      required final String description,
-      required final String status,
-      required final String note,
-      required final EquipmentModel equipment}) = _$RepairRequestModelImpl;
+          {required final String id,
+          required final String createdAt,
+          required final String description,
+          required final String status,
+          required final String note,
+          required final EquipmentModel equipment,
+          required final String updatedAt,
+          required final RepairRequestCreatedByModel createdBy,
+          required final RepairRequestUpdatedByModel updatedBy}) =
+      _$RepairRequestModelImpl;
 
   factory _RepairRequestModel.fromJson(Map<String, dynamic> json) =
       _$RepairRequestModelImpl.fromJson;
@@ -266,6 +350,12 @@ abstract class _RepairRequestModel implements RepairRequestModel {
   String get note;
   @override
   EquipmentModel get equipment;
+  @override
+  String get updatedAt;
+  @override
+  RepairRequestCreatedByModel get createdBy;
+  @override
+  RepairRequestUpdatedByModel get updatedBy;
   @override
   @JsonKey(ignore: true)
   _$$RepairRequestModelImplCopyWith<_$RepairRequestModelImpl> get copyWith =>

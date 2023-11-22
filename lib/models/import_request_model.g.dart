@@ -15,6 +15,11 @@ _$ImportRequestModelImpl _$$ImportRequestModelImplFromJson(
       description: json['description'] as String,
       status: json['status'] as String,
       note: json['note'] as String,
+      updatedAt: json['updatedAt'] as String,
+      createdBy: ImportRequestCreatedByModel.fromJson(
+          json['createdBy'] as Map<String, dynamic>),
+      updatedBy: ImportRequestUpdatedByModel.fromJson(
+          json['updatedBy'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ImportRequestModelImplToJson(
@@ -26,4 +31,7 @@ Map<String, dynamic> _$$ImportRequestModelImplToJson(
       'description': instance.description,
       'status': instance.status,
       'note': instance.note,
+      'updatedAt': instance.updatedAt,
+      'createdBy': instance.createdBy,
+      'updatedBy': instance.updatedBy,
     };
