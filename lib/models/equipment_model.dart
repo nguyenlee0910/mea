@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mea/models/brand_model.dart';
 import 'package:mea/models/equipment_category_model.dart';
 import 'package:mea/models/equipment_maintain_schedule_model.dart';
+import 'package:mea/models/import_request_items_model.dart';
 
 part 'equipment_model.freezed.dart';
 part 'equipment_model.g.dart';
@@ -19,6 +20,7 @@ class EquipmentModel with _$EquipmentModel {
     required String currentStatus,
     required EquipmentCategoryModel equipmentCategory,
     required BrandModel brand,
+    ImportRequestItemsModel? importRequestItemsModel,
   }) = _EquipmentModel;
 
   factory EquipmentModel.fromJson(Map<String, dynamic> json) =>

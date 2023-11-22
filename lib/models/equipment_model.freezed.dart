@@ -32,6 +32,8 @@ mixin _$EquipmentModel {
   EquipmentCategoryModel get equipmentCategory =>
       throw _privateConstructorUsedError;
   BrandModel get brand => throw _privateConstructorUsedError;
+  ImportRequestItemsModel? get importRequestItemsModel =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,11 +57,13 @@ abstract class $EquipmentModelCopyWith<$Res> {
       EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
       String currentStatus,
       EquipmentCategoryModel equipmentCategory,
-      BrandModel brand});
+      BrandModel brand,
+      ImportRequestItemsModel? importRequestItemsModel});
 
   $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
   $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory;
   $BrandModelCopyWith<$Res> get brand;
+  $ImportRequestItemsModelCopyWith<$Res>? get importRequestItemsModel;
 }
 
 /// @nodoc
@@ -85,6 +89,7 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
     Object? currentStatus = null,
     Object? equipmentCategory = null,
     Object? brand = null,
+    Object? importRequestItemsModel = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -127,6 +132,10 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
           ? _value.brand
           : brand // ignore: cast_nullable_to_non_nullable
               as BrandModel,
+      importRequestItemsModel: freezed == importRequestItemsModel
+          ? _value.importRequestItemsModel
+          : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
+              as ImportRequestItemsModel?,
     ) as $Val);
   }
 
@@ -159,6 +168,19 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
       return _then(_value.copyWith(brand: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImportRequestItemsModelCopyWith<$Res>? get importRequestItemsModel {
+    if (_value.importRequestItemsModel == null) {
+      return null;
+    }
+
+    return $ImportRequestItemsModelCopyWith<$Res>(
+        _value.importRequestItemsModel!, (value) {
+      return _then(_value.copyWith(importRequestItemsModel: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -179,7 +201,8 @@ abstract class _$$EquipmentModelImplCopyWith<$Res>
       EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
       String currentStatus,
       EquipmentCategoryModel equipmentCategory,
-      BrandModel brand});
+      BrandModel brand,
+      ImportRequestItemsModel? importRequestItemsModel});
 
   @override
   $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
@@ -187,6 +210,8 @@ abstract class _$$EquipmentModelImplCopyWith<$Res>
   $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory;
   @override
   $BrandModelCopyWith<$Res> get brand;
+  @override
+  $ImportRequestItemsModelCopyWith<$Res>? get importRequestItemsModel;
 }
 
 /// @nodoc
@@ -210,6 +235,7 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
     Object? currentStatus = null,
     Object? equipmentCategory = null,
     Object? brand = null,
+    Object? importRequestItemsModel = freezed,
   }) {
     return _then(_$EquipmentModelImpl(
       id: null == id
@@ -252,6 +278,10 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
           ? _value.brand
           : brand // ignore: cast_nullable_to_non_nullable
               as BrandModel,
+      importRequestItemsModel: freezed == importRequestItemsModel
+          ? _value.importRequestItemsModel
+          : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
+              as ImportRequestItemsModel?,
     ));
   }
 }
@@ -269,7 +299,8 @@ class _$EquipmentModelImpl implements _EquipmentModel {
       this.equipmentMaintainSchedule,
       required this.currentStatus,
       required this.equipmentCategory,
-      required this.brand})
+      required this.brand,
+      this.importRequestItemsModel})
       : _imageUrls = imageUrls;
 
   factory _$EquipmentModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -301,10 +332,12 @@ class _$EquipmentModelImpl implements _EquipmentModel {
   final EquipmentCategoryModel equipmentCategory;
   @override
   final BrandModel brand;
+  @override
+  final ImportRequestItemsModel? importRequestItemsModel;
 
   @override
   String toString() {
-    return 'EquipmentModel(id: $id, name: $name, code: $code, description: $description, imageUrls: $imageUrls, endOfWarrantyDate: $endOfWarrantyDate, equipmentMaintainSchedule: $equipmentMaintainSchedule, currentStatus: $currentStatus, equipmentCategory: $equipmentCategory, brand: $brand)';
+    return 'EquipmentModel(id: $id, name: $name, code: $code, description: $description, imageUrls: $imageUrls, endOfWarrantyDate: $endOfWarrantyDate, equipmentMaintainSchedule: $equipmentMaintainSchedule, currentStatus: $currentStatus, equipmentCategory: $equipmentCategory, brand: $brand, importRequestItemsModel: $importRequestItemsModel)';
   }
 
   @override
@@ -328,7 +361,10 @@ class _$EquipmentModelImpl implements _EquipmentModel {
                 other.currentStatus == currentStatus) &&
             (identical(other.equipmentCategory, equipmentCategory) ||
                 other.equipmentCategory == equipmentCategory) &&
-            (identical(other.brand, brand) || other.brand == brand));
+            (identical(other.brand, brand) || other.brand == brand) &&
+            (identical(
+                    other.importRequestItemsModel, importRequestItemsModel) ||
+                other.importRequestItemsModel == importRequestItemsModel));
   }
 
   @JsonKey(ignore: true)
@@ -344,7 +380,8 @@ class _$EquipmentModelImpl implements _EquipmentModel {
       equipmentMaintainSchedule,
       currentStatus,
       equipmentCategory,
-      brand);
+      brand,
+      importRequestItemsModel);
 
   @JsonKey(ignore: true)
   @override
@@ -363,16 +400,18 @@ class _$EquipmentModelImpl implements _EquipmentModel {
 
 abstract class _EquipmentModel implements EquipmentModel {
   factory _EquipmentModel(
-      {required final String id,
-      required final String name,
-      required final String code,
-      required final String description,
-      required final List<String> imageUrls,
-      required final String endOfWarrantyDate,
-      final EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
-      required final String currentStatus,
-      required final EquipmentCategoryModel equipmentCategory,
-      required final BrandModel brand}) = _$EquipmentModelImpl;
+          {required final String id,
+          required final String name,
+          required final String code,
+          required final String description,
+          required final List<String> imageUrls,
+          required final String endOfWarrantyDate,
+          final EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
+          required final String currentStatus,
+          required final EquipmentCategoryModel equipmentCategory,
+          required final BrandModel brand,
+          final ImportRequestItemsModel? importRequestItemsModel}) =
+      _$EquipmentModelImpl;
 
   factory _EquipmentModel.fromJson(Map<String, dynamic> json) =
       _$EquipmentModelImpl.fromJson;
@@ -397,6 +436,8 @@ abstract class _EquipmentModel implements EquipmentModel {
   EquipmentCategoryModel get equipmentCategory;
   @override
   BrandModel get brand;
+  @override
+  ImportRequestItemsModel? get importRequestItemsModel;
   @override
   @JsonKey(ignore: true)
   _$$EquipmentModelImplCopyWith<_$EquipmentModelImpl> get copyWith =>

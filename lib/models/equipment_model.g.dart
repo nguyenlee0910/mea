@@ -23,6 +23,10 @@ _$EquipmentModelImpl _$$EquipmentModelImplFromJson(Map<String, dynamic> json) =>
       equipmentCategory: EquipmentCategoryModel.fromJson(
           json['equipmentCategory'] as Map<String, dynamic>),
       brand: BrandModel.fromJson(json['brand'] as Map<String, dynamic>),
+      importRequestItemsModel: json['importRequestItemsModel'] == null
+          ? null
+          : ImportRequestItemsModel.fromJson(
+              json['importRequestItemsModel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$EquipmentModelImplToJson(
@@ -38,4 +42,5 @@ Map<String, dynamic> _$$EquipmentModelImplToJson(
       'currentStatus': instance.currentStatus,
       'equipmentCategory': instance.equipmentCategory,
       'brand': instance.brand,
+      'importRequestItemsModel': instance.importRequestItemsModel,
     };
