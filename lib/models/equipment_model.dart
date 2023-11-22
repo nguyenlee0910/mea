@@ -10,16 +10,16 @@ part 'equipment_model.g.dart';
 @freezed
 class EquipmentModel with _$EquipmentModel {
   factory EquipmentModel({
-    required String id,
-    required String name,
-    required String code,
-    required String description,
-    required List<String> imageUrls,
-    required String endOfWarrantyDate,
+    required String? id,
+    required String? name,
+    required String? code,
+    required String? description,
+    required List<String>? imageUrls,
+    required String? endOfWarrantyDate,
     EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
-    required String currentStatus,
-    required EquipmentCategoryModel equipmentCategory,
-    required BrandModel brand,
+    required String? currentStatus,
+    required EquipmentCategoryModel? equipmentCategory,
+    required BrandModel? brand,
     ImportRequestItemsModel? importRequestItemsModel,
   }) = _EquipmentModel;
 

@@ -53,7 +53,10 @@ class _RepairRequestState extends State<RepairRequest> {
               final temp = <EquipmentCellData>[];
               for (final i in newList) {
                 temp.add(
-                  EquipmentCellData(name: i.name, code: i.code, id: i.id),
+                  EquipmentCellData(
+                      name: i.name ?? 'Trống',
+                      code: i.code ?? 'Trống',
+                      id: i.id),
                 );
               }
               equipmentCellData = temp;

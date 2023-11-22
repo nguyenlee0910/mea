@@ -26,7 +26,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final checkImage =
-        Uri.tryParse(widget.equipmentModel.imageUrls.first)?.hasAbsolutePath ??
+        Uri.tryParse(widget.equipmentModel.imageUrls?.first ?? '')
+                ?.hasAbsolutePath ??
             false;
     var dateTime = DateTime.now();
     var dateTime2 = DateTime.now();
@@ -35,8 +36,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
         widget.equipmentModel.equipmentMaintainSchedule?.lastMaintainDate ??
             DateTime.now().toIso8601String(),
       );
-      dateTime2 = DateTime.parse(
-        widget.equipmentModel.endOfWarrantyDate,
+      DateTime dateTime2 = DateTime.parse(
+        widget.equipmentModel.endOfWarrantyDate ?? 'default_value_for_null',
       );
     } on Exception {
       print('ERROR');
@@ -61,16 +62,17 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 enableInfiniteScroll:
                     true, // Set this to true if you want infinite scrolling
               ),
-              items: widget.equipmentModel.imageUrls.map((imageURL) {
-                return SizedBox(
-                  width: size.width,
-                  height: size.height * 0.3,
-                  child: Image.network(
-                    imageURL,
-                    fit: BoxFit.fill,
-                  ),
-                );
-              }).toList(),
+              items: widget.equipmentModel.imageUrls?.map((imageURL) {
+                    return SizedBox(
+                      width: size.width,
+                      height: size.height * 0.3,
+                      child: Image.network(
+                        imageURL,
+                        fit: BoxFit.fill,
+                      ),
+                    );
+                  })?.toList() ??
+                  [],
             ),
 
             // SizedBox(
@@ -140,7 +142,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                           const SizedBox(width: 20),
                           Expanded(
                             child: Text(
-                              widget.equipmentModel.name,
+                              widget.equipmentModel.name ?? 'Trống',
                               softWrap: true,
                               style: const TextStyle(
                                 color: Color(0xFF1A1A1A),
@@ -173,7 +175,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                           const SizedBox(width: 20),
                           Expanded(
                             child: Text(
-                              widget.equipmentModel.code,
+                              widget.equipmentModel.code ?? 'Trống',
                               softWrap: true,
                               style: const TextStyle(
                                 color: Color(0xFF1A1A1A),
@@ -277,7 +279,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                           const SizedBox(width: 20),
                           Expanded(
                             child: Text(
-                              widget.equipmentModel.description,
+                              widget.equipmentModel.description ?? 'Trống',
                               //softWrap: true,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 7,

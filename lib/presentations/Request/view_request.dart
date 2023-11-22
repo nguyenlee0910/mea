@@ -231,8 +231,9 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
-                                  .equipment
-                                  .code,
+                                      .equipment
+                                      .code ??
+                                  'Trống',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
@@ -255,8 +256,9 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
-                                  .equipment
-                                  .name,
+                                      .equipment
+                                      .name ??
+                                  'Trống',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,

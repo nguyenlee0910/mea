@@ -42,7 +42,10 @@ class _EquipmentPageState extends State<EquipmentPage> {
         if (newList.isNotEmpty) {
           final temp = <EquipmentCellData>[];
           for (final i in newList) {
-            temp.add(EquipmentCellData(name: i.name, code: i.code));
+            temp.add(EquipmentCellData(
+              name: i.name ?? '', // Nếu i.name là null, sử dụng chuỗi rỗng
+              code: i.code ?? '', // Nếu i.code là null, sử dụng chuỗi rỗng
+            ));
           }
           equipmentCellData = temp;
           filterCellData = equipmentCellData;

@@ -228,7 +228,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                             ),
                           ),
                           Text(
-                            (requestModel as RepairRequestModel).equipment.code,
+                            (requestModel as RepairRequestModel)
+                                    .equipment
+                                    .code ??
+                                'Trống',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
@@ -250,7 +253,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                             ),
                           ),
                           Text(
-                            (requestModel as RepairRequestModel).equipment.name,
+                            (requestModel as RepairRequestModel)
+                                    .equipment
+                                    .name ??
+                                'Trống',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
