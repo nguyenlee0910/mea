@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:mea/services/department_api.dart';
 
 class RepairRequestDetail extends StatefulWidget {
   const RepairRequestDetail({
@@ -22,6 +24,8 @@ class RepairRequestDetail extends StatefulWidget {
 class _RepairRequestDetailState extends State<RepairRequestDetail> {
   String description = '';
   final fieldText = TextEditingController();
+  bool isLoading = false;
+  bool requestSuccess = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +85,11 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 8, left: 18),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 8, left: 18),
                                 child: Text(
                                   'Tên thiết bị:',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                     fontFamily: 'Inter',
@@ -98,7 +101,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                 padding:
                                     const EdgeInsets.only(top: 4, left: 18),
                                 child: Text(
-                                  '${widget.nameEquipment}',
+                                  widget.nameEquipment,
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
@@ -198,10 +201,49 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                             borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
                         ),
-                        onPressed: () {
-                          debugPrint(description);
-                          // Handle your logic here
-                        },
+                        onPressed: isLoading
+                            ? null
+                            : () async {
+                                // Show confirmation dialog
+                                // ignore: inference_failure_on_function_invocation
+                                final confirmed = await showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Xác nhận'),
+                                      content: const Text(
+                                          'Bạn có chắc chắn gửi đơn ?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop(false);
+                                          },
+                                          child: const Text('Hủy'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop(true);
+                                          },
+                                          child: const Text('Xác nhận'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+
+                                // If user confirms, make the API call
+                                if (confirmed == true) {
+                                  await _makeApiCall();
+
+                                  if (requestSuccess) {
+                                    // Handle success
+                                    debugPrint('API request successful!');
+                                  } else {
+                                    // Handle failure
+                                    debugPrint('API request failed!');
+                                  }
+                                }
+                              },
                         child: Text(
                           'Gửi',
                           textAlign: TextAlign.center,
@@ -221,5 +263,49 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
         ),
       ),
     );
+  }
+
+  Future<void> _makeApiCall() async {
+    // Set isLoading to true to disable the button during API call
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      // Call the API
+      final success = await DepartmentServices.requestRepairEquipment(
+        description: description,
+        endAt: '2023-11-24',
+        note: 'your_note',
+        price: NumberFormat.decimalPattern(),
+        startAt: '2023-11-23',
+        urlImage: ['yourUrlImageList', 'yourUrlImageList'],
+        id: widget.id,
+      );
+
+      setState(() {
+        requestSuccess = success;
+      });
+
+      // Optionally, show a success message to the user
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Tạo đơn thành công!')),
+        );
+      }
+    } catch (error) {
+      // Handle API call errors
+      debugPrint('API request failed with error: $error');
+
+      // Optionally, show an error message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('API request failed! Please try again.')),
+      );
+    } finally {
+      // Reset isLoading to false after the API call is complete
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 }
