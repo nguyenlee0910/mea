@@ -8,8 +8,8 @@ part of 'brand_model.dart';
 
 _$BrandModelImpl _$$BrandModelImplFromJson(Map<String, dynamic> json) =>
     _$BrandModelImpl(
-      id: json['id'] as String,
-      name: json['name'] as String,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$$BrandModelImplToJson(_$BrandModelImpl instance) =>

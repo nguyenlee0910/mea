@@ -20,8 +20,8 @@ BrandModel _$BrandModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BrandModel {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $BrandModelCopyWith<$Res> {
           BrandModel value, $Res Function(BrandModel) then) =
       _$BrandModelCopyWithImpl<$Res, BrandModel>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({String? id, String? name});
 }
 
 /// @nodoc
@@ -51,18 +51,18 @@ class _$BrandModelCopyWithImpl<$Res, $Val extends BrandModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$BrandModelImplCopyWith<$Res>
       __$$BrandModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({String? id, String? name});
 }
 
 /// @nodoc
@@ -89,18 +89,18 @@ class __$$BrandModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$BrandModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -114,9 +114,9 @@ class _$BrandModelImpl implements _BrandModel {
       _$$BrandModelImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
 
   @override
   String toString() {
@@ -151,16 +151,17 @@ class _$BrandModelImpl implements _BrandModel {
 }
 
 abstract class _BrandModel implements BrandModel {
-  factory _BrandModel({required final String id, required final String name}) =
-      _$BrandModelImpl;
+  factory _BrandModel(
+      {required final String? id,
+      required final String? name}) = _$BrandModelImpl;
 
   factory _BrandModel.fromJson(Map<String, dynamic> json) =
       _$BrandModelImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get name;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$BrandModelImplCopyWith<_$BrandModelImpl> get copyWith =>

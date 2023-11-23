@@ -110,16 +110,15 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: Colors.grey[100]),
+        decoration:
+            BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CarouselSlider(
               options: CarouselOptions(
-                //aspectRatio: 16 / 9, // Adjust the aspect ratio as needed
                 enlargeCenterPage: true,
-                enableInfiniteScroll:
-                    true, // Set this to true if you want infinite scrolling
+                enableInfiniteScroll: true,
               ),
               items: (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
                   ? widget.equipmentModel.imageUrls!.map((imageURL) {
@@ -155,242 +154,231 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
               ),
             ),
             Center(
-              child: Neumorphic(
-                style: NeumorphicStyle(
-                  boxShape:
-                      NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-                  depth: 5,
-                  color: Colors.grey,
-                  intensity: 1,
-                ),
-                child: Container(
-                  width: 380,
-                  padding: const EdgeInsets.all(20),
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 14),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          child: const Text(
+                            'Tên máy',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Text(
+                            widget.equipmentModel.name ?? 'Trống',
+                            softWrap: true,
+                            style: const TextStyle(
+                              color: Color(0xFF1A1A1A),
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Column(
+                  const SizedBox(height: 16),
+                  Container(
+                    margin: EdgeInsets.only(left: 14),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          child: const Text(
+                            'Mã máy',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Text(
+                            widget.equipmentModel.code ?? 'Trống',
+                            softWrap: true,
+                            style: const TextStyle(
+                              color: Color(0xFF1A1A1A),
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    margin: EdgeInsets.only(left: 14),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          child: const Text(
+                            'Nhãn hiệu',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Text(
+                            (widget.equipmentModel.brand?.name) ?? 'Trống',
+                            softWrap: true,
+                            style: const TextStyle(
+                              color: Color(0xFF1A1A1A),
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: const Text(
-                              'Tên máy',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                              ),
-                            ),
+                      SizedBox(
+                        width: 100,
+                        child: const Text(
+                          'Loại thiết bị',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
                           ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: Text(
-                              widget.equipmentModel.name ?? 'Trống',
-                              softWrap: true,
-                              style: const TextStyle(
-                                color: Color(0xFF1A1A1A),
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: const Text(
-                              'Mã máy',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                              ),
-                            ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: Text(
+                          (widget.equipmentModel.equipmentCategory?.name) ??
+                              'Trống',
+                          softWrap: true,
+                          style: const TextStyle(
+                            color: Color(0xFF1A1A1A),
+                            fontSize: 15,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
                           ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: Text(
-                              widget.equipmentModel.code ?? 'Trống',
-                              softWrap: true,
-                              style: const TextStyle(
-                                color: Color(0xFF1A1A1A),
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: const Text(
-                              'Nhãn hiệu',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: Text(
-                              (widget.equipmentModel.brand?.name) ?? 'Trống',
-                              softWrap: true,
-                              style: const TextStyle(
-                                color: Color(0xFF1A1A1A),
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: const Text(
-                              'Loại thiết bị',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: Text(
-                              (widget.equipmentModel.equipmentCategory?.name) ??
-                                  'Trống',
-                              softWrap: true,
-                              style: const TextStyle(
-                                color: Color(0xFF1A1A1A),
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: const Text(
-                              'Trạng thái',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: Text(
-                              getStatusLabel(
-                                  widget.equipmentModel.currentStatus ??
-                                      'DEFAULT'),
-                              softWrap: true,
-                              style: TextStyle(
-                                color: getStatusColor(
-                                    widget.equipmentModel.currentStatus ??
-                                        'DEFAULT'),
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            width: 100,
-                            child: Text(
-                              'Mô tả',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                widget.equipmentModel.description ?? 'Trống',
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 7,
-                                style: const TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 15,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        child: const Text(
+                          'Trạng thái',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: Text(
+                          getStatusLabel(
+                              widget.equipmentModel.currentStatus ?? 'DEFAULT'),
+                          softWrap: true,
+                          style: TextStyle(
+                            color: getStatusColor(
+                                widget.equipmentModel.currentStatus ??
+                                    'DEFAULT'),
+                            fontSize: 15,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        width: 100,
+                        child: Text(
+                          'Mô tả',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            widget.equipmentModel.description ?? 'Trống',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 7,
+                            style: const TextStyle(
+                              color: Color(0xFF1A1A1A),
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
@@ -417,7 +405,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
           decoration: const ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
-              side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
+              side: BorderSide(
+                  width: 2, color: Color.fromARGB(255, 255, 255, 255)),
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
           ),

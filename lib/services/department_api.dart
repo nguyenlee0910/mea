@@ -41,7 +41,7 @@ class DepartmentServices {
 
     final listResult = <EquipmentModel>[];
 
-    final equipmentJson = (jsonDecode(response.body)['data'] as List)
+    final equipmentJson = (jsonDecode(response.body) as List)
         .map((e) => e as Map<String, dynamic>)
         .toList();
 

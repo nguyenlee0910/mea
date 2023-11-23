@@ -9,8 +9,8 @@ part of 'equipment_category_model.dart';
 _$EquipmentCategoryModelImpl _$$EquipmentCategoryModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EquipmentCategoryModelImpl(
-      id: json['id'] as String,
-      name: json['name'] as String,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$$EquipmentCategoryModelImplToJson(
