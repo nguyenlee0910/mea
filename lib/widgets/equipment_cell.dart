@@ -50,7 +50,7 @@ class EquipmentCell extends StatelessWidget {
             ),
             child: Container(
               width: 372,
-              height: 128,
+              height: 100,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: ShapeDecoration(
                 color: Color.fromARGB(255, 219, 236, 248),
@@ -67,36 +67,40 @@ class EquipmentCell extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: 300,
-                          height: 20,
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: 'Tên thiết bị: ',
-                                  style: TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
+                        Container(
+                          margin: EdgeInsets.only(top: 5),
+                          child: SizedBox(
+                            width: 300,
+                            height: 20,
+                            child: Text.rich(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: 'Tên thiết bị: ',
+                                    style: TextStyle(
+                                      color: Color(0xFF1A1A1A),
+                                      fontSize: 17,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w600,
+                                      height: 0,
+                                    ),
                                   ),
-                                ),
-                                TextSpan(
-                                  text: name,
-                                  style: const TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
+                                  TextSpan(
+                                    text: name,
+                                    style: const TextStyle(
+                                      color: Color(0xFF1A1A1A),
+                                      fontSize: 17,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
+
                         const SizedBox(height: 4),
                         SizedBox(
                           width: 300,
@@ -108,7 +112,7 @@ class EquipmentCell extends StatelessWidget {
                                   text: 'Mã thiết bị: ',
                                   style: TextStyle(
                                     color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
+                                    fontSize: 17,
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w600,
                                     height: 0,
@@ -119,7 +123,7 @@ class EquipmentCell extends StatelessWidget {
                                   text: '$code\n',
                                   style: const TextStyle(
                                     color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Inter',
                                     height: 0,
@@ -140,19 +144,22 @@ class EquipmentCell extends StatelessWidget {
                                   text: 'Trạng thái: ',
                                   style: TextStyle(
                                     color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
+                                    fontSize: 17,
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w600,
                                     height: 0,
                                   ),
                                 ),
                                 TextSpan(
-                                  // text: '$code\n',
-                                  text: '$currentStatus\n',
-                                  style: const TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                                  text: currentStatus == 'ACTIVE'
+                                      ? 'Đang hoạt động'
+                                      : currentStatus ?? 'Đang hoạt động',
+                                  style: TextStyle(
+                                    color: currentStatus == 'ACTIVE'
+                                        ? Colors.green
+                                        : Colors.green,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
                                     fontFamily: 'Inter',
                                     height: 0,
                                   ),
@@ -161,6 +168,7 @@ class EquipmentCell extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         // const SizedBox(height: 4),
                         // SizedBox(
                         //   width: 300,

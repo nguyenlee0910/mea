@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:mea/presentations/Authencation/home.dart';
 import 'package:mea/services/department_api.dart';
 
 class RepairRequestDetail extends StatefulWidget {
@@ -26,6 +27,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
   final fieldText = TextEditingController();
   bool isLoading = false;
   bool requestSuccess = false;
+  bool sendButtonPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
           child: Column(
             children: [
               const SizedBox(
-                height: 50,
+                height: 80,
               ),
               Expanded(
                 child: Padding(
@@ -74,103 +76,128 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                       intensity: 1,
                     ),
                     child: Card(
+                      color: Color.fromARGB(255, 226, 245, 253),
                       margin: const EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      color: Colors.white,
+                      // color: Colors.white,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Padding(
-                                padding: EdgeInsets.only(top: 8, left: 18),
-                                child: Text(
-                                  'Tên thiết bị:',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w900,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 8, left: 18),
+                                    child: Text(
+                                      'Tên thiết bị:',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 4, left: 18),
+                                    child: Text(
+                                      widget.nameEquipment,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 8, left: 18),
+                                    child: Text(
+                                      'Mã thiết bị:',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 4, left: 18),
+                                    child: Text(
+                                      '${widget.codeEquipment}',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                thickness: 2,
+                                indent: 20,
+                                endIndent: 20,
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 4, left: 18),
-                                child: Text(
-                                  widget.nameEquipment,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                padding: const EdgeInsets.only(
+                                  top: 8,
+                                  left: 20,
+                                  right: 20,
+                                  bottom: 20,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextField(
+                                      controller: fieldText,
+                                      maxLines: 8, //or null
+                                      decoration:
+                                          const InputDecoration.collapsed(
+                                        hintText: 'Nhập lý do bảo trì',
+                                      ),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          description = value;
+                                        });
+                                      },
+                                    ),
+                                    if (sendButtonPressed &&
+                                        description.trim().isEmpty)
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                        ),
+                                        child: Text(
+                                          '*Lý do không được để trống',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
                                 ),
                               ),
                             ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 8, left: 18),
-                                child: Text(
-                                  'Mã thiết bị:',
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 4, left: 18),
-                                child: Text(
-                                  '${widget.codeEquipment}',
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const Divider(
-                            color: Colors.grey,
-                            thickness: 2,
-                            indent: 20,
-                            endIndent: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 8,
-                              left: 20,
-                              right: 20,
-                              bottom: 20,
-                            ),
-                            child: TextField(
-                              controller: fieldText,
-                              maxLines: 8, //or null
-                              decoration: const InputDecoration.collapsed(
-                                hintText: 'Lý do bảo trì',
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  description = value;
-                                });
-                              },
-                            ),
                           ),
                         ],
                       ),
@@ -204,43 +231,60 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                         onPressed: isLoading
                             ? null
                             : () async {
-                                // Show confirmation dialog
-                                // ignore: inference_failure_on_function_invocation
-                                final confirmed = await showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text('Xác nhận'),
-                                      content: const Text(
-                                          'Bạn có chắc chắn gửi đơn ?'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop(false);
-                                          },
-                                          child: const Text('Hủy'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop(true);
-                                          },
-                                          child: const Text('Xác nhận'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                // Check if description is not empty
+                                if (description.trim().isEmpty) {
+                                  // Show an error message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content:
+                                          Text('*Lý do không được để trống'),
+                                    ),
+                                  );
 
-                                // If user confirms, make the API call
-                                if (confirmed == true) {
-                                  await _makeApiCall();
+                                  // Set sendButtonPressed to true
+                                  setState(() {
+                                    sendButtonPressed = true;
+                                  });
+                                } else {
+                                  // Show confirmation dialog
+                                  final confirmed = await showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Xác nhận'),
+                                        content: const Text(
+                                            'Bạn có chắc chắn gửi đơn ?'),
+                                        actions: [
+                                          // TextButton(
+                                          //   onPressed: () {
+                                          //     Navigator.of(context).pop(false);
+                                          //   },
+                                          //   child: const Text('Hủy'),
+                                          // ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop(true);
+                                              Navigator.pushReplacementNamed(
+                                                  context, HomePage.routeName);
+                                            },
+                                            child: const Text('Xác nhận'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
 
-                                  if (requestSuccess) {
-                                    // Handle success
-                                    debugPrint('API request successful!');
-                                  } else {
-                                    // Handle failure
-                                    debugPrint('API request failed!');
+                                  // If user confirms, make the API call
+                                  if (confirmed == true) {
+                                    await _makeApiCall();
+
+                                    if (requestSuccess) {
+                                      // Handle success
+                                      debugPrint('API request successful!');
+                                    } else {
+                                      // Handle failure
+                                      debugPrint('API request failed!');
+                                    }
                                   }
                                 }
                               },
