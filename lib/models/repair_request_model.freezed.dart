@@ -25,7 +25,7 @@ mixin _$RepairRequestModel {
   String get description => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
-  EquipmentModel get equipment => throw _privateConstructorUsedError;
+  EquipmentModel? get equipment => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
   RepairRequestCreatedByModel get createdBy =>
       throw _privateConstructorUsedError;
@@ -50,12 +50,12 @@ abstract class $RepairRequestModelCopyWith<$Res> {
       String description,
       String status,
       String note,
-      EquipmentModel equipment,
+      EquipmentModel? equipment,
       String updatedAt,
       RepairRequestCreatedByModel createdBy,
       RepairRequestUpdatedByModel updatedBy});
 
-  $EquipmentModelCopyWith<$Res> get equipment;
+  $EquipmentModelCopyWith<$Res>? get equipment;
   $RepairRequestCreatedByModelCopyWith<$Res> get createdBy;
   $RepairRequestUpdatedByModelCopyWith<$Res> get updatedBy;
 }
@@ -78,7 +78,7 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
     Object? description = null,
     Object? status = null,
     Object? note = null,
-    Object? equipment = null,
+    Object? equipment = freezed,
     Object? updatedAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
@@ -104,10 +104,10 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
-      equipment: null == equipment
+      equipment: freezed == equipment
           ? _value.equipment
           : equipment // ignore: cast_nullable_to_non_nullable
-              as EquipmentModel,
+              as EquipmentModel?,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -125,8 +125,12 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $EquipmentModelCopyWith<$Res> get equipment {
-    return $EquipmentModelCopyWith<$Res>(_value.equipment, (value) {
+  $EquipmentModelCopyWith<$Res>? get equipment {
+    if (_value.equipment == null) {
+      return null;
+    }
+
+    return $EquipmentModelCopyWith<$Res>(_value.equipment!, (value) {
       return _then(_value.copyWith(equipment: value) as $Val);
     });
   }
@@ -164,13 +168,13 @@ abstract class _$$RepairRequestModelImplCopyWith<$Res>
       String description,
       String status,
       String note,
-      EquipmentModel equipment,
+      EquipmentModel? equipment,
       String updatedAt,
       RepairRequestCreatedByModel createdBy,
       RepairRequestUpdatedByModel updatedBy});
 
   @override
-  $EquipmentModelCopyWith<$Res> get equipment;
+  $EquipmentModelCopyWith<$Res>? get equipment;
   @override
   $RepairRequestCreatedByModelCopyWith<$Res> get createdBy;
   @override
@@ -193,7 +197,7 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
     Object? description = null,
     Object? status = null,
     Object? note = null,
-    Object? equipment = null,
+    Object? equipment = freezed,
     Object? updatedAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
@@ -219,10 +223,10 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
-      equipment: null == equipment
+      equipment: freezed == equipment
           ? _value.equipment
           : equipment // ignore: cast_nullable_to_non_nullable
-              as EquipmentModel,
+              as EquipmentModel?,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -248,7 +252,7 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
       required this.description,
       required this.status,
       required this.note,
-      required this.equipment,
+      this.equipment,
       required this.updatedAt,
       required this.createdBy,
       required this.updatedBy});
@@ -267,7 +271,7 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
   @override
   final String note;
   @override
-  final EquipmentModel equipment;
+  final EquipmentModel? equipment;
   @override
   final String updatedAt;
   @override
@@ -329,7 +333,7 @@ abstract class _RepairRequestModel implements RepairRequestModel {
           required final String description,
           required final String status,
           required final String note,
-          required final EquipmentModel equipment,
+          final EquipmentModel? equipment,
           required final String updatedAt,
           required final RepairRequestCreatedByModel createdBy,
           required final RepairRequestUpdatedByModel updatedBy}) =
@@ -349,7 +353,7 @@ abstract class _RepairRequestModel implements RepairRequestModel {
   @override
   String get note;
   @override
-  EquipmentModel get equipment;
+  EquipmentModel? get equipment;
   @override
   String get updatedAt;
   @override

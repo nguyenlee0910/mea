@@ -15,7 +15,7 @@ class RepairRequestModel extends BaseRequestModel with _$RepairRequestModel {
     required String description,
     required String status,
     required String note,
-    required EquipmentModel equipment,
+    EquipmentModel? equipment,
     required String updatedAt,
     required RepairRequestCreatedByModel createdBy,
     required RepairRequestUpdatedByModel updatedBy,

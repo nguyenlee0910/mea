@@ -14,8 +14,9 @@ _$RepairRequestModelImpl _$$RepairRequestModelImplFromJson(
       description: json['description'] as String,
       status: json['status'] as String,
       note: json['note'] as String,
-      equipment:
-          EquipmentModel.fromJson(json['equipment'] as Map<String, dynamic>),
+      equipment: json['equipment'] == null
+          ? null
+          : EquipmentModel.fromJson(json['equipment'] as Map<String, dynamic>),
       updatedAt: json['updatedAt'] as String,
       createdBy: RepairRequestCreatedByModel.fromJson(
           json['createdBy'] as Map<String, dynamic>),

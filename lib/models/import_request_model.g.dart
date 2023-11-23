@@ -20,8 +20,10 @@ _$ImportRequestModelImpl _$$ImportRequestModelImplFromJson(
           json['createdBy'] as Map<String, dynamic>),
       updatedBy: ImportRequestUpdatedByModel.fromJson(
           json['updatedBy'] as Map<String, dynamic>),
-      importRequestItemsModel: ImportRequestItemsModel.fromJson(
-          json['importRequestItemsModel'] as Map<String, dynamic>),
+      importRequestItemsModel: json['importRequestItemsModel'] == null
+          ? null
+          : ImportRequestItemsModel.fromJson(
+              json['importRequestItemsModel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ImportRequestModelImplToJson(

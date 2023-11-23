@@ -230,7 +230,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                           Text(
                             (requestModel as RepairRequestModel)
                                     .equipment
-                                    .code ??
+                                    ?.code ??
                                 'Trống',
                             style: TextStyle(
                               fontSize: 16,
@@ -255,7 +255,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                           Text(
                             (requestModel as RepairRequestModel)
                                     .equipment
-                                    .name ??
+                                    ?.name ??
                                 'Trống',
                             style: TextStyle(
                               fontSize: 16,
