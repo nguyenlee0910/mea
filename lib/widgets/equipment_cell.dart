@@ -116,7 +116,39 @@ class EquipmentCell extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   // text: '$code\n',
-                                  text: '$currentStatus\n',
+                                  text: '$code\n',
+                                  style: const TextStyle(
+                                    color: Color(0xFF1A1A1A),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Inter',
+                                    height: 0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        SizedBox(
+                          width: 300,
+                          height: 20,
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: 'Trạng thái: ',
+                                  style: TextStyle(
+                                    color: Color(0xFF1A1A1A),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                                TextSpan(
+                                  // text: '$code\n',
+                                  text: 'currentStatus\n',
                                   style: const TextStyle(
                                     color: Color(0xFF1A1A1A),
                                     fontSize: 16,
