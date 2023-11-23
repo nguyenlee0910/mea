@@ -148,7 +148,7 @@ class EquipmentCell extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   // text: '$code\n',
-                                  text: 'currentStatus\n',
+                                  text: '$currentStatus\n',
                                   style: const TextStyle(
                                     color: Color(0xFF1A1A1A),
                                     fontSize: 16,

@@ -11,6 +11,7 @@ class ImportRequestItemsModel with _$ImportRequestItemsModel {
     required String createdAt,
     required String updatedAt,
     required List<SupplyModel> supply,
+    required String quantity,
   }) = _ImportRequestItemsModel;
 
   factory ImportRequestItemsModel.fromJson(Map<String, dynamic> json) =>

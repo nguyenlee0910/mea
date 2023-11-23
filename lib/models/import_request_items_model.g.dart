@@ -15,6 +15,7 @@ _$ImportRequestItemsModelImpl _$$ImportRequestItemsModelImplFromJson(
       supply: (json['supply'] as List<dynamic>)
           .map((e) => SupplyModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      quantity: json['quantity'] as String,
     );
 
 Map<String, dynamic> _$$ImportRequestItemsModelImplToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$ImportRequestItemsModelImplToJson(
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'supply': instance.supply,
+      'quantity': instance.quantity,
     };

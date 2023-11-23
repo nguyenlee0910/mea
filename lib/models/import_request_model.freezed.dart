@@ -31,6 +31,8 @@ mixin _$ImportRequestModel {
       throw _privateConstructorUsedError;
   ImportRequestUpdatedByModel get updatedBy =>
       throw _privateConstructorUsedError;
+  ImportRequestItemsModel get importRequestItemsModel =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,10 +55,12 @@ abstract class $ImportRequestModelCopyWith<$Res> {
       String note,
       String updatedAt,
       ImportRequestCreatedByModel createdBy,
-      ImportRequestUpdatedByModel updatedBy});
+      ImportRequestUpdatedByModel updatedBy,
+      ImportRequestItemsModel importRequestItemsModel});
 
   $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
   $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy;
+  $ImportRequestItemsModelCopyWith<$Res> get importRequestItemsModel;
 }
 
 /// @nodoc
@@ -81,6 +85,7 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
     Object? updatedAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
+    Object? importRequestItemsModel = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -119,6 +124,10 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as ImportRequestUpdatedByModel,
+      importRequestItemsModel: null == importRequestItemsModel
+          ? _value.importRequestItemsModel
+          : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
+              as ImportRequestItemsModel,
     ) as $Val);
   }
 
@@ -137,6 +146,15 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
     return $ImportRequestUpdatedByModelCopyWith<$Res>(_value.updatedBy,
         (value) {
       return _then(_value.copyWith(updatedBy: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImportRequestItemsModelCopyWith<$Res> get importRequestItemsModel {
+    return $ImportRequestItemsModelCopyWith<$Res>(
+        _value.importRequestItemsModel, (value) {
+      return _then(_value.copyWith(importRequestItemsModel: value) as $Val);
     });
   }
 }
@@ -158,12 +176,15 @@ abstract class _$$ImportRequestModelImplCopyWith<$Res>
       String note,
       String updatedAt,
       ImportRequestCreatedByModel createdBy,
-      ImportRequestUpdatedByModel updatedBy});
+      ImportRequestUpdatedByModel updatedBy,
+      ImportRequestItemsModel importRequestItemsModel});
 
   @override
   $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
   @override
   $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy;
+  @override
+  $ImportRequestItemsModelCopyWith<$Res> get importRequestItemsModel;
 }
 
 /// @nodoc
@@ -186,6 +207,7 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
+    Object? importRequestItemsModel = null,
   }) {
     return _then(_$ImportRequestModelImpl(
       id: null == id
@@ -224,6 +246,10 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as ImportRequestUpdatedByModel,
+      importRequestItemsModel: null == importRequestItemsModel
+          ? _value.importRequestItemsModel
+          : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
+              as ImportRequestItemsModel,
     ));
   }
 }
@@ -240,7 +266,8 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
       required this.note,
       required this.updatedAt,
       required this.createdBy,
-      required this.updatedBy});
+      required this.updatedBy,
+      required this.importRequestItemsModel});
 
   factory _$ImportRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImportRequestModelImplFromJson(json);
@@ -263,10 +290,12 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
   final ImportRequestCreatedByModel createdBy;
   @override
   final ImportRequestUpdatedByModel updatedBy;
+  @override
+  final ImportRequestItemsModel importRequestItemsModel;
 
   @override
   String toString() {
-    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy)';
+    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, importRequestItemsModel: $importRequestItemsModel)';
   }
 
   @override
@@ -287,13 +316,16 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.updatedBy, updatedBy) ||
-                other.updatedBy == updatedBy));
+                other.updatedBy == updatedBy) &&
+            (identical(
+                    other.importRequestItemsModel, importRequestItemsModel) ||
+                other.importRequestItemsModel == importRequestItemsModel));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, createdAt, name, description,
-      status, note, updatedAt, createdBy, updatedBy);
+      status, note, updatedAt, createdBy, updatedBy, importRequestItemsModel);
 
   @JsonKey(ignore: true)
   @override
@@ -320,7 +352,8 @@ abstract class _ImportRequestModel implements ImportRequestModel {
           required final String note,
           required final String updatedAt,
           required final ImportRequestCreatedByModel createdBy,
-          required final ImportRequestUpdatedByModel updatedBy}) =
+          required final ImportRequestUpdatedByModel updatedBy,
+          required final ImportRequestItemsModel importRequestItemsModel}) =
       _$ImportRequestModelImpl;
 
   factory _ImportRequestModel.fromJson(Map<String, dynamic> json) =
@@ -344,6 +377,8 @@ abstract class _ImportRequestModel implements ImportRequestModel {
   ImportRequestCreatedByModel get createdBy;
   @override
   ImportRequestUpdatedByModel get updatedBy;
+  @override
+  ImportRequestItemsModel get importRequestItemsModel;
   @override
   @JsonKey(ignore: true)
   _$$ImportRequestModelImplCopyWith<_$ImportRequestModelImpl> get copyWith =>
