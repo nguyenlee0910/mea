@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/equipment_model.dart';
+import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/notification_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/navigation_page.dart';

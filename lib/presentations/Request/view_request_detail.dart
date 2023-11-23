@@ -4,10 +4,10 @@ import 'package:mea/models/import_request_model.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 
 class ViewRequestDetail extends StatelessWidget {
-  const ViewRequestDetail({super.key, required this.importRequestModel});
+  const ViewRequestDetail({super.key, required this.baseRequestModel});
 
   static const routeName = 'view_request_detail';
-  final ImportRequestModel importRequestModel;
+  final BaseRequestModel baseRequestModel;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class ViewRequestDetail extends StatelessWidget {
               buildImportRequestCell(
                   isDetail: true,
                   context: context,
-                  requestModel: importRequestModel),
+                  requestModel: baseRequestModel),
               Padding(
                 padding: const EdgeInsets.only(left: 15, top: 10),
                 child: Text(
@@ -53,7 +53,7 @@ class ViewRequestDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Text(
-                  importRequestModel.description,
+                  baseRequestModel.description,
                   //softWrap: true,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 7,
