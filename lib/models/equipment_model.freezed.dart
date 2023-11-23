@@ -20,18 +20,18 @@ EquipmentModel _$EquipmentModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EquipmentModel {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get code => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  List<String> get imageUrls => throw _privateConstructorUsedError;
-  String get endOfWarrantyDate => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  List<String>? get imageUrls => throw _privateConstructorUsedError;
+  String? get endOfWarrantyDate => throw _privateConstructorUsedError;
   EquipmentMaintainScheduleModel? get equipmentMaintainSchedule =>
       throw _privateConstructorUsedError;
-  String get currentStatus => throw _privateConstructorUsedError;
-  EquipmentCategoryModel get equipmentCategory =>
+  String? get currentStatus => throw _privateConstructorUsedError;
+  EquipmentCategoryModel? get equipmentCategory =>
       throw _privateConstructorUsedError;
-  BrandModel get brand => throw _privateConstructorUsedError;
+  BrandModel? get brand => throw _privateConstructorUsedError;
   ImportRequestItemsModel? get importRequestItemsModel =>
       throw _privateConstructorUsedError;
 
@@ -48,21 +48,21 @@ abstract class $EquipmentModelCopyWith<$Res> {
       _$EquipmentModelCopyWithImpl<$Res, EquipmentModel>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String code,
-      String description,
-      List<String> imageUrls,
-      String endOfWarrantyDate,
+      {String? id,
+      String? name,
+      String? code,
+      String? description,
+      List<String>? imageUrls,
+      String? endOfWarrantyDate,
       EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
-      String currentStatus,
-      EquipmentCategoryModel equipmentCategory,
-      BrandModel brand,
+      String? currentStatus,
+      EquipmentCategoryModel? equipmentCategory,
+      BrandModel? brand,
       ImportRequestItemsModel? importRequestItemsModel});
 
   $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
-  $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory;
-  $BrandModelCopyWith<$Res> get brand;
+  $EquipmentCategoryModelCopyWith<$Res>? get equipmentCategory;
+  $BrandModelCopyWith<$Res>? get brand;
   $ImportRequestItemsModelCopyWith<$Res>? get importRequestItemsModel;
 }
 
@@ -79,59 +79,59 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? code = null,
-    Object? description = null,
-    Object? imageUrls = null,
-    Object? endOfWarrantyDate = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
+    Object? imageUrls = freezed,
+    Object? endOfWarrantyDate = freezed,
     Object? equipmentMaintainSchedule = freezed,
-    Object? currentStatus = null,
-    Object? equipmentCategory = null,
-    Object? brand = null,
+    Object? currentStatus = freezed,
+    Object? equipmentCategory = freezed,
+    Object? brand = freezed,
     Object? importRequestItemsModel = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      code: null == code
+              as String?,
+      code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrls: null == imageUrls
+              as String?,
+      imageUrls: freezed == imageUrls
           ? _value.imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      endOfWarrantyDate: null == endOfWarrantyDate
+              as List<String>?,
+      endOfWarrantyDate: freezed == endOfWarrantyDate
           ? _value.endOfWarrantyDate
           : endOfWarrantyDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       equipmentMaintainSchedule: freezed == equipmentMaintainSchedule
           ? _value.equipmentMaintainSchedule
           : equipmentMaintainSchedule // ignore: cast_nullable_to_non_nullable
               as EquipmentMaintainScheduleModel?,
-      currentStatus: null == currentStatus
+      currentStatus: freezed == currentStatus
           ? _value.currentStatus
           : currentStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      equipmentCategory: null == equipmentCategory
+              as String?,
+      equipmentCategory: freezed == equipmentCategory
           ? _value.equipmentCategory
           : equipmentCategory // ignore: cast_nullable_to_non_nullable
-              as EquipmentCategoryModel,
-      brand: null == brand
+              as EquipmentCategoryModel?,
+      brand: freezed == brand
           ? _value.brand
           : brand // ignore: cast_nullable_to_non_nullable
-              as BrandModel,
+              as BrandModel?,
       importRequestItemsModel: freezed == importRequestItemsModel
           ? _value.importRequestItemsModel
           : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
@@ -154,8 +154,12 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory {
-    return $EquipmentCategoryModelCopyWith<$Res>(_value.equipmentCategory,
+  $EquipmentCategoryModelCopyWith<$Res>? get equipmentCategory {
+    if (_value.equipmentCategory == null) {
+      return null;
+    }
+
+    return $EquipmentCategoryModelCopyWith<$Res>(_value.equipmentCategory!,
         (value) {
       return _then(_value.copyWith(equipmentCategory: value) as $Val);
     });
@@ -163,8 +167,12 @@ class _$EquipmentModelCopyWithImpl<$Res, $Val extends EquipmentModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $BrandModelCopyWith<$Res> get brand {
-    return $BrandModelCopyWith<$Res>(_value.brand, (value) {
+  $BrandModelCopyWith<$Res>? get brand {
+    if (_value.brand == null) {
+      return null;
+    }
+
+    return $BrandModelCopyWith<$Res>(_value.brand!, (value) {
       return _then(_value.copyWith(brand: value) as $Val);
     });
   }
@@ -192,24 +200,24 @@ abstract class _$$EquipmentModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String code,
-      String description,
-      List<String> imageUrls,
-      String endOfWarrantyDate,
+      {String? id,
+      String? name,
+      String? code,
+      String? description,
+      List<String>? imageUrls,
+      String? endOfWarrantyDate,
       EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
-      String currentStatus,
-      EquipmentCategoryModel equipmentCategory,
-      BrandModel brand,
+      String? currentStatus,
+      EquipmentCategoryModel? equipmentCategory,
+      BrandModel? brand,
       ImportRequestItemsModel? importRequestItemsModel});
 
   @override
   $EquipmentMaintainScheduleModelCopyWith<$Res>? get equipmentMaintainSchedule;
   @override
-  $EquipmentCategoryModelCopyWith<$Res> get equipmentCategory;
+  $EquipmentCategoryModelCopyWith<$Res>? get equipmentCategory;
   @override
-  $BrandModelCopyWith<$Res> get brand;
+  $BrandModelCopyWith<$Res>? get brand;
   @override
   $ImportRequestItemsModelCopyWith<$Res>? get importRequestItemsModel;
 }
@@ -225,59 +233,59 @@ class __$$EquipmentModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? code = null,
-    Object? description = null,
-    Object? imageUrls = null,
-    Object? endOfWarrantyDate = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
+    Object? imageUrls = freezed,
+    Object? endOfWarrantyDate = freezed,
     Object? equipmentMaintainSchedule = freezed,
-    Object? currentStatus = null,
-    Object? equipmentCategory = null,
-    Object? brand = null,
+    Object? currentStatus = freezed,
+    Object? equipmentCategory = freezed,
+    Object? brand = freezed,
     Object? importRequestItemsModel = freezed,
   }) {
     return _then(_$EquipmentModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      code: null == code
+              as String?,
+      code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrls: null == imageUrls
+              as String?,
+      imageUrls: freezed == imageUrls
           ? _value._imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      endOfWarrantyDate: null == endOfWarrantyDate
+              as List<String>?,
+      endOfWarrantyDate: freezed == endOfWarrantyDate
           ? _value.endOfWarrantyDate
           : endOfWarrantyDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       equipmentMaintainSchedule: freezed == equipmentMaintainSchedule
           ? _value.equipmentMaintainSchedule
           : equipmentMaintainSchedule // ignore: cast_nullable_to_non_nullable
               as EquipmentMaintainScheduleModel?,
-      currentStatus: null == currentStatus
+      currentStatus: freezed == currentStatus
           ? _value.currentStatus
           : currentStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      equipmentCategory: null == equipmentCategory
+              as String?,
+      equipmentCategory: freezed == equipmentCategory
           ? _value.equipmentCategory
           : equipmentCategory // ignore: cast_nullable_to_non_nullable
-              as EquipmentCategoryModel,
-      brand: null == brand
+              as EquipmentCategoryModel?,
+      brand: freezed == brand
           ? _value.brand
           : brand // ignore: cast_nullable_to_non_nullable
-              as BrandModel,
+              as BrandModel?,
       importRequestItemsModel: freezed == importRequestItemsModel
           ? _value.importRequestItemsModel
           : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
@@ -294,7 +302,7 @@ class _$EquipmentModelImpl implements _EquipmentModel {
       required this.name,
       required this.code,
       required this.description,
-      required final List<String> imageUrls,
+      required final List<String>? imageUrls,
       required this.endOfWarrantyDate,
       this.equipmentMaintainSchedule,
       required this.currentStatus,
@@ -307,31 +315,33 @@ class _$EquipmentModelImpl implements _EquipmentModel {
       _$$EquipmentModelImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String code;
+  final String? code;
   @override
-  final String description;
-  final List<String> _imageUrls;
+  final String? description;
+  final List<String>? _imageUrls;
   @override
-  List<String> get imageUrls {
+  List<String>? get imageUrls {
+    final value = _imageUrls;
+    if (value == null) return null;
     if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_imageUrls);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final String endOfWarrantyDate;
+  final String? endOfWarrantyDate;
   @override
   final EquipmentMaintainScheduleModel? equipmentMaintainSchedule;
   @override
-  final String currentStatus;
+  final String? currentStatus;
   @override
-  final EquipmentCategoryModel equipmentCategory;
+  final EquipmentCategoryModel? equipmentCategory;
   @override
-  final BrandModel brand;
+  final BrandModel? brand;
   @override
   final ImportRequestItemsModel? importRequestItemsModel;
 
@@ -400,16 +410,16 @@ class _$EquipmentModelImpl implements _EquipmentModel {
 
 abstract class _EquipmentModel implements EquipmentModel {
   factory _EquipmentModel(
-          {required final String id,
-          required final String name,
-          required final String code,
-          required final String description,
-          required final List<String> imageUrls,
-          required final String endOfWarrantyDate,
+          {required final String? id,
+          required final String? name,
+          required final String? code,
+          required final String? description,
+          required final List<String>? imageUrls,
+          required final String? endOfWarrantyDate,
           final EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
-          required final String currentStatus,
-          required final EquipmentCategoryModel equipmentCategory,
-          required final BrandModel brand,
+          required final String? currentStatus,
+          required final EquipmentCategoryModel? equipmentCategory,
+          required final BrandModel? brand,
           final ImportRequestItemsModel? importRequestItemsModel}) =
       _$EquipmentModelImpl;
 
@@ -417,25 +427,25 @@ abstract class _EquipmentModel implements EquipmentModel {
       _$EquipmentModelImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get code;
+  String? get code;
   @override
-  String get description;
+  String? get description;
   @override
-  List<String> get imageUrls;
+  List<String>? get imageUrls;
   @override
-  String get endOfWarrantyDate;
+  String? get endOfWarrantyDate;
   @override
   EquipmentMaintainScheduleModel? get equipmentMaintainSchedule;
   @override
-  String get currentStatus;
+  String? get currentStatus;
   @override
-  EquipmentCategoryModel get equipmentCategory;
+  EquipmentCategoryModel? get equipmentCategory;
   @override
-  BrandModel get brand;
+  BrandModel? get brand;
   @override
   ImportRequestItemsModel? get importRequestItemsModel;
   @override

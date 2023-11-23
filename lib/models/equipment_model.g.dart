@@ -8,21 +8,26 @@ part of 'equipment_model.dart';
 
 _$EquipmentModelImpl _$$EquipmentModelImplFromJson(Map<String, dynamic> json) =>
     _$EquipmentModelImpl(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      code: json['code'] as String,
-      description: json['description'] as String,
-      imageUrls:
-          (json['imageUrls'] as List<dynamic>).map((e) => e as String).toList(),
-      endOfWarrantyDate: json['endOfWarrantyDate'] as String,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      code: json['code'] as String?,
+      description: json['description'] as String?,
+      imageUrls: (json['imageUrls'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      endOfWarrantyDate: json['endOfWarrantyDate'] as String?,
       equipmentMaintainSchedule: json['equipmentMaintainSchedule'] == null
           ? null
           : EquipmentMaintainScheduleModel.fromJson(
               json['equipmentMaintainSchedule'] as Map<String, dynamic>),
-      currentStatus: json['currentStatus'] as String,
-      equipmentCategory: EquipmentCategoryModel.fromJson(
-          json['equipmentCategory'] as Map<String, dynamic>),
-      brand: BrandModel.fromJson(json['brand'] as Map<String, dynamic>),
+      currentStatus: json['currentStatus'] as String?,
+      equipmentCategory: json['equipmentCategory'] == null
+          ? null
+          : EquipmentCategoryModel.fromJson(
+              json['equipmentCategory'] as Map<String, dynamic>),
+      brand: json['brand'] == null
+          ? null
+          : BrandModel.fromJson(json['brand'] as Map<String, dynamic>),
       importRequestItemsModel: json['importRequestItemsModel'] == null
           ? null
           : ImportRequestItemsModel.fromJson(

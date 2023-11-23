@@ -15,7 +15,7 @@ class ViewRequestDetail extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Chi tiết',
+          'Chi Tiết',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,

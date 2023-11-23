@@ -21,8 +21,8 @@ EquipmentCategoryModel _$EquipmentCategoryModelFromJson(
 
 /// @nodoc
 mixin _$EquipmentCategoryModel {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $EquipmentCategoryModelCopyWith<$Res> {
           $Res Function(EquipmentCategoryModel) then) =
       _$EquipmentCategoryModelCopyWithImpl<$Res, EquipmentCategoryModel>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({String? id, String? name});
 }
 
 /// @nodoc
@@ -53,18 +53,18 @@ class _$EquipmentCategoryModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -78,7 +78,7 @@ abstract class _$$EquipmentCategoryModelImplCopyWith<$Res>
       __$$EquipmentCategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({String? id, String? name});
 }
 
 /// @nodoc
@@ -94,18 +94,18 @@ class __$$EquipmentCategoryModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$EquipmentCategoryModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -119,9 +119,9 @@ class _$EquipmentCategoryModelImpl implements _EquipmentCategoryModel {
       _$$EquipmentCategoryModelImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
 
   @override
   String toString() {
@@ -158,16 +158,16 @@ class _$EquipmentCategoryModelImpl implements _EquipmentCategoryModel {
 
 abstract class _EquipmentCategoryModel implements EquipmentCategoryModel {
   factory _EquipmentCategoryModel(
-      {required final String id,
-      required final String name}) = _$EquipmentCategoryModelImpl;
+      {required final String? id,
+      required final String? name}) = _$EquipmentCategoryModelImpl;
 
   factory _EquipmentCategoryModel.fromJson(Map<String, dynamic> json) =
       _$EquipmentCategoryModelImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get name;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$EquipmentCategoryModelImplCopyWith<_$EquipmentCategoryModelImpl>
