@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/env.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,10 +42,9 @@ class DepartmentServices {
     );
 
     final listResult = <EquipmentModel>[];
-
-    final equipmentJson = (jsonDecode(response.body) as List)
-        .map((e) => e as Map<String, dynamic>)
-        .toList();
+    final equipmentJson = (jsonDecode(response.body) as List).map((e) {
+      return e as Map<String, dynamic>;
+    }).toList();
 
     for (final i in equipmentJson) {
       listResult.add(EquipmentModel.fromJson(i));
@@ -140,38 +141,66 @@ class DepartmentServices {
   static Future<bool> requestRepairEquipment({
     required String id,
     required String description,
+    required String endAt,
+    required String note,
+    required NumberFormat price,
+    required String startAt,
     List<String>? urlImage,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
+    final priceFormat = NumberFormat.decimalPattern();
+    final priceString = priceFormat.format(9);
     try {
       final header = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $auth',
       };
+
       final uri = Uri(
         scheme: 'https',
         host: Env.serverUrl,
-        path: 'api/v1/repair-request',
+        path: 'api/v1/repair-report',
       );
+
       final body = {
         'description': description,
-        'imageUrls': urlImage ?? [],
-        'equipmentId': id,
+        'repairReportItems': [
+          {
+            'equipmentId': id,
+            'type': 'FIXING',
+            'description': 'test',
+            'imageUrls': urlImage ?? [],
+            'repairProviderIds': [],
+            'replaceItems': [],
+          },
+        ],
+        'endAt': endAt,
+        'note': note,
+        'price': priceString,
+        'startAt': startAt,
       };
       final response = await http.post(
         uri,
         headers: header,
         body: jsonEncode(body),
       );
+
       if (response.statusCode == 201) {
         return true;
       } else {
+        debugPrint('==ERROR==');
+        debugPrint('Status code: ${response.statusCode}');
+        debugPrint('Response body: ${response.body}');
         return false;
       }
     } on HttpException {
-      debugPrint('==ERROR==');
+      debugPrint('==HTTP ERROR==');
+      return false;
+    } catch (error) {
+      debugPrint('==GENERAL ERROR==');
+      debugPrint('Error: $error');
       return false;
     }
   }

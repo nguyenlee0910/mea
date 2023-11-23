@@ -25,6 +25,7 @@ mixin _$ImportRequestItemsModel {
   String get createdAt => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
   List<SupplyModel> get supply => throw _privateConstructorUsedError;
+  String get quantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $ImportRequestItemsModelCopyWith<$Res> {
       {String id,
       String createdAt,
       String updatedAt,
-      List<SupplyModel> supply});
+      List<SupplyModel> supply,
+      String quantity});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$ImportRequestItemsModelCopyWithImpl<$Res,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? supply = null,
+    Object? quantity = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -81,6 +84,10 @@ class _$ImportRequestItemsModelCopyWithImpl<$Res,
           ? _value.supply
           : supply // ignore: cast_nullable_to_non_nullable
               as List<SupplyModel>,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$ImportRequestItemsModelImplCopyWith<$Res>
       {String id,
       String createdAt,
       String updatedAt,
-      List<SupplyModel> supply});
+      List<SupplyModel> supply,
+      String quantity});
 }
 
 /// @nodoc
@@ -118,6 +126,7 @@ class __$$ImportRequestItemsModelImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? supply = null,
+    Object? quantity = null,
   }) {
     return _then(_$ImportRequestItemsModelImpl(
       id: null == id
@@ -136,6 +145,10 @@ class __$$ImportRequestItemsModelImplCopyWithImpl<$Res>
           ? _value._supply
           : supply // ignore: cast_nullable_to_non_nullable
               as List<SupplyModel>,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -147,7 +160,8 @@ class _$ImportRequestItemsModelImpl implements _ImportRequestItemsModel {
       {required this.id,
       required this.createdAt,
       required this.updatedAt,
-      required final List<SupplyModel> supply})
+      required final List<SupplyModel> supply,
+      required this.quantity})
       : _supply = supply;
 
   factory _$ImportRequestItemsModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -168,8 +182,11 @@ class _$ImportRequestItemsModelImpl implements _ImportRequestItemsModel {
   }
 
   @override
+  final String quantity;
+
+  @override
   String toString() {
-    return 'ImportRequestItemsModel(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, supply: $supply)';
+    return 'ImportRequestItemsModel(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, supply: $supply, quantity: $quantity)';
   }
 
   @override
@@ -182,13 +199,15 @@ class _$ImportRequestItemsModelImpl implements _ImportRequestItemsModel {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(other._supply, _supply));
+            const DeepCollectionEquality().equals(other._supply, _supply) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, createdAt, updatedAt,
-      const DeepCollectionEquality().hash(_supply));
+      const DeepCollectionEquality().hash(_supply), quantity);
 
   @JsonKey(ignore: true)
   @override
@@ -210,7 +229,8 @@ abstract class _ImportRequestItemsModel implements ImportRequestItemsModel {
       {required final String id,
       required final String createdAt,
       required final String updatedAt,
-      required final List<SupplyModel> supply}) = _$ImportRequestItemsModelImpl;
+      required final List<SupplyModel> supply,
+      required final String quantity}) = _$ImportRequestItemsModelImpl;
 
   factory _ImportRequestItemsModel.fromJson(Map<String, dynamic> json) =
       _$ImportRequestItemsModelImpl.fromJson;
@@ -223,6 +243,8 @@ abstract class _ImportRequestItemsModel implements ImportRequestItemsModel {
   String get updatedAt;
   @override
   List<SupplyModel> get supply;
+  @override
+  String get quantity;
   @override
   @JsonKey(ignore: true)
   _$$ImportRequestItemsModelImplCopyWith<_$ImportRequestItemsModelImpl>

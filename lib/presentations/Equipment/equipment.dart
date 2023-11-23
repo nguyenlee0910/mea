@@ -45,6 +45,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
             temp.add(EquipmentCellData(
               name: i.name ?? '', // Nếu i.name là null, sử dụng chuỗi rỗng
               code: i.code ?? '', // Nếu i.code là null, sử dụng chuỗi rỗng
+              currentStatus: i.currentStatus ?? '',
             ));
           }
           equipmentCellData = temp;
@@ -149,6 +150,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
                           return EquipmentCell(
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
+                            currentStatus: filterCellData[index].currentStatus,
                             onPress: () {
                               context.push(
                                 '/${EquipmentDetail.routeName}',
