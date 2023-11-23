@@ -6,8 +6,8 @@ part 'brand_model.g.dart';
 @freezed
 class BrandModel with _$BrandModel {
   factory BrandModel({
-    required String id,
-    required String name,
+    required String? id,
+    required String? name,
   }) = _BrandModel;
 
   factory BrandModel.fromJson(Map<String, dynamic> json) =>

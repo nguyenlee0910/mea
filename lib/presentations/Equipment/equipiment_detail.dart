@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +8,8 @@ import 'package:mea/models/equipment_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class EquipmentDetail extends StatefulWidget {
-  const EquipmentDetail({required this.equipmentModel, super.key});
+  const EquipmentDetail({required this.equipmentModel, Key? key})
+      : super(key: key);
   static const routeName = 'equipment_detail';
   final EquipmentModel equipmentModel;
 
@@ -22,13 +24,70 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
     runZoned(() async {});
   }
 
+  String getStatusLabel(String status) {
+    if (status == 'ACTIVE') {
+      return 'Đang hoạt động';
+    } else if (status == 'UNACTIVE') {
+      return 'Không hoạt động';
+    } else if (status == 'BROKEN') {
+      return 'Hỏng';
+    } else if (status == 'FIXING') {
+      return 'Sửa chữa';
+    } else if (status == 'IDLE') {
+      return 'Chờ sử dụng';
+    } else if (status == 'DRAFT') {
+      return 'Nháp';
+    } else {
+      return (statusData[status]?['label'] as String?) ?? 'Trống';
+    }
+  }
+
+  Color getStatusColor(String status) {
+    if (status == 'UNACTIVE') {
+      return Color(0xFFE74C3C);
+    } else {
+      return (statusData[status]?['color'] as Color?) ?? Colors.black;
+    }
+  }
+
+  Map<String, Map<String, dynamic>> statusData = {
+    "ACTIVE": {
+      "label": "Hoạt động",
+      "color": Colors.green,
+    },
+    "INACTIVE": {
+      "label": "Không hoạt động",
+      "color": Colors.red,
+    },
+    "BROKEN": {
+      "label": "Hỏng",
+      "color": Colors.red,
+    },
+    "FIXING": {
+      "label": "Sửa chữa",
+      "color": Colors.yellow,
+    },
+    "IDLE": {
+      "label": "Chờ sử dụng",
+      "color": Colors.blue,
+    },
+    "DRAFT": {
+      "label": "Nháp",
+      "color": Colors.grey,
+    },
+    "UNACTIVE": {
+      "label": "Không hoạt động",
+      "color": Color(0xFFE74C3C),
+    },
+  };
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final checkImage =
-        Uri.tryParse(widget.equipmentModel.imageUrls?.first ?? '')
-                ?.hasAbsolutePath ??
-            false;
+    final checkImage = Uri.tryParse(widget.equipmentModel.imageUrls?.first ??
+                'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg')
+            ?.hasAbsolutePath ??
+        false;
     var dateTime = DateTime.now();
     var dateTime2 = DateTime.now();
     try {
@@ -36,7 +95,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
         widget.equipmentModel.equipmentMaintainSchedule?.lastMaintainDate ??
             DateTime.now().toIso8601String(),
       );
-      DateTime dateTime2 = DateTime.parse(
+      dateTime2 = DateTime.parse(
         widget.equipmentModel.endOfWarrantyDate ?? 'default_value_for_null',
       );
     } on Exception {
@@ -62,40 +121,35 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 enableInfiniteScroll:
                     true, // Set this to true if you want infinite scrolling
               ),
-              items: widget.equipmentModel.imageUrls?.map((imageURL) {
-                    return SizedBox(
-                      width: size.width,
-                      height: size.height * 0.3,
-                      child: Image.network(
-                        imageURL,
-                        fit: BoxFit.fill,
+              items: (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
+                  ? widget.equipmentModel.imageUrls!.map((imageURL) {
+                      return SizedBox(
+                        width: size.width,
+                        height: size.height * 0.3,
+                        child: Image.network(
+                          imageURL,
+                          fit: BoxFit.fill,
+                        ),
+                      );
+                    }).toList()
+                  : [
+                      SizedBox(
+                        width: size.width,
+                        height: size.height * 0.3,
+                        child: Image.network(
+                          widget.equipmentModel.imageUrls?.first ??
+                              'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    );
-                  })?.toList() ??
-                  [],
+                    ],
             ),
-
-            // SizedBox(
-            //   width: size.width,
-            //   height: size.height * 0.3,
-            //   child: DecoratedBox(
-            //     decoration: BoxDecoration(color: Colors.grey[100]),
-            //     child: Image(
-            //       fit: BoxFit.fill,
-            //       image: checkImage
-            //           ? NetworkImage(widget.equipmentModel.imageUrls[0])
-            //           : const NetworkImage(
-            //               'https://monkeymedia.vcdn.com.vn/upload/web/img/tieng-viet-lop-4-cau-hoi-va-dau-cham-hoi-01a.png',
-            //             ),
-            //     ),
-            //   ),
-            // ),
             const Padding(
               padding: EdgeInsets.only(top: 8, left: 12, bottom: 8),
               child: Text(
                 'Chi tiết',
                 style: TextStyle(
-                  fontSize: 27,
+                  fontSize: 21,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -111,7 +165,6 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 ),
                 child: Container(
                   width: 380,
-                  height: 380,
                   padding: const EdgeInsets.all(20),
                   decoration: ShapeDecoration(
                     color: Colors.white,
@@ -127,7 +180,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(
-                            width: 120,
+                            width: 100,
                             child: const Text(
                               'Tên máy',
                               style: TextStyle(
@@ -160,7 +213,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(
-                            width: 120,
+                            width: 100,
                             child: const Text(
                               'Mã máy',
                               style: TextStyle(
@@ -195,9 +248,9 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 120,
+                            width: 100,
                             child: const Text(
-                              'Ngày bảo trì\ngần nhất',
+                              'Nhãn hiệu',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
@@ -210,7 +263,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                           const SizedBox(width: 20),
                           Expanded(
                             child: Text(
-                              formattedDate,
+                              (widget.equipmentModel.brand?.name) ?? 'Trống',
                               softWrap: true,
                               style: const TextStyle(
                                 color: Color(0xFF1A1A1A),
@@ -230,9 +283,9 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 120,
+                            width: 100,
                             child: const Text(
-                              'Ngày hết hạn\nbảo trì',
+                              'Loại thiết bị',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
@@ -245,7 +298,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                           const SizedBox(width: 20),
                           Expanded(
                             child: Text(
-                              formattedDate2,
+                              (widget.equipmentModel.equipmentCategory?.name) ??
+                                  'Trống',
                               softWrap: true,
                               style: const TextStyle(
                                 color: Color(0xFF1A1A1A),
@@ -261,10 +315,49 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       const SizedBox(height: 16),
                       Row(
                         mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: const Text(
+                              'Trạng thái',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: Text(
+                              getStatusLabel(
+                                  widget.equipmentModel.currentStatus ??
+                                      'DEFAULT'),
+                              softWrap: true,
+                              style: TextStyle(
+                                color: getStatusColor(
+                                    widget.equipmentModel.currentStatus ??
+                                        'DEFAULT'),
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(
-                            width: 120,
+                            width: 100,
                             child: Text(
                               'Mô tả',
                               style: TextStyle(
@@ -278,17 +371,18 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                           ),
                           const SizedBox(width: 20),
                           Expanded(
-                            child: Text(
-                              widget.equipmentModel.description ?? 'Trống',
-                              //softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 7,
-                              style: const TextStyle(
-                                color: Color(0xFF1A1A1A),
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
+                            child: Center(
+                              child: Text(
+                                widget.equipmentModel.description ?? 'Trống',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 7,
+                                style: const TextStyle(
+                                  color: Color(0xFF1A1A1A),
+                                  fontSize: 15,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
                               ),
                             ),
                           ),

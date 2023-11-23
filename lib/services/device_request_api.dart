@@ -66,7 +66,7 @@ class DeviceRequestService {
     final uri = Uri(
       scheme: 'https',
       host: Env.serverUrl,
-      path: 'api/v1/repair-request/all',
+      path: 'api/v1/repair-report/all',
     );
 
     final response = await http.get(

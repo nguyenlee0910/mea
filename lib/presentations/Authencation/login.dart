@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +9,8 @@ import 'package:mea/presentations/Authencation/forgot_password.dart';
 import 'package:mea/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// import 'models/post.dart';
-// import 'services/dummy_service.dart';
-
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key});
 
   static String routeName = 'login';
 
@@ -34,6 +30,8 @@ class _LoginPageState extends State<LoginPage> {
   String userName = '';
   String password = '';
   String roleId = '';
+  bool nameError = false;
+  bool passwordError = false;
 
   @override
   void initState() {
@@ -54,6 +52,60 @@ class _LoginPageState extends State<LoginPage> {
 
   void saveRemember(bool value) {
     unawaited(prefs.setBool('rememberMe', value));
+  }
+
+  void _showErrorDialog(String message) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.error,
+      borderSide: const BorderSide(
+        color: Colors.green,
+        width: 2,
+      ),
+      width: 280,
+      buttonsBorderRadius: const BorderRadius.all(
+        Radius.circular(2),
+      ),
+      dismissOnTouchOutside: true,
+      dismissOnBackKeyPress: false,
+      onDismissCallback: (type) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Dismissed by $type'),
+          ),
+        );
+      },
+      headerAnimationLoop: false,
+      animType: AnimType.bottomSlide,
+      title: 'ERROR',
+      desc: message,
+      showCloseIcon: false,
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {},
+    ).show();
+  }
+
+  void _login() {
+    setState(() {
+      nameError = userName.isEmpty;
+      passwordError = password.isEmpty;
+    });
+
+    if (nameError || passwordError) {
+      return;
+    }
+
+    AuthService.login(
+      userName: userName,
+      password: password,
+      onSucess: () {
+        saveRemember(checkBoxValue);
+        context.go('/${Navigation.routeName}');
+      },
+      onFail: () {
+        _showErrorDialog('Vui lòng kiểm tra tài khoản');
+      },
+    );
   }
 
   @override
@@ -126,6 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                         onChanged: (value) {
                           setState(() {
                             userName = value;
+                            nameError = false;
                           });
                         },
                       ),
@@ -170,32 +223,71 @@ class _LoginPageState extends State<LoginPage> {
                         onChanged: (value) {
                           setState(() {
                             password = value;
+                            passwordError = false;
                           });
                         },
                       ),
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: Row(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Checkbox(
-                            value: checkBoxValue,
-                            activeColor: Colors.blue,
-                            onChanged: (newValue) {
-                              setState(() {
-                                checkBoxValue = newValue!;
-                              });
-                            },
-                          ),
-                          const Text(
-                            'Lưu đăng nhập',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 95, 95, 95),
-                              fontSize: 14,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w400,
-                              height: 5,
+                          if (nameError || passwordError)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                '*Tên đăng nhập và mật khẩu không được trống',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            )
+                          else if (passwordError)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                '*Mật khẩu không được trống',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            )
+                          else if (nameError)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                '*Tên đăng nhập không được trống',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
                             ),
+                          Row(
+                            children: <Widget>[
+                              Checkbox(
+                                value: checkBoxValue,
+                                activeColor: Colors.blue,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    checkBoxValue = newValue!;
+                                  });
+                                },
+                              ),
+                              Text(
+                                'Lưu đăng nhập',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 95, 95, 95),
+                                  fontSize: 14,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                  height: 5,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -242,47 +334,9 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
                         ),
-                        onPressed: () {
-                          AuthService.login(
-                              userName: userName,
-                              password: password,
-                              onSucess: () {
-                                saveRemember(checkBoxValue);
-                                context.go('/${Navigation.routeName}');
-                              },
-                              onFail: () {
-                                AwesomeDialog(
-                                  context: context,
-                                  dialogType: DialogType.error,
-                                  borderSide: const BorderSide(
-                                    color: Colors.green,
-                                    width: 2,
-                                  ),
-                                  width: 280,
-                                  buttonsBorderRadius: const BorderRadius.all(
-                                    Radius.circular(2),
-                                  ),
-                                  dismissOnTouchOutside: true,
-                                  dismissOnBackKeyPress: false,
-                                  onDismissCallback: (type) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('Dismissed by $type'),
-                                      ),
-                                    );
-                                  },
-                                  headerAnimationLoop: false,
-                                  animType: AnimType.bottomSlide,
-                                  title: 'ERROR',
-                                  desc: 'Vui lòng kiểm tra tài khoản',
-                                  showCloseIcon: false,
-                                  btnCancelOnPress: () {},
-                                  btnOkOnPress: () {},
-                                ).show();
-                              });
-                        },
+                        onPressed: _login,
                         child: Text(
-                          'Login',
+                          'Đăng nhập',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
                             color: Colors.white,

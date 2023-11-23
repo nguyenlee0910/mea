@@ -6,8 +6,8 @@ part 'equipment_category_model.g.dart';
 @freezed
 class EquipmentCategoryModel with _$EquipmentCategoryModel {
   factory EquipmentCategoryModel({
-    required String id,
-    required String name,
+    required String? id,
+    required String? name,
   }) = _EquipmentCategoryModel;
 
   factory EquipmentCategoryModel.fromJson(Map<String, dynamic> json) =>

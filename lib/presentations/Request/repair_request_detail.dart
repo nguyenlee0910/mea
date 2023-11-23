@@ -1,16 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mea/constants.dart';
-import 'package:mea/services/department_api.dart';
 
 class RepairRequestDetail extends StatefulWidget {
   const RepairRequestDetail({
     required this.id,
     required this.codeEquipment,
     required this.nameEquipment,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
+
   static const routeName = 'repair_request_detail';
   final String id;
   final String nameEquipment;
@@ -23,12 +22,6 @@ class RepairRequestDetail extends StatefulWidget {
 class _RepairRequestDetailState extends State<RepairRequestDetail> {
   String description = '';
   final fieldText = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    print(widget.id);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +76,16 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                       ),
                       color: Colors.white,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 8),
+                                padding:
+                                    const EdgeInsets.only(top: 8, left: 18),
                                 child: Text(
-                                  'Tên thiết bị: ${widget.nameEquipment}',
+                                  'Tên thiết bị:',
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
@@ -100,14 +95,46 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 8),
+                                padding:
+                                    const EdgeInsets.only(top: 4, left: 18),
                                 child: Text(
-                                  'Mã thiết bị: ${widget.codeEquipment}',
+                                  '${widget.nameEquipment}',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 8, left: 18),
+                                child: Text(
+                                  'Mã thiết bị:',
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 4, left: 18),
+                                child: Text(
+                                  '${widget.codeEquipment}',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -133,7 +160,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                               controller: fieldText,
                               maxLines: 8, //or null
                               decoration: const InputDecoration.collapsed(
-                                hintText: 'Lí do bảo trì',
+                                hintText: 'Lý do bảo trì',
                               ),
                               onChanged: (value) {
                                 setState(() {
@@ -171,22 +198,9 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                             borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           debugPrint(description);
-                          await DepartmentServices.requestRepairEquipment(
-                            id: widget.id,
-                            description: description,
-                          ).then((value) {
-                            print(value);
-                            if (value == true) {
-                              _showSucess(context, () {
-                                fieldText.clear();
-                                context.pop();
-                                context.pop();
-                                repairRequestKey.currentState!.context.pop();
-                              });
-                            }
-                          });
+                          // Handle your logic here
                         },
                         child: Text(
                           'Gửi',
@@ -203,61 +217,6 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _showSucess(BuildContext context, VoidCallback? callback) {
-    final alert = AlertDialog(
-      title: const Text('Thành công'),
-      content: const Text('Gửi yêu cầu thành công!'),
-      actions: [
-        ElevatedButton(
-          child: const Text('Xác nhận'),
-          onPressed: () {
-            callback!();
-          },
-        ),
-      ],
-    );
-    // ignore: inference_failure_on_function_invocation
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
-  Widget backBtn(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.pop();
-      },
-      child: Neumorphic(
-        style: NeumorphicStyle(
-          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-          depth: 5,
-          color: Colors.grey,
-          intensity: 1,
-        ),
-        child: Container(
-          width: 36,
-          height: 36,
-          decoration: const ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(width: 2, color: Color(0xFFE5E5E5)),
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-          ),
-          child: const Center(
-            child: Icon(
-              Icons.arrow_back,
-              color: Color(0xFFE5E5E5),
-            ),
           ),
         ),
       ),

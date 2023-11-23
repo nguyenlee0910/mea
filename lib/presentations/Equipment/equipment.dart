@@ -121,11 +121,11 @@ class _EquipmentPageState extends State<EquipmentPage> {
       ),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: Colors.grey[100]),
+        // decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           children: <Widget>[
             const SizedBox(
-              height: 40,
+              height: 10,
             ),
             Expanded(
               child: Container(
@@ -149,9 +149,6 @@ class _EquipmentPageState extends State<EquipmentPage> {
                           return EquipmentCell(
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
-                            colorButtonName:
-                                const Color.fromARGB(255, 70, 133, 246),
-                            buttonName: 'Xem Chi tiết',
                             onPress: () {
                               context.push(
                                 '/${EquipmentDetail.routeName}',
