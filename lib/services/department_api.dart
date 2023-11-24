@@ -150,7 +150,7 @@ class DepartmentServices {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
     final priceFormat = NumberFormat.decimalPattern();
-    final priceString = priceFormat.format(9);
+    final priceString = priceFormat.format(0);
     try {
       final header = {
         'Content-Type': 'application/json',
