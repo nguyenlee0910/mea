@@ -24,6 +24,7 @@ mixin _$ImportRequestModel {
   String get createdAt => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String get expected => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $ImportRequestModelCopyWith<$Res> {
       String createdAt,
       String name,
       String description,
+      String expected,
       String status,
       String note,
       String updatedAt,
@@ -80,6 +82,7 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
     Object? createdAt = null,
     Object? name = null,
     Object? description = null,
+    Object? expected = null,
     Object? status = null,
     Object? note = null,
     Object? updatedAt = null,
@@ -103,6 +106,10 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      expected: null == expected
+          ? _value.expected
+          : expected // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -176,6 +183,7 @@ abstract class _$$ImportRequestModelImplCopyWith<$Res>
       String createdAt,
       String name,
       String description,
+      String expected,
       String status,
       String note,
       String updatedAt,
@@ -206,6 +214,7 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? name = null,
     Object? description = null,
+    Object? expected = null,
     Object? status = null,
     Object? note = null,
     Object? updatedAt = null,
@@ -229,6 +238,10 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      expected: null == expected
+          ? _value.expected
+          : expected // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -266,6 +279,7 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
       required this.createdAt,
       required this.name,
       required this.description,
+      required this.expected,
       required this.status,
       required this.note,
       required this.updatedAt,
@@ -285,6 +299,8 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
   @override
   final String description;
   @override
+  final String expected;
+  @override
   final String status;
   @override
   final String note;
@@ -299,7 +315,7 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
 
   @override
   String toString() {
-    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, importRequestItemsModel: $importRequestItemsModel)';
+    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, expected: $expected, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, importRequestItemsModel: $importRequestItemsModel)';
   }
 
   @override
@@ -313,6 +329,8 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.expected, expected) ||
+                other.expected == expected) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.note, note) || other.note == note) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -328,8 +346,19 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdAt, name, description,
-      status, note, updatedAt, createdBy, updatedBy, importRequestItemsModel);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      createdAt,
+      name,
+      description,
+      expected,
+      status,
+      note,
+      updatedAt,
+      createdBy,
+      updatedBy,
+      importRequestItemsModel);
 
   @JsonKey(ignore: true)
   @override
@@ -352,6 +381,7 @@ abstract class _ImportRequestModel implements ImportRequestModel {
           required final String createdAt,
           required final String name,
           required final String description,
+          required final String expected,
           required final String status,
           required final String note,
           required final String updatedAt,
@@ -371,6 +401,8 @@ abstract class _ImportRequestModel implements ImportRequestModel {
   String get name;
   @override
   String get description;
+  @override
+  String get expected;
   @override
   String get status;
   @override

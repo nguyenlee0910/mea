@@ -14,6 +14,7 @@ class ImportRequestModel extends BaseRequestModel with _$ImportRequestModel {
     required String createdAt,
     required String name,
     required String description,
+    required String expected,
     required String status,
     required String note,
     required String updatedAt,
