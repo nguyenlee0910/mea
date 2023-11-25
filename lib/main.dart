@@ -15,7 +15,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // Retain native splash screen until Dart is ready

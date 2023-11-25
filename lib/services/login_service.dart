@@ -7,6 +7,8 @@ import 'package:mea/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_service.dart';
+
 class AuthService {
   static Future<void> login({
     required String userName,
@@ -43,8 +45,6 @@ class AuthService {
         prefs.setString('auth', responseJson['token'].toString()),
       );
 
-      final fcmToken = await FirebaseMessaging.instance.getToken();
-
       unawaited(
         prefs.setString(
           'departmentId',
@@ -69,6 +69,7 @@ class AuthService {
           responseJson['user']['id'].toString(),
         ),
       );
+
       // ignore: avoid_dynamic_calls
       onSucess();
     }
