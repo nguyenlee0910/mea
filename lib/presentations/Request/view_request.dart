@@ -9,6 +9,7 @@ import 'package:custom_sliding_segmented_control/custom_sliding_segmented_contro
 import 'package:go_router/go_router.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
+import 'package:mea/models/repair_report_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/presentations/Request/view_request_detail.dart';
 import 'package:mea/services/device_request_api.dart';
@@ -105,7 +106,7 @@ class _ViewRequestState extends State<ViewRequest> {
                           filterList = requestData;
                         } else if (v == 1) {
                           filterList = requestData.where((element) {
-                            return element is RepairRequestModel;
+                            return element is RepairReportModel;
                           }).toList();
                         } else {
                           filterList = requestData.where((element) {
@@ -154,7 +155,11 @@ Widget buildImportRequestCell({
   switch (requestModel.status) {
     case 'REQUESTING':
       color = Color.fromARGB(255, 211, 145, 38);
-      statusText = 'Chờ xác nhận';
+      statusText = (requestModel is ImportRequestModel)
+          ? 'Chờ xác nhận'
+          : (requestModel is RepairReportModel)
+              ? 'Đang yêu cầu'
+              : '';
       break;
     case 'APPROVED':
       color = const Color.fromARGB(255, 67, 153, 70);
@@ -168,6 +173,18 @@ Widget buildImportRequestCell({
       color = const Color.fromARGB(255, 221, 60, 48);
       statusText = 'Đã từ chối';
       break;
+    case 'PAUSED':
+      color = Color.fromARGB(255, 80, 27, 165);
+      statusText = 'Tạm dừng sửa chữa';
+      break;
+    case 'FIXING':
+      color = Color.fromARGB(255, 30, 89, 216);
+      statusText = 'Đang sửa chữa';
+      break;
+    case 'COMPLETED':
+      color = const Color.fromARGB(255, 67, 153, 70);
+      statusText = 'Hoàn thành';
+      break;
     case 'UPDATED':
       color = Color.fromARGB(255, 30, 89, 216);
       statusText = 'Đã cập nhật';
@@ -180,7 +197,7 @@ Widget buildImportRequestCell({
       color = Colors.black;
       break;
   }
-  double containerHeight = (requestModel is RepairRequestModel) ? 180 : 120;
+  double containerHeight = (requestModel is RepairReportModel) ? 160 : 135;
   return Padding(
     padding: const EdgeInsets.all(12),
     child: Neumorphic(
@@ -211,7 +228,7 @@ Widget buildImportRequestCell({
                 ),
               ),
               const Gap(12),
-              if (requestModel is RepairRequestModel) ...[
+              if (requestModel is RepairReportModel) ...[
                 Row(
                   children: [
                     Column(
@@ -229,16 +246,17 @@ Widget buildImportRequestCell({
                                 ),
                               ),
                             ),
-                            Text(
-                              (requestModel as RepairRequestModel)
-                                      .equipment
-                                      ?.code ??
-                                  'Trống',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
+                            // Text(
+                            //   (requestModel as RepairReportModel)
+                            //           .repairReportItemsModel
+                            //           ?.repairReportEquipmentModel
+                            //           ?.name ??
+                            //       'Trống',
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     fontWeight: FontWeight.normal,
+                            //   ),
+                            // ),
                           ],
                         ),
                         const Gap(6),
@@ -254,16 +272,17 @@ Widget buildImportRequestCell({
                                 ),
                               ),
                             ),
-                            Text(
-                              (requestModel as RepairRequestModel)
-                                      .equipment
-                                      ?.name ??
-                                  'Trống',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
+                            // Text(
+                            //   (requestModel as RepairReportModel)
+                            //           .repairReportItemsModel
+                            //           ?.repairReportEquipmentModel
+                            //           ?.code ??
+                            //       'Trống',
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     fontWeight: FontWeight.normal,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
@@ -315,6 +334,58 @@ Widget buildImportRequestCell({
                   ),
                 ],
               ),
+              if (requestModel is ImportRequestModel) ...[
+                const Gap(6),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        "Khoảng thời gian nhận: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      (requestModel is ImportRequestModel)
+                          ? (requestModel as ImportRequestModel).expected ==
+                                  'HOUR_72'
+                              ? '72 giờ'
+                              : (requestModel as ImportRequestModel).expected ==
+                                      'HOUR_1'
+                                  ? '1 giờ'
+                                  : (requestModel as ImportRequestModel)
+                                              .expected ==
+                                          'HOUR_3'
+                                      ? '3 giờ'
+                                      : (requestModel as ImportRequestModel)
+                                                  .expected ==
+                                              'HOUR_5'
+                                          ? '5 giờ'
+                                          : (requestModel as ImportRequestModel)
+                                                      .expected ==
+                                                  'HOUR_24'
+                                              ? '24 giờ'
+                                              : (requestModel as ImportRequestModel)
+                                                          .expected ==
+                                                      'HOUR_36'
+                                                  ? '36 giờ'
+                                                  : (requestModel
+                                                          is ImportRequestModel
+                                                      ? (requestModel
+                                                              as ImportRequestModel)
+                                                          .expected
+                                                      : '')
+                          : '',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
               if (isDetail == false) ...[
                 ElevatedButton(
                   child: Text('Xem chi tiết'),
