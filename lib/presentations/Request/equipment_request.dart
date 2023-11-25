@@ -17,13 +17,34 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
   late List<CustomEquipmentCell> filterCellData;
   String description = '';
   String name = '';
+  String expected = '72 giờ';
   final descriptionController = TextEditingController();
   final nameController = TextEditingController();
+  final expectedController = TextEditingController();
   bool nameError = false;
   bool descriptionError = false;
   @override
   void initState() {
     super.initState();
+  }
+
+  String convertDisplayToValue(String display) {
+    switch (display) {
+      case '1 giờ':
+        return 'HOUR_1';
+      case '3 giờ':
+        return 'HOUR_3';
+      case '5 giờ':
+        return 'HOUR_5';
+      case '24 giờ':
+        return 'HOUR_24';
+      case '36 giờ':
+        return 'HOUR_36';
+      case '72 giờ':
+        return 'HOUR_72';
+      default:
+        return display;
+    }
   }
 
   @override
@@ -75,7 +96,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 6),
                       Neumorphic(
                         style: NeumorphicStyle(
                           boxShape: NeumorphicBoxShape.roundRect(
@@ -113,7 +134,68 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 15),
+                      Container(
+                        margin: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Khoảng thời gian muốn nhận:',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Neumorphic(
+                        style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(20),
+                          ),
+                          depth: 6,
+                          color: Colors.grey,
+                          lightSource: LightSource.top,
+                          intensity: 1,
+                        ),
+                        child: Card(
+                          margin: const EdgeInsets.all(0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          color: Color.fromARGB(255, 226, 245, 253),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 2),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DropdownButton<String>(
+                                  value: expected,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      expected = newValue!;
+                                    });
+                                  },
+                                  items: <String>[
+                                    '72 giờ',
+                                    '1 giờ',
+                                    '3 giờ',
+                                    '5 giờ',
+                                    '24 giờ',
+                                    '36 giờ',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
                       Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: Text(
@@ -124,7 +206,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 6),
                       Neumorphic(
                         style: NeumorphicStyle(
                           boxShape: NeumorphicBoxShape.roundRect(
@@ -225,10 +307,12 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           });
 
                           if (!nameError && !descriptionError) {
-                            // Both name and description are non-empty
+                            String convertedExpected =
+                                convertDisplayToValue(expected);
                             await DepartmentServices.requestEquipment(
                               description: description,
                               name: name,
+                              expected: convertedExpected,
                             ).then(
                               (value) {
                                 if (value == true) {
