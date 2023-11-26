@@ -1,10 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:mea/presentations/Authencation/home.dart';
+import 'package:mea/presentations/Message/stream-chat.dart';
 import 'package:mea/presentations/Notification/list_notification.dart';
 import 'package:mea/presentations/UserManagement/user_management.dart';
-import 'package:mea/services/firebase_service.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -19,18 +17,14 @@ class _NavigationState extends State<Navigation> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     const NotificationPage(),
-    Container(),
+    // MyApp(client, user),
+    MessagePage(),
     UserManagementPage(),
   ];
 
   @override
   void initState() {
     super.initState();
-    runZoned(
-      () async {
-        await FireBaseService().initNotificaitonService();
-      },
-    );
   }
 
   @override
