@@ -14,14 +14,15 @@ _$RepairRequestModelImpl _$$RepairRequestModelImplFromJson(
       description: json['description'] as String,
       status: json['status'] as String,
       note: json['note'] as String,
-      equipment: json['equipment'] == null
-          ? null
-          : EquipmentModel.fromJson(json['equipment'] as Map<String, dynamic>),
       updatedAt: json['updatedAt'] as String,
       createdBy: RepairRequestCreatedByModel.fromJson(
           json['createdBy'] as Map<String, dynamic>),
       updatedBy: RepairRequestUpdatedByModel.fromJson(
           json['updatedBy'] as Map<String, dynamic>),
+      repairReportItemsModel: (json['repairReportItemsModel'] as List<dynamic>?)
+          ?.map(
+              (e) => RepairReportItemsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$RepairRequestModelImplToJson(
@@ -32,8 +33,8 @@ Map<String, dynamic> _$$RepairRequestModelImplToJson(
       'description': instance.description,
       'status': instance.status,
       'note': instance.note,
-      'equipment': instance.equipment,
       'updatedAt': instance.updatedAt,
       'createdBy': instance.createdBy,
       'updatedBy': instance.updatedBy,
+      'repairReportItemsModel': instance.repairReportItemsModel,
     };

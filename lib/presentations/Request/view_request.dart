@@ -231,6 +231,8 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
+                                      .repairReportItemsModel
+                                      ?.first
                                       .equipment
                                       ?.code ??
                                   'Trống',
@@ -256,6 +258,8 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
+                                      .repairReportItemsModel
+                                      ?.first
                                       .equipment
                                       ?.name ??
                                   'Trống',

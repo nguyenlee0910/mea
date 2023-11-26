@@ -25,6 +25,7 @@ mixin _$RepairReportItemsModel {
   String get description => throw _privateConstructorUsedError;
   RepairReportEquipmentModel? get repairReportEquipmentModel =>
       throw _privateConstructorUsedError;
+  EquipmentModel? get equipment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,9 +42,11 @@ abstract class $RepairReportItemsModelCopyWith<$Res> {
   $Res call(
       {String id,
       String description,
-      RepairReportEquipmentModel? repairReportEquipmentModel});
+      RepairReportEquipmentModel? repairReportEquipmentModel,
+      EquipmentModel? equipment});
 
   $RepairReportEquipmentModelCopyWith<$Res>? get repairReportEquipmentModel;
+  $EquipmentModelCopyWith<$Res>? get equipment;
 }
 
 /// @nodoc
@@ -63,6 +66,7 @@ class _$RepairReportItemsModelCopyWithImpl<$Res,
     Object? id = null,
     Object? description = null,
     Object? repairReportEquipmentModel = freezed,
+    Object? equipment = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -77,6 +81,10 @@ class _$RepairReportItemsModelCopyWithImpl<$Res,
           ? _value.repairReportEquipmentModel
           : repairReportEquipmentModel // ignore: cast_nullable_to_non_nullable
               as RepairReportEquipmentModel?,
+      equipment: freezed == equipment
+          ? _value.equipment
+          : equipment // ignore: cast_nullable_to_non_nullable
+              as EquipmentModel?,
     ) as $Val);
   }
 
@@ -90,6 +98,18 @@ class _$RepairReportItemsModelCopyWithImpl<$Res,
     return $RepairReportEquipmentModelCopyWith<$Res>(
         _value.repairReportEquipmentModel!, (value) {
       return _then(_value.copyWith(repairReportEquipmentModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EquipmentModelCopyWith<$Res>? get equipment {
+    if (_value.equipment == null) {
+      return null;
+    }
+
+    return $EquipmentModelCopyWith<$Res>(_value.equipment!, (value) {
+      return _then(_value.copyWith(equipment: value) as $Val);
     });
   }
 }
@@ -106,10 +126,13 @@ abstract class _$$RepairReportItemsModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String description,
-      RepairReportEquipmentModel? repairReportEquipmentModel});
+      RepairReportEquipmentModel? repairReportEquipmentModel,
+      EquipmentModel? equipment});
 
   @override
   $RepairReportEquipmentModelCopyWith<$Res>? get repairReportEquipmentModel;
+  @override
+  $EquipmentModelCopyWith<$Res>? get equipment;
 }
 
 /// @nodoc
@@ -128,6 +151,7 @@ class __$$RepairReportItemsModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? description = null,
     Object? repairReportEquipmentModel = freezed,
+    Object? equipment = freezed,
   }) {
     return _then(_$RepairReportItemsModelImpl(
       id: null == id
@@ -142,6 +166,10 @@ class __$$RepairReportItemsModelImplCopyWithImpl<$Res>
           ? _value.repairReportEquipmentModel
           : repairReportEquipmentModel // ignore: cast_nullable_to_non_nullable
               as RepairReportEquipmentModel?,
+      equipment: freezed == equipment
+          ? _value.equipment
+          : equipment // ignore: cast_nullable_to_non_nullable
+              as EquipmentModel?,
     ));
   }
 }
@@ -152,7 +180,8 @@ class _$RepairReportItemsModelImpl implements _RepairReportItemsModel {
   _$RepairReportItemsModelImpl(
       {required this.id,
       required this.description,
-      this.repairReportEquipmentModel});
+      this.repairReportEquipmentModel,
+      this.equipment});
 
   factory _$RepairReportItemsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RepairReportItemsModelImplFromJson(json);
@@ -163,10 +192,12 @@ class _$RepairReportItemsModelImpl implements _RepairReportItemsModel {
   final String description;
   @override
   final RepairReportEquipmentModel? repairReportEquipmentModel;
+  @override
+  final EquipmentModel? equipment;
 
   @override
   String toString() {
-    return 'RepairReportItemsModel(id: $id, description: $description, repairReportEquipmentModel: $repairReportEquipmentModel)';
+    return 'RepairReportItemsModel(id: $id, description: $description, repairReportEquipmentModel: $repairReportEquipmentModel, equipment: $equipment)';
   }
 
   @override
@@ -180,13 +211,15 @@ class _$RepairReportItemsModelImpl implements _RepairReportItemsModel {
             (identical(other.repairReportEquipmentModel,
                     repairReportEquipmentModel) ||
                 other.repairReportEquipmentModel ==
-                    repairReportEquipmentModel));
+                    repairReportEquipmentModel) &&
+            (identical(other.equipment, equipment) ||
+                other.equipment == equipment));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, description, repairReportEquipmentModel);
+  int get hashCode => Object.hash(
+      runtimeType, id, description, repairReportEquipmentModel, equipment);
 
   @JsonKey(ignore: true)
   @override
@@ -205,10 +238,10 @@ class _$RepairReportItemsModelImpl implements _RepairReportItemsModel {
 
 abstract class _RepairReportItemsModel implements RepairReportItemsModel {
   factory _RepairReportItemsModel(
-          {required final String id,
-          required final String description,
-          final RepairReportEquipmentModel? repairReportEquipmentModel}) =
-      _$RepairReportItemsModelImpl;
+      {required final String id,
+      required final String description,
+      final RepairReportEquipmentModel? repairReportEquipmentModel,
+      final EquipmentModel? equipment}) = _$RepairReportItemsModelImpl;
 
   factory _RepairReportItemsModel.fromJson(Map<String, dynamic> json) =
       _$RepairReportItemsModelImpl.fromJson;
@@ -219,6 +252,8 @@ abstract class _RepairReportItemsModel implements RepairReportItemsModel {
   String get description;
   @override
   RepairReportEquipmentModel? get repairReportEquipmentModel;
+  @override
+  EquipmentModel? get equipment;
   @override
   @JsonKey(ignore: true)
   _$$RepairReportItemsModelImplCopyWith<_$RepairReportItemsModelImpl>

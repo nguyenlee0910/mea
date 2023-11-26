@@ -15,6 +15,9 @@ _$RepairReportItemsModelImpl _$$RepairReportItemsModelImplFromJson(
           ? null
           : RepairReportEquipmentModel.fromJson(
               json['repairReportEquipmentModel'] as Map<String, dynamic>),
+      equipment: json['equipment'] == null
+          ? null
+          : EquipmentModel.fromJson(json['equipment'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$RepairReportItemsModelImplToJson(
@@ -23,4 +26,5 @@ Map<String, dynamic> _$$RepairReportItemsModelImplToJson(
       'id': instance.id,
       'description': instance.description,
       'repairReportEquipmentModel': instance.repairReportEquipmentModel,
+      'equipment': instance.equipment,
     };

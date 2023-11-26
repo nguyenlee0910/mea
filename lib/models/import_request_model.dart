@@ -19,7 +19,7 @@ class ImportRequestModel extends BaseRequestModel with _$ImportRequestModel {
     required String updatedAt,
     required ImportRequestCreatedByModel createdBy,
     required ImportRequestUpdatedByModel updatedBy,
-    ImportRequestItemsModel? importRequestItemsModel,
+    List<ImportRequestItemsModel>? importRequestItemsModel,
   }) = _ImportRequestModel;
 
   factory ImportRequestModel.fromJson(Map<String, dynamic> json) =>
