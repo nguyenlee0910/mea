@@ -5,12 +5,14 @@ class EquipmentCellData {
   EquipmentCellData({
     required this.name,
     required this.code,
+    this.imageUrls,
     this.currentStatus,
     this.id,
   });
   String? id;
   String name;
   String code;
+  String? imageUrls;
   String? currentStatus;
 }
 
@@ -18,6 +20,7 @@ class EquipmentCell extends StatelessWidget {
   const EquipmentCell({
     required this.name,
     required this.code,
+    this.imageUrls,
     this.currentStatus,
     this.buttonName = '',
     this.colorButtonName = Colors.grey, // Set a default color if needed
@@ -27,6 +30,7 @@ class EquipmentCell extends StatelessWidget {
 
   final String name;
   final String code;
+  final String? imageUrls;
   final String? currentStatus;
   final String buttonName;
   final VoidCallback? onPress;
@@ -50,156 +54,181 @@ class EquipmentCell extends StatelessWidget {
             ),
             child: Container(
               width: 372,
-              height: 100,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              height: 140,
+              padding: EdgeInsets.fromLTRB(8, 20, 8, 16),
               decoration: ShapeDecoration(
                 color: Color.fromARGB(255, 219, 236, 248),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                    width: 120.0,
+                    height: 100.0,
+                    child: Image.network(
+                      imageUrls ??
+                          "https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 5),
-                          child: SizedBox(
-                            width: 300,
-                            height: 20,
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: 'Tên thiết bị: ',
-                                    style: TextStyle(
-                                      color: Color(0xFF1A1A1A),
-                                      fontSize: 17,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w600,
-                                      height: 0,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 5),
+                                child: SizedBox(
+                                  width: 300,
+                                  height:
+                                      40, // Tăng giá trị này nếu bạn muốn hiển thị nhiều dòng hơn
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'Tên thiết bị: ',
+                                          style: TextStyle(
+                                            color: Color(0xFF1A1A1A),
+                                            fontSize: 17,
+                                            fontFamily: 'Inter',
+                                            fontWeight: FontWeight.w600,
+                                            height: 0,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: name,
+                                          style: const TextStyle(
+                                            color: Color(0xFF1A1A1A),
+                                            fontSize: 17,
+                                            fontFamily: 'Inter',
+                                            fontWeight: FontWeight.w400,
+                                            height: 0,
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    softWrap: true,
+                                    maxLines:
+                                        2, // Đặt số dòng tối đa muốn hiển thị
+                                    overflow: TextOverflow
+                                        .ellipsis, // Đặt kiểu tràn nếu vượt quá số dòng tối đa
                                   ),
-                                  TextSpan(
-                                    text: name,
-                                    style: const TextStyle(
-                                      color: Color(0xFF1A1A1A),
-                                      fontSize: 17,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
+                              const SizedBox(height: 4),
+                              SizedBox(
+                                width: 300,
+                                height: 20,
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      const TextSpan(
+                                        text: 'Mã thiết bị: ',
+                                        style: TextStyle(
+                                          color: Color(0xFF1A1A1A),
+                                          fontSize: 17,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.w600,
+                                          height: 0,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        // text: '$code\n',
+                                        text: '$code\n',
+                                        style: const TextStyle(
+                                          color: Color(0xFF1A1A1A),
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                width: 300,
+                                height: 20,
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      const TextSpan(
+                                        text: 'Trạng thái: ',
+                                        style: TextStyle(
+                                          color: Color(0xFF1A1A1A),
+                                          fontSize: 17,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.w600,
+                                          height: 0,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: currentStatus == 'ACTIVE'
+                                            ? 'Đang hoạt động'
+                                            : currentStatus ?? 'Đang hoạt động',
+                                        style: TextStyle(
+                                          color: currentStatus == 'ACTIVE'
+                                              ? Colors.green
+                                              : Colors.green,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
 
-                        const SizedBox(height: 4),
-                        SizedBox(
-                          width: 300,
-                          height: 20,
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: 'Mã thiết bị: ',
-                                  style: TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 17,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                                TextSpan(
-                                  // text: '$code\n',
-                                  text: '$code\n',
-                                  style: const TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Inter',
-                                    height: 0,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              // const SizedBox(height: 4),
+                              // SizedBox(
+                              //   width: 300,
+                              //   height: 20,
+                              //   child: Text.rich(
+                              //     TextSpan(
+                              //       children: [
+                              //         const TextSpan(
+                              //           text: 'Trạng thái: ',
+                              //           style: TextStyle(
+                              //             color: Color(0xFF1A1A1A),
+                              //             fontSize: 16,
+                              //             fontFamily: 'Inter',
+                              //             fontWeight: FontWeight.w600,
+                              //             height: 0,
+                              //           ),
+                              //         ),
+                              //         TextSpan(
+                              //           text: '$currentStatus\n',
+                              //           style: const TextStyle(
+                              //             color: Color(0xFF1A1A1A),
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.w400,
+                              //             fontFamily: 'Inter',
+                              //             height: 0,
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 4),
-                        SizedBox(
-                          width: 300,
-                          height: 20,
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: 'Trạng thái: ',
-                                  style: TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 17,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: currentStatus == 'ACTIVE'
-                                      ? 'Đang hoạt động'
-                                      : currentStatus ?? 'Đang hoạt động',
-                                  style: TextStyle(
-                                    color: currentStatus == 'ACTIVE'
-                                        ? Colors.green
-                                        : Colors.green,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'Inter',
-                                    height: 0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        // const SizedBox(height: 4),
-                        // SizedBox(
-                        //   width: 300,
-                        //   height: 20,
-                        //   child: Text.rich(
-                        //     TextSpan(
-                        //       children: [
-                        //         const TextSpan(
-                        //           text: 'Trạng thái: ',
-                        //           style: TextStyle(
-                        //             color: Color(0xFF1A1A1A),
-                        //             fontSize: 16,
-                        //             fontFamily: 'Inter',
-                        //             fontWeight: FontWeight.w600,
-                        //             height: 0,
-                        //           ),
-                        //         ),
-                        //         TextSpan(
-                        //           text: '$currentStatus\n',
-                        //           style: const TextStyle(
-                        //             color: Color(0xFF1A1A1A),
-                        //             fontSize: 16,
-                        //             fontWeight: FontWeight.w400,
-                        //             fontFamily: 'Inter',
-                        //             height: 0,
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),

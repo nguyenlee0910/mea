@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/services/department_api.dart';
-
 import '../../widgets/equipment_cell.dart';
 
 class EquipmentPage extends StatefulWidget {
@@ -151,6 +150,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
                             currentStatus: filterCellData[index].currentStatus,
+                            // imageUrls: filterCellData[index].imageUrls,
                             onPress: () {
                               context.push(
                                 '/${EquipmentDetail.routeName}',
