@@ -42,6 +42,9 @@ class _EquipmentPageState extends State<EquipmentPage> {
           final temp = <EquipmentCellData>[];
           for (final i in newList) {
             temp.add(EquipmentCellData(
+              imageUrl: (i.imageUrls?.isNotEmpty == true)
+                  ? i.imageUrls![0]
+                  : 'https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png',
               name: i.name ?? '', // Nếu i.name là null, sử dụng chuỗi rỗng
               code: i.code ?? '', // Nếu i.code là null, sử dụng chuỗi rỗng
               currentStatus: i.currentStatus ?? '',

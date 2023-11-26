@@ -5,14 +5,14 @@ class EquipmentCellData {
   EquipmentCellData({
     required this.name,
     required this.code,
-    this.imageUrls,
+    this.imageUrl,
     this.currentStatus,
     this.id,
   });
   String? id;
   String name;
   String code;
-  String? imageUrls;
+  String? imageUrl;
   String? currentStatus;
 }
 
@@ -20,7 +20,7 @@ class EquipmentCell extends StatelessWidget {
   const EquipmentCell({
     required this.name,
     required this.code,
-    this.imageUrls,
+    this.imageUrl,
     this.currentStatus,
     this.buttonName = '',
     this.colorButtonName = Colors.grey, // Set a default color if needed
@@ -30,7 +30,7 @@ class EquipmentCell extends StatelessWidget {
 
   final String name;
   final String code;
-  final String? imageUrls;
+  final String? imageUrl;
   final String? currentStatus;
   final String buttonName;
   final VoidCallback? onPress;
@@ -70,7 +70,7 @@ class EquipmentCell extends StatelessWidget {
                     width: 120.0,
                     height: 100.0,
                     child: Image.network(
-                      imageUrls ??
+                      imageUrl ??
                           "https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png",
                       fit: BoxFit.cover,
                     ),
