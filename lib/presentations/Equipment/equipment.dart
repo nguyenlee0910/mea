@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/services/department_api.dart';
+
 import '../../widgets/equipment_cell.dart';
 
 class EquipmentPage extends StatefulWidget {
@@ -153,12 +154,12 @@ class _EquipmentPageState extends State<EquipmentPage> {
                       )
                     : ListView.builder(
                         itemBuilder: (context, index) {
-                          // print(filterCellData[index].name);
+                          // print('Data return: ${filterCellData[index]}');
                           return EquipmentCell(
+                            imageUrl: filterCellData[index].imageUrl,
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
                             currentStatus: filterCellData[index].currentStatus,
-                            // imageUrls: filterCellData[index].imageUrls,
                             onPress: () {
                               context.push(
                                 '/${EquipmentDetail.routeName}',
