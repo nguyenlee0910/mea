@@ -246,17 +246,18 @@ Widget buildImportRequestCell({
                                 ),
                               ),
                             ),
-                            // Text(
-                            //   (requestModel as RepairReportModel)
-                            //           .repairReportItemsModel
-                            //           ?.repairReportEquipmentModel
-                            //           ?.name ??
-                            //       'Trống',
-                            //   style: TextStyle(
-                            //     fontSize: 16,
-                            //     fontWeight: FontWeight.normal,
-                            //   ),
-                            // ),
+                            Text(
+                              (requestModel as RepairRequestModel)
+                                      .repairReportItemsModel
+                                      ?.first
+                                      .equipment
+                                      ?.code ??
+                                  'Trống',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
                           ],
                         ),
                         const Gap(6),
@@ -272,17 +273,18 @@ Widget buildImportRequestCell({
                                 ),
                               ),
                             ),
-                            // Text(
-                            //   (requestModel as RepairReportModel)
-                            //           .repairReportItemsModel
-                            //           ?.repairReportEquipmentModel
-                            //           ?.code ??
-                            //       'Trống',
-                            //   style: TextStyle(
-                            //     fontSize: 16,
-                            //     fontWeight: FontWeight.normal,
-                            //   ),
-                            // ),
+                            Text(
+                              (requestModel as RepairRequestModel)
+                                      .repairReportItemsModel
+                                      ?.first
+                                      .equipment
+                                      ?.name ??
+                                  'Trống',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
                           ],
                         ),
                       ],

@@ -1,14 +1,21 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mea/services/login_service.dart';
 
 class FireBaseService {
   final _fireBaseServiceInstance = FirebaseMessaging.instance;
 
   Future<void> initNotificaitonService() async {
     await _fireBaseServiceInstance.requestPermission();
-    final fcmToken = await _fireBaseServiceInstance.getToken();
-    debugPrint('[FCM]: $fcmToken');
+    await _fireBaseServiceInstance.getToken().then((value) async {
+      debugPrint('[FCM]: $value');
+      if (value != null) {
+        await AuthService.updateToken(token: value);
+      } else {
+        debugPrint('[ERROR]: NO FCM TOKEN');
+      }
+    });
 
     //init notification channel
     const AndroidNotificationChannel channel = AndroidNotificationChannel(

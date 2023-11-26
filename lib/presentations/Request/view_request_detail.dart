@@ -11,6 +11,9 @@ class ViewRequestDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final importRequestModel = (baseRequestModel as ImportRequestModel)
+    //     .importRequestItemsModel
+    //     ?.map((e) => e.supply.first.name);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

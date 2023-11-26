@@ -70,7 +70,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
               tabs: [
                 Tab(text: 'Tất cả'),
                 Tab(text: 'Đang chờ'),
-                Tab(text: 'Đã duyệt'),
+                Tab(text: 'Đã xét'),
                 Tab(text: 'Đã hủy'),
               ],
               onTap: (index) {
@@ -237,6 +237,8 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                           ),
                           Text(
                             (requestModel as RepairRequestModel)
+                                    .repairReportItemsModel
+                                    ?.first
                                     .equipment
                                     ?.code ??
                                 'Trống',
@@ -262,6 +264,8 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                           ),
                           Text(
                             (requestModel as RepairRequestModel)
+                                    .repairReportItemsModel
+                                    ?.first
                                     .equipment
                                     ?.name ??
                                 'Trống',
