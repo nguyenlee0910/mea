@@ -45,6 +45,10 @@ class NotificationService {
     for (final i in equipmentJson) {
       listResult.add(NotificationModel.fromJson(i));
     }
+
+    // Sắp xếp danh sách theo ngày giảm dần
+    listResult.sort((a, b) => (b.createdAt ?? "").compareTo(a.createdAt ?? ""));
+
     return listResult;
   }
 

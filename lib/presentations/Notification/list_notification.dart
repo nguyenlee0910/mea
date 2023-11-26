@@ -95,9 +95,9 @@ class _NotificationPageState extends State<NotificationPage> {
             //     },
             //   ),
             // ),
-            const SizedBox(
-              height: 20,
-            ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             Expanded(
               child: Container(
                 width: double.infinity,

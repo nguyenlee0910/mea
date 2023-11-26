@@ -39,11 +39,11 @@ class NotificationCell extends StatelessWidget {
     // DateTime dateTime = DateTime.parse(iso8601Date);
     // DateFormat dateFormat = DateFormat('dd/MM/yyyy');
     // String formattedDate = dateFormat.format(dateTime);
-    final (dateNoti, type) = Utils.findDistance(iso8601Date);
+    final String distanceText = Utils.findDistance(iso8601Date);
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(0),
+        padding: const EdgeInsets.all(2),
         // child: Container(
         //   width: 358,
         //   height: 100,
@@ -119,12 +119,12 @@ class NotificationCell extends StatelessWidget {
             ),
             child: Container(
               // width: 352,
-              height: 120,
+              height: 110,
               padding: const EdgeInsets.all(16),
               decoration: ShapeDecoration(
                 color: status == 'READ_DETAIL'
                     ? Colors.white
-                    : const Color.fromARGB(255, 234, 242, 255),
+                    : Color.fromARGB(255, 221, 231, 247),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -143,73 +143,73 @@ class NotificationCell extends StatelessWidget {
                   //     height: 0,
                   //   ),
                   // ),
-                  const SizedBox(height: 8),
+                  // const SizedBox(height: 8),
                   SizedBox(
                     width: double.infinity,
-                    height: 60,
+                    // height: 60,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 300,
-                          height: 20,
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: 'Tiêu đề: ',
-                                  style: TextStyle(
-                                    color: Color(0xFF999999),
-                                    fontSize: 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
+                          // width: 300,
+                          // height: 20,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Text(
+                              //   'Tiêu đề:',
+                              //   style: const TextStyle(
+                              //     color: Color(0xFF1A1A1A),
+                              //     fontSize: 17,
+                              //     fontFamily: 'Inter',
+                              //     fontWeight: FontWeight.w600,
+                              //     height: 0,
+                              //   ),
+                              // ),
+                              Text(
+                                '$title',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: Color(0xFF1A1A1A),
+                                  fontSize: 18,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height:
+                                      1.2, // Adjust the height based on your design
                                 ),
-                                TextSpan(
-                                  text: '$title\n',
-                                  style: const TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(height: 8),
                         SizedBox(
                           width: 300,
-                          height: 20,
+                          // height: 20,
                           child: Text.rich(
                             TextSpan(
                               children: [
-                                const TextSpan(
-                                  text: 'Thời gian: ',
-                                  style: TextStyle(
-                                    color: Color(0xFF999999),
-                                    fontSize: 16,
+                                // const TextSpan(
+                                //   text: 'Thời gian: ',
+                                //   style: TextStyle(
+                                //     color: Color(0xFF1A1A1A),
+                                //     fontSize: 17,
+                                //     fontFamily: 'Inter',
+                                //     fontWeight: FontWeight.w600,
+                                //     height: 0,
+                                //   ),
+                                // ),
+                                TextSpan(
+                                  text: distanceText,
+                                  style: const TextStyle(
+                                    color: Color(0xFF0866FF),
+                                    fontSize: 17,
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: type == 'hours'
-                                      ? (dateNoti < 1
-                                          ? '$dateNoti phút trước\n'
-                                          : '$dateNoti giờ trước\n')
-                                      : '$dateNoti ngày trước\n',
-                                  style: const TextStyle(
-                                    color: Color(0xFF1A1A1A),
-                                    fontSize: 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
                                     height: 0,
                                   ),
                                 ),
