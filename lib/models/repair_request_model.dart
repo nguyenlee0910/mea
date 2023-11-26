@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mea/models/base_request_model.dart';
-import 'package:mea/models/equipment_model.dart';
 import 'package:mea/models/repair_report_items_model.dart';
 import 'package:mea/models/repair_request_createdBy_model.dart';
 import 'package:mea/models/repair_request_updatedBy_model.dart';

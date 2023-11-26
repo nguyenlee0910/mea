@@ -8,7 +8,6 @@ import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/list_equipment_ticket.dart';
 import 'package:mea/presentations/Request/list_repair_ticket.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
-import 'package:mea/presentations/Request/view_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/user_model.dart';

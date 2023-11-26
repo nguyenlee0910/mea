@@ -88,7 +88,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(left: 10),
-                        child: Text(
+                        child: const Text(
                           'Tên đơn yêu cầu thiết bị y tế:',
                           style: TextStyle(
                             fontSize: 16,
@@ -112,7 +112,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          color: Color.fromARGB(255, 226, 245, 253),
+                          color: const Color.fromARGB(255, 226, 245, 253),
                           child: Padding(
                             padding: const EdgeInsets.all(20),
                             child: Column(
@@ -137,7 +137,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                       const SizedBox(height: 15),
                       Container(
                         margin: const EdgeInsets.only(left: 10),
-                        child: Text(
+                        child: const Text(
                           'Khoảng thời gian muốn nhận:',
                           style: TextStyle(
                             fontSize: 16,
@@ -161,10 +161,10 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          color: Color.fromARGB(255, 226, 245, 253),
+                          color: const Color.fromARGB(255, 226, 245, 253),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 2),
+                                horizontal: 20, vertical: 2,),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -198,7 +198,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                       const SizedBox(height: 20),
                       Container(
                         margin: const EdgeInsets.only(left: 10),
-                        child: Text(
+                        child: const Text(
                           'Mô tả:',
                           style: TextStyle(
                             fontSize: 16,
@@ -222,7 +222,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          color: Color.fromARGB(255, 226, 245, 253),
+                          color: const Color.fromARGB(255, 226, 245, 253),
                           child: Padding(
                             padding: const EdgeInsets.all(20),
                             child: Column(
@@ -250,21 +250,21 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                         child: Column(
                           children: [
                             if (nameError && descriptionError)
-                              Text(
+                              const Text(
                                 '*Tên và mô tả không được trống',
                                 style: TextStyle(
                                   color: Colors.red,
                                 ),
                               )
                             else if (descriptionError)
-                              Text(
+                              const Text(
                                 '*Mô tả không được trống',
                                 style: TextStyle(
                                   color: Colors.red,
                                 ),
                               )
                             else if (nameError)
-                              Text(
+                              const Text(
                                 '*Tên không được trống',
                                 style: TextStyle(
                                   color: Colors.red,
@@ -307,7 +307,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           });
 
                           if (!nameError && !descriptionError) {
-                            String convertedExpected =
+                            final convertedExpected =
                                 convertDisplayToValue(expected);
                             await DepartmentServices.requestEquipment(
                               description: description,

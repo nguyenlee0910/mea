@@ -193,20 +193,18 @@ class _MessagePageState extends State<MessagePage> {
   Future<void> getData() async {
     final user = User(
       id: '6ef9a369-c49a-4cf1-abd1-b898ebbfabd6',
-      extraData: {
+      extraData: const {
         'name': 'Hoàng Nhã Thy',
       },
     );
 
-    if (user != null) {
-      await client.connectUser(user!,
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZmx1dHRlciJ9.S-MJpoSwDiqyXpUURgO5wVqJ4vKlIVFLSEyrFYCOE1c');
-      // client.devToken('6ef9a369-c49a-4cf1-abd1-b898ebbfabd6').toString());
+    await client.connectUser(user,
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZmx1dHRlciJ9.S-MJpoSwDiqyXpUURgO5wVqJ4vKlIVFLSEyrFYCOE1c',);
+    // client.devToken('6ef9a369-c49a-4cf1-abd1-b898ebbfabd6').toString());
 
-      setState(() {
-        isConected = true;
-      });
-    }
+    setState(() {
+      isConected = true;
+    });
   }
 
   @override
@@ -219,7 +217,7 @@ class _MessagePageState extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
     if (isConected == false) {
-      return SizedBox();
+      return const SizedBox();
     }
 
     return MaterialApp(
@@ -234,8 +232,8 @@ class _MessagePageState extends State<MessagePage> {
 
 class ChannelListPage extends StatefulWidget {
   const ChannelListPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<ChannelListPage> createState() => _ChannelListPageState();
@@ -282,15 +280,15 @@ class _ChannelListPageState extends State<ChannelListPage> {
 
 class ChannelPage extends StatelessWidget {
   const ChannelPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const StreamChannelHeader(),
+    return const Scaffold(
+      appBar: StreamChannelHeader(),
       body: Column(
-        children: const <Widget>[
+        children: <Widget>[
           Expanded(
             child: StreamMessageListView(),
           ),

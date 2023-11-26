@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:mea/env.dart';
 import 'package:mea/models/import_request_model.dart';
@@ -49,8 +48,8 @@ class DeviceRequestService {
 
     // Sort the list based on the creation date in descending order
     listResult.sort((a, b) {
-      DateTime dateTimeA = DateTime.parse(a.createdAt);
-      DateTime dateTimeB = DateTime.parse(b.createdAt);
+      final dateTimeA = DateTime.parse(a.createdAt);
+      final dateTimeB = DateTime.parse(b.createdAt);
       return dateTimeB.compareTo(dateTimeA);
     });
 
@@ -96,8 +95,8 @@ class DeviceRequestService {
 
     // Sort the list based on the creation date in descending order
     listResult.sort((a, b) {
-      DateTime dateTimeA = DateTime.parse(a.createdAt);
-      DateTime dateTimeB = DateTime.parse(b.createdAt);
+      final dateTimeA = DateTime.parse(a.createdAt);
+      final dateTimeB = DateTime.parse(b.createdAt);
       return dateTimeB.compareTo(dateTimeA);
     });
 

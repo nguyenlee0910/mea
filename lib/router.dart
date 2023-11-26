@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/equipment_model.dart';
-import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/notification_model.dart';
-import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
@@ -18,12 +14,12 @@ import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Notification/notification_detail.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
+import 'package:mea/presentations/Request/list_equipment_ticket.dart';
 import 'package:mea/presentations/Request/list_repair_ticket.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 import 'package:mea/presentations/Request/view_request_detail.dart';
-import 'package:mea/presentations/Request/list_equipment_ticket.dart';
 import 'package:mea/presentations/UserManagement/user_edit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

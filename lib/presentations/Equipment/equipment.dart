@@ -48,7 +48,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
               name: i.name ?? '', // Nếu i.name là null, sử dụng chuỗi rỗng
               code: i.code ?? '', // Nếu i.code là null, sử dụng chuỗi rỗng
               currentStatus: i.currentStatus ?? '',
-            ));
+            ),);
           }
           equipmentCellData = temp;
           filterCellData = equipmentCellData;
@@ -122,7 +122,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
           ),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         // decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(

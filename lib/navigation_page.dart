@@ -17,11 +17,12 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
+  int _badgeCount = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     const NotificationPage(),
     // MyApp(client, user),
-    MessagePage(),
+    const MessagePage(),
     UserManagementPage(),
   ];
 
@@ -30,7 +31,15 @@ class _NavigationState extends State<Navigation> {
     super.initState();
     runZoned(
       () async {
-        await FireBaseService().initNotificaitonService();
+        await FireBaseService().initNotificaitonService(
+          badgeCountListener: (badgeCount) {
+            setState(() {
+              if (badgeCount != 0) {
+                _badgeCount = badgeCount;
+              }
+            });
+          },
+        );
       },
     );
   }
@@ -50,7 +59,7 @@ class _NavigationState extends State<Navigation> {
               centerTitle: true,
               title: Text(
                 appBarName[_selectedIndex],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -72,8 +81,8 @@ class _NavigationState extends State<Navigation> {
           unselectedItemColor: Colors.white,
           selectedItemColor: Colors.blue[900],
           selectedIconTheme: IconThemeData(color: Colors.blue[900]),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
+          items: <BottomNavigationBarItem>[
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
                 //  color: Colors.white,
@@ -81,18 +90,25 @@ class _NavigationState extends State<Navigation> {
               label: 'Trang chủ',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.notifications,
-              ),
+              icon: _badgeCount != 0
+                  ? const Badge(
+                      label: Text(' '),
+                      child: Icon(
+                        Icons.notifications,
+                      ),
+                    )
+                  : const Icon(
+                      Icons.notifications,
+                    ),
               label: 'Thông báo',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.chat,
               ),
               label: 'Tin nhắn',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
               ),
@@ -105,6 +121,9 @@ class _NavigationState extends State<Navigation> {
           onTap: (value) {
             setState(() {
               _selectedIndex = value;
+              if (_selectedIndex == 1) {
+                _badgeCount = 0;
+              }
             });
           },
         ),

@@ -2,14 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mea/models/equipment_model.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class EquipmentDetail extends StatefulWidget {
-  const EquipmentDetail({required this.equipmentModel, Key? key})
-      : super(key: key);
+  const EquipmentDetail({required this.equipmentModel, super.key});
   static const routeName = 'equipment_detail';
   final EquipmentModel equipmentModel;
 
@@ -44,51 +41,51 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
 
   Color getStatusColor(String status) {
     if (status == 'UNACTIVE') {
-      return Color(0xFFE74C3C);
+      return const Color(0xFFE74C3C);
     } else {
       return (statusData[status]?['color'] as Color?) ?? Colors.black;
     }
   }
 
   Map<String, Map<String, dynamic>> statusData = {
-    "ACTIVE": {
-      "label": "Hoạt động",
-      "color": Colors.green,
+    'ACTIVE': {
+      'label': 'Hoạt động',
+      'color': Colors.green,
     },
-    "INACTIVE": {
-      "label": "Không hoạt động",
-      "color": Colors.red,
+    'INACTIVE': {
+      'label': 'Không hoạt động',
+      'color': Colors.red,
     },
-    "BROKEN": {
-      "label": "Hỏng",
-      "color": Colors.red,
+    'BROKEN': {
+      'label': 'Hỏng',
+      'color': Colors.red,
     },
-    "FIXING": {
-      "label": "Sửa chữa",
-      "color": Colors.yellow,
+    'FIXING': {
+      'label': 'Sửa chữa',
+      'color': Colors.yellow,
     },
-    "IDLE": {
-      "label": "Chờ sử dụng",
-      "color": Colors.blue,
+    'IDLE': {
+      'label': 'Chờ sử dụng',
+      'color': Colors.blue,
     },
-    "DRAFT": {
-      "label": "Nháp",
-      "color": Colors.grey,
+    'DRAFT': {
+      'label': 'Nháp',
+      'color': Colors.grey,
     },
-    "UNACTIVE": {
-      "label": "Không hoạt động",
-      "color": Color(0xFFE74C3C),
+    'UNACTIVE': {
+      'label': 'Không hoạt động',
+      'color': const Color(0xFFE74C3C),
     },
   };
 
-  final PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController();
   int _selectedThumbnailIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final checkImage = Uri.tryParse(widget.equipmentModel.imageUrls?.first ??
-                'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg')
+                'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',)
             ?.hasAbsolutePath ??
         false;
     var dateTime = DateTime.now();
@@ -108,12 +105,12 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
     final dateFormat = DateFormat('dd/MM/yyyy');
     final formattedDate = dateFormat.format(dateTime);
     final formattedDate2 = dateFormat.format(dateTime2);
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 110, 194, 247),
+        backgroundColor: const Color.fromARGB(255, 110, 194, 247),
         title: const Text(
           'Chi tiết thiết bị',
           style: TextStyle(
@@ -125,12 +122,11 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
       ),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: Color.fromARGB(255, 236, 236, 236)),
+        decoration: const BoxDecoration(color: Color.fromARGB(255, 236, 236, 236)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Container(
+            SizedBox(
               height: height * 0.27,
               child: PageView(
                 controller: _pageController,
@@ -163,10 +159,10 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
-            Container(
+            SizedBox(
               height: height * 0.13,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -177,7 +173,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 itemBuilder: (context, index) {
                   return (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
                       ? Padding(
-                          padding: const EdgeInsets.all(3.0),
+                          padding: const EdgeInsets.all(3),
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -185,10 +181,10 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               });
                               _pageController.animateToPage(
                                 index,
-                                duration: Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
                               );
-                              print("Show index $_selectedThumbnailIndex");
+                              print('Show index $_selectedThumbnailIndex');
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -197,7 +193,6 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                                       ? Colors
                                           .blue // Change the border color for the selected thumbnail
                                       : Colors.grey,
-                                  width: 1.0,
                                 ),
                               ),
                               child: SizedBox(
@@ -223,7 +218,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Center(
@@ -238,7 +233,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -247,12 +242,12 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 20,
                           top: 10,
                         ),
-                        child: Text(
-                          "Chi tiết",
+                        child: const Text(
+                          'Chi tiết',
                           style: TextStyle(
                             color: Color.fromARGB(255, 110, 194, 247),
                             fontSize: 25,
@@ -263,13 +258,13 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+                        margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
-                              child: const Text(
+                              child: Text(
                                 'Tên máy',
                                 style: TextStyle(
                                   color: Colors.black,
@@ -299,13 +294,13 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       ),
                       const SizedBox(height: 16),
                       Container(
-                        margin: EdgeInsets.only(left: 20, right: 20),
+                        margin: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
-                              child: const Text(
+                              child: Text(
                                 'Mã máy',
                                 style: TextStyle(
                                   color: Colors.black,
@@ -335,15 +330,15 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       ),
                       const SizedBox(height: 16),
                       Container(
-                        margin: EdgeInsets.only(left: 20, right: 20),
+                        margin: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
-                              child: const Text(
+                              child: Text(
                                 'Nhãn hiệu',
                                 style: TextStyle(
                                   color: Colors.black,
@@ -357,7 +352,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                             const SizedBox(width: 20),
                             Expanded(
                               child: Text(
-                                (widget.equipmentModel.brand?.name) ?? 'Trống',
+                                widget.equipmentModel.brand?.name ?? 'Trống',
                                 softWrap: true,
                                 style: const TextStyle(
                                   color: Color(0xFF1A1A1A),
@@ -373,15 +368,15 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       ),
                       const SizedBox(height: 16),
                       Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
+                        padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
-                              child: const Text(
+                              child: Text(
                                 'Loại thiết bị',
                                 style: TextStyle(
                                   color: Colors.black,
@@ -395,8 +390,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                             const SizedBox(width: 20),
                             Expanded(
                               child: Text(
-                                (widget.equipmentModel.equipmentCategory
-                                        ?.name) ??
+                                widget.equipmentModel.equipmentCategory
+                                        ?.name ??
                                     'Trống',
                                 softWrap: true,
                                 style: const TextStyle(
@@ -413,15 +408,15 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       ),
                       const SizedBox(height: 16),
                       Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
+                        padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
-                              child: const Text(
+                              child: Text(
                                 'Trạng thái',
                                 style: TextStyle(
                                   color: Colors.black,
@@ -437,12 +432,12 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               child: Text(
                                 getStatusLabel(
                                     widget.equipmentModel.currentStatus ??
-                                        'DEFAULT'),
+                                        'DEFAULT',),
                                 softWrap: true,
                                 style: TextStyle(
                                   color: getStatusColor(
                                       widget.equipmentModel.currentStatus ??
-                                          'DEFAULT'),
+                                          'DEFAULT',),
                                   fontSize: 16,
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w500,
@@ -456,7 +451,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       const SizedBox(height: 16),
                       Padding(
                         padding:
-                            EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                            const EdgeInsets.only(left: 20, right: 20, bottom: 10),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,16 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/presentations/Request/view_request_detail.dart';
 import 'package:mea/services/device_request_api.dart';
-import 'package:go_router/go_router.dart';
 
 class ListRepairTicket extends StatefulWidget {
-  const ListRepairTicket({Key? key}) : super(key: key);
+  const ListRepairTicket({super.key});
   static const routeName = 'list_repair';
 
   @override
@@ -67,7 +66,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
             TabBar(
               indicatorColor: Colors.blue[900],
               labelColor: Colors.blue[900],
-              tabs: [
+              tabs: const [
                 Tab(text: 'Tất cả'),
                 Tab(text: 'Đang chờ'),
                 Tab(text: 'Đã xét'),
@@ -97,25 +96,28 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
   }
 
   Widget buildTabContent({required String status}) {
-    List<BaseRequestModel> tabFilterList = [];
+    var tabFilterList = <BaseRequestModel>[];
 
     if (status == 'ALL') {
       tabFilterList = requestData;
     } else if (status == 'CANCELLED') {
       // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
       tabFilterList = requestData
-          .where((request) =>
-              request.status == 'CANCELLED' || request.status == 'REJECTED')
+          .where(
+            (request) =>
+                request.status == 'CANCELLED' || request.status == 'REJECTED',
+          )
           .toList();
     } else if (status == 'APPROVED') {
       // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
       tabFilterList = requestData
-          .where((request) =>
-                  request.status == 'APPROVED' ||
-                  request.status == 'COMPLETED' ||
-                  request.status == 'FIXING'
-              // || request.status == 'CANCELLED'
-              )
+          .where(
+            (request) =>
+                request.status == 'APPROVED' ||
+                request.status == 'COMPLETED' ||
+                request.status == 'FIXING',
+            // || request.status == 'CANCELLED'
+          )
           .toList();
     } else {
       // Lọc theo status khác
@@ -142,41 +144,34 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
     required BuildContext context,
     required BaseRequestModel requestModel,
   }) {
-    DateTime createDate = DateTime.parse(requestModel.createdAt);
-    var formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-    var createDateString = formatter.format(createDate);
+    final createDate = DateTime.parse(requestModel.createdAt);
+    final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
+    final createDateString = formatter.format(createDate);
     var color = Colors.black;
 
-    String statusText = '';
+    var statusText = '';
     switch (requestModel.status) {
       case 'REQUESTING':
-        color = Color.fromARGB(255, 211, 145, 38);
+        color = const Color.fromARGB(255, 211, 145, 38);
         statusText = 'Đang yêu cầu';
-        break;
       case 'COMPLETED':
         color = const Color.fromARGB(255, 67, 153, 70);
         statusText = 'Hoàn thành';
-        break;
       case 'PAUSED':
-        color = Color.fromARGB(255, 80, 27, 165);
+        color = const Color.fromARGB(255, 80, 27, 165);
         statusText = 'Tạm dừng sửa chữa';
-        break;
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Hủy sửa chữa';
-        break;
       case 'REJECTED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã từ chối';
-        break;
       case 'FIXING':
-        color = Color.fromARGB(255, 30, 89, 216);
+        color = const Color.fromARGB(255, 30, 89, 216);
         statusText = 'Đang sửa chữa';
-        break;
       case 'DRAFT':
         color = const Color.fromARGB(255, 51, 51, 51);
         statusText = 'Nháp';
-        break;
       default:
         color = Colors.black;
         break;
@@ -205,7 +200,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
             decoration:
                 const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -213,10 +208,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: Text(
                       requestModel is ImportRequestModel
-                          ? (requestModel as ImportRequestModel).name
+                          ? requestModel.name
                           : 'Đơn sửa chữa thiết bị y tế',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Gap(12),
@@ -225,10 +220,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                     children: [
                       Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              "Mã máy: ",
+                              'Mã máy: ',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -242,7 +237,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                                     .equipment
                                     ?.code ??
                                 'Trống',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
                             ),
@@ -252,10 +247,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                       const Gap(6),
                       Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              "Tên máy: ",
+                              'Tên máy: ',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -263,13 +258,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                             ),
                           ),
                           Text(
-                            (requestModel as RepairRequestModel)
-                                    .repairReportItemsModel
-                                    ?.first
-                                    .equipment
+                            requestModel.repairReportItemsModel?.first.equipment
                                     ?.name ??
                                 'Trống',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
                             ),
@@ -279,10 +271,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                       const Gap(6),
                       Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              "Trạng thái: ",
+                              'Trạng thái: ',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -302,10 +294,10 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                       const Gap(6),
                       Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              "Thời gian tạo: ",
+                              'Thời gian tạo: ',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -314,7 +306,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                           ),
                           Text(
                             createDateString,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),

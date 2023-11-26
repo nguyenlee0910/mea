@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mea/models/base_request_model.dart';
-import 'package:mea/models/import_request_model.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 
 class ViewRequestDetail extends StatelessWidget {
-  const ViewRequestDetail({super.key, required this.baseRequestModel});
+  const ViewRequestDetail({required this.baseRequestModel, super.key});
 
   static const routeName = 'view_request_detail';
   final BaseRequestModel baseRequestModel;
@@ -33,7 +32,6 @@ class ViewRequestDetail extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,9 +39,9 @@ class ViewRequestDetail extends StatelessWidget {
               buildImportRequestCell(
                   isDetail: true,
                   context: context,
-                  requestModel: baseRequestModel),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, top: 10),
+                  requestModel: baseRequestModel,),
+              const Padding(
+                padding: EdgeInsets.only(left: 15, top: 10),
                 child: Text(
                   'Mô tả đơn yêu cầu',
                   style: TextStyle(
@@ -76,8 +74,8 @@ class ViewRequestDetail extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 15),
                       child: Text(
                         'Ghi chú duyệt đơn',
                         style: TextStyle(
@@ -108,8 +106,8 @@ class ViewRequestDetail extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 15),
                       child: Text(
                         'Lý do hủy đơn',
                         style: TextStyle(

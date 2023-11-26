@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class EquipmentCellData {
@@ -55,9 +54,9 @@ class EquipmentCell extends StatelessWidget {
             child: Container(
               width: 372,
               height: 140,
-              padding: EdgeInsets.fromLTRB(8, 20, 8, 16),
+              padding: const EdgeInsets.fromLTRB(8, 20, 8, 16),
               decoration: ShapeDecoration(
-                color: Color.fromARGB(255, 219, 236, 248),
+                color: const Color.fromARGB(255, 219, 236, 248),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -66,16 +65,16 @@ class EquipmentCell extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 120.0,
-                    height: 100.0,
+                  SizedBox(
+                    width: 120,
+                    height: 100,
                     child: Image.network(
                       imageUrl ??
-                          "https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png",
+                          'https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png',
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Expanded(
@@ -89,7 +88,7 @@ class EquipmentCell extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 5),
+                                margin: const EdgeInsets.only(top: 5),
                                 child: SizedBox(
                                   width: 300,
                                   height:
