@@ -70,7 +70,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
               tabs: [
                 Tab(text: 'Tất cả'),
                 Tab(text: 'Đang chờ'),
-                Tab(text: 'Đã xét'),
+                Tab(text: 'Đã duyệt'),
                 Tab(text: 'Đã hủy'),
               ],
               onTap: (index) {

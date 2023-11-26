@@ -223,7 +223,7 @@ Widget buildImportRequestCell({
                 child: Text(
                   requestModel is ImportRequestModel
                       ? (requestModel as ImportRequestModel).name
-                      : 'Đơn yêu cầu thiết bị y tế',
+                      : 'Đơn sửa chữa thiết bị y tế',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
