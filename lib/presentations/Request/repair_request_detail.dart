@@ -54,12 +54,13 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Container(
+          height: 486,
           width: double.infinity,
           decoration: BoxDecoration(color: Colors.grey[100]),
           child: Column(
             children: [
               const SizedBox(
-                height: 80,
+                height: 10,
               ),
               Expanded(
                 child: Padding(
@@ -91,7 +92,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Padding(
-                                    padding: EdgeInsets.only(top: 8, left: 18),
+                                    padding: EdgeInsets.only(top: 20, left: 18),
                                     child: Text(
                                       'Tên thiết bị:',
                                       style: TextStyle(
@@ -121,8 +122,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 8, left: 18),
+                                    padding: EdgeInsets.only(top: 8, left: 18),
                                     child: Text(
                                       'Mã thiết bị:',
                                       style: TextStyle(
@@ -252,7 +252,8 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                       return AlertDialog(
                                         title: const Text('Xác nhận'),
                                         content: const Text(
-                                            'Bạn có chắc chắn gửi đơn ?',),
+                                          'Bạn có chắc chắn gửi đơn ?',
+                                        ),
                                         actions: [
                                           // TextButton(
                                           //   onPressed: () {
@@ -264,7 +265,9 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                             onPressed: () {
                                               Navigator.of(context).pop(true);
                                               Navigator.pushReplacementNamed(
-                                                  context, HomePage.routeName,);
+                                                context,
+                                                HomePage.routeName,
+                                              );
                                             },
                                             child: const Text('Xác nhận'),
                                           ),

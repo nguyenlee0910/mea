@@ -176,18 +176,29 @@ class EquipmentCell extends StatelessWidget {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: currentStatus == 'ACTIVE'
-                                            ? 'Đang hoạt động'
-                                            : currentStatus ?? 'Đang hoạt động',
-                                        style: TextStyle(
-                                          color: currentStatus == 'ACTIVE'
-                                              ? Colors.green
-                                              : Colors.green,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: currentStatus == 'ACTIVE'
+                                                ? 'Đang hoạt động'
+                                                : currentStatus ??
+                                                    'Đang hoạt động',
+                                            style: TextStyle(
+                                              color: currentStatus == 'ACTIVE'
+                                                  ? Colors.green
+                                                  : currentStatus == 'FIXING'
+                                                      ? Color.fromARGB(
+                                                          255,
+                                                          31,
+                                                          60,
+                                                          190) // Màu vàng cho trạng thái INACTIVE
+                                                      : Colors.green,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'Inter',
+                                              height: 0,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

@@ -14,7 +14,7 @@ import '../models/equipment_model.dart';
 
 class DepartmentServices {
   static Future<List<EquipmentModel>> getEquipment({
-    int pageSize = 12,
+    int pageSize = 100,
     int page = 0,
   }) async {
     final prefs = await SharedPreferences.getInstance();
@@ -41,14 +41,22 @@ class DepartmentServices {
       },
     );
 
-    final listResult = <EquipmentModel>[];
     final equipmentJson = (jsonDecode(response.body) as List).map((e) {
       return e as Map<String, dynamic>;
     }).toList();
 
-    for (final i in equipmentJson) {
-      listResult.add(EquipmentModel.fromJson(i));
-    }
+    // Lọc danh sách để chỉ giữ lại những mục có trạng thái là 'FIXING' hoặc 'ACTIVE'
+    final filteredList = equipmentJson
+        .where((equipment) =>
+            equipment['currentStatus'] == 'FIXING' ||
+            equipment['currentStatus'] == 'ACTIVE')
+        .toList();
+
+    // Chuyển đổi danh sách đã lọc thành danh sách các đối tượng EquipmentModel
+    final listResult = filteredList
+        .map((equipment) => EquipmentModel.fromJson(equipment))
+        .toList();
+
     return listResult;
   }
 

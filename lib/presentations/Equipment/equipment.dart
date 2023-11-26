@@ -34,21 +34,26 @@ class _EquipmentPageState extends State<EquipmentPage> {
           ),
         ],
       );
+      // print('Result 1: ${resultArary[0]}'); //tao check api
+      // print('Result 2: ${resultArary[1]}');
       final newList = List<EquipmentModel>.from(resultArary[0])
-        ..addAll(resultArary[1]);
+          // ..addAll(resultArary[1])
+          ;
       equipmentList = newList;
       setState(() {
         if (newList.isNotEmpty) {
           final temp = <EquipmentCellData>[];
           for (final i in newList) {
-            temp.add(EquipmentCellData(
-              imageUrl: (i.imageUrls?.isNotEmpty == true)
-                  ? i.imageUrls![0]
-                  : 'https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png',
-              name: i.name ?? '', // Nếu i.name là null, sử dụng chuỗi rỗng
-              code: i.code ?? '', // Nếu i.code là null, sử dụng chuỗi rỗng
-              currentStatus: i.currentStatus ?? '',
-            ),);
+            temp.add(
+              EquipmentCellData(
+                imageUrl: (i.imageUrls?.isNotEmpty == true)
+                    ? i.imageUrls![0]
+                    : 'https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png',
+                name: i.name ?? '', // Nếu i.name là null, sử dụng chuỗi rỗng
+                code: i.code ?? '', // Nếu i.code là null, sử dụng chuỗi rỗng
+                currentStatus: i.currentStatus ?? '',
+              ),
+            );
           }
           equipmentCellData = temp;
           filterCellData = equipmentCellData;

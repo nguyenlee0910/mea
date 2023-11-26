@@ -60,10 +60,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
       'label': 'Hỏng',
       'color': Colors.red,
     },
-    'FIXING': {
-      'label': 'Sửa chữa',
-      'color': Colors.yellow,
-    },
+    'FIXING': {'label': 'Sửa chữa', 'color': Color.fromARGB(255, 31, 60, 190)},
     'IDLE': {
       'label': 'Chờ sử dụng',
       'color': Colors.blue,
@@ -84,9 +81,10 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final checkImage = Uri.tryParse(widget.equipmentModel.imageUrls?.first ??
-                'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',)
-            ?.hasAbsolutePath ??
+    final checkImage = Uri.tryParse(
+          widget.equipmentModel.imageUrls?.first ??
+              'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',
+        )?.hasAbsolutePath ??
         false;
     var dateTime = DateTime.now();
     var dateTime2 = DateTime.now();
@@ -122,7 +120,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
       ),
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(color: Color.fromARGB(255, 236, 236, 236)),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 236, 236, 236)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -233,7 +232,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -258,7 +258,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        margin:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -390,8 +391,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                             const SizedBox(width: 20),
                             Expanded(
                               child: Text(
-                                widget.equipmentModel.equipmentCategory
-                                        ?.name ??
+                                widget.equipmentModel.equipmentCategory?.name ??
                                     'Trống',
                                 softWrap: true,
                                 style: const TextStyle(
@@ -431,13 +431,15 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                             Expanded(
                               child: Text(
                                 getStatusLabel(
-                                    widget.equipmentModel.currentStatus ??
-                                        'DEFAULT',),
+                                  widget.equipmentModel.currentStatus ??
+                                      'DEFAULT',
+                                ),
                                 softWrap: true,
                                 style: TextStyle(
                                   color: getStatusColor(
-                                      widget.equipmentModel.currentStatus ??
-                                          'DEFAULT',),
+                                    widget.equipmentModel.currentStatus ??
+                                        'DEFAULT',
+                                  ),
                                   fontSize: 16,
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w500,
@@ -450,8 +452,8 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                       ),
                       const SizedBox(height: 16),
                       Padding(
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, bottom: 10),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,

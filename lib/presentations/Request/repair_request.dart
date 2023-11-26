@@ -39,7 +39,8 @@ class _RepairRequestState extends State<RepairRequest> {
             ],
           );
           final newList = List<EquipmentModel>.from(resultArary[0])
-            ..addAll(resultArary[1]);
+              // ..addAll(resultArary[1])
+              ;
           // ..sort(
           //   (a, b) {
           //     final aStr = a.code.replaceAll(RegExp('[^0-9]'), '');
@@ -54,10 +55,11 @@ class _RepairRequestState extends State<RepairRequest> {
               for (final i in newList) {
                 temp.add(
                   EquipmentCellData(
-                      name: i.name ?? 'Trống',
-                      code: i.code ?? 'Trống',
-                      currentStatus: i.currentStatus ?? '',
-                      id: i.id,),
+                    name: i.name ?? 'Trống',
+                    code: i.code ?? 'Trống',
+                    currentStatus: i.currentStatus ?? '',
+                    id: i.id,
+                  ),
                 );
               }
               equipmentCellData = temp;
