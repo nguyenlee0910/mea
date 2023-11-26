@@ -350,7 +350,7 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
       updatedAt,
       createdBy,
       updatedBy,
-      importRequestItemsModel);
+      const DeepCollectionEquality().hash(_importRequestItemsModel));
 
   @JsonKey(ignore: true)
   @override
