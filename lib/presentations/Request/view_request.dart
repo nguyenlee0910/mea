@@ -239,10 +239,10 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
-                                      .repairReportItems
-                                      ?.first
-                                      .equipment
-                                      ?.code ??
+                                      .repairReportItems!
+                                      .first
+                                      .equipment!
+                                      .code ??
                                   'Trống',
                               style: const TextStyle(
                                 fontSize: 16,
@@ -266,10 +266,10 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
-                                      .repairReportItems
-                                      ?.first
-                                      .equipment
-                                      ?.name ??
+                                      .repairReportItems!
+                                      .first
+                                      .equipment!
+                                      .name ??
                                   'Trống',
                               style: const TextStyle(
                                 fontSize: 16,

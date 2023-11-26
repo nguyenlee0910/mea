@@ -259,8 +259,11 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                             ),
                           ),
                           Text(
-                            requestModel
-                                    .repairReportItems?.first.equipment?.name ??
+                            (requestModel as RepairRequestModel)
+                                    .repairReportItems
+                                    ?.first
+                                    .equipment
+                                    ?.name ??
                                 'Trống',
                             style: const TextStyle(
                               fontSize: 16,
