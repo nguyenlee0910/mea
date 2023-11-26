@@ -18,7 +18,7 @@ class RepairRequestModel extends BaseRequestModel with _$RepairRequestModel {
     required String updatedAt,
     required RepairRequestCreatedByModel createdBy,
     required RepairRequestUpdatedByModel updatedBy,
-    List<RepairReportItemsModel>? repairReportItemsModel,
+    List<RepairReportItemsModel>? repairReportItems,
   }) = _RepairRequestModel;
 
   factory RepairRequestModel.fromJson(Map<String, dynamic> json) =>

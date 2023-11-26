@@ -16,10 +16,6 @@ _$EquipmentModelImpl _$$EquipmentModelImplFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as String)
           .toList(),
       endOfWarrantyDate: json['endOfWarrantyDate'] as String?,
-      equipmentMaintainSchedule: json['equipmentMaintainSchedule'] == null
-          ? null
-          : EquipmentMaintainScheduleModel.fromJson(
-              json['equipmentMaintainSchedule'] as Map<String, dynamic>),
       currentStatus: json['currentStatus'] as String?,
       equipmentCategory: json['equipmentCategory'] == null
           ? null
@@ -28,6 +24,10 @@ _$EquipmentModelImpl _$$EquipmentModelImplFromJson(Map<String, dynamic> json) =>
       brand: json['brand'] == null
           ? null
           : BrandModel.fromJson(json['brand'] as Map<String, dynamic>),
+      equipmentMaintainSchedule: json['equipmentMaintainSchedule'] == null
+          ? null
+          : EquipmentMaintainScheduleModel.fromJson(
+              json['equipmentMaintainSchedule'] as Map<String, dynamic>),
       importRequestItemsModel: json['importRequestItemsModel'] == null
           ? null
           : ImportRequestItemsModel.fromJson(
@@ -43,9 +43,9 @@ Map<String, dynamic> _$$EquipmentModelImplToJson(
       'description': instance.description,
       'imageUrls': instance.imageUrls,
       'endOfWarrantyDate': instance.endOfWarrantyDate,
-      'equipmentMaintainSchedule': instance.equipmentMaintainSchedule,
       'currentStatus': instance.currentStatus,
       'equipmentCategory': instance.equipmentCategory,
       'brand': instance.brand,
+      'equipmentMaintainSchedule': instance.equipmentMaintainSchedule,
       'importRequestItemsModel': instance.importRequestItemsModel,
     };

@@ -27,10 +27,11 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
       setState(() {
         if (resultArray.isNotEmpty) {
           requestData.addAll(resultArray);
+
           filterList = requestData;
         }
       });
-      debugPrint(requestData.toString());
+      // debugPrint('[DEBUG] $requestData');
     });
   }
 
@@ -232,7 +233,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                           ),
                           Text(
                             (requestModel as RepairRequestModel)
-                                    .repairReportItemsModel
+                                    .repairReportItems
                                     ?.first
                                     .equipment
                                     ?.code ??
@@ -258,8 +259,8 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                             ),
                           ),
                           Text(
-                            requestModel.repairReportItemsModel?.first.equipment
-                                    ?.name ??
+                            requestModel
+                                    .repairReportItems?.first.equipment?.name ??
                                 'Trống',
                             style: const TextStyle(
                               fontSize: 16,

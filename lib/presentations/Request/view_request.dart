@@ -239,7 +239,7 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
-                                      .repairReportItemsModel
+                                      .repairReportItems
                                       ?.first
                                       .equipment
                                       ?.code ??
@@ -266,7 +266,7 @@ Widget buildImportRequestCell({
                             ),
                             Text(
                               (requestModel as RepairRequestModel)
-                                      .repairReportItemsModel
+                                      .repairReportItems
                                       ?.first
                                       .equipment
                                       ?.name ??

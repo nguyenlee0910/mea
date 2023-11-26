@@ -42,8 +42,8 @@ class FireBaseService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final notification = message.notification;
       final android = message.notification?.android;
-      final badgeCount =
-          (message.data['badge'] ?? 0) as int; //change to '0' to get server
+      final badgeCount = int.parse((message.data['badge'] ?? '0')
+          as String); //change to '0' to get server
       if (notification != null && android != null) {
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
