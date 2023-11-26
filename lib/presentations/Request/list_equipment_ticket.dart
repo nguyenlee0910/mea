@@ -1,16 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/import_request_model.dart';
-import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/presentations/Request/view_request_detail.dart';
 import 'package:mea/services/device_request_api.dart';
-import 'package:go_router/go_router.dart';
 
 class ListEquipmentTicket extends StatefulWidget {
-  const ListEquipmentTicket({Key? key}) : super(key: key);
+  const ListEquipmentTicket({super.key});
   static const routeName = 'list_request';
 
   @override
@@ -67,7 +65,7 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
             TabBar(
               indicatorColor: Colors.blue[900],
               labelColor: Colors.blue[900],
-              tabs: [
+              tabs: const [
                 Tab(text: 'Tất cả'),
                 Tab(text: 'Đang chờ'),
                 Tab(text: 'Đã duyệt'),
@@ -97,15 +95,17 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
   }
 
   Widget buildTabContent({required String status}) {
-    List<BaseRequestModel> tabFilterList = [];
+    var tabFilterList = <BaseRequestModel>[];
 
     if (status == 'ALL') {
       tabFilterList = requestData;
     } else if (status == 'APPROVED') {
       // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
       tabFilterList = requestData
-          .where((request) =>
-              request.status == 'APPROVED' || request.status == 'UPDATED')
+          .where(
+            (request) =>
+                request.status == 'APPROVED' || request.status == 'UPDATED',
+          )
           .toList();
     } else {
       // Lọc theo status khác
@@ -132,33 +132,28 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
     required BuildContext context,
     required BaseRequestModel requestModel,
   }) {
-    DateTime createDate = DateTime.parse(requestModel.createdAt);
-    var formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-    var createDateString = formatter.format(createDate);
+    final createDate = DateTime.parse(requestModel.createdAt);
+    final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
+    final createDateString = formatter.format(createDate);
     var color = Colors.black;
 
-    String statusText = '';
+    var statusText = '';
     switch (requestModel.status) {
       case 'REQUESTING':
-        color = Color.fromARGB(255, 211, 145, 38);
+        color = const Color.fromARGB(255, 211, 145, 38);
         statusText = 'Chờ xác nhận';
-        break;
       case 'APPROVED':
         color = const Color.fromARGB(255, 67, 153, 70);
         statusText = 'Đã duyệt';
-        break;
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã hủy';
-        break;
       case 'UPDATED':
-        color = Color.fromARGB(255, 30, 89, 216);
+        color = const Color.fromARGB(255, 30, 89, 216);
         statusText = 'Đã cập nhật';
-        break;
       case 'DRAFT':
         color = const Color.fromARGB(255, 51, 51, 51);
         statusText = 'Nháp';
-        break;
       default:
         color = Colors.black;
         break;
@@ -187,7 +182,7 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
             decoration:
                 const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -195,10 +190,10 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: Text(
                       requestModel is ImportRequestModel
-                          ? (requestModel as ImportRequestModel).name
+                          ? requestModel.name
                           : 'Đơn yêu cầu thiết bị y tế',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Gap(12),
@@ -211,8 +206,8 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                             padding: const EdgeInsets.only(left: 10),
                             child: Row(
                               children: [
-                                Text(
-                                  "Trạng thái: ",
+                                const Text(
+                                  'Trạng thái: ',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -232,10 +227,10 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                           const Gap(6),
                           Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10),
                                 child: Text(
-                                  "Khoảng thời gian nhận: ",
+                                  'Khoảng thời gian nhận: ',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -244,37 +239,28 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                               ),
                               Text(
                                 (requestModel is ImportRequestModel &&
-                                        (requestModel as ImportRequestModel)
-                                                .expected ==
-                                            'HOUR_72')
+                                        requestModel.expected == 'HOUR_72')
                                     ? '72 giờ'
                                     : (requestModel as ImportRequestModel)
                                                 .expected ==
                                             'HOUR_1'
                                         ? '1 giờ'
-                                        : (requestModel as ImportRequestModel)
-                                                    .expected ==
-                                                'HOUR_3'
+                                        : requestModel.expected == 'HOUR_3'
                                             ? '3 giờ'
-                                            : (requestModel as ImportRequestModel)
-                                                        .expected ==
-                                                    'HOUR_5'
+                                            : requestModel.expected == 'HOUR_5'
                                                 ? '5 giờ'
-                                                : (requestModel as ImportRequestModel)
-                                                            .expected ==
+                                                : requestModel.expected ==
                                                         'HOUR_24'
                                                     ? '24 giờ'
-                                                    : (requestModel as ImportRequestModel)
-                                                                .expected ==
+                                                    : requestModel.expected ==
                                                             'HOUR_36'
                                                         ? '36 giờ'
                                                         : (requestModel
                                                                 is ImportRequestModel
-                                                            ? (requestModel
-                                                                    as ImportRequestModel)
+                                                            ? requestModel
                                                                 .expected
                                                             : ''),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                 ),
                               ),
@@ -283,10 +269,10 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                           const Gap(6),
                           Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10),
                                 child: Text(
-                                  "Thời gian tạo: ",
+                                  'Thời gian tạo: ',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -295,7 +281,7 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                               ),
                               Text(
                                 createDateString,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                 ),
                               ),

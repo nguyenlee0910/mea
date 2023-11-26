@@ -9,7 +9,7 @@ import 'package:mea/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key});
+  const LoginPage({super.key});
 
   static String routeName = 'login';
 
@@ -64,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
       buttonsBorderRadius: const BorderRadius.all(
         Radius.circular(2),
       ),
-      dismissOnTouchOutside: true,
       dismissOnBackKeyPress: false,
       onDismissCallback: (type) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -77,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
       animType: AnimType.bottomSlide,
       title: 'ERROR',
       desc: message,
-      showCloseIcon: false,
       btnCancelOnPress: () {},
       btnOkOnPress: () {},
     ).show();
@@ -112,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: BoxDecoration(color: Color.fromARGB(255, 201, 229, 255)),
+        decoration: const BoxDecoration(color: Color.fromARGB(255, 201, 229, 255)),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,10 +149,10 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                              color: const Color.fromARGB(255, 0, 0, 0)!),
+                              ),
                         ),
                       ),
                       child: TextField(
@@ -183,10 +181,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Container(
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                              color: const Color.fromARGB(255, 0, 0, 0)!),
+                              ),
                         ),
                       ),
                       child: TextField(
@@ -232,9 +230,9 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           if (nameError || passwordError)
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                                  EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 '*Tên đăng nhập và mật khẩu không được trống',
                                 style: TextStyle(
@@ -243,9 +241,9 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             )
                           else if (passwordError)
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                                  EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 '*Mật khẩu không được trống',
                                 style: TextStyle(
@@ -254,9 +252,9 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             )
                           else if (nameError)
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                                  EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 '*Tên đăng nhập không được trống',
                                 style: TextStyle(
@@ -275,7 +273,7 @@ class _LoginPageState extends State<LoginPage> {
                                   });
                                 },
                               ),
-                              Text(
+                              const Text(
                                 'Lưu đăng nhập',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 95, 95, 95),
@@ -296,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: size.width * 0.4,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 32, 69, 182),
+                            backgroundColor: const Color.fromARGB(255, 32, 69, 182),
                             shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),

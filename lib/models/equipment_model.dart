@@ -16,10 +16,7 @@ class EquipmentModel with _$EquipmentModel {
     required String? description,
     required List<String>? imageUrls,
     required String? endOfWarrantyDate,
-    EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
-    required String? currentStatus,
-    required EquipmentCategoryModel? equipmentCategory,
-    required BrandModel? brand,
+    required String? currentStatus, required EquipmentCategoryModel? equipmentCategory, required BrandModel? brand, EquipmentMaintainScheduleModel? equipmentMaintainSchedule,
     ImportRequestItemsModel? importRequestItemsModel,
   }) = _EquipmentModel;
 

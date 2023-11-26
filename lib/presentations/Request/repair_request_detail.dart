@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -10,8 +9,8 @@ class RepairRequestDetail extends StatefulWidget {
     required this.id,
     required this.codeEquipment,
     required this.nameEquipment,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   static const routeName = 'repair_request_detail';
   final String id;
@@ -76,7 +75,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                       intensity: 1,
                     ),
                     child: Card(
-                      color: Color.fromARGB(255, 226, 245, 253),
+                      color: const Color.fromARGB(255, 226, 245, 253),
                       margin: const EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -121,12 +120,12 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding:
-                                        const EdgeInsets.only(top: 8, left: 18),
+                                        EdgeInsets.only(top: 8, left: 18),
                                     child: Text(
                                       'Mã thiết bị:',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 17,
                                         fontFamily: 'Inter',
@@ -138,7 +137,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                     padding:
                                         const EdgeInsets.only(top: 4, left: 18),
                                     child: Text(
-                                      '${widget.codeEquipment}',
+                                      widget.codeEquipment,
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 17,
@@ -183,8 +182,8 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                     ),
                                     if (sendButtonPressed &&
                                         description.trim().isEmpty)
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
                                           horizontal: 10,
                                         ),
                                         child: Text(
@@ -235,7 +234,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                 if (description.trim().isEmpty) {
                                   // Show an error message
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                       content:
                                           Text('*Lý do không được để trống'),
                                     ),
@@ -253,7 +252,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                       return AlertDialog(
                                         title: const Text('Xác nhận'),
                                         content: const Text(
-                                            'Bạn có chắc chắn gửi đơn ?'),
+                                            'Bạn có chắc chắn gửi đơn ?',),
                                         actions: [
                                           // TextButton(
                                           //   onPressed: () {
@@ -265,7 +264,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                             onPressed: () {
                                               Navigator.of(context).pop(true);
                                               Navigator.pushReplacementNamed(
-                                                  context, HomePage.routeName);
+                                                  context, HomePage.routeName,);
                                             },
                                             child: const Text('Xác nhận'),
                                           ),
@@ -334,7 +333,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
       // Optionally, show a success message to the user
       if (success) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Tạo đơn thành công!')),
+          const SnackBar(content: Text('Tạo đơn thành công!')),
         );
       }
     } catch (error) {
@@ -343,7 +342,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
 
       // Optionally, show an error message to the user
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('API request failed! Please try again.')),
+        const SnackBar(content: Text('API request failed! Please try again.')),
       );
     } finally {
       // Reset isLoading to false after the API call is complete

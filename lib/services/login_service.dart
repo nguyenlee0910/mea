@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'package:http/http.dart' as http;
 import 'package:mea/constants.dart';
 import 'package:mea/env.dart';
 import 'package:mea/models/user_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'firebase_service.dart';
 
 class AuthService {
   static Future<void> login({
@@ -34,7 +32,7 @@ class AuthService {
       final userData =
           UserModel.fromJson(responseJson['user'] as Map<String, dynamic>);
       //authencation: ///
-      String roleId = responseJson['user']['role']['id'] as String;
+      final roleId = responseJson['user']['role']['id'] as String;
       if (roleId != kAuthencatedRoleId) {
         onFail();
         return;
@@ -90,13 +88,13 @@ class AuthService {
     final userModel = UserModel.fromJson(data);
 
     final body = jsonEncode({
-      "name": userModel.name,
-      "email": userModel.email,
-      "deviceId": token,
-      "phone": userModel.phone,
-      "birthday": userModel.birthday,
-      "address": userModel.address,
-      "gender": userModel.gender
+      'name': userModel.name,
+      'email': userModel.email,
+      'deviceId': token,
+      'phone': userModel.phone,
+      'birthday': userModel.birthday,
+      'address': userModel.address,
+      'gender': userModel.gender
     });
     unawaited(http.put(uri,
         headers: {
@@ -104,7 +102,7 @@ class AuthService {
           'Accept': 'application/json',
           'Authorization': 'Bearer $auth',
         },
-        body: body));
+        body: body,),);
   }
 
   static Future<void> logout({required Function callBack}) async {

@@ -57,7 +57,7 @@ class _RepairRequestState extends State<RepairRequest> {
                       name: i.name ?? 'Trống',
                       code: i.code ?? 'Trống',
                       currentStatus: i.currentStatus ?? '',
-                      id: i.id),
+                      id: i.id,),
                 );
               }
               equipmentCellData = temp;

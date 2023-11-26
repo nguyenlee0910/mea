@@ -22,8 +22,8 @@ class _NotificationPageState extends State<NotificationPage> {
 
   void sortFilterCellDataByDate() {
     filterCellData.sort((a, b) {
-      final DateTime dateA = DateTime.tryParse(a.iso8601Date) ?? DateTime(1970);
-      final DateTime dateB = DateTime.tryParse(b.iso8601Date) ?? DateTime(1970);
+      final dateA = DateTime.tryParse(a.iso8601Date) ?? DateTime(1970);
+      final dateB = DateTime.tryParse(b.iso8601Date) ?? DateTime(1970);
       return dateB
           .compareTo(dateA); // Sorting in descending order (most recent first)
     });
