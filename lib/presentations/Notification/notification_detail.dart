@@ -26,42 +26,42 @@ class NotificationDetail extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      width: 100,
-                      child: Text(
-                        'Người gửi',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        notificationModel.sender?.name ?? 'NULL',
-                        style: const TextStyle(
-                          color: Color(0xFF1A1A1A),
-                          fontSize: 18,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w500,
-                          height: 0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(12),
+            //   child: Container(
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         const SizedBox(
+            //           width: 100,
+            //           child: Text(
+            //             'Người gửi',
+            //             style: TextStyle(
+            //               color: Colors.black,
+            //               fontSize: 18,
+            //               fontFamily: 'Inter',
+            //               fontWeight: FontWeight.w600,
+            //               height: 0,
+            //             ),
+            //           ),
+            //         ),
+            //         Expanded(
+            //           child: Text(
+            //             notificationModel.sender?.name ?? 'NULL',
+            //             style: const TextStyle(
+            //               color: Color(0xFF1A1A1A),
+            //               fontSize: 18,
+            //               fontFamily: 'Inter',
+            //               fontWeight: FontWeight.w500,
+            //               height: 0,
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
               height: 20,
             ),

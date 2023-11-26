@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class NotificationService {
   static Future<List<NotificationModel>> getNotification({
     int page = 0,
-    int pageSize = 12,
+    int pageSize = 1000,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');

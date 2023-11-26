@@ -2,12 +2,13 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mea/utils/utils.dart';
 
 class NotificationCellData {
-  NotificationCellData(
-      {required this.sender,
-      required this.content,
-      required this.iso8601Date,
-      required this.title,
-      required this.status,});
+  NotificationCellData({
+    required this.sender,
+    required this.content,
+    required this.iso8601Date,
+    required this.title,
+    required this.status,
+  });
   String sender;
   String title;
   String content;
@@ -111,11 +112,11 @@ class NotificationCell extends StatelessWidget {
           },
           child: Neumorphic(
             style: NeumorphicStyle(
-                boxShape:
-                    NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-                depth: 6,
-                color: Colors.grey,
-                intensity: 1,),
+              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+              depth: 6,
+              color: Colors.grey,
+              intensity: 1,
+            ),
             child: Container(
               // width: 352,
               height: 120,
@@ -132,16 +133,16 @@ class NotificationCell extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Người thông báo: $sender',
-                    style: const TextStyle(
-                      color: Color(0xFF1A1A1A),
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w800,
-                      height: 0,
-                    ),
-                  ),
+                  // Text(
+                  //   'Người thông báo: $sender',
+                  //   style: const TextStyle(
+                  //     color: Color(0xFF1A1A1A),
+                  //     fontSize: 16,
+                  //     fontFamily: 'Inter',
+                  //     fontWeight: FontWeight.w800,
+                  //     height: 0,
+                  //   ),
+                  // ),
                   const SizedBox(height: 8),
                   SizedBox(
                     width: double.infinity,
@@ -200,7 +201,9 @@ class NotificationCell extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   text: type == 'hours'
-                                      ? '$dateNoti giờ trước\n'
+                                      ? (dateNoti < 1
+                                          ? '$dateNoti phút trước\n'
+                                          : '$dateNoti giờ trước\n')
                                       : '$dateNoti ngày trước\n',
                                   style: const TextStyle(
                                     color: Color(0xFF1A1A1A),
