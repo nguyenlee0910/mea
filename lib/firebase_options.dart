@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAdUziUwOHiBcTzdvyj0RYkLQH-EaC23UU',
-    appId: '1:394033875878:android:d81c9e8c59521889df1d67',
-    messagingSenderId: '394033875878',
-    projectId: 'mea-project-35431',
-    storageBucket: 'mea-project-35431.appspot.com',
+    apiKey: 'AIzaSyADu6N3CWeSZaVGXkzFj6pr2DYeEvzreYE',
+    appId: '1:314412826763:android:37652d0c0c6331d77f148e',
+    messagingSenderId: '314412826763',
+    projectId: 'mea-project-c8184',
+    storageBucket: 'mea-project-c8184.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDZBXGyjyVzrGbeSs4NJtxNaaTiPDkQ_Yw',
-    appId: '1:394033875878:ios:11fdc06a68ede134df1d67',
-    messagingSenderId: '394033875878',
-    projectId: 'mea-project-35431',
-    storageBucket: 'mea-project-35431.appspot.com',
+    apiKey: 'AIzaSyDgKSBazYHf5zZJ9HACbm7w5VF8doyyjJs',
+    appId: '1:314412826763:ios:fee17df6a03d213e7f148e',
+    messagingSenderId: '314412826763',
+    projectId: 'mea-project-c8184',
+    storageBucket: 'mea-project-c8184.appspot.com',
     iosBundleId: 'com.nguyenle.mea',
   );
 }

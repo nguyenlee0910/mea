@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   late bool _hidePassword;
   late bool checkBoxValue;
   late SharedPreferences prefs;
-  final dio = Dio();
 
   String userName = '';
   String password = '';

@@ -55,6 +55,7 @@ class DepartmentServices {
   static Future<bool> requestEquipment({
     required String description,
     required String name,
+    required String expected,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
@@ -62,6 +63,7 @@ class DepartmentServices {
       final getId = await _sendRequest(
         description: description,
         name: name,
+        expected: expected,
       );
       if (getId != kErrorString) {
         final id = getId;
@@ -95,6 +97,7 @@ class DepartmentServices {
   static Future<String> _sendRequest({
     required String description,
     required String name,
+    required String expected,
   }) async {
     try {
       final uri = Uri(
@@ -109,6 +112,7 @@ class DepartmentServices {
         {
           'name': name,
           'description': description,
+          'expected': expected,
           'departmentId': departmentId,
           'importRequestItems': <String>[],
         },
@@ -150,7 +154,7 @@ class DepartmentServices {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
     final priceFormat = NumberFormat.decimalPattern();
-    final priceString = priceFormat.format(9);
+    final priceString = priceFormat.format(0);
     try {
       final header = {
         'Content-Type': 'application/json',

@@ -101,11 +101,11 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
 
     if (status == 'ALL') {
       tabFilterList = requestData;
-    } else if (status == 'REQUESTING') {
+    } else if (status == 'APPROVED') {
       // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
       tabFilterList = requestData
           .where((request) =>
-              request.status == 'REQUESTING' || request.status == 'UPDATED')
+              request.status == 'APPROVED' || request.status == 'UPDATED')
           .toList();
     } else {
       // Lọc theo status khác
@@ -183,7 +183,7 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
           ),
           child: Container(
             width: 396,
-            height: 120,
+            height: 130,
             decoration:
                 const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
             child: Padding(
@@ -228,6 +228,57 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                                 ),
                               ],
                             ),
+                          ),
+                          const Gap(6),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  "Khoảng thời gian nhận: ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                (requestModel is ImportRequestModel &&
+                                        (requestModel as ImportRequestModel)
+                                                .expected ==
+                                            'HOUR_72')
+                                    ? '72 giờ'
+                                    : (requestModel as ImportRequestModel)
+                                                .expected ==
+                                            'HOUR_1'
+                                        ? '1 giờ'
+                                        : (requestModel as ImportRequestModel)
+                                                    .expected ==
+                                                'HOUR_3'
+                                            ? '3 giờ'
+                                            : (requestModel as ImportRequestModel)
+                                                        .expected ==
+                                                    'HOUR_5'
+                                                ? '5 giờ'
+                                                : (requestModel as ImportRequestModel)
+                                                            .expected ==
+                                                        'HOUR_24'
+                                                    ? '24 giờ'
+                                                    : (requestModel as ImportRequestModel)
+                                                                .expected ==
+                                                            'HOUR_36'
+                                                        ? '36 giờ'
+                                                        : (requestModel
+                                                                is ImportRequestModel
+                                                            ? (requestModel
+                                                                    as ImportRequestModel)
+                                                                .expected
+                                                            : ''),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
                           const Gap(6),
                           Row(

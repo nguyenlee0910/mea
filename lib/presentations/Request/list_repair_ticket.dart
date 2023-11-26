@@ -101,17 +101,21 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
 
     if (status == 'ALL') {
       tabFilterList = requestData;
-    } else if (status == 'REQUESTING') {
-      // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
-      tabFilterList = requestData
-          .where((request) =>
-              request.status == 'REQUESTING' || request.status == 'UPDATED')
-          .toList();
     } else if (status == 'CANCELLED') {
       // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
       tabFilterList = requestData
           .where((request) =>
               request.status == 'CANCELLED' || request.status == 'REJECTED')
+          .toList();
+    } else if (status == 'APPROVED') {
+      // Lọc các đơn có status là 'Chờ xác nhận' hoặc 'Đã cập nhật'
+      tabFilterList = requestData
+          .where((request) =>
+                  request.status == 'APPROVED' ||
+                  request.status == 'COMPLETED' ||
+                  request.status == 'FIXING'
+              // || request.status == 'CANCELLED'
+              )
           .toList();
     } else {
       // Lọc theo status khác
@@ -147,23 +151,27 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
     switch (requestModel.status) {
       case 'REQUESTING':
         color = Color.fromARGB(255, 211, 145, 38);
-        statusText = 'Chờ xác nhận';
+        statusText = 'Đang yêu cầu';
         break;
-      case 'APPROVED':
+      case 'COMPLETED':
         color = const Color.fromARGB(255, 67, 153, 70);
-        statusText = 'Đã duyệt';
+        statusText = 'Hoàn thành';
+        break;
+      case 'PAUSED':
+        color = Color.fromARGB(255, 80, 27, 165);
+        statusText = 'Tạm dừng sửa chữa';
         break;
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
-        statusText = 'Đã hủy';
+        statusText = 'Hủy sửa chữa';
         break;
       case 'REJECTED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã từ chối';
         break;
-      case 'UPDATED':
+      case 'FIXING':
         color = Color.fromARGB(255, 30, 89, 216);
-        statusText = 'Đã cập nhật';
+        statusText = 'Đang sửa chữa';
         break;
       case 'DRAFT':
         color = const Color.fromARGB(255, 51, 51, 51);
@@ -193,7 +201,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
           ),
           child: Container(
             width: 396,
-            height: 180,
+            height: 160,
             decoration:
                 const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
             child: Padding(
