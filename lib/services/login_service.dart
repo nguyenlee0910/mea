@@ -75,6 +75,38 @@ class AuthService {
     }
   }
 
+  static Future<void> updateToken({required String token}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final auth = prefs.getString('auth');
+    final uri = Uri(
+      scheme: 'https',
+      host: Env.serverUrl,
+      path: 'api/v1/user-me',
+    );
+
+    final data =
+        jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
+
+    final userModel = UserModel.fromJson(data);
+
+    final body = jsonEncode({
+      "name": userModel.name,
+      "email": userModel.email,
+      "deviceId": token,
+      "phone": userModel.phone,
+      "birthday": userModel.birthday,
+      "address": userModel.address,
+      "gender": userModel.gender
+    });
+    unawaited(http.put(uri,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+        body: body));
+  }
+
   static Future<void> logout({required Function callBack}) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
