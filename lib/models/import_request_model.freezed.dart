@@ -32,7 +32,7 @@ mixin _$ImportRequestModel {
       throw _privateConstructorUsedError;
   ImportRequestUpdatedByModel get updatedBy =>
       throw _privateConstructorUsedError;
-  List<ImportRequestItemsModel>? get importRequestItemsModel =>
+  List<ImportRequestItemsModel>? get importRequestItems =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $ImportRequestModelCopyWith<$Res> {
       String updatedAt,
       ImportRequestCreatedByModel createdBy,
       ImportRequestUpdatedByModel updatedBy,
-      List<ImportRequestItemsModel>? importRequestItemsModel});
+      List<ImportRequestItemsModel>? importRequestItems});
 
   $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
   $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy;
@@ -87,7 +87,7 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
     Object? updatedAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
-    Object? importRequestItemsModel = freezed,
+    Object? importRequestItems = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -130,9 +130,9 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as ImportRequestUpdatedByModel,
-      importRequestItemsModel: freezed == importRequestItemsModel
-          ? _value.importRequestItemsModel
-          : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
+      importRequestItems: freezed == importRequestItems
+          ? _value.importRequestItems
+          : importRequestItems // ignore: cast_nullable_to_non_nullable
               as List<ImportRequestItemsModel>?,
     ) as $Val);
   }
@@ -175,7 +175,7 @@ abstract class _$$ImportRequestModelImplCopyWith<$Res>
       String updatedAt,
       ImportRequestCreatedByModel createdBy,
       ImportRequestUpdatedByModel updatedBy,
-      List<ImportRequestItemsModel>? importRequestItemsModel});
+      List<ImportRequestItemsModel>? importRequestItems});
 
   @override
   $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
@@ -204,7 +204,7 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
-    Object? importRequestItemsModel = freezed,
+    Object? importRequestItems = freezed,
   }) {
     return _then(_$ImportRequestModelImpl(
       id: null == id
@@ -247,9 +247,9 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as ImportRequestUpdatedByModel,
-      importRequestItemsModel: freezed == importRequestItemsModel
-          ? _value._importRequestItemsModel
-          : importRequestItemsModel // ignore: cast_nullable_to_non_nullable
+      importRequestItems: freezed == importRequestItems
+          ? _value._importRequestItems
+          : importRequestItems // ignore: cast_nullable_to_non_nullable
               as List<ImportRequestItemsModel>?,
     ));
   }
@@ -269,8 +269,8 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
       required this.updatedAt,
       required this.createdBy,
       required this.updatedBy,
-      final List<ImportRequestItemsModel>? importRequestItemsModel})
-      : _importRequestItemsModel = importRequestItemsModel;
+      final List<ImportRequestItemsModel>? importRequestItems})
+      : _importRequestItems = importRequestItems;
 
   factory _$ImportRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImportRequestModelImplFromJson(json);
@@ -295,20 +295,20 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
   final ImportRequestCreatedByModel createdBy;
   @override
   final ImportRequestUpdatedByModel updatedBy;
-  final List<ImportRequestItemsModel>? _importRequestItemsModel;
+  final List<ImportRequestItemsModel>? _importRequestItems;
   @override
-  List<ImportRequestItemsModel>? get importRequestItemsModel {
-    final value = _importRequestItemsModel;
+  List<ImportRequestItemsModel>? get importRequestItems {
+    final value = _importRequestItems;
     if (value == null) return null;
-    if (_importRequestItemsModel is EqualUnmodifiableListView)
-      return _importRequestItemsModel;
+    if (_importRequestItems is EqualUnmodifiableListView)
+      return _importRequestItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, expected: $expected, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, importRequestItemsModel: $importRequestItemsModel)';
+    return 'ImportRequestModel(id: $id, createdAt: $createdAt, name: $name, description: $description, expected: $expected, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, importRequestItems: $importRequestItems)';
   }
 
   @override
@@ -332,8 +332,8 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
                 other.createdBy == createdBy) &&
             (identical(other.updatedBy, updatedBy) ||
                 other.updatedBy == updatedBy) &&
-            const DeepCollectionEquality().equals(
-                other._importRequestItemsModel, _importRequestItemsModel));
+            const DeepCollectionEquality()
+                .equals(other._importRequestItems, _importRequestItems));
   }
 
   @JsonKey(ignore: true)
@@ -350,7 +350,7 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
       updatedAt,
       createdBy,
       updatedBy,
-      const DeepCollectionEquality().hash(_importRequestItemsModel));
+      const DeepCollectionEquality().hash(_importRequestItems));
 
   @JsonKey(ignore: true)
   @override
@@ -379,7 +379,7 @@ abstract class _ImportRequestModel implements ImportRequestModel {
           required final String updatedAt,
           required final ImportRequestCreatedByModel createdBy,
           required final ImportRequestUpdatedByModel updatedBy,
-          final List<ImportRequestItemsModel>? importRequestItemsModel}) =
+          final List<ImportRequestItemsModel>? importRequestItems}) =
       _$ImportRequestModelImpl;
 
   factory _ImportRequestModel.fromJson(Map<String, dynamic> json) =
@@ -406,7 +406,7 @@ abstract class _ImportRequestModel implements ImportRequestModel {
   @override
   ImportRequestUpdatedByModel get updatedBy;
   @override
-  List<ImportRequestItemsModel>? get importRequestItemsModel;
+  List<ImportRequestItemsModel>? get importRequestItems;
   @override
   @JsonKey(ignore: true)
   _$$ImportRequestModelImplCopyWith<_$ImportRequestModelImpl> get copyWith =>
