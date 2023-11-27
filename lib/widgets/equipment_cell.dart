@@ -37,6 +37,7 @@ class EquipmentCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         onPress?.call();
@@ -52,8 +53,8 @@ class EquipmentCell extends StatelessWidget {
               intensity: 1,
             ),
             child: Container(
-              width: 372,
-              height: 140,
+              width: size.width - 40,
+              // height: 140,
               padding: const EdgeInsets.fromLTRB(8, 20, 8, 16),
               decoration: ShapeDecoration(
                 color: const Color.fromARGB(255, 219, 236, 248),
@@ -100,7 +101,7 @@ class EquipmentCell extends StatelessWidget {
                                           text: 'Tên thiết bị: ',
                                           style: TextStyle(
                                             color: Color(0xFF1A1A1A),
-                                            fontSize: 17,
+                                            fontSize: 16,
                                             fontFamily: 'Inter',
                                             fontWeight: FontWeight.w600,
                                             height: 0,
@@ -109,8 +110,9 @@ class EquipmentCell extends StatelessWidget {
                                         TextSpan(
                                           text: name,
                                           style: const TextStyle(
-                                            color: Color(0xFF1A1A1A),
-                                            fontSize: 17,
+                                            color:
+                                                Color.fromARGB(255, 21, 17, 17),
+                                            fontSize: 16,
                                             fontFamily: 'Inter',
                                             fontWeight: FontWeight.w400,
                                             height: 0,
@@ -137,7 +139,7 @@ class EquipmentCell extends StatelessWidget {
                                         text: 'Mã thiết bị: ',
                                         style: TextStyle(
                                           color: Color(0xFF1A1A1A),
-                                          fontSize: 17,
+                                          fontSize: 16,
                                           fontFamily: 'Inter',
                                           fontWeight: FontWeight.w600,
                                           height: 0,
@@ -148,7 +150,7 @@ class EquipmentCell extends StatelessWidget {
                                         text: '$code\n',
                                         style: const TextStyle(
                                           color: Color(0xFF1A1A1A),
-                                          fontSize: 17,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Inter',
                                           height: 0,
@@ -169,39 +171,37 @@ class EquipmentCell extends StatelessWidget {
                                         text: 'Trạng thái: ',
                                         style: TextStyle(
                                           color: Color(0xFF1A1A1A),
-                                          fontSize: 17,
+                                          fontSize: 16,
                                           fontFamily: 'Inter',
                                           fontWeight: FontWeight.w600,
                                           height: 0,
                                         ),
                                       ),
                                       TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: currentStatus == 'ACTIVE'
-                                                ? 'Đang hoạt động'
-                                                : currentStatus ??
-                                                    'Đang hoạt động',
-                                            style: TextStyle(
-                                              color: currentStatus == 'ACTIVE'
-                                                  ? Colors.green
-                                                  : currentStatus == 'FIXING'
-                                                      ? Color.fromARGB(
-                                                          255,
-                                                          31,
-                                                          60,
-                                                          190) // Màu vàng cho trạng thái INACTIVE
-                                                      : Colors.green,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600,
-                                              fontFamily: 'Inter',
-                                              height: 0,
-                                            ),
-                                          ),
-                                        ],
+                                        text: currentStatus == 'ACTIVE'
+                                            ? 'Hoạt động'
+                                            : currentStatus ?? 'Hoạt động',
+                                        style: TextStyle(
+                                          color: currentStatus == 'ACTIVE'
+                                              ? Colors.green
+                                              : currentStatus == 'FIXING'
+                                                  ? Color.fromARGB(255, 1, 1,
+                                                      1) // Màu vàng cho trạng thái INACTIVE
+                                                  : Colors.green,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
                                       ),
                                     ],
                                   ),
+                                  softWrap: true,
+                                  overflow: TextOverflow.visible,
+                                  // maxLines:
+                                  //     2, // Đặt số dòng tối đa muốn hiển thị
+                                  // overflow: TextOverflow
+                                  //     .ellipsis, // Đặt kiểu tràn nếu vượt quá số dòng tối đa
                                 ),
                               ),
 

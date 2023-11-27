@@ -218,7 +218,7 @@ Widget buildImportRequestCell({
                 ),
               ),
               const Gap(12),
-              if (requestModel is RepairReportModel) ...[
+              if (requestModel is RepairRequestModel) ...[
                 Row(
                   children: [
                     Column(

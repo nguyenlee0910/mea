@@ -17,6 +17,8 @@ class WhiteTableCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     final texToShow = Text(
       text,
       textAlign: TextAlign.center,
@@ -40,7 +42,7 @@ class WhiteTableCell extends StatelessWidget {
         child: GestureDetector(
           child: Container(
             // width: double.infinity,
-            width: 352,
+            width: size.width - 40,
             height: 52,
             decoration: const ShapeDecoration(
               color: Color.fromARGB(255, 205, 229, 245),

@@ -28,13 +28,14 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
           padding:
-              const EdgeInsets.only(top: 40, left: 44, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 30),
           child: Container(
-            width: 140,
-            height: 140,
+            width: 100,
+            height: 100,
             decoration: ShapeDecoration(
               image: const DecorationImage(
                 image: NetworkImage(
@@ -49,7 +50,7 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 80),
+          padding: const EdgeInsets.only(top: 0),
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
