@@ -6,11 +6,11 @@ part 'supply_model.g.dart';
 @freezed
 class SupplyModel with _$SupplyModel {
   factory SupplyModel({
-    required String id,
-    required String name,
-    required String unit,
-    required String quantity,
-    required List<String> imageUrls,
+    required String? id,
+    required String? name,
+    required String? unit,
+    required int? quantity,
+    required List<String>? imageUrls,
   }) = _SupplyModel;
 
   factory SupplyModel.fromJson(Map<String, dynamic> json) =>

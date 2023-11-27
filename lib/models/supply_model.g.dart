@@ -8,12 +8,13 @@ part of 'supply_model.dart';
 
 _$SupplyModelImpl _$$SupplyModelImplFromJson(Map<String, dynamic> json) =>
     _$SupplyModelImpl(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      unit: json['unit'] as String,
-      quantity: json['quantity'] as String,
-      imageUrls:
-          (json['imageUrls'] as List<dynamic>).map((e) => e as String).toList(),
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      unit: json['unit'] as String?,
+      quantity: json['quantity'] as int?,
+      imageUrls: (json['imageUrls'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$SupplyModelImplToJson(_$SupplyModelImpl instance) =>

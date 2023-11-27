@@ -28,9 +28,9 @@ mixin _$ImportRequestModel {
   String get status => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
-  ImportRequestCreatedByModel get createdBy =>
+  ImportRequestCreatedByModel? get createdBy =>
       throw _privateConstructorUsedError;
-  ImportRequestUpdatedByModel get updatedBy =>
+  ImportRequestUpdatedByModel? get updatedBy =>
       throw _privateConstructorUsedError;
   List<ImportRequestItemsModel>? get importRequestItems =>
       throw _privateConstructorUsedError;
@@ -56,12 +56,12 @@ abstract class $ImportRequestModelCopyWith<$Res> {
       String status,
       String note,
       String updatedAt,
-      ImportRequestCreatedByModel createdBy,
-      ImportRequestUpdatedByModel updatedBy,
+      ImportRequestCreatedByModel? createdBy,
+      ImportRequestUpdatedByModel? updatedBy,
       List<ImportRequestItemsModel>? importRequestItems});
 
-  $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
-  $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy;
+  $ImportRequestCreatedByModelCopyWith<$Res>? get createdBy;
+  $ImportRequestUpdatedByModelCopyWith<$Res>? get updatedBy;
 }
 
 /// @nodoc
@@ -85,8 +85,8 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
     Object? status = null,
     Object? note = null,
     Object? updatedAt = null,
-    Object? createdBy = null,
-    Object? updatedBy = null,
+    Object? createdBy = freezed,
+    Object? updatedBy = freezed,
     Object? importRequestItems = freezed,
   }) {
     return _then(_value.copyWith(
@@ -122,14 +122,14 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as ImportRequestCreatedByModel,
-      updatedBy: null == updatedBy
+              as ImportRequestCreatedByModel?,
+      updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
-              as ImportRequestUpdatedByModel,
+              as ImportRequestUpdatedByModel?,
       importRequestItems: freezed == importRequestItems
           ? _value.importRequestItems
           : importRequestItems // ignore: cast_nullable_to_non_nullable
@@ -139,8 +139,12 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $ImportRequestCreatedByModelCopyWith<$Res> get createdBy {
-    return $ImportRequestCreatedByModelCopyWith<$Res>(_value.createdBy,
+  $ImportRequestCreatedByModelCopyWith<$Res>? get createdBy {
+    if (_value.createdBy == null) {
+      return null;
+    }
+
+    return $ImportRequestCreatedByModelCopyWith<$Res>(_value.createdBy!,
         (value) {
       return _then(_value.copyWith(createdBy: value) as $Val);
     });
@@ -148,8 +152,12 @@ class _$ImportRequestModelCopyWithImpl<$Res, $Val extends ImportRequestModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy {
-    return $ImportRequestUpdatedByModelCopyWith<$Res>(_value.updatedBy,
+  $ImportRequestUpdatedByModelCopyWith<$Res>? get updatedBy {
+    if (_value.updatedBy == null) {
+      return null;
+    }
+
+    return $ImportRequestUpdatedByModelCopyWith<$Res>(_value.updatedBy!,
         (value) {
       return _then(_value.copyWith(updatedBy: value) as $Val);
     });
@@ -173,14 +181,14 @@ abstract class _$$ImportRequestModelImplCopyWith<$Res>
       String status,
       String note,
       String updatedAt,
-      ImportRequestCreatedByModel createdBy,
-      ImportRequestUpdatedByModel updatedBy,
+      ImportRequestCreatedByModel? createdBy,
+      ImportRequestUpdatedByModel? updatedBy,
       List<ImportRequestItemsModel>? importRequestItems});
 
   @override
-  $ImportRequestCreatedByModelCopyWith<$Res> get createdBy;
+  $ImportRequestCreatedByModelCopyWith<$Res>? get createdBy;
   @override
-  $ImportRequestUpdatedByModelCopyWith<$Res> get updatedBy;
+  $ImportRequestUpdatedByModelCopyWith<$Res>? get updatedBy;
 }
 
 /// @nodoc
@@ -202,8 +210,8 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
     Object? status = null,
     Object? note = null,
     Object? updatedAt = null,
-    Object? createdBy = null,
-    Object? updatedBy = null,
+    Object? createdBy = freezed,
+    Object? updatedBy = freezed,
     Object? importRequestItems = freezed,
   }) {
     return _then(_$ImportRequestModelImpl(
@@ -239,14 +247,14 @@ class __$$ImportRequestModelImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as ImportRequestCreatedByModel,
-      updatedBy: null == updatedBy
+              as ImportRequestCreatedByModel?,
+      updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
-              as ImportRequestUpdatedByModel,
+              as ImportRequestUpdatedByModel?,
       importRequestItems: freezed == importRequestItems
           ? _value._importRequestItems
           : importRequestItems // ignore: cast_nullable_to_non_nullable
@@ -292,9 +300,9 @@ class _$ImportRequestModelImpl implements _ImportRequestModel {
   @override
   final String updatedAt;
   @override
-  final ImportRequestCreatedByModel createdBy;
+  final ImportRequestCreatedByModel? createdBy;
   @override
-  final ImportRequestUpdatedByModel updatedBy;
+  final ImportRequestUpdatedByModel? updatedBy;
   final List<ImportRequestItemsModel>? _importRequestItems;
   @override
   List<ImportRequestItemsModel>? get importRequestItems {
@@ -377,8 +385,8 @@ abstract class _ImportRequestModel implements ImportRequestModel {
           required final String status,
           required final String note,
           required final String updatedAt,
-          required final ImportRequestCreatedByModel createdBy,
-          required final ImportRequestUpdatedByModel updatedBy,
+          required final ImportRequestCreatedByModel? createdBy,
+          required final ImportRequestUpdatedByModel? updatedBy,
           final List<ImportRequestItemsModel>? importRequestItems}) =
       _$ImportRequestModelImpl;
 
@@ -402,9 +410,9 @@ abstract class _ImportRequestModel implements ImportRequestModel {
   @override
   String get updatedAt;
   @override
-  ImportRequestCreatedByModel get createdBy;
+  ImportRequestCreatedByModel? get createdBy;
   @override
-  ImportRequestUpdatedByModel get updatedBy;
+  ImportRequestUpdatedByModel? get updatedBy;
   @override
   List<ImportRequestItemsModel>? get importRequestItems;
   @override

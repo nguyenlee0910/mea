@@ -18,8 +18,8 @@ class ImportRequestModel extends BaseRequestModel with _$ImportRequestModel {
     required String status,
     required String note,
     required String updatedAt,
-    required ImportRequestCreatedByModel createdBy,
-    required ImportRequestUpdatedByModel updatedBy,
+    required ImportRequestCreatedByModel? createdBy,
+    required ImportRequestUpdatedByModel? updatedBy,
     List<ImportRequestItemsModel>? importRequestItems,
   }) = _ImportRequestModel;
 

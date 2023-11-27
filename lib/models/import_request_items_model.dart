@@ -7,11 +7,11 @@ part 'import_request_items_model.g.dart';
 @freezed
 class ImportRequestItemsModel with _$ImportRequestItemsModel {
   factory ImportRequestItemsModel({
-    required String id,
-    required String createdAt,
-    required String updatedAt,
-    required List<SupplyModel> supply,
-    required String quantity,
+    required String? id,
+    required String? createdAt,
+    required String? updatedAt,
+    SupplyModel? supply,
+    required int? quantity,
   }) = _ImportRequestItemsModel;
 
   factory ImportRequestItemsModel.fromJson(Map<String, dynamic> json) =>

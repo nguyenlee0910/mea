@@ -9,13 +9,13 @@ part of 'import_request_items_model.dart';
 _$ImportRequestItemsModelImpl _$$ImportRequestItemsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ImportRequestItemsModelImpl(
-      id: json['id'] as String,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
-      supply: (json['supply'] as List<dynamic>)
-          .map((e) => SupplyModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      quantity: json['quantity'] as String,
+      id: json['id'] as String?,
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      supply: json['supply'] == null
+          ? null
+          : SupplyModel.fromJson(json['supply'] as Map<String, dynamic>),
+      quantity: json['quantity'] as int?,
     );
 
 Map<String, dynamic> _$$ImportRequestItemsModelImplToJson(

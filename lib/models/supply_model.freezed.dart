@@ -20,11 +20,11 @@ SupplyModel _$SupplyModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SupplyModel {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get unit => throw _privateConstructorUsedError;
-  String get quantity => throw _privateConstructorUsedError;
-  List<String> get imageUrls => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get unit => throw _privateConstructorUsedError;
+  int? get quantity => throw _privateConstructorUsedError;
+  List<String>? get imageUrls => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,11 +39,11 @@ abstract class $SupplyModelCopyWith<$Res> {
       _$SupplyModelCopyWithImpl<$Res, SupplyModel>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String unit,
-      String quantity,
-      List<String> imageUrls});
+      {String? id,
+      String? name,
+      String? unit,
+      int? quantity,
+      List<String>? imageUrls});
 }
 
 /// @nodoc
@@ -59,33 +59,33 @@ class _$SupplyModelCopyWithImpl<$Res, $Val extends SupplyModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? unit = null,
-    Object? quantity = null,
-    Object? imageUrls = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? unit = freezed,
+    Object? quantity = freezed,
+    Object? imageUrls = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      unit: null == unit
+              as String?,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
-      quantity: null == quantity
+              as String?,
+      quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrls: null == imageUrls
+              as int?,
+      imageUrls: freezed == imageUrls
           ? _value.imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -99,11 +99,11 @@ abstract class _$$SupplyModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String unit,
-      String quantity,
-      List<String> imageUrls});
+      {String? id,
+      String? name,
+      String? unit,
+      int? quantity,
+      List<String>? imageUrls});
 }
 
 /// @nodoc
@@ -117,33 +117,33 @@ class __$$SupplyModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? unit = null,
-    Object? quantity = null,
-    Object? imageUrls = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? unit = freezed,
+    Object? quantity = freezed,
+    Object? imageUrls = freezed,
   }) {
     return _then(_$SupplyModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      unit: null == unit
+              as String?,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
-      quantity: null == quantity
+              as String?,
+      quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrls: null == imageUrls
+              as int?,
+      imageUrls: freezed == imageUrls
           ? _value._imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
     ));
   }
 }
@@ -156,26 +156,28 @@ class _$SupplyModelImpl implements _SupplyModel {
       required this.name,
       required this.unit,
       required this.quantity,
-      required final List<String> imageUrls})
+      required final List<String>? imageUrls})
       : _imageUrls = imageUrls;
 
   factory _$SupplyModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SupplyModelImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String unit;
+  final String? unit;
   @override
-  final String quantity;
-  final List<String> _imageUrls;
+  final int? quantity;
+  final List<String>? _imageUrls;
   @override
-  List<String> get imageUrls {
+  List<String>? get imageUrls {
+    final value = _imageUrls;
+    if (value == null) return null;
     if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_imageUrls);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -218,25 +220,25 @@ class _$SupplyModelImpl implements _SupplyModel {
 
 abstract class _SupplyModel implements SupplyModel {
   factory _SupplyModel(
-      {required final String id,
-      required final String name,
-      required final String unit,
-      required final String quantity,
-      required final List<String> imageUrls}) = _$SupplyModelImpl;
+      {required final String? id,
+      required final String? name,
+      required final String? unit,
+      required final int? quantity,
+      required final List<String>? imageUrls}) = _$SupplyModelImpl;
 
   factory _SupplyModel.fromJson(Map<String, dynamic> json) =
       _$SupplyModelImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get unit;
+  String? get unit;
   @override
-  String get quantity;
+  int? get quantity;
   @override
-  List<String> get imageUrls;
+  List<String>? get imageUrls;
   @override
   @JsonKey(ignore: true)
   _$$SupplyModelImplCopyWith<_$SupplyModelImpl> get copyWith =>

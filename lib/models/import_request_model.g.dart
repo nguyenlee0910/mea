@@ -17,10 +17,14 @@ _$ImportRequestModelImpl _$$ImportRequestModelImplFromJson(
       status: json['status'] as String,
       note: json['note'] as String,
       updatedAt: json['updatedAt'] as String,
-      createdBy: ImportRequestCreatedByModel.fromJson(
-          json['createdBy'] as Map<String, dynamic>),
-      updatedBy: ImportRequestUpdatedByModel.fromJson(
-          json['updatedBy'] as Map<String, dynamic>),
+      createdBy: json['createdBy'] == null
+          ? null
+          : ImportRequestCreatedByModel.fromJson(
+              json['createdBy'] as Map<String, dynamic>),
+      updatedBy: json['updatedBy'] == null
+          ? null
+          : ImportRequestUpdatedByModel.fromJson(
+              json['updatedBy'] as Map<String, dynamic>),
       importRequestItems: (json['importRequestItems'] as List<dynamic>?)
           ?.map((e) =>
               ImportRequestItemsModel.fromJson(e as Map<String, dynamic>))
