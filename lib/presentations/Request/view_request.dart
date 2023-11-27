@@ -154,11 +154,7 @@ Widget buildImportRequestCell({
   switch (requestModel.status) {
     case 'REQUESTING':
       color = const Color.fromARGB(255, 211, 145, 38);
-      statusText = (requestModel is ImportRequestModel)
-          ? 'Chờ xác nhận'
-          : (requestModel is RepairReportModel)
-              ? 'Đang yêu cầu'
-              : '';
+      statusText = "Chờ xác nhận";
     case 'APPROVED':
       color = const Color.fromARGB(255, 67, 153, 70);
       statusText = 'Đã duyệt';
@@ -171,6 +167,9 @@ Widget buildImportRequestCell({
     case 'PAUSED':
       color = const Color.fromARGB(255, 80, 27, 165);
       statusText = 'Tạm dừng sửa chữa';
+    case 'WAITING_FOR_SUPPLY':
+      color = const Color.fromARGB(255, 80, 27, 165);
+      statusText = 'Chờ cung cấp';
     case 'FIXING':
       color = const Color.fromARGB(255, 30, 89, 216);
       statusText = 'Đang sửa chữa';
@@ -187,7 +186,7 @@ Widget buildImportRequestCell({
       color = Colors.black;
       break;
   }
-  final containerHeight = (requestModel is RepairReportModel) ? 160.0 : 135.0;
+  final containerHeight = (requestModel is RepairRequestModel) ? 175.0 : 135.0;
   return Padding(
     padding: const EdgeInsets.all(12),
     child: Neumorphic(
@@ -212,9 +211,12 @@ Widget buildImportRequestCell({
                 padding: const EdgeInsets.only(left: 10, top: 5),
                 child: Text(
                   requestModel is ImportRequestModel
-                      ? (requestModel as ImportRequestModel).name
-                      : 'Đơn sửa chữa thiết bị y tế',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ? requestModel.name
+                      : 'Đơn sửa chữa thiết bị ${((requestModel as RepairRequestModel).repairReportItems?.first?.equipment?.name) ?? 'Trống'}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const Gap(12),

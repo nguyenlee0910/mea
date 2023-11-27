@@ -116,7 +116,8 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
             (request) =>
                 request.status == 'APPROVED' ||
                 request.status == 'COMPLETED' ||
-                request.status == 'FIXING',
+                request.status == 'FIXING' ||
+                request.status == 'WAITING_FOR_SUPPLY',
             // || request.status == 'CANCELLED'
           )
           .toList();
@@ -154,7 +155,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
     switch (requestModel.status) {
       case 'REQUESTING':
         color = const Color.fromARGB(255, 211, 145, 38);
-        statusText = 'Đang yêu cầu';
+        statusText = 'Chờ xác nhận';
       case 'COMPLETED':
         color = const Color.fromARGB(255, 67, 153, 70);
         statusText = 'Hoàn thành';
@@ -164,6 +165,9 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Hủy sửa chữa';
+      case 'WAITING_FOR_SUPPLY':
+        color = const Color(0xFF9b59b6);
+        statusText = 'Chờ cung cấp';
       case 'REJECTED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã từ chối';
@@ -197,7 +201,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
           ),
           child: Container(
             width: 396,
-            height: 160,
+            height: 175,
             decoration:
                 const BoxDecoration(color: Color.fromARGB(255, 219, 236, 248)),
             child: Padding(
@@ -206,13 +210,15 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 5),
+                    padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
                     child: Text(
                       requestModel is ImportRequestModel
                           ? requestModel.name
-                          : 'Đơn sửa chữa thiết bị y tế',
+                          : 'Đơn sửa chữa ${((requestModel as RepairRequestModel).repairReportItems?.first?.equipment?.name) ?? 'Trống'}',
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   const Gap(12),
