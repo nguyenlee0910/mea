@@ -219,7 +219,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                     child: Text(
                       requestModel is ImportRequestModel
                           ? requestModel.name
-                          : 'Đơn sửa chữa ${((requestModel as RepairRequestModel).repairReportItems?.first?.equipment?.name) ?? 'Trống'}',
+                          : 'Đơn sửa chữa ${((requestModel as RepairRequestModel).repairReportItems?.firstOrNull?.equipment?.name) ?? 'Trống'}',
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -245,8 +245,8 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                           Text(
                             (requestModel as RepairRequestModel)
                                     .repairReportItems
-                                    ?.first
-                                    .equipment
+                                    ?.firstOrNull
+                                    ?.equipment
                                     ?.code ??
                                 'Trống',
                             style: const TextStyle(
@@ -275,8 +275,8 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                                 overflow: TextOverflow.ellipsis,
                                 (requestModel as RepairRequestModel)
                                         .repairReportItems
-                                        ?.first
-                                        .equipment
+                                        ?.firstOrNull
+                                        ?.equipment
                                         ?.name ??
                                     'Trống',
                                 style: const TextStyle(
