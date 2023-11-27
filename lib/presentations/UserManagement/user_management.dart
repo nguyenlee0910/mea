@@ -116,30 +116,40 @@ class _UserManagementPageState extends State<UserManagementPage> {
             //     ),
             //   ),
             // ),
+            SizedBox(
+              height: 50,
+            ),
             GestureDetector(
               onTap: () {
-                AuthService.logout(callBack: () {
-                  context.go('//');
-                },);
+                AuthService.logout(
+                  callBack: () {
+                    context.go('//');
+                  },
+                );
               },
               child: Center(
                 child: Neumorphic(
                   style: NeumorphicStyle(
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(24),),
-                      depth: 7,
-                      color: Colors.transparent,
-                      intensity: 1,),
+                    boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.circular(24),
+                    ),
+                    depth: 7,
+                    color: Colors.transparent,
+                    intensity: 1,
+                  ),
                   child: Container(
-                    width: 312,
+                    // width: 312,
+                    width: size.width - 40,
                     height: 60,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 12,),
+                      horizontal: 40,
+                      vertical: 12,
+                    ),
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 255, 87, 78),
+                          width: 3,
+                          color: Color.fromARGB(255, 205, 229, 245),
                         ),
                         borderRadius: BorderRadius.circular(24),
                       ),
