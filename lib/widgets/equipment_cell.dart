@@ -19,6 +19,7 @@ class EquipmentCell extends StatelessWidget {
   const EquipmentCell({
     required this.name,
     required this.code,
+    this.id,
     this.imageUrl,
     this.currentStatus,
     this.buttonName = '',
@@ -34,6 +35,7 @@ class EquipmentCell extends StatelessWidget {
   final String buttonName;
   final VoidCallback? onPress;
   final Color colorButtonName;
+  final String? id;
 
   @override
   Widget build(BuildContext context) {

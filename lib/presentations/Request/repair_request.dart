@@ -59,6 +59,7 @@ class _RepairRequestState extends State<RepairRequest> {
                     code: i.code ?? 'Trống',
                     currentStatus: i.currentStatus ?? '',
                     id: i.id,
+                    imageUrl: i.imageUrls?.firstOrNull ?? '',
                   ),
                 );
               }
@@ -204,6 +205,7 @@ class _RepairRequestState extends State<RepairRequest> {
 
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
+                            imageUrl: filterCellData[index].imageUrl,
                             colorButtonName:
                                 const Color.fromARGB(255, 70, 133, 246),
                             buttonName: 'Yêu cầu sửa chữa thiết bị',

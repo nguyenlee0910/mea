@@ -52,7 +52,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -72,16 +72,16 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(color: Colors.grey[100]),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 40,
-              ),
-              Expanded(
-                child: Padding(
+        child: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(color: Colors.grey[100]),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 40,
+                ),
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,7 +164,9 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                           color: const Color.fromARGB(255, 226, 245, 253),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 2,),
+                              horizontal: 20,
+                              vertical: 2,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -276,72 +278,73 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Center(
-                  child: SizedBox(
-                    width: size.width * 0.6,
-                    height: 50,
-                    child: Neumorphic(
-                      style: NeumorphicStyle(
-                        boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(40),
-                        ),
-                        depth: 6,
-                        color: Colors.grey,
-                        intensity: 1,
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 70, 133, 246),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  child: Center(
+                    child: SizedBox(
+                      width: size.width * 0.6,
+                      height: 50,
+                      child: Neumorphic(
+                        style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(40),
                           ),
+                          depth: 6,
+                          color: Colors.grey,
+                          intensity: 1,
                         ),
-                        onPressed: () async {
-                          setState(() {
-                            nameError = name.isEmpty;
-                            descriptionError = description.isEmpty;
-                          });
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 70, 133, 246),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40)),
+                            ),
+                          ),
+                          onPressed: () async {
+                            setState(() {
+                              nameError = name.isEmpty;
+                              descriptionError = description.isEmpty;
+                            });
 
-                          if (!nameError && !descriptionError) {
-                            final convertedExpected =
-                                convertDisplayToValue(expected);
-                            await DepartmentServices.requestEquipment(
-                              description: description,
-                              name: name,
-                              expected: convertedExpected,
-                            ).then(
-                              (value) {
-                                if (value == true) {
-                                  _showSucess(context, () {
-                                    context.pop();
-                                    descriptionController.clear();
-                                    nameController.clear();
-                                    context.pop();
-                                  });
-                                }
-                              },
-                            );
-                          }
-                        },
-                        child: Text(
-                          'Gửi',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800,
+                            if (!nameError && !descriptionError) {
+                              final convertedExpected =
+                                  convertDisplayToValue(expected);
+                              await DepartmentServices.requestEquipment(
+                                description: description,
+                                name: name,
+                                expected: convertedExpected,
+                              ).then(
+                                (value) {
+                                  if (value == true) {
+                                    _showSucess(context, () {
+                                      context.pop();
+                                      descriptionController.clear();
+                                      nameController.clear();
+                                      context.pop();
+                                    });
+                                  }
+                                },
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Gửi',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

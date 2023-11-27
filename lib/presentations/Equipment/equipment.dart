@@ -50,9 +50,10 @@ class _EquipmentPageState extends State<EquipmentPage> {
                 imageUrl: (i.imageUrls?.isNotEmpty == true)
                     ? i.imageUrls![0]
                     : 'https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/Tran/mua-ban-trang-thiet-bi-y-te-b-c-d.png',
-                name: i.name ?? '', // Nếu i.name là null, sử dụng chuỗi rỗng
-                code: i.code ?? '', // Nếu i.code là null, sử dụng chuỗi rỗng
+                name: i.name ?? '',
+                code: i.code ?? '',
                 currentStatus: i.currentStatus ?? '',
+                id: i.id ?? '',
               ),
             );
           }
@@ -160,10 +161,24 @@ class _EquipmentPageState extends State<EquipmentPage> {
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
                             currentStatus: filterCellData[index].currentStatus,
+                            id: filterCellData[index].id,
                             onPress: () {
+                              var idPush = filterCellData[index].id;
+                              // List<dynamic> EquipmentModel(
+                              //     List<dynamic> inputlist) {
+                              //   List outputList = inputlist
+                              //       .where((idPush) => idPush == equipmentList[index].id)
+                              //       .toList();
+                              //   return outputList;
+                              // }
+                              EquipmentModel company = equipmentList
+                                  .where((element) => element.id == idPush)
+                                  .first;
+
                               context.push(
                                 '/${EquipmentDetail.routeName}',
-                                extra: equipmentList[index],
+                                // extra: equipmentList[index],
+                                extra: company,
                               );
                             },
                           );

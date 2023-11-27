@@ -188,8 +188,6 @@ Widget buildImportRequestCell({
   }
   final containerHeight = (requestModel is RepairRequestModel) ? 175.0 : 135.0;
   final size = MediaQuery.of(context).size;
-  debugPrint(
-      '[BUUU]${(requestModel as ImportRequestModel).importRequestItems?.firstOrNull?.supply?.name}');
   return Padding(
     padding: const EdgeInsets.all(12),
     child: Neumorphic(

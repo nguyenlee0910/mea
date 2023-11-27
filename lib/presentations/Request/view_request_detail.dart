@@ -3,10 +3,12 @@ import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 
+import '../../models/import_request_items_model.dart';
 import '../../models/import_request_model.dart';
+import '../../widgets/equipment_import_request_cell.dart';
 
 class ViewRequestDetail extends StatelessWidget {
-  const ViewRequestDetail({required this.baseRequestModel, super.key});
+  ViewRequestDetail({required this.baseRequestModel, super.key});
 
   static const routeName = 'view_request_detail';
   final BaseRequestModel baseRequestModel;
@@ -16,12 +18,7 @@ class ViewRequestDetail extends StatelessWidget {
     // final importRequestModel = (baseRequestModel as ImportRequestModel)
     //     .importRequestItemsModel
     //     ?.map((e) => e.supply.first.name);
-    dynamic model;
-    model = (baseRequestModel is ImportRequestModel
-        ? baseRequestModel as ImportRequestModel
-        : baseRequestModel as RepairRequestModel);
-    debugPrint(
-        '[BUUU]${(baseRequestModel as ImportRequestModel).importRequestItems?.firstOrNull?.supply?.name}');
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -143,6 +140,61 @@ class ViewRequestDetail extends StatelessWidget {
                     ),
                   ],
                 ),
+              if (baseRequestModel is ImportRequestModel &&
+                  (baseRequestModel as ImportRequestModel)
+                          .importRequestItems
+                          ?.length !=
+                      0) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 16),
+                  child: Text(
+                    'Thiết bị được giao',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                // ListView.builder(
+                //   itemBuilder: (context, index) {
+                //     return EquipmentImportRequestCell(
+                //       name: (baseRequestModel as ImportRequestModel)
+                //               .importRequestItems?[index]
+                //               .supply
+                //               ?.name ??
+                //           'Empty',
+                //       quantity: (baseRequestModel as ImportRequestModel)
+                //               .importRequestItems?[index]
+                //               .quantity ??
+                //           0,
+                //       unit: (baseRequestModel as ImportRequestModel)
+                //               .importRequestItems?[index]
+                //               .supply
+                //               ?.unit ??
+                //           'none',
+                //     );
+                //   },
+                //   itemCount: (baseRequestModel as ImportRequestModel)
+                //           .importRequestItems
+                //           ?.length ??
+                //       0,
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: (baseRequestModel as ImportRequestModel)
+                        .importRequestItems!
+                        .map((element) => Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: EquipmentImportRequestCell(
+                                  name: element.supply?.name ?? '',
+                                  quantity: element.quantity ?? 0,
+                                  unit: element.supply?.unit ?? ''),
+                            ))
+                        .toList(),
+                  ),
+                )
+              ]
             ],
           ),
         ),
