@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mea/models/base_request_model.dart';
+import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/presentations/Request/view_request.dart';
+
+import '../../models/import_request_model.dart';
 
 class ViewRequestDetail extends StatelessWidget {
   const ViewRequestDetail({required this.baseRequestModel, super.key});
@@ -13,6 +16,12 @@ class ViewRequestDetail extends StatelessWidget {
     // final importRequestModel = (baseRequestModel as ImportRequestModel)
     //     .importRequestItemsModel
     //     ?.map((e) => e.supply.first.name);
+    dynamic model;
+    model = (baseRequestModel is ImportRequestModel
+        ? baseRequestModel as ImportRequestModel
+        : baseRequestModel as RepairRequestModel);
+    debugPrint(
+        '[BUUU]${(baseRequestModel as ImportRequestModel).importRequestItems?.firstOrNull?.supply?.name}');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -37,9 +46,10 @@ class ViewRequestDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildImportRequestCell(
-                  isDetail: true,
-                  context: context,
-                  requestModel: baseRequestModel,),
+                isDetail: true,
+                context: context,
+                requestModel: baseRequestModel,
+              ),
               const Padding(
                 padding: EdgeInsets.only(left: 15, top: 10),
                 child: Text(
