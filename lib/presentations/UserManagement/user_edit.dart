@@ -84,34 +84,37 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: Center(
                 child: Container(
+                  width: 140,
+                  height: 140,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(),
+                  child: Container(
                     width: 140,
                     height: 140,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: const BoxDecoration(),
-                    child: Container(
-                      width: 140,
-                      height: 140,
-                      decoration: ShapeDecoration(
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                              'https://boxgaixinh.net/wp-content/uploads/2023/02/avatar-shin-cute-8.1.jpg',),
-                          fit: BoxFit.cover,
+                    decoration: ShapeDecoration(
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                          'https://i.pinimg.com/564x/ee/31/8c/ee318ca3da36bf34841e879c072aff25.jpg',
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(74.87),
-                        ),
+                        fit: BoxFit.cover,
                       ),
-                    ),),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(74.87),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             Center(
               child: Neumorphic(
                 style: NeumorphicStyle(
-                    boxShape:
-                        NeumorphicBoxShape.roundRect(BorderRadius.circular(20)),
-                    depth: 5,
-                    color: Colors.grey,
-                    intensity: 1,),
+                  boxShape:
+                      NeumorphicBoxShape.roundRect(BorderRadius.circular(20)),
+                  depth: 5,
+                  color: Colors.grey,
+                  intensity: 1,
+                ),
                 child: Container(
                   width: size.width * 0.9,
                   height: size.height * 0.47,
@@ -189,17 +192,20 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
               child: Center(
                 child: Neumorphic(
                   style: NeumorphicStyle(
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(40),),
-                      depth: 5,
-                      color: Colors.grey,
-                      intensity: 1,),
+                    boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.circular(40),
+                    ),
+                    depth: 5,
+                    color: Colors.grey,
+                    intensity: 1,
+                  ),
                   child: SizedBox(
                     width: size.width * 0.6,
                     height: 56,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 70, 113, 246),
+                        backgroundColor:
+                            const Color.fromARGB(255, 70, 113, 246),
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(40)),
                         ),
@@ -232,10 +238,11 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
       },
       child: Neumorphic(
         style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            depth: 5,
-            color: Colors.grey,
-            intensity: 1,),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+          depth: 5,
+          color: Colors.grey,
+          intensity: 1,
+        ),
         child: Container(
           width: 36,
           height: 36,
