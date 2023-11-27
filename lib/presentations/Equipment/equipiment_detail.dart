@@ -246,13 +246,14 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                         Container(
                           padding: const EdgeInsets.only(
                             left: 20,
-                            top: 10,
+                            top: 20,
+                            bottom: 10,
                           ),
                           child: const Text(
                             'Chi tiết',
                             style: TextStyle(
                               color: Color.fromARGB(255, 110, 194, 247),
-                              fontSize: 25,
+                              fontSize: 28,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
                               height: 0,
@@ -264,6 +265,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                               left: 20, right: 20, top: 10),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(
                                 width: 100,

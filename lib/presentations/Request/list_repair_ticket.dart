@@ -44,6 +44,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -64,20 +65,24 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
         length: 4,
         child: Column(
           children: [
-            TabBar(
-              indicatorColor: Colors.blue[900],
-              labelColor: Colors.blue[900],
-              tabs: const [
-                Tab(text: 'Tất cả'),
-                Tab(text: 'Đang chờ'),
-                Tab(text: 'Đã duyệt'),
-                Tab(text: 'Đã hủy'),
-              ],
-              onTap: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
+            Container(
+              // width: size.width,
+              child: TabBar(
+                isScrollable: true,
+                indicatorColor: Colors.blue[900],
+                labelColor: Colors.blue[900],
+                tabs: [
+                  Tab(text: 'Tất cả'),
+                  Tab(text: 'Đang chờ'),
+                  Tab(text: 'Đã duyệt'),
+                  Tab(text: 'Đã hủy'),
+                ],
+                onTap: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+              ),
             ),
             Expanded(
               child: TabBarView(

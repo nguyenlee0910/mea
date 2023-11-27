@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -62,20 +63,23 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
         length: 4,
         child: Column(
           children: [
-            TabBar(
-              indicatorColor: Colors.blue[900],
-              labelColor: Colors.blue[900],
-              tabs: const [
-                Tab(text: 'Tất cả'),
-                Tab(text: 'Đang chờ'),
-                Tab(text: 'Đã duyệt'),
-                Tab(text: 'Đã hủy'),
-              ],
-              onTap: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
+            Container(
+              child: TabBar(
+                isScrollable: true,
+                indicatorColor: Colors.blue[900],
+                labelColor: Colors.blue[900],
+                tabs: [
+                  Tab(text: 'Tất cả'),
+                  Tab(text: 'Đang chờ'),
+                  Tab(text: 'Đã duyệt'),
+                  Tab(text: 'Đã hủy'),
+                ],
+                onTap: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+              ),
             ),
             Expanded(
               child: TabBarView(

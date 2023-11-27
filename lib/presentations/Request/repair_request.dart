@@ -196,7 +196,12 @@ class _RepairRequestState extends State<RepairRequest> {
                       )
                     : ListView.builder(
                         itemBuilder: (context, index) {
+                          print('This is url: ${filterCellData[0].imageUrl}');
                           return EquipmentCell(
+                            // imageUrl:
+                            //     'https://hips.hearstapps.com/hmg-prod/images/14bugatti-divo-99leadgallery-1535035005.jpg?crop=0.824xw:1.00xh;0.109xw,0&resize=768:*',
+                            // imageUrl: filterCellData[index].imageUrl,
+
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
                             colorButtonName:

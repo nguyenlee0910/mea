@@ -187,6 +187,7 @@ Widget buildImportRequestCell({
       break;
   }
   final containerHeight = (requestModel is RepairRequestModel) ? 175.0 : 135.0;
+  final size = MediaQuery.of(context).size;
   return Padding(
     padding: const EdgeInsets.all(12),
     child: Neumorphic(
@@ -197,8 +198,7 @@ Widget buildImportRequestCell({
         intensity: 1,
       ),
       child: Container(
-        width: 396,
-        height: containerHeight,
+        width: size.width - 40,
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 219, 236, 248),
         ),
@@ -206,6 +206,7 @@ Widget buildImportRequestCell({
           padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 10, top: 5),
@@ -253,31 +254,42 @@ Widget buildImportRequestCell({
                           ],
                         ),
                         const Gap(6),
-                        Row(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Text(
-                                'Tên máy: ',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                          ),
+                          child: SizedBox(
+                            // 40 padding ngoài mỗi bên 20 và khoảng 40 padding trong khung
+                            // không cần cho height để nó tự động dãn
+                            width: size.width - 40 - 40,
+                            child: Text.rich(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: 'Tên máy: ',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: (requestModel as RepairRequestModel)
+                                            .repairReportItems!
+                                            .first
+                                            .equipment!
+                                            .name ??
+                                        'Trống',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
                               ),
+                              softWrap: true,
+                              overflow: TextOverflow.visible,
                             ),
-                            Text(
-                              (requestModel as RepairRequestModel)
-                                      .repairReportItems!
-                                      .first
-                                      .equipment!
-                                      .name ??
-                                  'Trống',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
