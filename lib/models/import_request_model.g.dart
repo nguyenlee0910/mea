@@ -21,11 +21,10 @@ _$ImportRequestModelImpl _$$ImportRequestModelImplFromJson(
           json['createdBy'] as Map<String, dynamic>),
       updatedBy: ImportRequestUpdatedByModel.fromJson(
           json['updatedBy'] as Map<String, dynamic>),
-      importRequestItemsModel:
-          (json['importRequestItemsModel'] as List<dynamic>?)
-              ?.map((e) =>
-                  ImportRequestItemsModel.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      importRequestItems: (json['importRequestItems'] as List<dynamic>?)
+          ?.map((e) =>
+              ImportRequestItemsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ImportRequestModelImplToJson(
@@ -41,5 +40,5 @@ Map<String, dynamic> _$$ImportRequestModelImplToJson(
       'updatedAt': instance.updatedAt,
       'createdBy': instance.createdBy,
       'updatedBy': instance.updatedBy,
-      'importRequestItemsModel': instance.importRequestItemsModel,
+      'importRequestItems': instance.importRequestItems,
     };
