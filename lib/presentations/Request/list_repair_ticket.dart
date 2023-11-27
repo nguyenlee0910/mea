@@ -258,16 +258,21 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                               ),
                             ),
                           ),
-                          Text(
-                            (requestModel as RepairRequestModel)
-                                    .repairReportItems
-                                    ?.first
-                                    .equipment
-                                    ?.name ??
-                                'Trống',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
+                          Container(
+                            child: Flexible(
+                              child: Text(
+                                overflow: TextOverflow.ellipsis,
+                                (requestModel as RepairRequestModel)
+                                        .repairReportItems
+                                        ?.first
+                                        .equipment
+                                        ?.name ??
+                                    'Trống',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
                             ),
                           ),
                         ],

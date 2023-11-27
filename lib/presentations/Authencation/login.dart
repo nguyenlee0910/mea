@@ -110,27 +110,34 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: const BoxDecoration(color: Color.fromARGB(255, 201, 229, 255)),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 201, 229, 255)),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(
-              height: 80,
+              height: 60,
             ),
+            // Center(
+            //   child: Text(
+            //     'MEA',
+            //     style: GoogleFonts.knewave(
+            //       fontSize: 45,
+            //       fontWeight: FontWeight.w400,
+            //       color: const Color.fromARGB(255, 70, 113, 246),
+            //     ),
+            //     textAlign: TextAlign.center,
+            //   ),
+            // ),
             Center(
-              child: Text(
-                'MEA',
-                style: GoogleFonts.knewave(
-                  fontSize: 45,
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromARGB(255, 70, 113, 246),
-                ),
-                textAlign: TextAlign.center,
+              child: Image.asset(
+                'assets/icon/logo-tam-phuc.png',
+                width: 120,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 32, top: 40),
+              padding: const EdgeInsets.only(left: 32, top: 20),
               child: Text(
                 'Đăng nhập',
                 textAlign: TextAlign.center,
@@ -151,8 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(12),
                       decoration: const BoxDecoration(
                         border: Border(
-                          bottom: BorderSide(
-                              ),
+                          bottom: BorderSide(),
                         ),
                       ),
                       child: TextField(
@@ -183,8 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(10),
                       decoration: const BoxDecoration(
                         border: Border(
-                          bottom: BorderSide(
-                              ),
+                          bottom: BorderSide(),
                         ),
                       ),
                       child: TextField(
@@ -231,8 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           if (nameError || passwordError)
                             const Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 '*Tên đăng nhập và mật khẩu không được trống',
                                 style: TextStyle(
@@ -242,8 +246,7 @@ class _LoginPageState extends State<LoginPage> {
                             )
                           else if (passwordError)
                             const Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 '*Mật khẩu không được trống',
                                 style: TextStyle(
@@ -253,8 +256,7 @@ class _LoginPageState extends State<LoginPage> {
                             )
                           else if (nameError)
                             const Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 '*Tên đăng nhập không được trống',
                                 style: TextStyle(
@@ -263,6 +265,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               Checkbox(
                                 value: checkBoxValue,
@@ -288,33 +291,36 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: SizedBox(
-                        width: size.width * 0.4,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 32, 69, 182),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: size.width * 0.4,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 32, 69, 182),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            return context.go('/${ForgotPassword.routeName}');
-                          },
-                          child: Text(
-                            'Quên mật khẩu?',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              height: 0,
+                            onPressed: () {
+                              return context.go('/${ForgotPassword.routeName}');
+                            },
+                            child: Text(
+                              'Quên mật khẩu?',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     const SizedBox(
                       height: 88,

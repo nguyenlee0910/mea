@@ -107,6 +107,7 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 236, 236, 236),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 110, 194, 247),
         title: const Text(
@@ -120,364 +121,168 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
       ),
       body: Container(
         width: double.infinity,
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 236, 236, 236)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: height * 0.27,
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() {
-                    _selectedThumbnailIndex = index;
-                  });
-                },
-                children: (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
-                    ? widget.equipmentModel.imageUrls!.map((imageURL) {
-                        return SizedBox(
-                          width: size.width,
-                          height: size.height * 0.3,
-                          child: Image.network(
-                            imageURL,
-                            fit: BoxFit.fill,
-                          ),
-                        );
-                      }).toList()
-                    : [
-                        SizedBox(
-                          width: size.width,
-                          height: size.height * 0.3,
-                          child: Image.network(
-                            widget.equipmentModel.imageUrls?.first ??
-                                'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ],
-              ),
-            ),
-            const SizedBox(
-              height: 3,
-            ),
-            SizedBox(
-              height: height * 0.13,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount:
-                    (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
-                        ? widget.equipmentModel.imageUrls!.length
-                        : 0,
-                itemBuilder: (context, index) {
-                  return (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
-                      ? Padding(
-                          padding: const EdgeInsets.all(3),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _selectedThumbnailIndex = index;
-                              });
-                              _pageController.animateToPage(
-                                index,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                              print('Show index $_selectedThumbnailIndex');
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: _selectedThumbnailIndex == index
-                                      ? Colors
-                                          .blue // Change the border color for the selected thumbnail
-                                      : Colors.grey,
-                                ),
-                              ),
-                              child: SizedBox(
-                                width: size.width * 0.3,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: height * 0.27,
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _selectedThumbnailIndex = index;
+                    });
+                  },
+                  children:
+                      (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
+                          ? widget.equipmentModel.imageUrls!.map((imageURL) {
+                              return SizedBox(
+                                width: size.width,
                                 height: size.height * 0.3,
                                 child: Image.network(
-                                  widget.equipmentModel.imageUrls![index],
+                                  imageURL,
+                                  fit: BoxFit.fill,
+                                ),
+                              );
+                            }).toList()
+                          : [
+                              SizedBox(
+                                width: size.width,
+                                height: size.height * 0.3,
+                                child: Image.network(
+                                  widget.equipmentModel.imageUrls?.first ??
+                                      'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                            ),
-                          ),
-                        )
-                      : SizedBox(
-                          width: size.width * 0.3,
-                          height: size.height * 0.3,
-                          child: Image.network(
-                            widget.equipmentModel.imageUrls?.first ??
-                                'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',
-                            fit: BoxFit.fill,
-                          ),
-                        );
-                },
+                            ],
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                          top: 10,
+              const SizedBox(
+                height: 3,
+              ),
+              SizedBox(
+                height: height * 0.13,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount:
+                      (widget.equipmentModel.imageUrls?.isNotEmpty ?? false)
+                          ? widget.equipmentModel.imageUrls!.length
+                          : 0,
+                  itemBuilder: (context, index) {
+                    return (widget.equipmentModel.imageUrls?.isNotEmpty ??
+                            false)
+                        ? Padding(
+                            padding: const EdgeInsets.all(3),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedThumbnailIndex = index;
+                                });
+                                _pageController.animateToPage(
+                                  index,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                                print('Show index $_selectedThumbnailIndex');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: _selectedThumbnailIndex == index
+                                        ? Colors
+                                            .blue // Change the border color for the selected thumbnail
+                                        : Colors.grey,
+                                  ),
+                                ),
+                                child: SizedBox(
+                                  width: size.width * 0.3,
+                                  height: size.height * 0.3,
+                                  child: Image.network(
+                                    widget.equipmentModel.imageUrls![index],
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            width: size.width * 0.3,
+                            height: size.height * 0.3,
+                            child: Image.network(
+                              widget.equipmentModel.imageUrls?.first ??
+                                  'https://www.isosig.com/wp-content/uploads/2021/03/medical_devices2.jpg',
+                              fit: BoxFit.fill,
+                            ),
+                          );
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
-                        child: const Text(
-                          'Chi tiết',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 110, 194, 247),
-                            fontSize: 25,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0,
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            top: 10,
+                          ),
+                          child: const Text(
+                            'Chi tiết',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 110, 194, 247),
+                              fontSize: 25,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: 20, right: 20, top: 10),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Tên máy',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Text(
-                                widget.equipmentModel.name ?? 'Trống',
-                                softWrap: true,
-                                style: const TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        margin: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Mã máy',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Text(
-                                widget.equipmentModel.code ?? 'Trống',
-                                softWrap: true,
-                                style: const TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        margin: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Nhãn hiệu',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Text(
-                                widget.equipmentModel.brand?.name ?? 'Trống',
-                                softWrap: true,
-                                style: const TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Loại thiết bị',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Text(
-                                widget.equipmentModel.equipmentCategory?.name ??
-                                    'Trống',
-                                softWrap: true,
-                                style: const TextStyle(
-                                  color: Color(0xFF1A1A1A),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Trạng thái',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Text(
-                                getStatusLabel(
-                                  widget.equipmentModel.currentStatus ??
-                                      'DEFAULT',
-                                ),
-                                softWrap: true,
-                                style: TextStyle(
-                                  color: getStatusColor(
-                                    widget.equipmentModel.currentStatus ??
-                                        'DEFAULT',
-                                  ),
-                                  fontSize: 16,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Mô tả',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Center(
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 20, right: 20, top: 10),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(
+                                width: 100,
                                 child: Text(
-                                  widget.equipmentModel.description ?? 'Trống',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 7,
+                                  'Tên máy',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Text(
+                                  widget.equipmentModel.name ?? 'Trống',
+                                  softWrap: true,
                                   style: const TextStyle(
                                     color: Color(0xFF1A1A1A),
                                     fontSize: 16,
@@ -487,16 +292,219 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+                        Container(
+                          margin: const EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  'Mã máy',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Text(
+                                  widget.equipmentModel.code ?? 'Trống',
+                                  softWrap: true,
+                                  style: const TextStyle(
+                                    color: Color(0xFF1A1A1A),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Container(
+                          margin: const EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  'Nhãn hiệu',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Text(
+                                  widget.equipmentModel.brand?.name ?? 'Trống',
+                                  softWrap: true,
+                                  style: const TextStyle(
+                                    color: Color(0xFF1A1A1A),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  'Loại thiết bị',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Text(
+                                  widget.equipmentModel.equipmentCategory
+                                          ?.name ??
+                                      'Trống',
+                                  softWrap: true,
+                                  style: const TextStyle(
+                                    color: Color(0xFF1A1A1A),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  'Trạng thái',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Text(
+                                  getStatusLabel(
+                                    widget.equipmentModel.currentStatus ??
+                                        'DEFAULT',
+                                  ),
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    color: getStatusColor(
+                                      widget.equipmentModel.currentStatus ??
+                                          'DEFAULT',
+                                    ),
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  'Mô tả',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                    widget.equipmentModel.description ??
+                                        'Trống',
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 7,
+                                    style: const TextStyle(
+                                      color: Color(0xFF1A1A1A),
+                                      fontSize: 16,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 30,
+              )
+            ],
+          ),
         ),
       ),
     );

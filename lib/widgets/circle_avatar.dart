@@ -49,41 +49,43 @@ class _CircleAvatarWithNameState extends State<CircleAvatarWithName> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 80, right: 60),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.name,
-                style: const TextStyle(
-                  color: Color(0xFF1A1A1A),
-                  fontSize: 20,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w800,
-                  height: 0,
+          padding: const EdgeInsets.only(top: 80),
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.name,
+                  style: const TextStyle(
+                    color: Color(0xFF1A1A1A),
+                    fontSize: 20,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w800,
+                    height: 0,
+                  ),
                 ),
-              ),
-              Text(
-                widget.deparmentName ?? 'NULL',
-                style: const TextStyle(
-                  color: Color(0xFF999999),
-                  fontSize: 12,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  height: 0,
+                Text(
+                  widget.deparmentName ?? 'NULL',
+                  style: const TextStyle(
+                    color: Color(0xFF999999),
+                    fontSize: 12,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    height: 0,
+                  ),
                 ),
-              ),
-              Text(
-                widget.email ?? 'NULL',
-                style: const TextStyle(
-                  color: Color(0xFF999999),
-                  fontSize: 12,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
+                Text(
+                  widget.email ?? 'NULL',
+                  style: const TextStyle(
+                    color: Color(0xFF999999),
+                    fontSize: 12,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
