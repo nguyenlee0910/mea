@@ -147,18 +147,27 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
       case 'REQUESTING':
         color = const Color.fromARGB(255, 211, 145, 38);
         statusText = 'Chờ xác nhận';
+        break;
       case 'APPROVED':
         color = const Color.fromARGB(255, 67, 153, 70);
         statusText = 'Đã duyệt';
+        break;
+
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã từ chối';
+        break;
+
       case 'UPDATED':
         color = const Color.fromARGB(255, 30, 89, 216);
         statusText = 'Đã cập nhật';
+        break;
+
       case 'DRAFT':
         color = const Color.fromARGB(255, 51, 51, 51);
         statusText = 'Nháp';
+        break;
+
       default:
         color = Colors.black;
         break;

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/services/department_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../models/user_model.dart';
 import '../../widgets/equipment_cell.dart';
 
 class RepairRequest extends StatefulWidget {
@@ -23,10 +25,26 @@ class _RepairRequestState extends State<RepairRequest> {
   List<EquipmentModel> equipmentList = [];
   List<EquipmentCellData> equipmentCellData = [];
   final TextEditingController _searchController = TextEditingController();
+  UserModel userModel = UserModel();
+  String _name = '';
+  String departmentName = '';
+
+  Future<void> getData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data =
+        jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
+    setState(() {
+      userModel = UserModel.fromJson(data);
+      departmentName = prefs.getString('departmentName') ?? 'NULL';
+      _name = userModel.name ?? 'NULL';
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    getData();
+
     runZoned(() async {
       await SharedPreferences.getInstance().then(
         (value) async {
