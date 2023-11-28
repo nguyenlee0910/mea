@@ -70,9 +70,9 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
                 labelColor: Colors.blue[900],
                 tabs: [
                   Tab(text: 'Tất cả'),
-                  Tab(text: 'Đang chờ'),
+                  Tab(text: 'Đang chờ duyệt'),
                   Tab(text: 'Đã duyệt'),
-                  Tab(text: 'Đã hủy'),
+                  Tab(text: 'Đã từ chối'),
                 ],
                 onTap: (index) {
                   setState(() {
@@ -138,7 +138,8 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
   }) {
     final createDate = DateTime.parse(requestModel.createdAt);
     final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-    final createDateString = formatter.format(createDate);
+    final createDateString =
+        formatter.format(createDate.add(const Duration(hours: 7)));
     var color = Colors.black;
 
     var statusText = '';
@@ -151,7 +152,7 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
         statusText = 'Đã duyệt';
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
-        statusText = 'Đã hủy';
+        statusText = 'Đã từ chối';
       case 'UPDATED':
         color = const Color.fromARGB(255, 30, 89, 216);
         statusText = 'Đã cập nhật';

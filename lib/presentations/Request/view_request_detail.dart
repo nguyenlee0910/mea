@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/repair_request_model.dart';
 import 'package:mea/presentations/Request/view_request.dart';
-
+import 'package:intl/intl.dart';
 import '../../models/import_request_items_model.dart';
 import '../../models/import_request_model.dart';
 import '../../widgets/equipment_import_request_cell.dart';
@@ -18,7 +18,7 @@ class ViewRequestDetail extends StatelessWidget {
     // final importRequestModel = (baseRequestModel as ImportRequestModel)
     //     .importRequestItemsModel
     //     ?.map((e) => e.supply.first.name);
-
+    final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -47,8 +47,93 @@ class ViewRequestDetail extends StatelessWidget {
                 context: context,
                 requestModel: baseRequestModel,
               ),
+              if (baseRequestModel is RepairRequestModel) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 20),
+                  child: Text(
+                    'Chi tiết đơn yêu cầu sửa chữa',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF0033FF),
+                    ),
+                  ),
+                ),
+              ],
+              if (baseRequestModel is ImportRequestModel) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 20),
+                  child: Text(
+                    'Chi tiết đơn yêu cầu thiết bị',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF0033FF),
+                    ),
+                  ),
+                ),
+              ],
+              if (baseRequestModel is RepairRequestModel &&
+                  (baseRequestModel as RepairRequestModel)
+                          .repairReportItems
+                          ?.length !=
+                      0) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 15),
+                  child: Text(
+                    'Người lập',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    (baseRequestModel as RepairRequestModel).createdBy.name,
+                    maxLines: 100,
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ],
+              if (baseRequestModel is ImportRequestModel) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 15),
+                  child: Text(
+                    'Người lập',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    (baseRequestModel as ImportRequestModel).createdBy?.name ??
+                        'Unknown',
+                    maxLines: 100,
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ],
               const Padding(
-                padding: EdgeInsets.only(left: 15, top: 10),
+                padding: EdgeInsets.only(left: 15, top: 15),
                 child: Text(
                   'Mô tả đơn yêu cầu',
                   style: TextStyle(
@@ -59,7 +144,7 @@ class ViewRequestDetail extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Text(
                   baseRequestModel.description,
                   //softWrap: true,
@@ -74,7 +159,146 @@ class ViewRequestDetail extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              if (baseRequestModel.status != 'REQUESTING') ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 8, right: 15),
+                  child: Divider(
+                    thickness: 1, // Adjust the thickness as needed
+                    color: Colors.grey, // Set the color of the divider
+                  ),
+                ),
+              ],
+              if (baseRequestModel is RepairRequestModel &&
+                  (baseRequestModel as RepairRequestModel).status !=
+                      'REQUESTING' &&
+                  (baseRequestModel as RepairRequestModel).status !=
+                      'CANCELLED' &&
+                  (baseRequestModel as RepairRequestModel)
+                          .repairReportItems
+                          ?.length !=
+                      0) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 8),
+                  child: Text(
+                    'Người duyệt đơn',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    (baseRequestModel as RepairRequestModel).updatedBy.name,
+                    maxLines: 100,
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ],
+              if (baseRequestModel is ImportRequestModel &&
+                  (baseRequestModel as ImportRequestModel).status !=
+                      'REQUESTING' &&
+                  (baseRequestModel as ImportRequestModel).status !=
+                      'CANCELLED') ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 8),
+                  child: Text(
+                    'Người duyệt đơn',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    (baseRequestModel as ImportRequestModel).updatedBy?.name ??
+                        'Unknown',
+                    maxLines: 100,
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ],
+              if (baseRequestModel is RepairRequestModel &&
+                  (baseRequestModel as RepairRequestModel).status ==
+                      'CANCELLED' &&
+                  (baseRequestModel as RepairRequestModel)
+                          .repairReportItems
+                          ?.length !=
+                      0) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 8),
+                  child: Text(
+                    'Người từ chối',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    (baseRequestModel as RepairRequestModel).updatedBy.name,
+                    maxLines: 100,
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ],
+              if (baseRequestModel is ImportRequestModel &&
+                  (baseRequestModel as ImportRequestModel).status ==
+                      'CANCELLED') ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 8),
+                  child: Text(
+                    'Người từ chối',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    (baseRequestModel as ImportRequestModel).updatedBy?.name ??
+                        'Unknown',
+                    maxLines: 100,
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ],
+              const SizedBox(height: 15),
               if (baseRequestModel.status != 'REQUESTING' &&
                   baseRequestModel.status != 'UPDATED' &&
                   baseRequestModel.status != 'CANCELLED')
@@ -93,7 +317,7 @@ class ViewRequestDetail extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15, right: 15),
                       child: Text(
                         baseRequestModel.note,
                         maxLines: 100,
@@ -116,7 +340,7 @@ class ViewRequestDetail extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.only(left: 15),
                       child: Text(
-                        'Lý do hủy đơn',
+                        'Lý do từ chối đơn',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -125,7 +349,7 @@ class ViewRequestDetail extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15, right: 15),
                       child: Text(
                         baseRequestModel.note,
                         maxLines: 100,
@@ -146,55 +370,131 @@ class ViewRequestDetail extends StatelessWidget {
                           ?.length !=
                       0) ...[
                 const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 30),
+                  child: Text(
+                    'Thông tin thiết bị được giao',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF0033FF),
+                    ),
+                  ),
+                ),
+                DataTable(
+                  columnSpacing: 20.0, // Điều chỉnh khoảng cách giữa các cột
+                  horizontalMargin:
+                      15.0, // Điều chỉnh khoảng cách giữa mép của bảng và các cột
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Tên vật tư',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'SL',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                  rows: (baseRequestModel as ImportRequestModel)
+                      .importRequestItems!
+                      .map(
+                        (element) => DataRow(
+                          cells: [
+                            DataCell(Text(
+                              element.supply?.name ?? 'Empty',
+                              style: TextStyle(fontSize: 16),
+                            )),
+                            DataCell(Text(
+                              element.quantity?.toString() ?? '0',
+                              style: TextStyle(fontSize: 16),
+                            )),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+              if (baseRequestModel is RepairRequestModel &&
+                  (baseRequestModel as RepairRequestModel).status !=
+                      'REQUESTING' &&
+                  (baseRequestModel as RepairRequestModel).status !=
+                      'CANCELLED' &&
+                  (baseRequestModel as RepairRequestModel)
+                          .repairReportItems
+                          ?.length !=
+                      0) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 30),
+                  child: Text(
+                    'Chi tiết kế hoạch sửa chữa',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF0033FF),
+                    ),
+                  ),
+                ),
+                const Padding(
                   padding: EdgeInsets.only(left: 15, top: 16),
                   child: Text(
-                    'Thiết bị được giao',
+                    'Thời gian bắt đầu sửa chữa',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                // ListView.builder(
-                //   itemBuilder: (context, index) {
-                //     return EquipmentImportRequestCell(
-                //       name: (baseRequestModel as ImportRequestModel)
-                //               .importRequestItems?[index]
-                //               .supply
-                //               ?.name ??
-                //           'Empty',
-                //       quantity: (baseRequestModel as ImportRequestModel)
-                //               .importRequestItems?[index]
-                //               .quantity ??
-                //           0,
-                //       unit: (baseRequestModel as ImportRequestModel)
-                //               .importRequestItems?[index]
-                //               .supply
-                //               ?.unit ??
-                //           'none',
-                //     );
-                //   },
-                //   itemCount: (baseRequestModel as ImportRequestModel)
-                //           .importRequestItems
-                //           ?.length ??
-                //       0,
-                // ),
+                const SizedBox(height: 8),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    children: (baseRequestModel as ImportRequestModel)
-                        .importRequestItems!
-                        .map((element) => Padding(
-                              padding: const EdgeInsets.only(bottom: 12.0),
-                              child: EquipmentImportRequestCell(
-                                  name: element.supply?.name ?? '',
-                                  quantity: element.quantity ?? 0,
-                                  unit: element.supply?.unit ?? ''),
-                            ))
-                        .toList(),
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    formatter.format(
+                      DateTime.parse(
+                          (baseRequestModel as RepairRequestModel).startAt),
+                    ),
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
                   ),
-                )
-              ]
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 16),
+                  child: Text(
+                    'Thời gian kết thúc sửa chữa',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    // Assuming startAt is a DateTime
+                    formatter.format(
+                      DateTime.parse(
+                          (baseRequestModel as RepairRequestModel).endAt),
+                    ),
+                    style: const TextStyle(
+                      color: Color(0xFF1A1A1A),
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      height: 0,
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
         ),

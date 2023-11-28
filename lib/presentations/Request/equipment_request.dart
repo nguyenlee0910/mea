@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mea/models/user_model.dart';
 import 'package:mea/widgets/custom_equipment_cell.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/department_api.dart';
 
@@ -23,9 +27,25 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
   final expectedController = TextEditingController();
   bool nameError = false;
   bool descriptionError = false;
+  UserModel userModel = UserModel();
+  String _name = '';
+  String departmentName = '';
+
   @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data =
+        jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
+    setState(() {
+      userModel = UserModel.fromJson(data);
+      departmentName = prefs.getString('departmentName') ?? 'NULL';
+      _name = userModel.name ?? 'NULL';
+    });
   }
 
   String convertDisplayToValue(String display) {
@@ -86,6 +106,57 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Người lập: ',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: Flexible(
+                              child: Text(
+                                _name ?? 'Default Name',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Phòng ban: ',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: Flexible(
+                              child: Text(
+                                departmentName ?? 'Default',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 30),
                       Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: const Text(

@@ -26,9 +26,8 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
   String _name = '';
   String _birthday = '';
   String _address = '';
-
-  UserModel userModel = UserModel();
   String departmentName = '';
+  UserModel userModel = UserModel();
 
   Future<void> getData() async {
     final prefs = await SharedPreferences.getInstance();

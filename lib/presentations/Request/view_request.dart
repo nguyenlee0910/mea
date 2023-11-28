@@ -147,7 +147,7 @@ Widget buildImportRequestCell({
 }) {
   final createDate = DateTime.parse(requestModel.createdAt);
   final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-  final createDateString = formatter.format(createDate);
+  final createDateString = formatter.format(createDate.add(Duration(hours: 7)));
   var color = Colors.black;
 
   var statusText = '';
@@ -160,7 +160,7 @@ Widget buildImportRequestCell({
       statusText = 'Đã duyệt';
     case 'CANCELLED':
       color = const Color.fromARGB(255, 221, 60, 48);
-      statusText = 'Đã hủy';
+      statusText = 'Đã từ chối';
     case 'REJECTED':
       color = const Color.fromARGB(255, 221, 60, 48);
       statusText = 'Đã từ chối';
@@ -296,7 +296,7 @@ Widget buildImportRequestCell({
                   ],
                 ),
               ],
-              const Gap(6),
+              // const Gap(6),
               Row(
                 children: [
                   const Padding(
@@ -340,8 +340,8 @@ Widget buildImportRequestCell({
                   ),
                 ],
               ),
+              const Gap(6),
               if (requestModel is ImportRequestModel) ...[
-                const Gap(6),
                 Row(
                   children: [
                     const Padding(
@@ -380,6 +380,7 @@ Widget buildImportRequestCell({
                     ),
                   ],
                 ),
+                const Gap(6),
               ],
               if (isDetail == false) ...[
                 ElevatedButton(

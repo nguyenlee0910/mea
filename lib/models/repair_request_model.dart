@@ -16,6 +16,8 @@ class RepairRequestModel extends BaseRequestModel with _$RepairRequestModel {
     required String status,
     required String note,
     required String updatedAt,
+    required String startAt,
+    required String endAt,
     required RepairRequestCreatedByModel createdBy,
     required RepairRequestUpdatedByModel updatedBy,
     List<RepairReportItemsModel>? repairReportItems,

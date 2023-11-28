@@ -73,9 +73,9 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
                 labelColor: Colors.blue[900],
                 tabs: [
                   Tab(text: 'Tất cả'),
-                  Tab(text: 'Đang chờ'),
+                  Tab(text: 'Đang chờ duyệt'),
                   Tab(text: 'Đã duyệt'),
-                  Tab(text: 'Đã hủy'),
+                  Tab(text: 'Đã từ chối'),
                 ],
                 onTap: (index) {
                   setState(() {
@@ -153,7 +153,8 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
   }) {
     final createDate = DateTime.parse(requestModel.createdAt);
     final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-    final createDateString = formatter.format(createDate);
+    final createDateString =
+        formatter.format(createDate.toUtc().add(Duration(hours: 7)));
     var color = Colors.black;
 
     var statusText = '';

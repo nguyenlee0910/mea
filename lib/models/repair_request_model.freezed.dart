@@ -26,6 +26,8 @@ mixin _$RepairRequestModel {
   String get status => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
+  String get startAt => throw _privateConstructorUsedError;
+  String get endAt => throw _privateConstructorUsedError;
   RepairRequestCreatedByModel get createdBy =>
       throw _privateConstructorUsedError;
   RepairRequestUpdatedByModel get updatedBy =>
@@ -52,6 +54,8 @@ abstract class $RepairRequestModelCopyWith<$Res> {
       String status,
       String note,
       String updatedAt,
+      String startAt,
+      String endAt,
       RepairRequestCreatedByModel createdBy,
       RepairRequestUpdatedByModel updatedBy,
       List<RepairReportItemsModel>? repairReportItems});
@@ -79,6 +83,8 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
     Object? status = null,
     Object? note = null,
     Object? updatedAt = null,
+    Object? startAt = null,
+    Object? endAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
     Object? repairReportItems = freezed,
@@ -107,6 +113,14 @@ class _$RepairRequestModelCopyWithImpl<$Res, $Val extends RepairRequestModel>
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      startAt: null == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      endAt: null == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
               as String,
       createdBy: null == createdBy
           ? _value.createdBy
@@ -157,6 +171,8 @@ abstract class _$$RepairRequestModelImplCopyWith<$Res>
       String status,
       String note,
       String updatedAt,
+      String startAt,
+      String endAt,
       RepairRequestCreatedByModel createdBy,
       RepairRequestUpdatedByModel updatedBy,
       List<RepairReportItemsModel>? repairReportItems});
@@ -184,6 +200,8 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
     Object? status = null,
     Object? note = null,
     Object? updatedAt = null,
+    Object? startAt = null,
+    Object? endAt = null,
     Object? createdBy = null,
     Object? updatedBy = null,
     Object? repairReportItems = freezed,
@@ -213,6 +231,14 @@ class __$$RepairRequestModelImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      startAt: null == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      endAt: null == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
+              as String,
       createdBy: null == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -239,6 +265,8 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
       required this.status,
       required this.note,
       required this.updatedAt,
+      required this.startAt,
+      required this.endAt,
       required this.createdBy,
       required this.updatedBy,
       final List<RepairReportItemsModel>? repairReportItems})
@@ -260,6 +288,10 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
   @override
   final String updatedAt;
   @override
+  final String startAt;
+  @override
+  final String endAt;
+  @override
   final RepairRequestCreatedByModel createdBy;
   @override
   final RepairRequestUpdatedByModel updatedBy;
@@ -276,7 +308,7 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
 
   @override
   String toString() {
-    return 'RepairRequestModel(id: $id, createdAt: $createdAt, description: $description, status: $status, note: $note, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, repairReportItems: $repairReportItems)';
+    return 'RepairRequestModel(id: $id, createdAt: $createdAt, description: $description, status: $status, note: $note, updatedAt: $updatedAt, startAt: $startAt, endAt: $endAt, createdBy: $createdBy, updatedBy: $updatedBy, repairReportItems: $repairReportItems)';
   }
 
   @override
@@ -293,6 +325,8 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
             (identical(other.note, note) || other.note == note) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
+            (identical(other.endAt, endAt) || other.endAt == endAt) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.updatedBy, updatedBy) ||
@@ -311,6 +345,8 @@ class _$RepairRequestModelImpl implements _RepairRequestModel {
       status,
       note,
       updatedAt,
+      startAt,
+      endAt,
       createdBy,
       updatedBy,
       const DeepCollectionEquality().hash(_repairReportItems));
@@ -338,6 +374,8 @@ abstract class _RepairRequestModel implements RepairRequestModel {
           required final String status,
           required final String note,
           required final String updatedAt,
+          required final String startAt,
+          required final String endAt,
           required final RepairRequestCreatedByModel createdBy,
           required final RepairRequestUpdatedByModel updatedBy,
           final List<RepairReportItemsModel>? repairReportItems}) =
@@ -358,6 +396,10 @@ abstract class _RepairRequestModel implements RepairRequestModel {
   String get note;
   @override
   String get updatedAt;
+  @override
+  String get startAt;
+  @override
+  String get endAt;
   @override
   RepairRequestCreatedByModel get createdBy;
   @override
