@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mea/presentations/Authencation/home.dart';
@@ -38,19 +39,6 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
   String brokenDate = '';
   DateTime selectedDateTime = DateTime.now();
 
-  // void _selectDateTime() {
-  //   DatePicker.showDateTimePicker(
-  //     context,
-  //     showTitleActions: true,
-  //     onConfirm: (date) {
-  //       setState(() {
-  //         selectedDateTime = date;
-  //       });
-  //     },
-  //     currentTime: selectedDateTime,
-  //   );
-  // }
-
   Future<void> getData() async {
     final prefs = await SharedPreferences.getInstance();
     final data =
@@ -64,7 +52,6 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
@@ -520,10 +507,10 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                                           TextButton(
                                             onPressed: () {
                                               Navigator.of(context).pop(true);
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                HomePage.routeName,
-                                              );
+                                              // Navigator.pushReplacementNamed(
+                                              //   context,
+                                              //   HomePage.routeName,
+                                              // );
                                             },
                                             child: const Text('Xác nhận'),
                                           ),
@@ -534,8 +521,12 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
 
                                   // If user confirms, make the API call
                                   if (confirmed == true) {
-                                    await _makeApiCall();
-
+                                    await _makeApiCall(onSucess: () {
+                                      _showSucess(context, () {
+                                        context.pop();
+                                        context.pop();
+                                      });
+                                    });
                                     if (requestSuccess) {
                                       // Handle success
                                       debugPrint('API request successful!');
@@ -567,7 +558,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
     );
   }
 
-  Future<void> _makeApiCall() async {
+  Future<void> _makeApiCall({required Function onSucess}) async {
     setState(() {
       isLoading = true;
     });
@@ -590,9 +581,10 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
         requestSuccess = success;
       });
       if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tạo đơn thành công!')),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(content: Text('Tạo đơn thành công!')),
+        // );
+        onSucess();
       }
     } catch (error) {
       debugPrint('API request failed with error: $error');
@@ -605,4 +597,26 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
       });
     }
   }
+}
+
+void _showSucess(BuildContext context, VoidCallback? callback) {
+  final alert = AlertDialog(
+    title: const Text('Thành công'),
+    content: const Text('Cập nhật thông tin thành công!'),
+    actions: [
+      ElevatedButton(
+        child: const Text('Xác nhận'),
+        onPressed: () {
+          callback!();
+        },
+      ),
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

@@ -8,13 +8,15 @@ class WhiteTableCell extends StatelessWidget {
       this.route,
       this.isCenter = false,
       super.key,
-      this.extra});
+      this.extra,
+      this.onPopCallBack});
 
   final IconData icon;
   final String text;
   final String? route;
   final bool isCenter;
   final dynamic extra;
+  final Function(dynamic)? onPopCallBack;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,9 @@ class WhiteTableCell extends StatelessWidget {
             if ('' != route && extra == null) {
               context.push(route!);
             } else if ('' != route && extra != null) {
-              context.push(route!, extra: extra);
+              context.push(route!, extra: extra).then((value) {
+                onPopCallBack!(value);
+              });
             }
           },
         ),

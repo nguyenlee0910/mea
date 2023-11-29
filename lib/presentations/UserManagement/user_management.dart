@@ -78,6 +78,11 @@ class _UserManagementPageState extends State<UserManagementPage> {
                     text: widget.cellData[index].textTitle!,
                     route: widget.cellData[index].route ?? '',
                     extra: index == 0 ? userModel : null,
+                    onPopCallBack: index == 0
+                        ? (isSuccess) async {
+                            await getData();
+                          }
+                        : null,
                   ),
                 );
               },
