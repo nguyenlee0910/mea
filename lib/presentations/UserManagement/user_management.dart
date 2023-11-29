@@ -77,6 +77,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                     icon: widget.cellData[index].iconData!,
                     text: widget.cellData[index].textTitle!,
                     route: widget.cellData[index].route ?? '',
+                    extra: index == 0 ? userModel : null,
                   ),
                 );
               },

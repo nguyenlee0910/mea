@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mea/models/base_request_model.dart';
 import 'package:mea/models/equipment_model.dart';
 import 'package:mea/models/notification_model.dart';
+import 'package:mea/models/user_model.dart';
 import 'package:mea/navigation_page.dart';
 import 'package:mea/presentations/Authencation/create_new_password.dart';
 import 'package:mea/presentations/Authencation/forgot_password.dart';
@@ -70,8 +71,10 @@ GoRouter appRouter() => GoRouter(
         GoRoute(
           path: '/edit_profile',
           name: UserEditProfilePage.routeName,
-          builder: (BuildContext context, GoRouterState state) =>
-              const UserEditProfilePage(),
+          builder: (BuildContext context, GoRouterState state) {
+            final userModel = state.extra! as UserModel;
+            return UserEditProfilePage(userModel: userModel);
+          },
         ),
         GoRoute(
           path: '/equipment_all',

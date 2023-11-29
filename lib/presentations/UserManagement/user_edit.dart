@@ -9,9 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/user_model.dart';
 
+// ignore: must_be_immutable
 class UserEditProfilePage extends StatefulWidget {
-  const UserEditProfilePage({super.key});
+  UserEditProfilePage({super.key, required this.userModel});
   static const routeName = 'edit_profile';
+
+  UserModel userModel;
 
   @override
   State<UserEditProfilePage> createState() => _UserEditProfilePageState();
@@ -29,15 +32,10 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
   String departmentName = '';
   UserModel userModel = UserModel();
 
-  Future<void> getData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final data =
-        jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
+  void getData() {
     setState(() {
-      userModel = UserModel.fromJson(data);
-      departmentName = prefs.getString('departmentName') ?? 'NULL';
+      userModel = widget.userModel;
       _gender = userModel.gender == 'MALE' ? genderList.first : genderList.last;
-
       _name = userModel.name ?? 'NULL';
       _birthday = userModel.birthday ?? 'NULL';
       _address = userModel.address ?? 'NULL';

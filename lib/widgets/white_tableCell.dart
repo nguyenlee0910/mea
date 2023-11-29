@@ -2,18 +2,19 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
 
 class WhiteTableCell extends StatelessWidget {
-  const WhiteTableCell({
-    required this.icon,
-    required this.text,
-    this.route,
-    this.isCenter = false,
-    super.key,
-  });
+  const WhiteTableCell(
+      {required this.icon,
+      required this.text,
+      this.route,
+      this.isCenter = false,
+      super.key,
+      this.extra});
 
   final IconData icon;
   final String text;
   final String? route;
   final bool isCenter;
+  final dynamic extra;
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +78,10 @@ class WhiteTableCell extends StatelessWidget {
             ),
           ),
           onTap: () {
-            if ('' != route) {
+            if ('' != route && extra == null) {
               context.push(route!);
+            } else if ('' != route && extra != null) {
+              context.push(route!, extra: extra);
             }
           },
         ),
