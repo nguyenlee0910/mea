@@ -157,6 +157,7 @@ class DepartmentServices {
     required String note,
     required NumberFormat price,
     required String startAt,
+    required String brokenDate,
     List<String>? urlImage,
   }) async {
     final prefs = await SharedPreferences.getInstance();
@@ -192,6 +193,7 @@ class DepartmentServices {
         'note': note,
         'price': priceString,
         'startAt': startAt,
+        'brokenDate': brokenDate,
       };
       final response = await http.post(
         uri,
