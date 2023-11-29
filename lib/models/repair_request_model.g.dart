@@ -17,6 +17,7 @@ _$RepairRequestModelImpl _$$RepairRequestModelImplFromJson(
       updatedAt: json['updatedAt'] as String,
       startAt: json['startAt'] as String,
       endAt: json['endAt'] as String,
+      brokenDate: json['brokenDate'] as String?,
       createdBy: RepairRequestCreatedByModel.fromJson(
           json['createdBy'] as Map<String, dynamic>),
       updatedBy: RepairRequestUpdatedByModel.fromJson(
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$RepairRequestModelImplToJson(
       'updatedAt': instance.updatedAt,
       'startAt': instance.startAt,
       'endAt': instance.endAt,
+      'brokenDate': instance.brokenDate,
       'createdBy': instance.createdBy,
       'updatedBy': instance.updatedBy,
       'repairReportItems': instance.repairReportItems,
