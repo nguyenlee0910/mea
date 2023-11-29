@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
       routeInformationProvider: router.routeInformationProvider,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

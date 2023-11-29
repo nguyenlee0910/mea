@@ -198,8 +198,10 @@ class _MessagePageState extends State<MessagePage> {
       },
     );
 
-    await client.connectUser(user,
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZmx1dHRlciJ9.S-MJpoSwDiqyXpUURgO5wVqJ4vKlIVFLSEyrFYCOE1c',);
+    await client.connectUser(
+      user,
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZmx1dHRlciJ9.S-MJpoSwDiqyXpUURgO5wVqJ4vKlIVFLSEyrFYCOE1c',
+    );
     // client.devToken('6ef9a369-c49a-4cf1-abd1-b898ebbfabd6').toString());
 
     setState(() {
@@ -221,6 +223,7 @@ class _MessagePageState extends State<MessagePage> {
     }
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       builder: (context, child) => StreamChat(
         client: client,
         child: child,
