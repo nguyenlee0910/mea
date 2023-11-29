@@ -315,11 +315,13 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                     child: GestureDetector(
                       onTap: () async {
                         final now = DateTime.now();
+                        final oneWeekAgo = now.subtract(Duration(days: 7));
+
                         final selectedDate =
                             await DatePicker.showDateTimePicker(
                           context,
                           showTitleActions: true,
-                          minTime: DateTime(2018, 3, 5),
+                          minTime: oneWeekAgo,
                           maxTime: now,
                           onChanged: (date) {
                             print('change $date');
@@ -327,11 +329,11 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                           onConfirm: (date) {
                             print('confirm $date');
                             if (date.isAfter(now)) {
-                              // Nếu người dùng chọn thời gian sau thời gian hiện tại,
-                              // đặt lại ngày giờ thành thời gian hiện tại
+                              // If the user chooses a time after the current time,
+                              // set the date time to the current time
                               date = now;
                             }
-                            // Xử lý ngày giờ đã chọn ở đây
+                            // Handle the selected date time here
                             setState(() {
                               selectedDateTime = date;
                             });
@@ -339,6 +341,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                           currentTime: now,
                           locale: LocaleType.vi,
                         );
+
                         if (selectedDate != null) {
                           setState(() {
                             selectedDateTime = selectedDate;
