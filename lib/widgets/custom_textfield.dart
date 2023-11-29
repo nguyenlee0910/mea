@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 Widget buildEditable({
   required String initiaValue,
   required void Function(String) onChange,
+  required double widthscreen,
   String? titleText,
   List<String> dropDownItems = const [],
   MainAxisAlignment mainAxisAlignment = MainAxisAlignment.end,
-  Size size = const Size(240, 36),
   double borderRadiusRatio = 10.0,
   Color backgroundColor = const Color(0xffd9d9d9),
 }) {
@@ -28,52 +28,28 @@ Widget buildEditable({
           ),
         ],
         SizedBox(
-          width: size.width,
+          width: widthscreen * 0.57,
           child: Container(
             width: double.infinity,
-            height: size.height,
+            height: 45,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(borderRadiusRatio),
               ),
               color: backgroundColor,
             ),
-            child: dropDownItems.isNotEmpty
-                ? Center(
-                    child: DropdownButton<String>(
-                      value: initiaValue,
-                      onChanged: (String? value) {
-                        onChange(value!);
-                      },
-                      icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
-                      isExpanded: true,
-                      items:
-                          dropDownItems.map<DropdownMenuItem<String>>((value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 12),
-                            child: Text(value),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 12),
-                        child: TextFormField(
-                          initialValue: initiaValue,
-                          decoration:
-                              const InputDecoration(border: InputBorder.none),
-                        ),
-                      ),
-                    ),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    initialValue: initiaValue,
+                    decoration: const InputDecoration(border: InputBorder.none),
                   ),
+                ),
+              ),
+            ),
           ),
         ),
       ],

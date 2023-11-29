@@ -88,14 +88,14 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
           ),
         ),
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(color: Colors.grey[100]),
-          child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(color: Colors.grey[100]),
             child: Stack(
               children: [
                 Column(
@@ -376,75 +376,73 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                         ],
                       ),
                     ),
-                  ],
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 17,
-                  child: Center(
-                    child: SizedBox(
-                      width: size.width - 30,
-                      height: 50,
-                      child: Neumorphic(
-                        style: NeumorphicStyle(
-                          boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(8),
-                          ),
-                          depth: 6,
-                          color: Colors.grey,
-                          intensity: 1,
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 70, 133, 246),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 40, top: 40),
+                        child: SizedBox(
+                          width: size.width - 30,
+                          height: 50,
+                          child: Neumorphic(
+                            style: NeumorphicStyle(
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.circular(8),
+                              ),
+                              depth: 6,
+                              color: Colors.grey,
+                              intensity: 1,
                             ),
-                          ),
-                          onPressed: () async {
-                            setState(() {
-                              nameError = name.isEmpty;
-                              descriptionError = description.isEmpty;
-                            });
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 70, 133, 246),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                ),
+                              ),
+                              onPressed: () async {
+                                setState(() {
+                                  nameError = name.isEmpty;
+                                  descriptionError = description.isEmpty;
+                                });
 
-                            if (!nameError && !descriptionError) {
-                              final convertedExpected =
-                                  convertDisplayToValue(expected);
-                              await DepartmentServices.requestEquipment(
-                                description: description,
-                                name: name,
-                                expected: convertedExpected,
-                              ).then(
-                                (value) {
-                                  if (value == true) {
-                                    _showSucess(context, () {
-                                      context.pop();
-                                      descriptionController.clear();
-                                      nameController.clear();
-                                      context.pop();
-                                    });
-                                  }
-                                },
-                              );
-                            }
-                          },
-                          child: Text(
-                            'Gửi',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
+                                if (!nameError && !descriptionError) {
+                                  final convertedExpected =
+                                      convertDisplayToValue(expected);
+                                  await DepartmentServices.requestEquipment(
+                                    description: description,
+                                    name: name,
+                                    expected: convertedExpected,
+                                  ).then(
+                                    (value) {
+                                      if (value == true) {
+                                        _showSucess(context, () {
+                                          context.pop();
+                                          descriptionController.clear();
+                                          nameController.clear();
+                                          context.pop();
+                                        });
+                                      }
+                                    },
+                                  );
+                                }
+                              },
+                              child: Text(
+                                'Gửi',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.inter(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                )
+                    )
+                  ],
+                ),
               ],
             ),
           ),

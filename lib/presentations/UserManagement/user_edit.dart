@@ -44,6 +44,44 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
     });
   }
 
+  Future<void> _showGenderDialog() async {
+    await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            // <-- SEE HERE
+            title: const Text('Giới tính'),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () {
+                  setState(() {
+                    _gender = 'Nam';
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Nam',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  setState(() {
+                    _gender = 'Nữ';
+                  });
+
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Nữ',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -65,6 +103,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
     final formattedDate = dateFormat.format(dateTime);
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Cập nhật thông tin cá nhân'),
@@ -77,154 +116,195 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(color: Colors.grey[100]),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: Center(
-                child: Container(
-                  width: 140,
-                  height: 140,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                child: Center(
                   child: Container(
                     width: 140,
                     height: 140,
-                    decoration: ShapeDecoration(
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://i.pinimg.com/564x/ee/31/8c/ee318ca3da36bf34841e879c072aff25.jpg',
+                    clipBehavior: Clip.antiAlias,
+                    decoration: const BoxDecoration(),
+                    child: Container(
+                      width: 140,
+                      height: 140,
+                      decoration: ShapeDecoration(
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://i.pinimg.com/564x/ee/31/8c/ee318ca3da36bf34841e879c072aff25.jpg',
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        fit: BoxFit.cover,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(74.87),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(74.87),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Center(
-              child: Neumorphic(
-                style: NeumorphicStyle(
-                  boxShape:
-                      NeumorphicBoxShape.roundRect(BorderRadius.circular(20)),
-                  depth: 5,
-                  color: Colors.grey,
-                  intensity: 1,
-                ),
-                child: Container(
-                  width: size.width * 0.9,
-                  height: size.height * 0.47,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      children: [
-                        buildEditable(
-                          titleText: 'Tên:',
-                          initiaValue: _name,
-                          onChange: (value) {},
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        buildEditable(
-                          titleText: 'Email:',
-                          initiaValue: userModel.email ?? 'NULL',
-                          onChange: (value) {},
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        buildEditable(
-                          titleText: 'SDT:',
-                          initiaValue: userModel.phone ?? 'NULL',
-                          onChange: (value) {},
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        buildEditable(
-                          titleText: 'Ngày sinh:',
-                          initiaValue: formattedDate ?? 'NULL',
-                          onChange: (value) {},
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        buildEditable(
-                          titleText: 'Địa chỉ:',
-                          initiaValue: userModel.address ?? 'NULL',
-                          onChange: (value) {},
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        buildEditable(
-                          titleText: 'Giới tính :',
-                          initiaValue: _gender,
-                          dropDownItems: genderList,
-                          onChange: (value) {
-                            setState(() {
-                              _gender = value;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Center(
+              Center(
                 child: Neumorphic(
                   style: NeumorphicStyle(
-                    boxShape: NeumorphicBoxShape.roundRect(
-                      BorderRadius.circular(40),
-                    ),
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(BorderRadius.circular(20)),
                     depth: 5,
                     color: Colors.grey,
                     intensity: 1,
                   ),
-                  child: SizedBox(
-                    width: size.width * 0.6,
-                    height: 56,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 70, 113, 246),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(40)),
-                        ),
+                  child: Container(
+                    width: size.width * 0.9,
+                    height: size.height * 0.47,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
                       ),
-                      onPressed: () {},
-                      child: Text(
-                        'Lưu',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        children: [
+                          buildEditable(
+                            widthscreen: size.width,
+                            titleText: 'Tên:',
+                            initiaValue: _name,
+                            onChange: (value) {},
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          buildEditable(
+                            widthscreen: size.width,
+                            titleText: 'Email:',
+                            initiaValue: userModel.email ?? 'NULL',
+                            onChange: (value) {},
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          buildEditable(
+                            widthscreen: size.width,
+                            titleText: 'SDT:',
+                            initiaValue: userModel.phone ?? 'NULL',
+                            onChange: (value) {},
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          buildEditable(
+                            widthscreen: size.width,
+                            titleText: 'Ngày sinh:',
+                            initiaValue: formattedDate ?? 'NULL',
+                            onChange: (value) {},
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          buildEditable(
+                            widthscreen: size.width,
+                            titleText: 'Địa chỉ:',
+                            initiaValue: userModel.address ?? 'NULL',
+                            onChange: (value) {},
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          // buildEditable(
+                          //   titleText: 'Giới tính :',
+                          //   initiaValue: _gender,
+                          //   dropDownItems: genderList,
+                          //   onChange: (value) {
+                          //     setState(() {
+                          //       _gender = value;
+                          //     });
+                          //   },
+                          // ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Giới tính:',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(),
+                              ),
+                              GestureDetector(
+                                onTap: _showGenderDialog,
+                                child: Container(
+                                  height: 45,
+                                  width: size.width * 0.57,
+                                  padding: EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                    color: Color(0xffd9d9d9),
+                                  ),
+                                  child: Text(
+                                    _gender,
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Neumorphic(
+                    style: NeumorphicStyle(
+                      boxShape: NeumorphicBoxShape.roundRect(
+                        BorderRadius.circular(40),
+                      ),
+                      depth: 5,
+                      color: Colors.grey,
+                      intensity: 1,
+                    ),
+                    child: SizedBox(
+                      width: size.width * 0.6,
+                      height: 56,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 70, 113, 246),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          'Lưu',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
