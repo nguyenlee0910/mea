@@ -39,13 +39,14 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
   void getData() {
     setState(() {
       userModel = widget.userModel;
-      _gender = userModel.gender == 'MALE' ? genderList.first : genderList.last;
+      _gender = userModel.gender ?? genderList.first;
       _name = userModel.name ?? 'NULL';
       _birthday = userModel.birthday ?? 'NULL';
       _address = userModel.address ?? 'NULL';
       _email = userModel.email ?? 'NULL';
       _phone = userModel.phone ?? 'NULL';
     });
+    print('===>${userModel.gender}');
   }
 
   Future<void> _showGenderDialog() async {
@@ -316,6 +317,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                           ),
                         ),
                         onPressed: () async {
+                          print('===>>>>>>$_gender');
                           final updatedUser = UserModel(
                             name: _name,
                             email: _email,
