@@ -368,7 +368,9 @@ class ViewRequestDetail extends StatelessWidget {
                   (baseRequestModel as ImportRequestModel)
                           .importRequestItems
                           ?.length !=
-                      0) ...[
+                      0 &&
+                  (baseRequestModel as ImportRequestModel).status !=
+                      "REQUESTING") ...[
                 const Padding(
                   padding: EdgeInsets.only(left: 15, top: 30),
                   child: Text(
