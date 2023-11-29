@@ -162,27 +162,27 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
       case 'REQUESTING':
         color = const Color.fromARGB(255, 211, 145, 38);
         statusText = 'Chờ xác nhận';
-      case 'COMPLETED':
+        break;
+      case 'APPROVED':
         color = const Color.fromARGB(255, 67, 153, 70);
-        statusText = 'Hoàn thành';
-      case 'PAUSED':
-        color = const Color.fromARGB(255, 80, 27, 165);
-        statusText = 'Tạm dừng sửa chữa';
+        statusText = 'Đã duyệt';
+        break;
+
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
-        statusText = 'Hủy sửa chữa';
-      case 'WAITING_FOR_SUPPLY':
-        color = const Color(0xFF9b59b6);
-        statusText = 'Chờ cung cấp';
-      case 'REJECTED':
-        color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã từ chối';
-      case 'FIXING':
+        break;
+
+      case 'UPDATED':
         color = const Color.fromARGB(255, 30, 89, 216);
-        statusText = 'Đang sửa chữa';
+        statusText = 'Đã cập nhật';
+        break;
+
       case 'DRAFT':
         color = const Color.fromARGB(255, 51, 51, 51);
         statusText = 'Nháp';
+        break;
+
       default:
         color = Colors.black;
         break;

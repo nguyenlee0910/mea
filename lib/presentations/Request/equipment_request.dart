@@ -95,352 +95,358 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(color: Colors.grey[100]),
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Text(
-                      'Thông tin người tạo:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            child: Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 15),
+                      child: Text(
+                        'Thông tin người tạo:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  Center(
-                    child: Container(
+                    SizedBox(
+                      height: 6,
+                    ),
+                    Center(
+                      child: Container(
+                        width: size.width - 30,
+                        child: Neumorphic(
+                          style: NeumorphicStyle(
+                            boxShape: NeumorphicBoxShape.roundRect(
+                              BorderRadius.circular(8),
+                            ),
+                            depth: 3,
+                            color: const Color.fromARGB(255, 226, 245, 253),
+                            intensity: 1,
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 15, top: 10),
+                                  child: Text(
+                                    'Người lập:',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 15, top: 5),
+                                  child: Text(
+                                    _name ?? 'Default Name',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 15, top: 5),
+                                  child: Text(
+                                    'Phòng ban:',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                      left: 15, top: 5, bottom: 10),
+                                  child: Text(
+                                    departmentName ?? 'Default',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 15),
+                          Container(
+                            margin: const EdgeInsets.only(left: 0),
+                            child: const Text(
+                              'Tên đơn yêu cầu thiết bị y tế:',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Neumorphic(
+                            style: NeumorphicStyle(
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.circular(8),
+                              ),
+                              depth: 6,
+                              color: Colors.grey,
+                              lightSource: LightSource.top,
+                              intensity: 1,
+                            ),
+                            child: Card(
+                              margin: const EdgeInsets.all(0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              color: const Color.fromARGB(255, 226, 245, 253),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextFormField(
+                                      controller: nameController,
+                                      decoration:
+                                          const InputDecoration.collapsed(
+                                        hintText:
+                                            'Nhập tên đơn yêu cầu thiết bị',
+                                      ),
+                                      onChanged: (valueName) {
+                                        setState(() {
+                                          name = valueName;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          Container(
+                            child: const Text(
+                              'Khoảng thời gian muốn nhận:',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Neumorphic(
+                            style: NeumorphicStyle(
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.circular(8),
+                              ),
+                              depth: 6,
+                              color: Colors.grey,
+                              lightSource: LightSource.top,
+                              intensity: 1,
+                            ),
+                            child: Card(
+                              margin: const EdgeInsets.all(0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              color: const Color.fromARGB(255, 226, 245, 253),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 2,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    DropdownButton<String>(
+                                      value: expected,
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          expected = newValue!;
+                                        });
+                                      },
+                                      items: <String>[
+                                        '72 giờ',
+                                        '1 giờ',
+                                        '3 giờ',
+                                        '5 giờ',
+                                        '24 giờ',
+                                        '36 giờ',
+                                      ].map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            child: const Text(
+                              'Mô tả:',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Neumorphic(
+                            style: NeumorphicStyle(
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.circular(8),
+                              ),
+                              depth: 6,
+                              color: Colors.grey,
+                              lightSource: LightSource.top,
+                              intensity: 1,
+                            ),
+                            child: Card(
+                              margin: const EdgeInsets.all(0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              color: const Color.fromARGB(255, 226, 245, 253),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextField(
+                                      controller: descriptionController,
+                                      maxLines: 8,
+                                      decoration:
+                                          const InputDecoration.collapsed(
+                                        hintText: 'Bông gạc, Bơm tiêm, ...',
+                                      ),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          description = value;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              children: [
+                                if (nameError && descriptionError)
+                                  const Text(
+                                    '*Tên và mô tả không được trống',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  )
+                                else if (descriptionError)
+                                  const Text(
+                                    '*Mô tả không được trống',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  )
+                                else if (nameError)
+                                  const Text(
+                                    '*Tên không được trống',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 17,
+                  child: Center(
+                    child: SizedBox(
                       width: size.width - 30,
+                      height: 50,
                       child: Neumorphic(
                         style: NeumorphicStyle(
                           boxShape: NeumorphicBoxShape.roundRect(
                             BorderRadius.circular(8),
                           ),
-                          depth: 3,
-                          color: const Color.fromARGB(255, 226, 245, 253),
+                          depth: 6,
+                          color: Colors.grey,
                           intensity: 1,
                         ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(left: 15, top: 10),
-                                child: Text(
-                                  'Người lập:',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(left: 15, top: 5),
-                                child: Text(
-                                  _name ?? 'Default Name',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 15, top: 5),
-                                child: Text(
-                                  'Phòng ban:',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 15, top: 5, bottom: 10),
-                                child: Text(
-                                  departmentName ?? 'Default',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ),
-                            ]),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 15),
-                        Container(
-                          margin: const EdgeInsets.only(left: 0),
-                          child: const Text(
-                            'Tên đơn yêu cầu thiết bị y tế:',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 70, 133, 246),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        Neumorphic(
-                          style: NeumorphicStyle(
-                            boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.circular(8),
-                            ),
-                            depth: 6,
-                            color: Colors.grey,
-                            lightSource: LightSource.top,
-                            intensity: 1,
-                          ),
-                          child: Card(
-                            margin: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            color: const Color.fromARGB(255, 226, 245, 253),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextFormField(
-                                    controller: nameController,
-                                    decoration: const InputDecoration.collapsed(
-                                      hintText: 'Nhập tên đơn yêu cầu thiết bị',
-                                    ),
-                                    onChanged: (valueName) {
-                                      setState(() {
-                                        name = valueName;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          child: const Text(
-                            'Khoảng thời gian muốn nhận:',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Neumorphic(
-                          style: NeumorphicStyle(
-                            boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.circular(8),
-                            ),
-                            depth: 6,
-                            color: Colors.grey,
-                            lightSource: LightSource.top,
-                            intensity: 1,
-                          ),
-                          child: Card(
-                            margin: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            color: const Color.fromARGB(255, 226, 245, 253),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 2,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  DropdownButton<String>(
-                                    value: expected,
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        expected = newValue!;
-                                      });
-                                    },
-                                    items: <String>[
-                                      '72 giờ',
-                                      '1 giờ',
-                                      '3 giờ',
-                                      '5 giờ',
-                                      '24 giờ',
-                                      '36 giờ',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
-                          child: const Text(
-                            'Mô tả:',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Neumorphic(
-                          style: NeumorphicStyle(
-                            boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.circular(8),
-                            ),
-                            depth: 6,
-                            color: Colors.grey,
-                            lightSource: LightSource.top,
-                            intensity: 1,
-                          ),
-                          child: Card(
-                            margin: const EdgeInsets.all(0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            color: const Color.fromARGB(255, 226, 245, 253),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextField(
-                                    controller: descriptionController,
-                                    maxLines: 8,
-                                    decoration: const InputDecoration.collapsed(
-                                      hintText: 'Bông gạc, Bơm tiêm, ...',
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        description = value;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            children: [
-                              if (nameError && descriptionError)
-                                const Text(
-                                  '*Tên và mô tả không được trống',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ),
-                                )
-                              else if (descriptionError)
-                                const Text(
-                                  '*Mô tả không được trống',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ),
-                                )
-                              else if (nameError)
-                                const Text(
-                                  '*Tên không được trống',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 17,
-                child: Center(
-                  child: SizedBox(
-                    width: size.width - 30,
-                    height: 50,
-                    child: Neumorphic(
-                      style: NeumorphicStyle(
-                        boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(8),
-                        ),
-                        depth: 6,
-                        color: Colors.grey,
-                        intensity: 1,
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 70, 133, 246),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                        ),
-                        onPressed: () async {
-                          setState(() {
-                            nameError = name.isEmpty;
-                            descriptionError = description.isEmpty;
-                          });
+                          onPressed: () async {
+                            setState(() {
+                              nameError = name.isEmpty;
+                              descriptionError = description.isEmpty;
+                            });
 
-                          if (!nameError && !descriptionError) {
-                            final convertedExpected =
-                                convertDisplayToValue(expected);
-                            await DepartmentServices.requestEquipment(
-                              description: description,
-                              name: name,
-                              expected: convertedExpected,
-                            ).then(
-                              (value) {
-                                if (value == true) {
-                                  _showSucess(context, () {
-                                    context.pop();
-                                    descriptionController.clear();
-                                    nameController.clear();
-                                    context.pop();
-                                  });
-                                }
-                              },
-                            );
-                          }
-                        },
-                        child: Text(
-                          'Gửi',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800,
+                            if (!nameError && !descriptionError) {
+                              final convertedExpected =
+                                  convertDisplayToValue(expected);
+                              await DepartmentServices.requestEquipment(
+                                description: description,
+                                name: name,
+                                expected: convertedExpected,
+                              ).then(
+                                (value) {
+                                  if (value == true) {
+                                    _showSucess(context, () {
+                                      context.pop();
+                                      descriptionController.clear();
+                                      nameController.clear();
+                                      context.pop();
+                                    });
+                                  }
+                                },
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Gửi',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
