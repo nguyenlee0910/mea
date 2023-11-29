@@ -159,6 +159,43 @@ class ViewRequestDetail extends StatelessWidget {
                   ),
                 ),
               ),
+              if (baseRequestModel is RepairRequestModel &&
+                  (baseRequestModel as RepairRequestModel)
+                          .repairReportItems
+                          ?.length !=
+                      0) ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 15),
+                  child: Text(
+                    'Thời gian máy móc bắt đầu có vấn đề',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Text(
+                      formatter.format(
+                        DateTime.parse(
+                          ((baseRequestModel as RepairRequestModel)
+                                  .brokenDate ??
+                              (baseRequestModel as RepairRequestModel)
+                                  .createdAt ??
+                              DateTime.now().toString()),
+                        ),
+                      ),
+                      style: const TextStyle(
+                        color: Color(0xFF1A1A1A),
+                        fontSize: 15,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w500,
+                        height: 0,
+                      ),
+                    )),
+              ],
               if (baseRequestModel.status != 'REQUESTING') ...[
                 const Padding(
                   padding: EdgeInsets.only(left: 15, top: 8, right: 15),
