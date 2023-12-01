@@ -8,14 +8,13 @@ import 'package:mea/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  static Future<void> login({
+  static Future<bool> login({
     required String userName,
     required String password,
-    required Function onSucess,
-    required Function onFail,
   }) async {
     final uri =
         Uri(scheme: 'https', host: Env.serverUrl, path: 'api/v1/auth/login');
+    print(uri);
     final response = await http.post(
       uri,
       body: jsonEncode({
@@ -34,8 +33,7 @@ class AuthService {
       //authencation: ///
       final roleId = responseJson['user']['role']['id'] as String;
       if (roleId != kAuthencatedRoleId) {
-        onFail();
-        return;
+        return false;
       }
 
       final prefs = await SharedPreferences.getInstance();
@@ -69,8 +67,9 @@ class AuthService {
       );
 
       // ignore: avoid_dynamic_calls
-      onSucess();
+      return true;
     }
+    return false;
   }
 
   static Future<void> updateToken({required String token}) async {
@@ -96,13 +95,17 @@ class AuthService {
       'address': userModel.address,
       'gender': userModel.gender
     });
-    unawaited(http.put(uri,
+    unawaited(
+      http.put(
+        uri,
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': 'Bearer $auth',
         },
-        body: body,),);
+        body: body,
+      ),
+    );
   }
 
   static Future<void> logout({required Function callBack}) async {
