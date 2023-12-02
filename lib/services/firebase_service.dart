@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mea/services/login_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FireBaseService {
   final _fireBaseServiceInstance = FirebaseMessaging.instance;
@@ -10,10 +11,13 @@ class FireBaseService {
     required Function(int) badgeCountListener,
   }) async {
     await _fireBaseServiceInstance.requestPermission();
+    final prefs = await SharedPreferences.getInstance();
     await _fireBaseServiceInstance.getToken().then((value) async {
       debugPrint('[FCM]: $value');
+
       if (value != null) {
         await AuthService.updateToken(token: value);
+        await prefs.setString('fcm', value);
       } else {
         debugPrint('[ERROR]: NO FCM TOKEN');
       }

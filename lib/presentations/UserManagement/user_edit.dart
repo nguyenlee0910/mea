@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -8,10 +9,14 @@ import 'package:mea/widgets/custom_textfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/user_model.dart';
+import '../../services/user_api.dart';
 
+// ignore: must_be_immutable
 class UserEditProfilePage extends StatefulWidget {
-  const UserEditProfilePage({super.key});
+  UserEditProfilePage({super.key, required this.userModel});
   static const routeName = 'edit_profile';
+
+  UserModel userModel;
 
   @override
   State<UserEditProfilePage> createState() => _UserEditProfilePageState();
@@ -28,20 +33,20 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
   String _address = '';
   String departmentName = '';
   UserModel userModel = UserModel();
+  String _email = '';
+  String _phone = '';
 
-  Future<void> getData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final data =
-        jsonDecode(prefs.getString('userData')!) as Map<String, dynamic>;
+  void getData() {
     setState(() {
-      userModel = UserModel.fromJson(data);
-      departmentName = prefs.getString('departmentName') ?? 'NULL';
-      _gender = userModel.gender == 'MALE' ? genderList.first : genderList.last;
-
+      userModel = widget.userModel;
+      _gender = userModel.gender ?? genderList.first;
       _name = userModel.name ?? 'NULL';
       _birthday = userModel.birthday ?? 'NULL';
       _address = userModel.address ?? 'NULL';
+      _email = userModel.email ?? 'NULL';
+      _phone = userModel.phone ?? 'NULL';
     });
+    print('===>${userModel.gender}');
   }
 
   Future<void> _showGenderDialog() async {
@@ -100,7 +105,7 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
       dateTime = DateTime.now();
     }
     final dateFormat = DateFormat('dd/MM/yyyy');
-    final formattedDate = dateFormat.format(dateTime);
+    var formattedDate = dateFormat.format(dateTime);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -171,7 +176,11 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                             widthscreen: size.width,
                             titleText: 'Tên:',
                             initiaValue: _name,
-                            onChange: (value) {},
+                            onChange: (value) {
+                              setState(() {
+                                _name = value;
+                              });
+                            },
                           ),
                           const SizedBox(
                             height: 12,
@@ -179,8 +188,12 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                           buildEditable(
                             widthscreen: size.width,
                             titleText: 'Email:',
-                            initiaValue: userModel.email ?? 'NULL',
-                            onChange: (value) {},
+                            initiaValue: _email,
+                            onChange: (value) {
+                              setState(() {
+                                _email = value;
+                              });
+                            },
                           ),
                           const SizedBox(
                             height: 12,
@@ -188,8 +201,12 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                           buildEditable(
                             widthscreen: size.width,
                             titleText: 'SDT:',
-                            initiaValue: userModel.phone ?? 'NULL',
-                            onChange: (value) {},
+                            initiaValue: _phone,
+                            onChange: (value) {
+                              setState(() {
+                                _phone = value;
+                              });
+                            },
                           ),
                           const SizedBox(
                             height: 12,
@@ -197,8 +214,15 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                           buildEditable(
                             widthscreen: size.width,
                             titleText: 'Ngày sinh:',
-                            initiaValue: formattedDate ?? 'NULL',
-                            onChange: (value) {},
+                            initiaValue: _birthday,
+                            isDatePicker: true,
+                            context: context,
+                            onChange: (value) {
+                              setState(() {
+                                _birthday = value;
+                                print(_birthday);
+                              });
+                            },
                           ),
                           const SizedBox(
                             height: 12,
@@ -206,8 +230,12 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                           buildEditable(
                             widthscreen: size.width,
                             titleText: 'Địa chỉ:',
-                            initiaValue: userModel.address ?? 'NULL',
-                            onChange: (value) {},
+                            initiaValue: _address,
+                            onChange: (value) {
+                              setState(() {
+                                _address = value;
+                              });
+                            },
                           ),
                           const SizedBox(
                             height: 12,
@@ -288,7 +316,28 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
                             borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          print('===>>>>>>$_gender');
+                          final updatedUser = UserModel(
+                            name: _name,
+                            email: _email,
+                            phone: _phone,
+                            birthday: _birthday,
+                            address: _address,
+                            gender: _gender,
+                          );
+
+                          await UserService.updateInformation(updatedUser)
+                              .then((value) {
+                            if (value == true) {
+                              _showSucess(context, () {
+                                context.pop();
+                                context.pop(value);
+                              });
+                            }
+                            // context.pop(value);
+                          });
+                        },
                         child: Text(
                           'Lưu',
                           textAlign: TextAlign.center,
@@ -342,4 +391,26 @@ class _UserEditProfilePageState extends State<UserEditProfilePage> {
       ),
     );
   }
+}
+
+void _showSucess(BuildContext context, VoidCallback? callback) {
+  final alert = AlertDialog(
+    title: const Text('Thành công'),
+    content: const Text('Cập nhật thông tin thành công!'),
+    actions: [
+      ElevatedButton(
+        child: const Text('Xác nhận'),
+        onPressed: () {
+          callback!();
+        },
+      ),
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

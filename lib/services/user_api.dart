@@ -1,13 +1,17 @@
+import 'dart:async';
+import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:mea/env.dart';
+import 'package:mea/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
-  static Future<void> updateInformation(String name, String email, String phone,
-      String birthday, String address, String gender,) async {
+  static Future<bool> updateInformation(UserModel userModel) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
+
+    final deviceId = prefs.getString('fcm');
 
     final uri = Uri(
       scheme: 'https',
@@ -21,19 +25,28 @@ class UserService {
       'Authorization': 'Bearer $auth',
     };
 
-    final body = {
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'birthday': birthday,
-      'address': address,
-      'gender': gender,
-    };
+    final body = jsonEncode({
+      'name': userModel.name,
+      'email': userModel.email,
+      'phone': userModel.phone,
+      'birthday': userModel.birthday,
+      'address': userModel.address,
+      'gender': userModel.gender,
+      'deviceId': deviceId
+    });
 
     final response = await http.put(
       uri,
       headers: header,
       body: body,
     );
+    if (response.statusCode == 200) {
+      print(response.toString());
+      await prefs.setString('userData', jsonEncode(userModel.toJson()));
+      return true;
+    } else {
+      print(response.toString());
+      return false;
+    }
   }
 }
