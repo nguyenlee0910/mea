@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/env.dart';
+import 'package:mea/models/feedback_status_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/equipment_model.dart';
@@ -58,6 +59,66 @@ class DepartmentServices {
         .toList();
 
     return listResult;
+  }
+
+  Future<List<FeedbackStatusModel>> getFeedbackStatus({
+    required String departmentId,
+    int pageSize = 100,
+    int page = 0,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final storedDepartmentId = prefs.getString('departmentId');
+    final auth = prefs.getString('auth');
+
+    // Kiểm tra giá trị null từ SharedPreferences
+    final departmentIdToUse = storedDepartmentId ?? 'defaultDepartmentId';
+    final authToUse = auth ?? 'defaultAuth';
+
+    final uri = Uri(
+      scheme: 'https',
+      host: Env.serverUrl,
+      path: 'api/v1/repair-report-item/department/$departmentIdToUse',
+      queryParameters: {
+        'page': page.toString(),
+        'pageSize': pageSize.toString(),
+      },
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $authToUse',
+      },
+    );
+
+    print('Response body: ${response.body}');
+
+    final dynamic responseData = jsonDecode(response.body);
+
+    if (responseData is Map<String, dynamic>) {
+      final count = responseData['count'] ?? 0;
+      final data = responseData['data'];
+
+      if (data is List) {
+        final feedbackStatusJson = data.cast<Map<String, dynamic>>();
+
+        final listResult = feedbackStatusJson
+            .map((feedback) => FeedbackStatusModel.fromJson(feedback))
+            .toList();
+
+        // Sort the list by createdAt in descending order
+        listResult.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+
+        return listResult;
+      } else {
+        throw Exception("Invalid 'data' type");
+      }
+    } else {
+      throw Exception("Invalid response type");
+    }
   }
 
   static Future<bool> requestEquipment({

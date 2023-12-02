@@ -6,6 +6,7 @@ import 'package:mea/models/cell_data.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/list_equipment_ticket.dart';
+import 'package:mea/presentations/Request/list_maintenance_machine.dart';
 import 'package:mea/presentations/Request/list_repair_ticket.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,6 +54,11 @@ class HomePage extends StatefulWidget {
       textTitle: 'Đơn yêu cầu sửa chữa',
       route: '/${ListRepairTicket.routeName}',
     ),
+    CellData(
+      iconData: Icons.star_border_purple500,
+      textTitle: 'Đánh giá bảo trì, sửa chữa',
+      route: '/${ListFeedbackStatus.routeName}',
+    ),
   ];
 
   @override
@@ -88,10 +94,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            CircleAvatarWithName(
-              name: userModel.name ?? 'No name',
-              email: userModel.email,
-              deparmentName: departmentName,
+            Padding(
+              padding: EdgeInsets.only(left: 35),
+              child: CircleAvatarWithName(
+                name: userModel.name ?? 'No name',
+                email: userModel.email,
+                deparmentName: departmentName,
+              ),
             ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
