@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mea/viewmodels/auth_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
@@ -18,9 +19,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  final getIt = GetIt.instance;
-  getIt.registerSingletonAsync<SharedPreferences>(
-      () => SharedPreferences.getInstance());
+  GetIt.instance.registerLazySingletonAsync<SharedPreferences>(
+    SharedPreferences.getInstance,
+  );
 
   // Retain native splash screen until Dart is ready
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);

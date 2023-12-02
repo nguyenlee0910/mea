@@ -1057,6 +1057,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.7.1"
+  loading_indicator:
+    dependency: "direct main"
+    description:
+      name: loading_indicator
+      sha256: a101ffb2aa3e646137d7810bfa90b50525dd3f72c01235b6df7491cf6af6f284
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   logging:
     dependency: transitive
     description:
@@ -1510,6 +1518,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  stacked:
+    dependency: "direct main"
+    description:
+      name: stacked
+      sha256: "9b314261e675b6d153caee14c3e8fc4590e8a8f3fdd0f418d545c5963372a46f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.1+1"
+  stacked_shared:
+    dependency: transitive
+    description:
+      name: stacked_shared
+      sha256: e6bc2921eb59b7c741c551fbb4060f22a543ea9c2d9351315fb58aa055b535f3
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
   stream_channel:
     dependency: transitive
     description:
