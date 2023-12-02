@@ -17,6 +17,7 @@ import 'package:mea/presentations/Notification/notification_detail.dart';
 import 'package:mea/presentations/Request/choose_supply_import_request.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/list_equipment_ticket.dart';
+import 'package:mea/presentations/Request/list_maintenance_machine.dart';
 import 'package:mea/presentations/Request/list_repair_ticket.dart';
 import 'package:mea/presentations/Request/repair_request.dart';
 import 'package:mea/presentations/Request/repair_request_detail.dart';
@@ -100,6 +101,12 @@ GoRouter appRouter() => GoRouter(
           name: ListRepairTicket.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               const ListRepairTicket(),
+        ),
+        GoRoute(
+          path: '/list_feedback',
+          name: ListFeedbackStatus.routeName,
+          builder: (BuildContext context, GoRouterState state) =>
+              const ListFeedbackStatus(),
         ),
         GoRoute(
           path: '/view_request',
