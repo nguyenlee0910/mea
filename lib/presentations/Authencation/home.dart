@@ -56,7 +56,7 @@ class HomePage extends StatefulWidget {
     ),
     CellData(
       iconData: Icons.star_border_purple500,
-      textTitle: 'Đánh giá bảo trì, sửa chữa',
+      textTitle: 'Xác nhận bảo trì, sửa chữa',
       route: '/${ListFeedbackStatus.routeName}',
     ),
   ];

@@ -163,60 +163,64 @@ class MaintenanceDetailPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Container(
-              margin: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Xác nhận',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 2.5),
-                  if (feedback.status == 'COMPLETED' &&
-                      feedback.feedbackStatus == 'ACCEPTED')
-                    Row(
-                      children: [
-                        const Text(
-                          'Hoạt động tốt',
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        const SizedBox(width: 5),
-                        ...List.generate(
-                          5,
-                          (index) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                        ),
-                      ],
-                    )
-                  else if (feedback.status == 'COMPLETED' &&
-                      feedback.feedbackStatus == 'REJECTED')
-                    const Row(
-                      children: [
-                        Text(
-                          'Không hoạt động',
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        SizedBox(width: 5),
-                        Icon(
-                          Icons.clear,
-                          color: Colors.red,
-                        ),
-                      ],
-                    )
-                  else
+            if (feedback.status == 'COMPLETED' &&
+                    feedback.feedbackStatus == 'ACCEPTED' ||
+                feedback.feedbackStatus == 'REJECTED') ...[
+              Container(
+                margin: const EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     const Text(
-                      'Chưa đánh giá',
-                      style: TextStyle(fontSize: 15),
+                      'Xác nhận',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                ],
+                    const SizedBox(height: 2.5),
+                    if (feedback.status == 'COMPLETED' &&
+                        feedback.feedbackStatus == 'ACCEPTED')
+                      Row(
+                        children: [
+                          const Text(
+                            'Hoạt động tốt',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(width: 5),
+                          ...List.generate(
+                            5,
+                            (index) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                          ),
+                        ],
+                      )
+                    else if (feedback.status == 'COMPLETED' &&
+                        feedback.feedbackStatus == 'REJECTED')
+                      const Row(
+                        children: [
+                          Text(
+                            'Không hoạt động',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.clear,
+                            color: Colors.red,
+                          ),
+                        ],
+                      )
+                    else
+                      const Text(
+                        'Chưa xác nhận',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                  ],
+                ),
               ),
-            ),
+            ],
             const SizedBox(height: 8),
             const SizedBox(height: 10),
             Container(
