@@ -62,10 +62,13 @@ class _UserManagementPageState extends State<UserManagementPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            CircleAvatarWithName(
-              name: userModel.name ?? 'No Name',
-              email: userModel.email,
-              deparmentName: departmentName,
+            Padding(
+              padding: EdgeInsets.only(left: 35),
+              child: CircleAvatarWithName(
+                name: userModel.name ?? 'No name',
+                email: userModel.email,
+                deparmentName: departmentName,
+              ),
             ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
