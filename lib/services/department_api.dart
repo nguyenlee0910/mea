@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:mea/constants.dart';
 import 'package:mea/env.dart';
+import 'package:mea/models/supply_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/equipment_model.dart';
@@ -60,9 +61,42 @@ class DepartmentServices {
     return listResult;
   }
 
+  static Future<List<SupplyModel>> getSupply() async {
+    final prefs = await SharedPreferences.getInstance();
+    final auth = prefs.getString('auth');
+
+    final uri = Uri(
+      scheme: 'https',
+      host: Env.serverUrl,
+      path: 'api/v1/supply/all',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    final supplyJson = (jsonDecode(response.body) as List).map((e) {
+      return e as Map<String, dynamic>;
+    }).toList();
+
+    // Lọc danh sách để chỉ giữ lại những mục có trạng thái là 'FIXING' hoặc 'ACTIVE'
+    final filteredList =
+        supplyJson.where((supply) => supply['status'] == 'ACTIVE').toList();
+
+    // Chuyển đổi danh sách đã lọc thành danh sách các đối tượng EquipmentModel
+    final listResult =
+        filteredList.map((supply) => SupplyModel.fromJson(supply)).toList();
+
+    return listResult;
+  }
+
   static Future<bool> requestEquipment({
     required String description,
-    required String name,
     required String expected,
   }) async {
     final prefs = await SharedPreferences.getInstance();
@@ -70,7 +104,7 @@ class DepartmentServices {
     try {
       final getId = await _sendRequest(
         description: description,
-        name: name,
+        name: 'Đơn yêu cầu thiết bị y tế',
         expected: expected,
       );
       if (getId != kErrorString) {

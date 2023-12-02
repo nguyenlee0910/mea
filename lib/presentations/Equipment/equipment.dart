@@ -35,8 +35,6 @@ class _EquipmentPageState extends State<EquipmentPage> {
           ),
         ],
       );
-      // print('Result 1: ${resultArary[0]}'); //tao check api
-      // print('Result 2: ${resultArary[1]}');
       final newList = List<EquipmentModel>.from(resultArary[0])
           // ..addAll(resultArary[1])
           ;

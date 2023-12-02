@@ -25,6 +25,9 @@ mixin _$SupplyModel {
   String? get unit => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
   List<String>? get imageUrls => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +46,10 @@ abstract class $SupplyModelCopyWith<$Res> {
       String? name,
       String? unit,
       int? quantity,
-      List<String>? imageUrls});
+      List<String>? imageUrls,
+      String? status,
+      String? code,
+      String? description});
 }
 
 /// @nodoc
@@ -64,6 +70,9 @@ class _$SupplyModelCopyWithImpl<$Res, $Val extends SupplyModel>
     Object? unit = freezed,
     Object? quantity = freezed,
     Object? imageUrls = freezed,
+    Object? status = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -86,6 +95,18 @@ class _$SupplyModelCopyWithImpl<$Res, $Val extends SupplyModel>
           ? _value.imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -103,7 +124,10 @@ abstract class _$$SupplyModelImplCopyWith<$Res>
       String? name,
       String? unit,
       int? quantity,
-      List<String>? imageUrls});
+      List<String>? imageUrls,
+      String? status,
+      String? code,
+      String? description});
 }
 
 /// @nodoc
@@ -122,6 +146,9 @@ class __$$SupplyModelImplCopyWithImpl<$Res>
     Object? unit = freezed,
     Object? quantity = freezed,
     Object? imageUrls = freezed,
+    Object? status = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
   }) {
     return _then(_$SupplyModelImpl(
       id: freezed == id
@@ -144,6 +171,18 @@ class __$$SupplyModelImplCopyWithImpl<$Res>
           ? _value._imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -156,7 +195,10 @@ class _$SupplyModelImpl implements _SupplyModel {
       required this.name,
       required this.unit,
       required this.quantity,
-      required final List<String>? imageUrls})
+      required final List<String>? imageUrls,
+      this.status,
+      this.code,
+      this.description})
       : _imageUrls = imageUrls;
 
   factory _$SupplyModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -181,8 +223,15 @@ class _$SupplyModelImpl implements _SupplyModel {
   }
 
   @override
+  final String? status;
+  @override
+  final String? code;
+  @override
+  final String? description;
+
+  @override
   String toString() {
-    return 'SupplyModel(id: $id, name: $name, unit: $unit, quantity: $quantity, imageUrls: $imageUrls)';
+    return 'SupplyModel(id: $id, name: $name, unit: $unit, quantity: $quantity, imageUrls: $imageUrls, status: $status, code: $code, description: $description)';
   }
 
   @override
@@ -196,13 +245,25 @@ class _$SupplyModelImpl implements _SupplyModel {
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
             const DeepCollectionEquality()
-                .equals(other._imageUrls, _imageUrls));
+                .equals(other._imageUrls, _imageUrls) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, unit, quantity,
-      const DeepCollectionEquality().hash(_imageUrls));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      unit,
+      quantity,
+      const DeepCollectionEquality().hash(_imageUrls),
+      status,
+      code,
+      description);
 
   @JsonKey(ignore: true)
   @override
@@ -224,7 +285,10 @@ abstract class _SupplyModel implements SupplyModel {
       required final String? name,
       required final String? unit,
       required final int? quantity,
-      required final List<String>? imageUrls}) = _$SupplyModelImpl;
+      required final List<String>? imageUrls,
+      final String? status,
+      final String? code,
+      final String? description}) = _$SupplyModelImpl;
 
   factory _SupplyModel.fromJson(Map<String, dynamic> json) =
       _$SupplyModelImpl.fromJson;
@@ -239,6 +303,12 @@ abstract class _SupplyModel implements SupplyModel {
   int? get quantity;
   @override
   List<String>? get imageUrls;
+  @override
+  String? get status;
+  @override
+  String? get code;
+  @override
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$SupplyModelImplCopyWith<_$SupplyModelImpl> get copyWith =>

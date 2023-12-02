@@ -8,6 +8,7 @@ import 'package:mea/widgets/custom_equipment_cell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/department_api.dart';
+import 'choose_supply_import_request.dart';
 
 class EquipmentRequestPage extends StatefulWidget {
   const EquipmentRequestPage({super.key});
@@ -30,6 +31,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
   UserModel userModel = UserModel();
   String _name = '';
   String departmentName = '';
+  String chooseSupply = 'Chọn vật tư';
 
   @override
   void initState() {
@@ -183,56 +185,97 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 15),
-                          Container(
-                            margin: const EdgeInsets.only(left: 0),
-                            child: const Text(
-                              'Tên đơn yêu cầu thiết bị y tế:',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          const Text(
+                            'Chọn vật tư',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 6),
-                          Neumorphic(
-                            style: NeumorphicStyle(
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                BorderRadius.circular(8),
+                          SizedBox(
+                            width: size.width - 30,
+                            height: 50,
+                            child: Neumorphic(
+                              style: NeumorphicStyle(
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(8),
+                                ),
+                                depth: 6,
+                                color: Colors.grey,
+                                intensity: 1,
                               ),
-                              depth: 6,
-                              color: Colors.grey,
-                              lightSource: LightSource.top,
-                              intensity: 1,
-                            ),
-                            child: Card(
-                              margin: const EdgeInsets.all(0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              color: const Color.fromARGB(255, 226, 245, 253),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextFormField(
-                                      controller: nameController,
-                                      decoration:
-                                          const InputDecoration.collapsed(
-                                        hintText:
-                                            'Nhập tên đơn yêu cầu thiết bị',
-                                      ),
-                                      onChanged: (valueName) {
-                                        setState(() {
-                                          name = valueName;
-                                        });
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 226, 245, 253),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  showModalBottomSheet<Widget>(
+                                      context: context,
+                                      builder: (context) {
+                                        return FractionallySizedBox(
+                                          heightFactor: 0.9,
+                                          child: const ListSupplyPage(),
+                                        );
                                       },
-                                    ),
-                                  ],
+                                      isScrollControlled: true);
+                                },
+                                child: Text(
+                                  chooseSupply,
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.inter(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
+                          // Neumorphic(
+                          //   style: NeumorphicStyle(
+                          //     boxShape: NeumorphicBoxShape.roundRect(
+                          //       BorderRadius.circular(8),
+                          //     ),
+                          //     depth: 6,
+                          //     color: Colors.grey,
+                          //     lightSource: LightSource.top,
+                          //     intensity: 1,
+                          //   ),
+                          //   child: Card(
+                          //     margin: const EdgeInsets.all(0),
+                          //     shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(8),
+                          //     ),
+                          //     color: const Color.fromARGB(255, 226, 245, 253),
+                          //     child: Padding(
+                          //       padding: const EdgeInsets.all(20),
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.start,
+                          //         children: [
+                          //           TextFormField(
+                          //             controller: nameController,
+                          //             decoration:
+                          //                 const InputDecoration.collapsed(
+                          //               hintText:
+                          //                   'Nhập tên đơn yêu cầu thiết bị',
+                          //             ),
+                          //             onChanged: (valueName) {
+                          //               setState(() {
+                          //                 name = valueName;
+                          //               });
+                          //             },
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           const SizedBox(height: 15),
                           Container(
                             child: const Text(
@@ -349,9 +392,9 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Column(
                               children: [
-                                if (nameError && descriptionError)
+                                if (descriptionError)
                                   const Text(
-                                    '*Tên và mô tả không được trống',
+                                    '*Mô tả không được trống',
                                     style: TextStyle(
                                       color: Colors.red,
                                     ),
@@ -402,16 +445,15 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                               ),
                               onPressed: () async {
                                 setState(() {
-                                  nameError = name.isEmpty;
+                                  // nameError = name.isEmpty;
                                   descriptionError = description.isEmpty;
                                 });
 
-                                if (!nameError && !descriptionError) {
+                                if (!descriptionError) {
                                   final convertedExpected =
                                       convertDisplayToValue(expected);
                                   await DepartmentServices.requestEquipment(
                                     description: description,
-                                    name: name,
                                     expected: convertedExpected,
                                   ).then(
                                     (value) {

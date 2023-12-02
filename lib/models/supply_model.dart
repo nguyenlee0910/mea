@@ -11,6 +11,9 @@ class SupplyModel with _$SupplyModel {
     required String? unit,
     required int? quantity,
     required List<String>? imageUrls,
+    String? status,
+    String? code,
+    String? description,
   }) = _SupplyModel;
 
   factory SupplyModel.fromJson(Map<String, dynamic> json) =>

@@ -48,6 +48,8 @@ dependencies:
   stream_chat: ^6.9.0
   flutter_datetime_picker: ^1.5.1
   flutter_datetime_picker_plus: ^2.1.0
+  anim_search_bar: ^2.0.3
+  easy_search_bar: ^2.5.0
 
 dev_dependencies:
   build_runner: ^2.4.6

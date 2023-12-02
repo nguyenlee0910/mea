@@ -15,6 +15,9 @@ _$SupplyModelImpl _$$SupplyModelImplFromJson(Map<String, dynamic> json) =>
       imageUrls: (json['imageUrls'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      status: json['status'] as String?,
+      code: json['code'] as String?,
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$$SupplyModelImplToJson(_$SupplyModelImpl instance) =>
@@ -24,4 +27,7 @@ Map<String, dynamic> _$$SupplyModelImplToJson(_$SupplyModelImpl instance) =>
       'unit': instance.unit,
       'quantity': instance.quantity,
       'imageUrls': instance.imageUrls,
+      'status': instance.status,
+      'code': instance.code,
+      'description': instance.description,
     };

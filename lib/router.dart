@@ -14,6 +14,7 @@ import 'package:mea/presentations/Authencation/login.dart';
 import 'package:mea/presentations/Equipment/equipiment_detail.dart';
 import 'package:mea/presentations/Equipment/equipment.dart';
 import 'package:mea/presentations/Notification/notification_detail.dart';
+import 'package:mea/presentations/Request/choose_supply_import_request.dart';
 import 'package:mea/presentations/Request/equipment_request.dart';
 import 'package:mea/presentations/Request/list_equipment_ticket.dart';
 import 'package:mea/presentations/Request/list_repair_ticket.dart';
@@ -56,6 +57,12 @@ GoRouter appRouter() => GoRouter(
           name: ForgotPassword.routeName,
           builder: (BuildContext context, GoRouterState state) =>
               const ForgotPassword(),
+        ),
+        GoRoute(
+          path: '/choose_supply',
+          name: ListSupplyPage.routeName,
+          builder: (BuildContext context, GoRouterState state) =>
+              const ListSupplyPage(),
         ),
         GoRoute(
           path: '/create_new_password',
