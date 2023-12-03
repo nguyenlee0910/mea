@@ -16,6 +16,7 @@ _$ImportRequestItemsModelImpl _$$ImportRequestItemsModelImplFromJson(
           ? null
           : SupplyModel.fromJson(json['supply'] as Map<String, dynamic>),
       quantity: json['quantity'] as int?,
+      approveQuantity: json['approveQuantity'] as int?,
     );
 
 Map<String, dynamic> _$$ImportRequestItemsModelImplToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$ImportRequestItemsModelImplToJson(
       'updatedAt': instance.updatedAt,
       'supply': instance.supply,
       'quantity': instance.quantity,
+      'approveQuantity': instance.approveQuantity,
     };

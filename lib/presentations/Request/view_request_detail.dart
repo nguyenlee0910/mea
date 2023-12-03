@@ -438,6 +438,13 @@ class ViewRequestDetail extends StatelessWidget {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
+                    DataColumn(
+                      label: Text(
+                        'SLTT',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ],
                   rows: (baseRequestModel as ImportRequestModel)
                       .importRequestItems!
@@ -446,10 +453,18 @@ class ViewRequestDetail extends StatelessWidget {
                           cells: [
                             DataCell(Text(
                               element.supply?.name ?? 'Empty',
-                              style: TextStyle(fontSize: 16),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
                             )),
                             DataCell(Text(
                               element.quantity?.toString() ?? '0',
+                              style: TextStyle(fontSize: 16),
+                            )),
+                            DataCell(Text(
+                              element.approveQuantity?.toString() ?? '0',
                               style: TextStyle(fontSize: 16),
                             )),
                           ],

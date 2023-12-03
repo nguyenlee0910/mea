@@ -26,6 +26,7 @@ mixin _$ImportRequestItemsModel {
   String? get updatedAt => throw _privateConstructorUsedError;
   SupplyModel? get supply => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
+  int? get approveQuantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,8 @@ abstract class $ImportRequestItemsModelCopyWith<$Res> {
       String? createdAt,
       String? updatedAt,
       SupplyModel? supply,
-      int? quantity});
+      int? quantity,
+      int? approveQuantity});
 
   $SupplyModelCopyWith<$Res>? get supply;
 }
@@ -68,6 +70,7 @@ class _$ImportRequestItemsModelCopyWithImpl<$Res,
     Object? updatedAt = freezed,
     Object? supply = freezed,
     Object? quantity = freezed,
+    Object? approveQuantity = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -89,6 +92,10 @@ class _$ImportRequestItemsModelCopyWithImpl<$Res,
       quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+      approveQuantity: freezed == approveQuantity
+          ? _value.approveQuantity
+          : approveQuantity // ignore: cast_nullable_to_non_nullable
               as int?,
     ) as $Val);
   }
@@ -120,7 +127,8 @@ abstract class _$$ImportRequestItemsModelImplCopyWith<$Res>
       String? createdAt,
       String? updatedAt,
       SupplyModel? supply,
-      int? quantity});
+      int? quantity,
+      int? approveQuantity});
 
   @override
   $SupplyModelCopyWith<$Res>? get supply;
@@ -144,6 +152,7 @@ class __$$ImportRequestItemsModelImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? supply = freezed,
     Object? quantity = freezed,
+    Object? approveQuantity = freezed,
   }) {
     return _then(_$ImportRequestItemsModelImpl(
       id: freezed == id
@@ -166,6 +175,10 @@ class __$$ImportRequestItemsModelImplCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int?,
+      approveQuantity: freezed == approveQuantity
+          ? _value.approveQuantity
+          : approveQuantity // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -178,7 +191,8 @@ class _$ImportRequestItemsModelImpl implements _ImportRequestItemsModel {
       required this.createdAt,
       required this.updatedAt,
       this.supply,
-      required this.quantity});
+      required this.quantity,
+      this.approveQuantity});
 
   factory _$ImportRequestItemsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImportRequestItemsModelImplFromJson(json);
@@ -193,10 +207,12 @@ class _$ImportRequestItemsModelImpl implements _ImportRequestItemsModel {
   final SupplyModel? supply;
   @override
   final int? quantity;
+  @override
+  final int? approveQuantity;
 
   @override
   String toString() {
-    return 'ImportRequestItemsModel(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, supply: $supply, quantity: $quantity)';
+    return 'ImportRequestItemsModel(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, supply: $supply, quantity: $quantity, approveQuantity: $approveQuantity)';
   }
 
   @override
@@ -211,13 +227,15 @@ class _$ImportRequestItemsModelImpl implements _ImportRequestItemsModel {
                 other.updatedAt == updatedAt) &&
             (identical(other.supply, supply) || other.supply == supply) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+                other.quantity == quantity) &&
+            (identical(other.approveQuantity, approveQuantity) ||
+                other.approveQuantity == approveQuantity));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, createdAt, updatedAt, supply, quantity);
+  int get hashCode => Object.hash(
+      runtimeType, id, createdAt, updatedAt, supply, quantity, approveQuantity);
 
   @JsonKey(ignore: true)
   @override
@@ -240,7 +258,8 @@ abstract class _ImportRequestItemsModel implements ImportRequestItemsModel {
       required final String? createdAt,
       required final String? updatedAt,
       final SupplyModel? supply,
-      required final int? quantity}) = _$ImportRequestItemsModelImpl;
+      required final int? quantity,
+      final int? approveQuantity}) = _$ImportRequestItemsModelImpl;
 
   factory _ImportRequestItemsModel.fromJson(Map<String, dynamic> json) =
       _$ImportRequestItemsModelImpl.fromJson;
@@ -255,6 +274,8 @@ abstract class _ImportRequestItemsModel implements ImportRequestItemsModel {
   SupplyModel? get supply;
   @override
   int? get quantity;
+  @override
+  int? get approveQuantity;
   @override
   @JsonKey(ignore: true)
   _$$ImportRequestItemsModelImplCopyWith<_$ImportRequestItemsModelImpl>
