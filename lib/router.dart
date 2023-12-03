@@ -23,6 +23,7 @@ import 'package:mea/presentations/Request/repair_request_detail.dart';
 import 'package:mea/presentations/Request/view_request.dart';
 import 'package:mea/presentations/Request/view_request_detail.dart';
 import 'package:mea/presentations/UserManagement/user_edit.dart';
+import 'package:mea/viewModels/import_items_viewModels.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 GoRouter appRouter() => GoRouter(
@@ -61,8 +62,13 @@ GoRouter appRouter() => GoRouter(
         GoRoute(
           path: '/choose_supply',
           name: ListSupplyPage.routeName,
-          builder: (BuildContext context, GoRouterState state) =>
-              const ListSupplyPage(),
+          builder: (BuildContext context, GoRouterState state) {
+            ListImportRequestDevice listImportRequestDevice =
+                state.extra as ListImportRequestDevice;
+            return ListSupplyPage(
+              listImportRequestDevice: listImportRequestDevice,
+            );
+          },
         ),
         GoRoute(
           path: '/create_new_password',

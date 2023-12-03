@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mea/models/supply_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -16,9 +17,19 @@ class ImportRequestItems {
   String imageURL;
 }
 
+class ListImportRequestDevice extends ChangeNotifier {
+  List<ImportRequestItems> data = [];
+  void setData(List<ImportRequestItems> value) {
+    data = value;
+    notifyListeners();
+  }
+}
+
 class ImportRequestItemViewModel extends BaseViewModel {
   List<ImportRequestItems> data = [];
+  List<ImportRequestItems> filterData = [];
   bool isIncreaseAny = false;
+  String searchValue = '';
 
   Future<void> getData() async {
     await runBusyFuture<List<SupplyModel>>(DepartmentServices.getSupply())
@@ -54,5 +65,33 @@ class ImportRequestItemViewModel extends BaseViewModel {
 
   bool isIncrese() {
     return data.where((element) => element.quantity != 0).isNotEmpty;
+  }
+
+  void setDataFromParent(List<ImportRequestItems> value) {
+    for (final ele in value) {
+      data.where((element) => element.supplyId == ele.supplyId).first.quantity =
+          ele.quantity;
+    }
+    notifyListeners();
+  }
+
+  void _filterData() {
+    if (searchValue.isNotEmpty) {
+      filterData = data
+          .where(
+            (element) => element.name.toLowerCase().contains(
+                  searchValue.toLowerCase(),
+                ),
+          )
+          .toList();
+    } else {
+      filterData = data;
+    }
+  }
+
+  void setSearchValue(String value) {
+    searchValue = value;
+    _filterData();
+    notifyListeners();
   }
 }
