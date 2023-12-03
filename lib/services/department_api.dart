@@ -72,7 +72,6 @@ class DepartmentServices {
     final storedDepartmentId = prefs.getString('departmentId');
     final auth = prefs.getString('auth');
 
-    // Kiểm tra giá trị null từ SharedPreferences
     final departmentIdToUse = storedDepartmentId ?? 'defaultDepartmentId';
     final authToUse = auth ?? 'defaultAuth';
 

@@ -65,6 +65,146 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
     await fetchFeedbackStatusData();
   }
 
+  Future<void> refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await fetchFeedbackStatusData();
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future<void> showConfirmationDialog(
+      BuildContext context, FeedbackStatusModel feedback) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Xác nhận'),
+          content: const Text(
+              'Vui lòng xác nhận tình trạng máy móc sau khi bàn giao'),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 15),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      final auth = prefs.getString('auth');
+                      final String url =
+                          'https://mea.monoinfinity.net/api/v1/repair-report-item/feedback/${feedback.id}';
+                      final Map<String, String> headers = {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer $auth',
+                      };
+                      final Map<String, String> body = {
+                        'feedbackStatus': 'REJECTED',
+                      };
+
+                      try {
+                        final response = await http.post(
+                          Uri.parse(url),
+                          headers: headers,
+                          body: jsonEncode(body),
+                        );
+
+                        if (response.statusCode == 201) {
+                          Navigator.of(context).pop();
+                          await fetchFeedbackStatusData();
+                          refreshData();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  'Gọi API không thành công: ${response.statusCode}'),
+                            ),
+                          );
+                        }
+                      } catch (error) {
+                        // Xử lý khi gặp lỗi trong quá trình gọi API
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Đã xảy ra lỗi: $error'),
+                          ),
+                        );
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(255, 230, 63, 51)),
+                    ),
+                    child: const Text('Không hoạt động'),
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  margin: const EdgeInsets.only(right: 15),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      final auth = prefs.getString('auth');
+                      final String url =
+                          'https://mea.monoinfinity.net/api/v1/repair-report-item/feedback/${feedback.id}';
+                      final Map<String, String> headers = {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer $auth',
+                      };
+                      final Map<String, String> body = {
+                        'feedbackStatus': 'ACCEPTED',
+                      };
+
+                      try {
+                        final response = await http.post(
+                          Uri.parse(url),
+                          headers: headers,
+                          body: jsonEncode(body),
+                        );
+
+                        if (response.statusCode == 201) {
+                          Navigator.of(context).pop();
+                          await fetchFeedbackStatusData();
+                          refreshData();
+                          // });
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  'Gọi API không thành công: ${response.statusCode}'),
+                            ),
+                          );
+                        }
+                      } catch (error) {
+                        // Xử lý khi gặp lỗi trong quá trình gọi API
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Đã xảy ra lỗi: $error'),
+                          ),
+                        );
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 39, 141, 224),
+                      ),
+                    ),
+                    child: const Text('Hoạt động tốt'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> fetchFeedbackStatusData() async {
     try {
       setState(() {
@@ -109,25 +249,28 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
   }
 
   Widget buildDateTimeRow(String label, dynamic dateTime) {
-    return Row(
-      children: [
-        Text(
-          '$label: ',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-            color: Colors.black,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          Text(
+            '$label: ',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.black,
+            ),
           ),
-        ),
-        Text(
-          formatDateTime(dateTime),
-          style: const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 15,
-            color: Colors.black,
+          Text(
+            formatDateTime(dateTime),
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              color: Colors.black,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -182,7 +325,12 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                 ? Colors.red
                                 : Colors.blue,
                             child: ListTile(
+                              contentPadding: EdgeInsets.zero,
                               title: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10,
+                                ),
                                 decoration: BoxDecoration(
                                   color: feedback.status == 'COMPLETED'
                                       ? const Color.fromARGB(255, 71, 163, 74)
@@ -194,11 +342,10 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                               131,
                                               214,
                                             ),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 10,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                  ),
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
@@ -226,53 +373,13 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Gap(8),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        'Tên máy: ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                        feedback.equipment!.name ?? 'N/A',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Gap(2),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        'Mã máy: ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                        feedback.equipment!.code ?? 'N/A',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Gap(2),
-                                  if (feedback.status == 'COMPLETED') ...[
-                                    Row(
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
                                       children: [
                                         const Text(
-                                          'Xác nhận: ',
+                                          'Tên máy: ',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16,
@@ -280,30 +387,79 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                           ),
                                         ),
                                         Text(
-                                          feedback.feedbackStatus == 'ACCEPTED'
-                                              ? 'Hoạt động tốt'
-                                              : feedback.feedbackStatus ==
-                                                      'REJECTED'
-                                                  ? 'Không hoạt động'
-                                                  : 'Chưa xác nhận',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
+                                          feedback.equipment!.name ?? 'N/A',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
                                             fontSize: 15,
-                                            color: feedback.feedbackStatus ==
-                                                    'ACCEPTED'
-                                                ? const Color.fromARGB(
-                                                    255,
-                                                    28,
-                                                    123,
-                                                    201,
-                                                  )
-                                                : feedback.feedbackStatus ==
-                                                        'REJECTED'
-                                                    ? Colors.red
-                                                    : Colors.black,
+                                            color: Colors.black,
                                           ),
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  const Gap(2),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          'Mã máy: ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        Text(
+                                          feedback.equipment!.code ?? 'N/A',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Gap(2),
+                                  if (feedback.status == 'COMPLETED') ...[
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Row(
+                                        children: [
+                                          const Text(
+                                            'Xác nhận: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          Text(
+                                            feedback.feedbackStatus ==
+                                                    'ACCEPTED'
+                                                ? 'Hoạt động tốt'
+                                                : feedback.feedbackStatus ==
+                                                        'REJECTED'
+                                                    ? 'Không hoạt động'
+                                                    : 'Chưa xác nhận',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15,
+                                              color: feedback.feedbackStatus ==
+                                                      'ACCEPTED'
+                                                  ? const Color.fromARGB(
+                                                      255, 28, 123, 201)
+                                                  : feedback.feedbackStatus ==
+                                                          'REJECTED'
+                                                      ? Colors.red
+                                                      : Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                   const Gap(2),
@@ -338,26 +494,33 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // Text chú thích
-                                        Container(
-                                          constraints: const BoxConstraints(
-                                              maxWidth: 240),
-                                          child: const Text(
-                                            'Vui lòng chỉ nhấn "Xác nhận" khi thiết bị bảo trì đã bàn giao đến phòng ban.',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Container(
+                                            constraints: const BoxConstraints(
+                                                maxWidth: 240),
+                                            child: const Text(
+                                              'Vui lòng chỉ nhấn "Xác nhận" khi thiết bị bảo trì đã bàn giao đến phòng ban.',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        ElevatedButton(
-                                          onPressed: () async {
-                                            await showConfirmationDialog(
-                                              context,
-                                              feedback,
-                                            );
-                                          },
-                                          child: const Text('Xác nhận'),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 10),
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              await showConfirmationDialog(
+                                                context,
+                                                feedback,
+                                              );
+                                            },
+                                            child: const Text('Xác nhận'),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -437,133 +600,5 @@ void main() {
         body: ListFeedbackStatus(),
       ),
     ),
-  );
-}
-
-Future<void> showConfirmationDialog(
-    BuildContext context, FeedbackStatusModel feedback) async {
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Xác nhận'),
-        content:
-            const Text('Vui lòng xác nhận tình trạng máy móc sau khi bàn giao'),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(left: 15),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    final auth = prefs.getString('auth');
-                    final String url =
-                        'https://mea.monoinfinity.net/api/v1/repair-report-item/feedback/${feedback.id}';
-                    final Map<String, String> headers = {
-                      'Content-Type': 'application/json',
-                      'Accept': 'application/json',
-                      'Authorization': 'Bearer $auth',
-                    };
-                    final Map<String, String> body = {
-                      'feedbackStatus': 'REJECTED',
-                    };
-
-                    try {
-                      final response = await http.post(
-                        Uri.parse(url),
-                        headers: headers,
-                        body: jsonEncode(body),
-                      );
-
-                      if (response.statusCode == 201) {
-                        context.pop();
-                        context.pop();
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                'Gọi API không thành công: ${response.statusCode}'),
-                          ),
-                        );
-                      }
-                    } catch (error) {
-                      // Xử lý khi gặp lỗi trong quá trình gọi API
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Đã xảy ra lỗi: $error'),
-                        ),
-                      );
-                    }
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 230, 63, 51)),
-                  ),
-                  child: const Text('Không hoạt động'),
-                ),
-              ),
-              Spacer(),
-              Container(
-                margin: const EdgeInsets.only(right: 15),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    final auth = prefs.getString('auth');
-                    final String url =
-                        'https://mea.monoinfinity.net/api/v1/repair-report-item/feedback/${feedback.id}';
-                    final Map<String, String> headers = {
-                      'Content-Type': 'application/json',
-                      'Accept': 'application/json',
-                      'Authorization': 'Bearer $auth',
-                    };
-                    final Map<String, String> body = {
-                      'feedbackStatus': 'ACCEPTED',
-                    };
-
-                    try {
-                      final response = await http.post(
-                        Uri.parse(url),
-                        headers: headers,
-                        body: jsonEncode(body),
-                      );
-
-                      if (response.statusCode == 201) {
-                        // _showSucess(context, () {
-                        context.pop();
-                        context.pop();
-                        // Navigator.of(context).pop(true);
-                        // });
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                'Gọi API không thành công: ${response.statusCode}'),
-                          ),
-                        );
-                      }
-                    } catch (error) {
-                      // Xử lý khi gặp lỗi trong quá trình gọi API
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Đã xảy ra lỗi: $error'),
-                        ),
-                      );
-                    }
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 39, 141, 224),
-                    ),
-                  ),
-                  child: const Text('Hoạt động tốt'),
-                ),
-              ),
-            ],
-          ),
-        ],
-      );
-    },
   );
 }
