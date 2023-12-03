@@ -158,15 +158,16 @@ class DepartmentServices {
   static Future<bool> requestEquipment({
     required String description,
     required String expected,
+    required List<Map<String, dynamic>> listSupply,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     final auth = prefs.getString('auth');
     try {
       final getId = await _sendRequest(
-        description: description,
-        name: 'Đơn yêu cầu thiết bị y tế',
-        expected: expected,
-      );
+          description: description,
+          name: 'Đơn yêu cầu thiết bị y tế',
+          expected: expected,
+          listSupply: listSupply);
       if (getId != kErrorString) {
         final id = getId;
         final uri = Uri(
@@ -200,6 +201,7 @@ class DepartmentServices {
     required String description,
     required String name,
     required String expected,
+    required List<Map<String, dynamic>> listSupply,
   }) async {
     try {
       final uri = Uri(
@@ -216,7 +218,7 @@ class DepartmentServices {
           'description': description,
           'expected': expected,
           'departmentId': departmentId,
-          'importRequestItems': <String>[],
+          'importRequestItems': listSupply,
         },
       );
       final response = await http.post(

@@ -24,7 +24,7 @@ dependencies:
   awesome_dialog: ^3.1.0
   extended_image: ^8.0.0
   extended_image_library: ^3.5.3
-  input_quantity: ^2.2.0
+  input_quantity: ^1.1.4
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.3.1
@@ -51,6 +51,7 @@ dependencies:
   flutter_datetime_picker_plus: ^2.1.0
   anim_search_bar: ^2.0.3
   easy_search_bar: ^2.5.0
+  stacked: ^3.4.1+1
 
 dev_dependencies:
   build_runner: ^2.4.6
