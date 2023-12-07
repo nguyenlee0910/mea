@@ -235,7 +235,7 @@ class MaintenanceDetailPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Container(
-                              width: 165,
+                              width: 140,
                               decoration: const BoxDecoration(
                                 border: Border(
                                   top: BorderSide(
@@ -251,7 +251,7 @@ class MaintenanceDetailPage extends StatelessWidget {
                               size: 22,
                             ),
                             Container(
-                              width: 165,
+                              width: 140,
                               decoration: const BoxDecoration(
                                 border: Border(
                                   top: BorderSide(

@@ -503,7 +503,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                             child: const Text(
                                               'Vui lòng chỉ nhấn "Xác nhận" khi thiết bị bảo trì đã bàn giao đến phòng ban.',
                                               style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 12,
                                                 color: Colors.black,
                                               ),
                                             ),
@@ -511,7 +511,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(right: 10),
+                                              const EdgeInsets.only(right: 4),
                                           child: ElevatedButton(
                                             onPressed: () async {
                                               await showConfirmationDialog(

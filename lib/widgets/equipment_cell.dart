@@ -187,8 +187,7 @@ class EquipmentCell extends StatelessWidget {
                                           color: currentStatus == 'ACTIVE'
                                               ? Colors.green
                                               : currentStatus == 'FIXING'
-                                                  ? Color.fromARGB(255, 1, 1,
-                                                      1) // Màu vàng cho trạng thái INACTIVE
+                                                  ? Colors.blue
                                                   : Colors.green,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,

@@ -64,7 +64,7 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
               onPressed: () {
                 final list = List<ImportRequestItems>.from(
                   viewModel.data
-                      .where((element) => element.quantity != 0)
+                      .where((element) => element.quantityImport != 0)
                       .toList(),
                 );
                 widget.listImportRequestDevice.setData(list);
@@ -98,11 +98,13 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
               : viewModel.filterData;
           return GridView.count(
             primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
+            padding: const EdgeInsets.all(8),
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
             crossAxisCount: 2,
             children: data.map((supplyItems) {
+              final maxVal =
+                  supplyItems.quantity > 5 ? 5 : supplyItems.quantity;
               return Column(
                 children: [
                   Expanded(
@@ -145,32 +147,38 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
                               ),
                             ),
                           ),
-                          if (supplyItems.quantity == 0) ...[
+                          if (supplyItems.quantityImport == 0) ...[
                             IconButton(
                               icon: Icon(
                                 Icons.add_circle,
-                                color: Colors.green,
+                                color: viewModel.getQuantity(
+                                            supplyItems.supplyId) !=
+                                        maxVal
+                                    ? Colors.green
+                                    : Colors.grey,
                               ),
-                              onPressed: () {
-                                Future.microtask(() {
-                                  viewModel.setQuantity(
-                                    1,
-                                    supplyItems.supplyId,
-                                  );
-                                });
-                              },
+                              onPressed: maxVal == 0
+                                  ? () {}
+                                  : () {
+                                      Future.microtask(() {
+                                        viewModel.setQuantity(
+                                          1,
+                                          supplyItems.supplyId,
+                                        );
+                                      });
+                                    },
                             )
                           ] else ...[
                             SizedBox(
-                              width: size.width * 0.25,
+                              width: size.width * 0.3,
                               height: size.width * 0.12,
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: InputQty(
-                                  maxVal: 5,
+                                  maxVal: maxVal,
                                   isIntrinsicWidth: false,
                                   showMessageLimit: false,
-                                  initVal: supplyItems.quantity,
+                                  initVal: supplyItems.quantityImport,
                                   onQtyChanged: (val) {
                                     Future.microtask(() {
                                       viewModel.setQuantity(
@@ -183,7 +191,7 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
                                     Icons.add_circle,
                                     color: viewModel.getQuantity(
                                                 supplyItems.supplyId) !=
-                                            5
+                                            maxVal
                                         ? Colors.green
                                         : Colors.grey,
                                     size: 18,
@@ -208,7 +216,7 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
                       ),
                     ),
                   ),
-                  const Gap(16),
+                  const Gap(8),
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
@@ -216,6 +224,24 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
+                  ),
+                  const Gap(8),
+                  Row(
+                    children: [
+                      Text(
+                        'Số lượng trong kho: ',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          supplyItems.quantity.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   )
                 ],
               );
