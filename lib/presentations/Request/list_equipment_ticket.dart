@@ -108,7 +108,9 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
       tabFilterList = requestData
           .where(
             (request) =>
-                request.status == 'APPROVED' || request.status == 'UPDATED',
+                request.status == 'APPROVED' ||
+                request.status == 'UPDATED' ||
+                request.status == 'COMPLETED',
           )
           .toList();
     } else {
@@ -149,10 +151,13 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
         statusText = 'Chờ xác nhận';
         break;
       case 'APPROVED':
-        color = const Color.fromARGB(255, 67, 153, 70);
+        color = const Color.fromARGB(255, 30, 89, 216);
         statusText = 'Đã duyệt';
         break;
-
+      case 'COMPLETED':
+        color = const Color.fromARGB(255, 67, 153, 70);
+        statusText = 'Hoàn thành';
+        break;
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã từ chối';

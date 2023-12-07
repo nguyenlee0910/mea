@@ -182,7 +182,9 @@ class EquipmentCell extends StatelessWidget {
                                       TextSpan(
                                         text: currentStatus == 'ACTIVE'
                                             ? 'Hoạt động'
-                                            : currentStatus ?? 'Hoạt động',
+                                            : currentStatus == 'FIXING'
+                                                ? 'Đang sửa chữa'
+                                                : currentStatus ?? 'Hoạt động',
                                         style: TextStyle(
                                           color: currentStatus == 'ACTIVE'
                                               ? Colors.green
