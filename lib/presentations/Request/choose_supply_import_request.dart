@@ -73,7 +73,7 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
                 context.pop();
               },
               child: const Center(
-                child: Text('Cofirm'),
+                child: Text('Xác nhận'),
               ),
             ),
           ),
