@@ -104,7 +104,7 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
             crossAxisCount: 2,
             children: data.map((supplyItems) {
               final maxVal =
-                  supplyItems.quantity > 5 ? 5 : supplyItems.quantity;
+                  supplyItems.quantity > 50 ? 50 : supplyItems.quantity;
               return Column(
                 children: [
                   Expanded(
