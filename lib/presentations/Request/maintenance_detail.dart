@@ -447,10 +447,12 @@ class MaintenanceDetailPage extends StatelessWidget {
   String formatDateTime(dynamic dateTime) {
     if (dateTime != null) {
       if (dateTime is String) {
-        return DateFormat('dd/MM/yyyy HH:mm:ss')
-            .format(DateTime.parse(dateTime));
+        final DateTime parsedDateTime = DateTime.parse(dateTime);
+        final DateTime updatedDateTime = parsedDateTime.add(Duration(hours: 7));
+        return DateFormat('dd/MM/yyyy HH:mm:ss').format(updatedDateTime);
       } else if (dateTime is DateTime) {
-        return DateFormat('dd/MM/yyyy HH:mm:ss').format(dateTime);
+        final DateTime updatedDateTime = dateTime.add(Duration(hours: 7));
+        return DateFormat('dd/MM/yyyy HH:mm:ss').format(updatedDateTime);
       }
     }
     return 'N/A';

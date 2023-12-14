@@ -19,7 +19,7 @@ class ViewRequestDetail extends StatelessWidget {
     // final importRequestModel = (baseRequestModel as ImportRequestModel)
     //     .importRequestItemsModel
     //     ?.map((e) => e.supply.first.name);
-    final formatter = DateFormat('dd/MM/yyyy hh:mm');
+    final formatter = DateFormat('dd/MM/yyyy HH:mm');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

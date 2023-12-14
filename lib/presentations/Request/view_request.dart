@@ -145,9 +145,11 @@ Widget buildImportRequestCell({
   required BaseRequestModel requestModel,
   bool isDetail = false,
 }) {
-  final createDate = DateTime.parse(requestModel.createdAt);
-  final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-  final createDateString = formatter.format(createDate.add(Duration(hours: 7)));
+  final createDate =
+      DateTime.parse(requestModel.createdAt).add(Duration(hours: 7));
+  final formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
+  final createDateString = formatter.format(createDate);
+
   var color = Colors.black;
 
   var statusText = '';

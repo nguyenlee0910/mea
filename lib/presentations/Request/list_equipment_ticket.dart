@@ -138,10 +138,11 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
     required BuildContext context,
     required BaseRequestModel requestModel,
   }) {
-    final createDate = DateTime.parse(requestModel.createdAt);
-    final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-    final createDateString =
-        formatter.format(createDate.add(const Duration(hours: 7)));
+    final createDate =
+        DateTime.parse(requestModel.createdAt).add(Duration(hours: 7));
+    final formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
+    final createDateString = formatter.format(createDate);
+
     var color = Colors.black;
 
     var statusText = '';

@@ -284,7 +284,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               Container(
                 padding: EdgeInsets.only(left: 15),
                 child: Text(
-                  'Thời gian máy móc bắt đầu có vấn đề:',
+                  'Thời gian máy móc bắt đầu có vấnn đề:',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
