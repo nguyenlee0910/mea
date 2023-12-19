@@ -108,7 +108,9 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
       tabFilterList = requestData
           .where(
             (request) =>
-                request.status == 'APPROVED' || request.status == 'UPDATED',
+                request.status == 'APPROVED' ||
+                request.status == 'UPDATED' ||
+                request.status == 'COMPLETED',
           )
           .toList();
     } else {
@@ -136,10 +138,11 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
     required BuildContext context,
     required BaseRequestModel requestModel,
   }) {
-    final createDate = DateTime.parse(requestModel.createdAt);
-    final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
-    final createDateString =
-        formatter.format(createDate.add(const Duration(hours: 7)));
+    final createDate =
+        DateTime.parse(requestModel.createdAt).add(Duration(hours: 7));
+    final formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
+    final createDateString = formatter.format(createDate);
+
     var color = Colors.black;
 
     var statusText = '';
@@ -149,10 +152,13 @@ class _ListEquipmentTicketState extends State<ListEquipmentTicket> {
         statusText = 'Chờ xác nhận';
         break;
       case 'APPROVED':
-        color = const Color.fromARGB(255, 67, 153, 70);
+        color = const Color.fromARGB(255, 30, 89, 216);
         statusText = 'Đã duyệt';
         break;
-
+      case 'COMPLETED':
+        color = const Color.fromARGB(255, 67, 153, 70);
+        statusText = 'Hoàn thành';
+        break;
       case 'CANCELLED':
         color = const Color.fromARGB(255, 221, 60, 48);
         statusText = 'Đã từ chối';

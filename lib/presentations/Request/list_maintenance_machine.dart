@@ -239,10 +239,12 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
   String formatDateTime(dynamic dateTime) {
     if (dateTime != null) {
       if (dateTime is String) {
-        return DateFormat('dd/MM/yyyy HH:mm:ss')
-            .format(DateTime.parse(dateTime));
+        final DateTime parsedDateTime = DateTime.parse(dateTime);
+        final DateTime updatedDateTime = parsedDateTime.add(Duration(hours: 7));
+        return DateFormat('dd/MM/yyyy HH:mm:ss').format(updatedDateTime);
       } else if (dateTime is DateTime) {
-        return DateFormat('dd/MM/yyyy HH:mm:ss').format(dateTime);
+        final DateTime updatedDateTime = dateTime.add(Duration(hours: 7));
+        return DateFormat('dd/MM/yyyy HH:mm:ss').format(updatedDateTime);
       }
     }
     return 'N/A';
@@ -503,7 +505,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                             child: const Text(
                                               'Vui lòng chỉ nhấn "Xác nhận" khi thiết bị bảo trì đã bàn giao đến phòng ban.',
                                               style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 12,
                                                 color: Colors.black,
                                               ),
                                             ),
@@ -511,7 +513,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(right: 10),
+                                              const EdgeInsets.only(right: 4),
                                           child: ElevatedButton(
                                             onPressed: () async {
                                               await showConfirmationDialog(

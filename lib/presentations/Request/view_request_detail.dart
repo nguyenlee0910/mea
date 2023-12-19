@@ -15,10 +15,11 @@ class ViewRequestDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     // final importRequestModel = (baseRequestModel as ImportRequestModel)
     //     .importRequestItemsModel
     //     ?.map((e) => e.supply.first.name);
-    final formatter = DateFormat('dd/MM/yyyy hh:mm');
+    final formatter = DateFormat('dd/MM/yyyy HH:mm');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -159,6 +160,67 @@ class ViewRequestDetail extends StatelessWidget {
                   ),
                 ),
               ),
+              if ((baseRequestModel is ImportRequestModel) &&
+                  (baseRequestModel as ImportRequestModel).status ==
+                      "REQUESTING") ...[
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 30),
+                  child: Text(
+                    'Thông tin thiết bị yêu cầu',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF0033FF),
+                    ),
+                  ),
+                ),
+                DataTable(
+                  columnSpacing: 20.0, // Điều chỉnh khoảng cách giữa các cột
+                  horizontalMargin:
+                      15.0, // Điều chỉnh khoảng cách giữa mép của bảng và các cột
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Tên vật tư',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'SL',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                  rows: (baseRequestModel as ImportRequestModel)
+                      .importRequestItems!
+                      .map(
+                        (element) => DataRow(
+                          cells: [
+                            DataCell(
+                              Text(
+                                element.supply?.name ?? 'Empty',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Text(
+                                element.quantity?.toString() ?? '0',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
               if (baseRequestModel is RepairRequestModel &&
                   (baseRequestModel as RepairRequestModel)
                           .repairReportItems

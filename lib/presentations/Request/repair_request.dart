@@ -38,6 +38,41 @@ class _RepairRequestState extends State<RepairRequest> {
       departmentName = prefs.getString('departmentName') ?? 'NULL';
       _name = userModel.name ?? 'NULL';
     });
+
+    await runZoned(() async {
+      await SharedPreferences.getInstance().then((value) async {
+        final resultArray = await Future.wait([
+          DepartmentServices.getEquipment(),
+          DepartmentServices.getEquipment(page: 1),
+        ]);
+
+        final newList = List<EquipmentModel>.from(resultArray[0]);
+        // Chỉ thêm các mục có currentStatus là 'ACTIVE'
+        final activeList = newList
+            .where((equipment) => equipment.currentStatus == 'ACTIVE')
+            .toList();
+
+        setState(() {
+          if (activeList.isNotEmpty) {
+            final temp = <EquipmentCellData>[];
+            for (final i in activeList) {
+              temp.add(
+                EquipmentCellData(
+                  name: i.name ?? 'Trống',
+                  code: i.code ?? 'Trống',
+                  currentStatus: i.currentStatus ?? '',
+                  id: i.id,
+                  imageUrl: i.imageUrls?.firstOrNull ?? '',
+                ),
+              );
+            }
+            equipmentCellData = temp;
+            filterCellData = equipmentCellData;
+            print(filterCellData.length);
+          }
+        });
+      });
+    });
   }
 
   @override
@@ -45,50 +80,6 @@ class _RepairRequestState extends State<RepairRequest> {
     super.initState();
     getData();
 
-    runZoned(() async {
-      await SharedPreferences.getInstance().then(
-        (value) async {
-          final resultArary = await Future.wait(
-            [
-              DepartmentServices.getEquipment(),
-              DepartmentServices.getEquipment(
-                page: 1,
-              ),
-            ],
-          );
-          final newList = List<EquipmentModel>.from(resultArary[0])
-              // ..addAll(resultArary[1])
-              ;
-          // ..sort(
-          //   (a, b) {
-          //     final aStr = a.code.replaceAll(RegExp('[^0-9]'), '');
-          //     final bStr = b.code.replaceAll(RegExp('[^0-9]'), '');
-          //     return int.parse(aStr).compareTo(int.parse(bStr));
-          //   },
-          // );
-          // equipmentList = result;
-          setState(() {
-            if (newList.isNotEmpty) {
-              final temp = <EquipmentCellData>[];
-              for (final i in newList) {
-                temp.add(
-                  EquipmentCellData(
-                    name: i.name ?? 'Trống',
-                    code: i.code ?? 'Trống',
-                    currentStatus: i.currentStatus ?? '',
-                    id: i.id,
-                    imageUrl: i.imageUrls?.firstOrNull ?? '',
-                  ),
-                );
-              }
-              equipmentCellData = temp;
-              filterCellData = equipmentCellData;
-              print(filterCellData.length);
-            }
-          });
-        },
-      );
-    });
     _searchController.addListener(() {
       setState(() {
         if (_searchController.text.isEmpty) {
@@ -144,6 +135,8 @@ class _RepairRequestState extends State<RepairRequest> {
                     borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(width: 0),
                   ),
+                  contentPadding:
+                      const EdgeInsets.only(top: 20, left: 10, right: 10),
                 ),
                 onChanged: (value) {},
               ),
@@ -161,41 +154,8 @@ class _RepairRequestState extends State<RepairRequest> {
         decoration: BoxDecoration(color: Colors.grey[100]),
         child: Column(
           children: <Widget>[
-            // const Padding(
-            //   padding: EdgeInsets.only(top: 80),
-            //   child: WhiteTableCell(
-            //     icon: Icons.devices,
-            //     text: 'Tạo đơn yêu cầu sửa chữa thiết bị',
-            //     isCenter: true,
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(12),
-            //   child: Container(
-            //     width: 352,
-            //     height: 52,
-            //     child: SearchBar(
-            //       hintText: 'Tìm kiếm',
-            //       leading: const Icon(Icons.search),
-            //       backgroundColor: MaterialStateProperty.all(
-            //         Colors.white.withOpacity(0.5),
-            //       ),
-            //       onChanged: (value) {
-            //         setState(() {
-            //           if (value.isEmpty) {
-            //             filterCellData = equipmentCellData;
-            //             return;
-            //           }
-            //           filterCellData = equipmentCellData.where((element) {
-            //             return element.name.contains(value);
-            //           }).toList();
-            //         });
-            //       },
-            //     ),
-            //   ),
-            // ),
             const SizedBox(
-              height: 40,
+              height: 8,
             ),
             Expanded(
               child: Container(
@@ -217,10 +177,6 @@ class _RepairRequestState extends State<RepairRequest> {
                         itemBuilder: (context, index) {
                           print('This is url: ${filterCellData[0].imageUrl}');
                           return EquipmentCell(
-                            // imageUrl:
-                            //     'https://hips.hearstapps.com/hmg-prod/images/14bugatti-divo-99leadgallery-1535035005.jpg?crop=0.824xw:1.00xh;0.109xw,0&resize=768:*',
-                            // imageUrl: filterCellData[index].imageUrl,
-
                             name: filterCellData[index].name,
                             code: filterCellData[index].code,
                             imageUrl: filterCellData[index].imageUrl,

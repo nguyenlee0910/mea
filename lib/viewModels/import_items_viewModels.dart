@@ -6,15 +6,17 @@ import '../services/department_api.dart';
 
 class ImportRequestItems {
   ImportRequestItems({
-    required this.quantity,
+    required this.quantityImport,
     required this.supplyId,
     required this.imageURL,
     required this.name,
+    required this.quantity,
   });
-  int quantity;
+  int quantityImport;
   String supplyId;
   String name;
   String imageURL;
+  int quantity;
 }
 
 class ListImportRequestDevice extends ChangeNotifier {
@@ -38,7 +40,8 @@ class ImportRequestItemViewModel extends BaseViewModel {
         value.map(
           (e) {
             return ImportRequestItems(
-              quantity: 0,
+              quantity: e.quantity!,
+              quantityImport: 0,
               name: e.name!,
               supplyId: e.id!,
               imageURL: e.imageUrls!.first,
@@ -50,27 +53,30 @@ class ImportRequestItemViewModel extends BaseViewModel {
   }
 
   int getQuantity(String id) {
-    return data.where((element) => element.supplyId == id).first.quantity;
+    return data.where((element) => element.supplyId == id).first.quantityImport;
   }
 
   // ignore: use_setters_to_change_properties
   void setQuantity(int value, String id) {
-    data.where((element) => element.supplyId == id).first.quantity = value;
+    data.where((element) => element.supplyId == id).first.quantityImport =
+        value;
     notifyListeners();
   }
 
   void increaseByOne(String id) {
-    data.where((element) => element.supplyId == id).first.quantity += 1;
+    data.where((element) => element.supplyId == id).first.quantityImport += 1;
   }
 
   bool isIncrese() {
-    return data.where((element) => element.quantity != 0).isNotEmpty;
+    return data.where((element) => element.quantityImport != 0).isNotEmpty;
   }
 
   void setDataFromParent(List<ImportRequestItems> value) {
     for (final ele in value) {
-      data.where((element) => element.supplyId == ele.supplyId).first.quantity =
-          ele.quantity;
+      data
+          .where((element) => element.supplyId == ele.supplyId)
+          .first
+          .quantityImport = ele.quantityImport;
     }
     notifyListeners();
   }

@@ -284,7 +284,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               Container(
                 padding: EdgeInsets.only(left: 15),
                 child: Text(
-                  'Thời gian máy móc bắt đầu có vấn đề:',
+                  'Thời gian máy móc bắt đầu có vấnn đề:',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -330,33 +330,31 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                       });
                     }
                   },
-                  child: Expanded(
-                    child: Container(
-                      width: size.width - 30,
-                      child: Neumorphic(
-                        style: NeumorphicStyle(
-                          boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(8),
-                          ),
-                          depth: 3,
-                          color: const Color.fromARGB(255, 226, 245, 253),
-                          intensity: 1,
+                  child: Container(
+                    width: size.width - 30,
+                    child: Neumorphic(
+                      style: NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(8),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Ngày ${DateFormat('dd/MM/yyyy HH:mm').format(selectedDateTime)}',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 1, 1, 235),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        depth: 3,
+                        color: const Color.fromARGB(255, 226, 245, 253),
+                        intensity: 1,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ngày ${DateFormat('dd/MM/yyyy HH:mm').format(selectedDateTime)}',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 1, 1, 235),
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

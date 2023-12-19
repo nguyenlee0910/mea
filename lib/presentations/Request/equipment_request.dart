@@ -308,7 +308,8 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                                             ),
                                             DataCell(
                                               Text(
-                                                element.quantity.toString(),
+                                                element.quantityImport
+                                                    .toString(),
                                                 style: const TextStyle(
                                                     fontSize: 16),
                                               ),
@@ -501,19 +502,19 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                                     await DepartmentServices.requestEquipment(
                                       description: description,
                                       expected: convertedExpected,
-                                      listSupply:
-                                          listImportRequestDevice.data.isEmpty
-                                              ? <Map<String, dynamic>>[]
-                                              : List<Map<String, dynamic>>.from(
-                                                  listImportRequestDevice.data
-                                                      .map((e) {
-                                                    return {
-                                                      'supplyId': e.supplyId,
-                                                      'quantity': e.quantity,
-                                                      'equipmentId': null,
-                                                    };
-                                                  }).toList(),
-                                                ),
+                                      listSupply: listImportRequestDevice
+                                              .data.isEmpty
+                                          ? <Map<String, dynamic>>[]
+                                          : List<Map<String, dynamic>>.from(
+                                              listImportRequestDevice.data
+                                                  .map((e) {
+                                                return {
+                                                  'supplyId': e.supplyId,
+                                                  'quantity': e.quantityImport,
+                                                  'equipmentId': null,
+                                                };
+                                              }).toList(),
+                                            ),
                                     ).then(
                                       (value) {
                                         if (value == true) {

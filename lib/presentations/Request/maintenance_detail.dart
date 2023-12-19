@@ -52,13 +52,13 @@ class MaintenanceDetailPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(left: 10),
               width: feedback.status == 'COMPLETED'
-                  ? 110
+                  ? 100
                   : feedback.status == 'WAITING'
-                      ? 125
+                      ? 115
                       : feedback.status == 'CANCELLED'
-                          ? 130
-                          : 110, // Default width is 110
-              height: 39,
+                          ? 115
+                          : 100, // Default width is 110
+              height: 40,
               decoration: BoxDecoration(
                 color: feedback.status == 'COMPLETED'
                     ? Colors.green
@@ -235,7 +235,7 @@ class MaintenanceDetailPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Container(
-                              width: 165,
+                              width: 140,
                               decoration: const BoxDecoration(
                                 border: Border(
                                   top: BorderSide(
@@ -251,7 +251,7 @@ class MaintenanceDetailPage extends StatelessWidget {
                               size: 22,
                             ),
                             Container(
-                              width: 165,
+                              width: 140,
                               decoration: const BoxDecoration(
                                 border: Border(
                                   top: BorderSide(
@@ -447,10 +447,12 @@ class MaintenanceDetailPage extends StatelessWidget {
   String formatDateTime(dynamic dateTime) {
     if (dateTime != null) {
       if (dateTime is String) {
-        return DateFormat('dd/MM/yyyy HH:mm:ss')
-            .format(DateTime.parse(dateTime));
+        final DateTime parsedDateTime = DateTime.parse(dateTime);
+        final DateTime updatedDateTime = parsedDateTime.add(Duration(hours: 7));
+        return DateFormat('dd/MM/yyyy HH:mm:ss').format(updatedDateTime);
       } else if (dateTime is DateTime) {
-        return DateFormat('dd/MM/yyyy HH:mm:ss').format(dateTime);
+        final DateTime updatedDateTime = dateTime.add(Duration(hours: 7));
+        return DateFormat('dd/MM/yyyy HH:mm:ss').format(updatedDateTime);
       }
     }
     return 'N/A';
