@@ -566,7 +566,8 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
           selectedDateTime.subtract(const Duration(hours: 7));
       final success = await DepartmentServices.requestRepairEquipment(
         description: description,
-        endAt: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        endAt: DateFormat('yyyy-MM-dd')
+            .format(DateTime.now().add(Duration(days: 1))),
         note: '',
         price: NumberFormat.decimalPattern(),
         startAt: DateFormat('yyyy-MM-dd').format(DateTime.now()),
