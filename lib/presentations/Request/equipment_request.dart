@@ -422,7 +422,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                                         maxLines: 8,
                                         decoration:
                                             const InputDecoration.collapsed(
-                                          hintText: 'Bông gạc, Bơm tiêm, ...',
+                                          hintText: 'Điền mô tả của bạn',
                                         ),
                                         onChanged: (value) {
                                           setState(() {

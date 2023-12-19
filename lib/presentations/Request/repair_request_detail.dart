@@ -284,7 +284,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               Container(
                 padding: EdgeInsets.only(left: 15),
                 child: Text(
-                  'Thời gian máy móc bắt đầu có vấnn đề:',
+                  'Thời gian máy móc bắt đầu có vấn đề:',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -600,7 +600,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
 void _showSucess(BuildContext context, VoidCallback? callback) {
   final alert = AlertDialog(
     title: const Text('Thành công'),
-    content: const Text('Cập nhật thông tin thành công!'),
+    content: const Text('Gửi đơn thành công!'),
     actions: [
       ElevatedButton(
         child: const Text('Xác nhận'),

@@ -267,7 +267,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
             formatDateTime(dateTime),
             style: const TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 15,
+              fontSize: 16,
               color: Colors.black,
             ),
           ),
@@ -392,7 +392,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                           feedback.equipment!.name ?? 'N/A',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 15,
+                                            fontSize: 16,
                                             color: Colors.black,
                                           ),
                                         ),
@@ -417,7 +417,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                           feedback.equipment!.code ?? 'N/A',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 15,
+                                            fontSize: 16,
                                             color: Colors.black,
                                           ),
                                         ),
@@ -449,7 +449,7 @@ class _ListFeedbackStatusState extends State<ListFeedbackStatus>
                                                     : 'Chưa xác nhận',
                                             style: TextStyle(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 15,
+                                              fontSize: 16,
                                               color: feedback.feedbackStatus ==
                                                       'ACCEPTED'
                                                   ? const Color.fromARGB(
