@@ -52,13 +52,13 @@ class MaintenanceDetailPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(left: 10),
               width: feedback.status == 'COMPLETED'
-                  ? 100
+                  ? 93
                   : feedback.status == 'WAITING'
-                      ? 115
+                      ? 107
                       : feedback.status == 'CANCELLED'
-                          ? 115
+                          ? 108
                           : 100, // Default width is 110
-              height: 40,
+              height: 36,
               decoration: BoxDecoration(
                 color: feedback.status == 'COMPLETED'
                     ? Colors.green
