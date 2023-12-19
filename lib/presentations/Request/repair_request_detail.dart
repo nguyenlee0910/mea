@@ -569,7 +569,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
       final success = await DepartmentServices.requestRepairEquipment(
         description: description,
         endAt: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        note: 'your_note',
+        note: '',
         price: NumberFormat.decimalPattern(),
         startAt: DateFormat('yyyy-MM-dd').format(DateTime.now()),
         urlImage: ['yourUrlImageList', 'yourUrlImageList'],
