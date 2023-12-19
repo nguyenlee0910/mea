@@ -88,14 +88,29 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               SizedBox(
                 height: 40,
               ),
-              Container(
+              Padding(
                 padding: EdgeInsets.only(left: 15),
-                child: Text(
-                  'Thông tin người tạo:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Thông tin người tạo:',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -109,8 +124,8 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                       boxShape: NeumorphicBoxShape.roundRect(
                         BorderRadius.circular(8),
                       ),
-                      depth: 3,
-                      color: const Color.fromARGB(255, 226, 245, 253),
+                      depth: 1,
+                      color: Color.fromARGB((0.3 * 255).round(), 88, 171, 207),
                       intensity: 1,
                     ),
                     child: Column(
@@ -166,14 +181,32 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               SizedBox(
                 height: 20,
               ),
-              Container(
+              Padding(
                 padding: EdgeInsets.only(left: 15),
-                child: Text(
-                  'Thông tin thiết bị:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.medical_services, // Use the medical device icon
+                          color: Colors.blue, // Adjust the color as needed
+                          size: 20, // Adjust the size as needed
+                        ),
+                        const SizedBox(
+                            width: 8), // Add some spacing between icon and text
+                        Container(
+                          child: Text(
+                            'Thông tin thiết bị:',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -191,18 +224,15 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                           boxShape: NeumorphicBoxShape.roundRect(
                             BorderRadius.circular(8),
                           ),
-                          depth: 6,
-                          color: Colors.grey,
-                          lightSource: LightSource.top,
+                          depth: 1,
                           intensity: 1,
                         ),
                         child: Card(
-                          color: const Color.fromARGB(255, 226, 245, 253),
                           margin: const EdgeInsets.all(0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          // color: Colors.white,
+                          color: Color.fromARGB(255, 200, 226, 237),
                           child: Container(
                             width: size.width - 30,
                             child: Column(
@@ -281,14 +311,31 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               SizedBox(
                 height: 20,
               ),
-              Container(
+              Padding(
                 padding: EdgeInsets.only(left: 15),
-                child: Text(
-                  'Thời gian máy móc bắt đầu có vấn đề:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.access_time,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          child: const Text(
+                            'Thời gian máy móc bắt đầu có vấn đề:',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -337,8 +384,9 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                         boxShape: NeumorphicBoxShape.roundRect(
                           BorderRadius.circular(8),
                         ),
-                        depth: 3,
-                        color: const Color.fromARGB(255, 226, 245, 253),
+                        depth: 1,
+                        color:
+                            Color.fromARGB((0.3 * 255).round(), 88, 171, 207),
                         intensity: 1,
                       ),
                       child: Padding(
@@ -349,7 +397,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                             Text(
                               'Ngày ${DateFormat('dd/MM/yyyy HH:mm').format(selectedDateTime)}',
                               style: TextStyle(
-                                color: Color.fromARGB(255, 1, 1, 235),
+                                color: Color.fromARGB(255, 4, 4, 43),
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -364,14 +412,31 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
               SizedBox(
                 height: 20,
               ),
-              Container(
+              Padding(
                 padding: EdgeInsets.only(left: 15),
-                child: Text(
-                  'Lý do bảo trì:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.info,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          child: Text(
+                            'Lý do bảo trì:',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -385,12 +450,11 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                       boxShape: NeumorphicBoxShape.roundRect(
                         BorderRadius.circular(8),
                       ),
-                      depth: 3,
-                      color: const Color.fromARGB(255, 226, 245, 253),
+                      depth: 1,
                       intensity: 1,
                     ),
                     child: Card(
-                      color: const Color.fromARGB(255, 226, 245, 253),
+                      color: Color.fromARGB(255, 187, 215, 227),
                       margin: const EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -456,7 +520,7 @@ class _RepairRequestDetailState extends State<RepairRequestDetail> {
                         boxShape: NeumorphicBoxShape.roundRect(
                           BorderRadius.circular(8),
                         ),
-                        depth: 5,
+                        depth: 1,
                         color: Colors.transparent,
                         intensity: 1,
                       ),

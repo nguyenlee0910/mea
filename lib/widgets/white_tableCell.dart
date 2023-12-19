@@ -38,7 +38,7 @@ class WhiteTableCell extends StatelessWidget {
       child: Neumorphic(
         style: NeumorphicStyle(
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(42)),
-          depth: 5,
+          depth: 2,
           color: Colors.grey,
           intensity: 1,
         ),

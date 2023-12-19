@@ -46,6 +46,7 @@ class _ListSupplyPageState extends State<ListSupplyPage> {
       disposeViewModel: true,
       builder: (context, viewModel, child) => Scaffold(
         appBar: EasySearchBar(
+          backgroundColor: Color.fromARGB(255, 110, 194, 247),
           isFloating: true,
           title: const Text('Tìm vật tư'),
           onSearch: (value) {

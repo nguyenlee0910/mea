@@ -199,7 +199,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
       child: Neumorphic(
         style: NeumorphicStyle(
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-          depth: 5,
+          depth: 1,
           color: Colors.grey,
           intensity: 1,
         ),

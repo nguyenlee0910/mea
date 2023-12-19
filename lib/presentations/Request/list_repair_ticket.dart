@@ -219,7 +219,7 @@ class _ListRepairTicketState extends State<ListRepairTicket> {
         child: Neumorphic(
           style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-            depth: 6,
+            depth: 5,
             color: const Color.fromARGB(255, 158, 158, 158),
             intensity: 1,
           ),

@@ -160,6 +160,10 @@ class EquipmentCell extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                                  softWrap: true,
+                                  maxLines:
+                                      1, // Đặt số dòng tối đa muốn hiển thị
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               const SizedBox(height: 10),

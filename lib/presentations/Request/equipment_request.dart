@@ -110,14 +110,29 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                       const SizedBox(
                         height: 40,
                       ),
-                      Container(
+                      Padding(
                         padding: EdgeInsets.only(left: 15),
-                        child: Text(
-                          'Thông tin người tạo:',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person,
+                                  color: Colors.blue,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Thông tin người tạo:',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -131,8 +146,9 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                               boxShape: NeumorphicBoxShape.roundRect(
                                 BorderRadius.circular(8),
                               ),
-                              depth: 3,
-                              color: const Color.fromARGB(255, 226, 245, 253),
+                              depth: 1,
+                              color: Color.fromARGB(
+                                  (0.3 * 255).round(), 88, 171, 207),
                               intensity: 1,
                             ),
                             child: Column(
@@ -192,12 +208,22 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  'Chọn vật tư',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.healing,
+                                      color: Colors.blue,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      'Chọn vật tư',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 if (listImportRequestDevice
                                     .data.isNotEmpty) ...[
@@ -229,18 +255,13 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                                     boxShape: NeumorphicBoxShape.roundRect(
                                       BorderRadius.circular(8),
                                     ),
-                                    depth: 6,
-                                    color: Colors.grey,
+                                    depth: 1,
                                     intensity: 1,
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromARGB(
-                                        255,
-                                        226,
-                                        245,
-                                        253,
-                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 130, 204, 250),
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(8),
@@ -268,10 +289,8 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                               SizedBox(
                                 width: size.width,
                                 child: DataTable(
-                                  columnSpacing:
-                                      20, // Điều chỉnh khoảng cách giữa các cột
-                                  horizontalMargin:
-                                      15, // Điều chỉnh khoảng cách giữa mép của bảng và các cột
+                                  columnSpacing: 20,
+                                  horizontalMargin: 15,
                                   columns: const [
                                     DataColumn(
                                       label: Text(
@@ -322,77 +341,90 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                               ),
                             ],
                             const SizedBox(height: 15),
-                            Container(
-                              child: const Text(
-                                'Khoảng thời gian muốn nhận:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.access_time,
+                                  color: Colors.blue,
+                                  size: 20,
                                 ),
-                              ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  child: const Text(
+                                    'Khoảng thời gian muốn nhận:',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 6),
                             Neumorphic(
                               style: NeumorphicStyle(
+                                depth: 1,
+                                color: Color.fromARGB(
+                                    (0.3 * 255).round(), 88, 171, 207),
+                                intensity: 1,
                                 boxShape: NeumorphicBoxShape.roundRect(
                                   BorderRadius.circular(8),
                                 ),
-                                depth: 6,
-                                color: Colors.grey,
-                                lightSource: LightSource.top,
-                                intensity: 1,
                               ),
-                              child: Card(
-                                margin: const EdgeInsets.all(0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 0,
                                 ),
-                                color: const Color.fromARGB(255, 226, 245, 253),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 2,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      DropdownButton<String>(
-                                        value: expected,
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            expected = newValue!;
-                                          });
-                                        },
-                                        items: <String>[
-                                          '72 giờ',
-                                          '1 giờ',
-                                          '3 giờ',
-                                          '5 giờ',
-                                          '24 giờ',
-                                          '36 giờ',
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    DropdownButton<String>(
+                                      value: expected,
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          expected = newValue!;
+                                        });
+                                      },
+                                      items: <String>[
+                                        '72 giờ',
+                                        '1 giờ',
+                                        '3 giờ',
+                                        '5 giờ',
+                                        '24 giờ',
+                                        '36 giờ',
+                                      ].map<DropdownMenuItem<String>>(
+                                        (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
                                             child: Text(value),
                                           );
-                                        }).toList(),
-                                      ),
-                                    ],
-                                  ),
+                                        },
+                                      ).toList(),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            Container(
-                              child: const Text(
-                                'Mô tả:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.edit,
+                                  color: Colors.blue,
+                                  size: 20,
                                 ),
-                              ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  child: const Text(
+                                    'Mô tả:',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 6),
                             Neumorphic(
@@ -400,9 +432,8 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                                 boxShape: NeumorphicBoxShape.roundRect(
                                   BorderRadius.circular(8),
                                 ),
-                                depth: 6,
-                                color: Colors.grey,
-                                lightSource: LightSource.top,
+                                depth: 1,
+                                // color: Colors.grey,
                                 intensity: 1,
                               ),
                               child: Card(
@@ -410,7 +441,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                color: const Color.fromARGB(255, 226, 245, 253),
+                                color: Color.fromARGB(255, 178, 210, 224),
                                 child: Padding(
                                   padding: const EdgeInsets.all(20),
                                   child: Column(
@@ -477,7 +508,7 @@ class _EquipmentRequestPageState extends State<EquipmentRequestPage> {
                                 boxShape: NeumorphicBoxShape.roundRect(
                                   BorderRadius.circular(8),
                                 ),
-                                depth: 6,
+                                depth: 1,
                                 color: Colors.grey,
                                 intensity: 1,
                               ),

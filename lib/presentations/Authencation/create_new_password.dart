@@ -60,13 +60,16 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 Expanded(
                   child: Neumorphic(
                     style: NeumorphicStyle(
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            const BorderRadius.only(
-                                topRight: Radius.circular(42.5),
-                                bottomRight: Radius.circular(42.5),),),
-                        depth: 5,
-                        color: Colors.grey,
-                        intensity: 1,),
+                      boxShape: NeumorphicBoxShape.roundRect(
+                        const BorderRadius.only(
+                          topRight: Radius.circular(42.5),
+                          bottomRight: Radius.circular(42.5),
+                        ),
+                      ),
+                      depth: 5,
+                      color: Colors.grey,
+                      intensity: 1,
+                    ),
                     child: Container(
                       // width: double.infinity,
                       height: 52,
@@ -186,11 +189,12 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             Center(
               child: Neumorphic(
                 style: NeumorphicStyle(
-                    boxShape:
-                        NeumorphicBoxShape.roundRect(BorderRadius.circular(40)),
-                    depth: 5,
-                    color: Colors.grey,
-                    intensity: 1,),
+                  boxShape:
+                      NeumorphicBoxShape.roundRect(BorderRadius.circular(40)),
+                  depth: 5,
+                  color: Colors.grey,
+                  intensity: 1,
+                ),
                 child: SizedBox(
                   width: size.width * 0.6,
                   height: 56,
@@ -228,10 +232,11 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
       },
       child: Neumorphic(
         style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            depth: 5,
-            color: Colors.grey,
-            intensity: 1,),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+          depth: 5,
+          color: Colors.grey,
+          intensity: 1,
+        ),
         child: Container(
           width: 36,
           height: 36,
