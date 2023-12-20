@@ -279,7 +279,7 @@ class DepartmentServices {
           {
             'equipmentId': id,
             'type': 'FIXING',
-            'description': 'test',
+            'description': '',
             'imageUrls': urlImage ?? [],
             'repairProviderIds': [],
             'replaceItems': [],
